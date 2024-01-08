@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkxuelin_dumi=self.webpackChunkxuelin_dumi||[]).push([[509],{29975:function(t,n,u){u.r(n);var i=u(67294),e=u(85893);n.default=function(){return(0,e.jsx)(e.Fragment,{children:"404"})}}}]);
