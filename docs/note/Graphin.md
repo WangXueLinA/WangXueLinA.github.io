@@ -1,6 +1,6 @@
 ---
 toc: content
-title: graphin
+title: Graphin
 ---
 
 # Graphin

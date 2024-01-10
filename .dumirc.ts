@@ -12,8 +12,8 @@ export default defineConfig({
       { title: '笔记', link: '/note/react18' },
       { title: '部署', link: '/deploy/web' },
     ],
-    // socialLinks: {
-    //   github: 'https://github.com/umijs/dumi',
-    // },
+    socialLinks: {
+      github: 'https://github.com/WangXueLinA?tab=repositories',
+    },
   },
 });

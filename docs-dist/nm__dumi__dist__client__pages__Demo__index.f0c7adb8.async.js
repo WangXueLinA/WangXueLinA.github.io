@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkxuelin_dumi=self.webpackChunkxuelin_dumi||[]).push([[9],{65149:function(f,n,e){e.r(n),e.d(n,{default:function(){return m}});var u=e(27544),t=e(67294),d=function(){var o=(0,u.UO)(),r=o.id,s=(0,u.WF)(),i=s.demos,c=i[r]||{},a=c.component;return a&&(0,t.createElement)(a)},m=d}}]);

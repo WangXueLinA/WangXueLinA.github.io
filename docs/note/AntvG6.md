@@ -1,22 +1,22 @@
 ---
 toc: content
-title: antv G6
+title: Antv G6
 ---
 
-# antv G6  4.x版本
+# Antv G6 4.x 版本
 
 ## 简介
 
-AntV G6 是蚂蚁金服全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。G6 是一个图可视化引擎。它提供了图的绘制、布局、分析、交互、动画等图可视化的基础能力。G6可以实现很多d3才能实现的可视化图表。
+AntV G6 是蚂蚁金服全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。G6 是一个图可视化引擎。它提供了图的绘制、布局、分析、交互、动画等图可视化的基础能力。G6 可以实现很多 d3 才能实现的可视化图表。
 
-G6是一个纯 JS 库，不与任何框架耦合，也就是说可以在任何前端框架中使用，如 React、Vue、Angular 等
+G6 是一个纯 JS 库，不与任何框架耦合，也就是说可以在任何前端框架中使用，如 React、Vue、Angular 等
 
 官网：<https://g6.antv.antgroup.com/examples>
 
 ## 使用
 
- 安装
- 
+安装
+
 ```js
 npm install --save @antv/g6
 ```
@@ -40,20 +40,20 @@ const data = {
   // 点集
   nodes: [
     {
-      id: "node1",
-      label: "circle1",
+      id: 'node1',
+      label: 'circle1',
     },
     {
-      id: "node2",
-      label: "circle2",
+      id: 'node2',
+      label: 'circle2',
     },
   ],
   // 边集
   edges: [
-     // 表示一条从 node1 节点连接到 node2 节点的边
+    // 表示一条从 node1 节点连接到 node2 节点的边
     {
-      source: "node1",
-      target: "node2",
+      source: 'node1',
+      target: 'node2',
     },
   ],
 };
@@ -78,18 +78,20 @@ graph.data(data); // 读取 data 中的数据源到图上
 graph.render(); // 渲染图
 ```
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-jw7qw1?file=src%2FApp.js
 
 ## 概念
 
 ### Graph
+
 在 G6 中，Graph 对象是图的载体，它包含了图上的所有元素（节点、边等），同时挂载了图的相关操作（如交互监听、元素操作、渲染等）。
 
 Graph 对象的生命周期为：初始化 —> 加载数据 —> 渲染 —> 更新 —> 销毁。
 
 ### 图形分组 Group
-图形分组 group 类似于 [SVG 中的 `<g>` 标签](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/g)：元素  `g`  是用来组合图形对象的容器。在 group  上添加变换（例如剪裁、旋转、放缩、平移等）会应用到其所有的子元素上。在 group  上添加属性（例如颜色、位置等）会被其所有的子元素继承。此外， group 可以多层嵌套使用，因此可以用来定义复杂的对象。图形分组一般会在[自定义节点](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/nodes/custom-node)、[自定义边](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/edges/custom-edge)时用到。
+
+图形分组 group 类似于  [SVG 中的  `<g>`  标签](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element/g)：元素  `g`  是用来组合图形对象的容器。在 group  上添加变换（例如剪裁、旋转、放缩、平移等）会应用到其所有的子元素上。在 group  上添加属性（例如颜色、位置等）会被其所有的子元素继承。此外， group 可以多层嵌套使用，因此可以用来定义复杂的对象。图形分组一般会在[自定义节点](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/nodes/custom-node)、[自定义边](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/edges/custom-edge)时用到。
 
 ## 节点
 
@@ -97,18 +99,17 @@ Graph 对象的生命周期为：初始化 —> 加载数据 —> 渲染 —> �
 
 G6 的内置节点包括
 
--   circle：圆形
--   rect：矩形
--   ellipse：椭圆
--   diamond：菱形
--   triangle：三角形
--   star：星形
--   image：图片
--   modelRect：卡片
--   donut：甜甜圈圆形（v4.2.5 起支持）
+- circle：圆形
+- rect：矩形
+- ellipse：椭圆
+- diamond：菱形
+- triangle：三角形
+- star：星形
+- image：图片
+- modelRect：卡片
+- donut：甜甜圈圆形（v4.2.5 起支持）
 
-
-demo演示：
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-64peos?file=src%2FApp.js
 
 ### 节点配置方式
@@ -148,9 +149,9 @@ const data = {
 
 #### 使用 graph.node()
 
--   该方法必须**在 render 之前调用**，否则不起作用；
--   由于该方法优先级最高，将覆盖其他地方对节点的配置，这可能将造成一些其他配置不生效的疑惑；
--   该方法在增加元素、更新元素时会被调用，如果数据量大、每个节点上需要更新的内容多时，可能会有性能问题。
+- 该方法必须**在 render 之前调用**，否则不起作用；
+- 由于该方法优先级最高，将覆盖其他地方对节点的配置，这可能将造成一些其他配置不生效的疑惑；
+- 该方法在增加元素、更新元素时会被调用，如果数据量大、每个节点上需要更新的内容多时，可能会有性能问题。
 
 ```js
 graph.node((node) => {
@@ -167,21 +168,16 @@ graph.data(data);
 graph.render();
 ```
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
-
-
 
 优先级：使用 graph.node() 配置 > 数据中动态配置 > 实例化图时全局配
 
 即有相同的配置项时，优先级高的方式将会覆盖优先级低的。
 
-
-
 ### 自定义节点
 
 当内置节点不满足需求时，可以通过 G6.registerNode() 方法自定义节点。
-
 
 ```js
   G6.registerNode(
@@ -201,14 +197,14 @@ https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
        * @return {G.Shape} 返回一个绘制的图形作为 keyShape，通过 node.get('keyShape') 可以获取。
        */
       draw(cfg, group) {},
-      
+
       /**
        * 绘制完成以后的操作，用户可继承现有的节点或边，在 `afterDraw()` 方法中扩展图形或添加动画
        * @param  {Object} cfg 节点的配置项
        * @param  {G.Group} group 图形分组，节点中图形对象的容器
        */
       afterDraw(cfg, group) {},
-      
+
       /**
        * 更新节点或边，包括节点或边上的文本。
        * @override
@@ -216,7 +212,7 @@ https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
        * @param  {Node} node 节点
        */
       update(cfg, node) {},
-      
+
       /**
        * 更新完以后的操作，如扩展图形或添加动画。一般同 afterDraw 配合使用
        * @override
@@ -224,15 +220,15 @@ https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
        * @param  {Node} node 节点
        */
       afterUpdate(cfg, node) {},
-      
+
       /**
        *是否允许更新
        *@param type  元素类型，'node' 或 'edge'
       **/
       shouldUpdate(type){}
-      
+
       /**
-       * 用于响应外部对元素状态的改变。当外部调用 
+       * 用于响应外部对元素状态的改变。当外部调用
        graph.setItemState(item, state, value) 时，该函数作出相关响应。
        主要是交互状态，业务状态请在 draw() 方法中实现。
        单图形的节点仅考虑 'selected' 、'active' 状态，有其他状态需求的用户可以复写该方法。
@@ -241,7 +237,7 @@ https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
        * @param  {Node} node 节点
        */
       setState(name, value, node) {},
-      
+
       /**
        * 获取锚点（相关边的连入点）
        * @param  {Object} cfg 节点的配置项
@@ -249,103 +245,99 @@ https://stackblitz.com/edit/stackblitz-starters-s3tsbh?file=src%2FApp.js
        */
       getAnchorPoints(cfg) {},
     },
-    
+
     // 继承内置节点类型的名字，例如基类 'single-node'，或 'circle', 'rect' 等
     // 当不指定该参数则代表不继承任何内置节点类型
     extendedNodeType,
   );
 ```
 
-通过自定义节点或自定义边时在 `draw` 方法中使用 `group.addShape` 添加，G6 中支持以下的图形：
+通过自定义节点或自定义边时在  `draw`  方法中使用  `group.addShape`  添加，G6 中支持以下的图形：
 
--   [circle](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%9C%86%E5%9B%BE%E5%BD%A2-circle)：圆；
--   [rect](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E7%9F%A9%E5%BD%A2%E5%9B%BE%E5%BD%A2-rect)：矩形；
--   [ellipse](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%A4%AD%E5%9C%86%E5%9B%BE%E5%BD%A2-ellipse)：椭圆；
--   [polygon](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%9B%BE%E5%BD%A2-polygon)：多边形；
--   [fan](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%89%87%E5%BD%A2%E5%9B%BE%E5%BD%A2-fan)：扇形；
--   [image](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%9B%BE%E7%89%87%E5%9B%BE%E5%BD%A2-image)：图片；
--   [marker](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%A0%87%E8%AE%B0%E5%9B%BE%E5%BD%A2-marker)：标记；
--   [path](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E8%B7%AF%E5%BE%84-path)：路径；
--   [text](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%96%87%E6%9C%AC-text)：文本；
--   [dom(svg)](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#dom-svg)：DOM（图渲染方式 `renderer` 为 `'svg'` 时可用）。
+- [circle](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%9C%86%E5%9B%BE%E5%BD%A2-circle)：圆；
+- [rect](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E7%9F%A9%E5%BD%A2%E5%9B%BE%E5%BD%A2-rect)：矩形；
+- [ellipse](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%A4%AD%E5%9C%86%E5%9B%BE%E5%BD%A2-ellipse)：椭圆；
+- [polygon](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%9B%BE%E5%BD%A2-polygon)：多边形；
+- [fan](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%89%87%E5%BD%A2%E5%9B%BE%E5%BD%A2-fan)：扇形；
+- [image](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E5%9B%BE%E7%89%87%E5%9B%BE%E5%BD%A2-image)：图片；
+- [marker](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%A0%87%E8%AE%B0%E5%9B%BE%E5%BD%A2-marker)：标记；
+- [path](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E8%B7%AF%E5%BE%84-path)：路径；
+- [text](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#%E6%96%87%E6%9C%AC-text)：文本；
+- [dom(svg)](https://g6.antv.antgroup.com/manual/middle/elements/shape/shape-and-properties#dom-svg)：DOM（图渲染方式  `renderer`  为  `'svg'`  时可用）。
 
-demo演示：
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-dy67wv?file=src%2FApp.js
 
-
-### 使用jsx自定义节点
+### 使用 jsx 自定义节点
 
 使用类 JSX 语法来定义 G6 节点时，支持使用以下的标签：
 
--   `<group />`
--   `<rect />`
--   `<circle />`
--   `<text />`
--   `<path />`
--   `<line />`
--   `<points />`
--   `<polygon />`
--   `<polyline />`
--   `<image />`
+- `<group />`
+- `<rect />`
+- `<circle />`
+- `<text />`
+- `<path />`
+- `<line />`
+- `<points />`
+- `<polygon />`
+- `<polyline />`
+- `<image />`
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-vqhvxw?file=src%2FApp.js
 
 ### 使用 React 定义节点
 
-
 G6 4.2.0 版本推出了`@antv/g6-react-node`， 解决了自定义节点门槛高的问题。用户借助该包，可使用开发 React 组件的方式来自定义 G6 的节点。
 
 ```js
-npm install @antv/g6-react-node 
+npm install @antv/g6-react-node
 
 // yarn add @antv/g6-react-node
 ```
-react支持节点
+
+react 支持节点
 https://dicegraph.github.io/g6-react-node/api/rect
 
-
-demo演示：
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-k1svaa?file=src%2FApp.js
 
+### 使用 DOM 自定义节点
 
-### 使用DOM自定义节点
-SVG 除支持内置的所有节点/边类型以及自定义节点/边时使用与 Canvas 相同的图形外，还支持在自定义节点/边时使用 `dom` 图形，
+SVG 除支持内置的所有节点/边类型以及自定义节点/边时使用与 Canvas 相同的图形外，还支持在自定义节点/边时使用  `dom`  图形，
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-fjdt3b?file=src%2FApp.js
 
 ### 节点的连接点 anchorPoint
 
 节点的连接点 anchorPoint 指的是边连入节点的相对位置，即节点与其相关边的交点位置。
 
-
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d29288697ae47089c490ccb0a85b9f2~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1226&h=584&s=176288&e=png&b=fdfdfd)
 
 节点中有了 anchorPoints 之后，相关边可以分别选择连入起始点、结束点的哪一个 anchorPoint。
 
-边可以通过指定 `sourceAnchor` 和 `targetAnchor`  分别选择起始点、结束点的 anchorPoint。
+边可以通过指定  `sourceAnchor`  和  `targetAnchor`  分别选择起始点、结束点的 anchorPoint。
 
-
-
-demo演示：
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-lg8aq7?file=src%2FApp.js
 
-
 ## 边
+
 ### 内置边
 
-G6 提供了8种内置边：
--   `line`：直线
--   `polyline`：折线
--   `arc`：圆弧线；
--   `quadratic`：二阶贝塞尔曲线；
--   `cubic`：三阶贝塞尔曲线；
--   `cubic-vertical`：垂直方向的三阶贝塞尔曲线，
--   `cubic-horizontal`：水平方向的三阶贝塞尔曲线，
--   `loop`：自环
+G6 提供了 8 种内置边：
 
-demo演示：
+- `line`：直线
+- `polyline`：折线
+- `arc`：圆弧线；
+- `quadratic`：二阶贝塞尔曲线；
+- `cubic`：三阶贝塞尔曲线；
+- `cubic-vertical`：垂直方向的三阶贝塞尔曲线，
+- `cubic-horizontal`：水平方向的三阶贝塞尔曲线，
+- `loop`：自环
+
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-cq5xtj?file=src%2FApp.js
 
 ### 边配置方式
@@ -391,9 +383,9 @@ const data = {
 
 #### 使用 graph.edge()
 
--   该方法必须**在 render 之前调用**，否则不起作用；
--   由于该方法优先级最高，将覆盖其他地方对边的配置，这可能将造成一些其他配置不生效的疑惑；
--   该方法在增加元素、更新元素时会被调用，如果数据量大、每条边上需要更新的内容多时，可能会有性能问题。
+- 该方法必须**在 render 之前调用**，否则不起作用；
+- 由于该方法优先级最高，将覆盖其他地方对边的配置，这可能将造成一些其他配置不生效的疑惑；
+- 该方法在增加元素、更新元素时会被调用，如果数据量大、每条边上需要更新的内容多时，可能会有性能问题。
 
 ```js
 graph.edge((edge) => {
@@ -404,7 +396,7 @@ graph.edge((edge) => {
 });
 ```
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-htrqbt?file=src%2FApp.js
 
 优先级：使用 graph.edge(edgeFn) 配置 > 数据中动态配置 > 实例化图时全局配置
@@ -415,31 +407,30 @@ https://stackblitz.com/edit/stackblitz-starters-htrqbt?file=src%2FApp.js
 
 用户可以通过 `G6.registerEdge`注册一个新的边类型
 
-demo演示： https://stackblitz.com/edit/stackblitz-starters-nz3cac?file=src%2FApp.js
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-nz3cac?file=src%2FApp.js
 
 ## Combo
 
-此前，G6 已经存在一个节点分组 Group 功能，但它的机制无法支持一些较复杂的功能，图形分组 Group 与 [节点分组 Combo](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/combos/default-combo) 属于不同层次的概念。
+此前，G6 已经存在一个节点分组 Group 功能，但它的机制无法支持一些较复杂的功能，图形分组 Group 与  [节点分组 Combo](https://g6.antv.antgroup.com/zh/docs/manual/middle/elements/combos/default-combo)  属于不同层次的概念。
 
 group：针对图形层次的分组
 Combo ： 是针对节点的分组，与数据结构中的层次、分组对应。
 
 V3.5 推出了全新的节点分组 Combo 机制，能够支持所有常用功能。
 
-### 内置Combo
+### 内置 Combo
 
 G6 的内置 Combo 包括 circle 和 rect 两种类型
 
+**⚠️ 注意:**   使用 Combo 时，必须在示例化图时配置  `groupByTypes`  设置为  `false`，图中元素的视觉层级才能合理。
 
-**⚠️ 注意:**  使用 Combo 时，必须在示例化图时配置 `groupByTypes` 设置为 `false`，图中元素的视觉层级才能合理。
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-panqn8?file=src%2FApp.js
 
-demo演示： https://stackblitz.com/edit/stackblitz-starters-panqn8?file=src%2FApp.js
-
-### Combo配置方式
+### Combo 配置方式
 
 #### 实例化图时全局配置
 
-可以通过 `defaultCombo` 配置Combo，这里的配置是全局的配置，将会在所有边上生效。
+可以通过  `defaultCombo`  配置 Combo，这里的配置是全局的配置，将会在所有边上生效。
 
 ```js
 const graph = new G6.Graph({
@@ -457,7 +448,7 @@ const graph = new G6.Graph({
 
 #### 在数据中动态配置
 
-如果需要使不同Combo有不同的配置，可以将配置写入到Combo数据中。
+如果需要使不同 Combo 有不同的配置，可以将配置写入到 Combo 数据中。
 
 ```js
 const data = {
@@ -488,9 +479,9 @@ const data = {
 
 #### 使用 graph.combos()
 
--   该方法必须**在 render 之前调用**，否则不起作用；
--   由于该方法优先级最高，将覆盖其他地方对 combo 的配置，这可能将造成一些其他配置不生效的疑惑；
--   该方法在增加元素、更新元素时会被调用，如果数据量大、每个 Combo 上需要更新的内容多时，可能会有性能问题。
+- 该方法必须**在 render 之前调用**，否则不起作用；
+- 由于该方法优先级最高，将覆盖其他地方对 combo 的配置，这可能将造成一些其他配置不生效的疑惑；
+- 该方法在增加元素、更新元素时会被调用，如果数据量大、每个 Combo 上需要更新的内容多时，可能会有性能问题。
 
 ```js
 graph.combo((combo) => {
@@ -503,27 +494,27 @@ graph.combo((combo) => {
   };
 });
 
-
 graph.data(data);
 graph.render();
 ```
 
-### 自定义Combo
-用户可以通过 `G6.registerCombo`注册一个新的边类型
+### 自定义 Combo
 
-demo演示：
+用户可以通过  `G6.registerCombo`注册一个新的边类型
+
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-8wqd4y?file=src%2FApp.js
-
 
 ## 图布局 Layout
 
 图布局是指图中节点的排布方式，根据图的数据结构不同，布局可以分为两类：一般图布局、树图布局。
 
 ### 配置一般图布局
-通过`G6.Graph`注册layout
+
+通过`G6.Graph`注册 layout
+
 ```js
 const graph = new G6.Graph({
-
   // ...其他配置
   layout: {
     type: 'force', // 定义好内置布局
@@ -531,11 +522,13 @@ const graph = new G6.Graph({
 });
 ```
 
- demo演示：
- https://stackblitz.com/edit/stackblitz-starters-vgghpg?file=src%2FApp.js
+demo 演示：
+https://stackblitz.com/edit/stackblitz-starters-vgghpg?file=src%2FApp.js
 
 ### 配置树图布局
-通过`G6.TreeGraph`注册layout
+
+通过`G6.TreeGraph`注册 layout
+
 ```js
 const graph = new G6.TreeGraph({
   // 定义布局
@@ -548,39 +541,40 @@ const graph = new G6.TreeGraph({
 });
 ```
 
-demo演示： https://stackblitz.com/edit/stackblitz-starters-qqjmk1?file=src%2FApp.js
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-qqjmk1?file=src%2FApp.js
 
 ### 自定义布局 Layout
 
 可以通过 `G6.registerLayout`注册一个新的布局方式
 
-demo演示：https://stackblitz.com/edit/stackblitz-starters-qerghm?file=src%2FApp.js
+demo 演示：https://stackblitz.com/edit/stackblitz-starters-qerghm?file=src%2FApp.js
 
 ## 图的交互
 
 ### 交互行为 Behavior
 
-Behavior 是 G6 提供的定义图上交互事件的机制。它与**交互模式 Mode** 搭配使用，
+Behavior 是 G6 提供的定义图上交互事件的机制。它与**交互模式 Mode**  搭配使用，
 
 #### 内置 Behavior
+
 官方文档：
 
 <https://g6.antv.antgroup.com/manual/middle/states/default-behavior>
 
 #### 自定义交互 Behavior
 
-通过 `G6.registerBehavior` 自定义 Behavior。
+通过  `G6.registerBehavior`  自定义 Behavior。
 
-demo演示： https://stackblitz.com/edit/stackblitz-starters-ufkxvu?file=src%2FApp.js
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-ufkxvu?file=src%2FApp.js
 
 ### 交互管理 Mode
 
 Mode 是 G6 交互行为的管理机制，一个 mode 是多种行为 Behavior 的组合，允许用户通过切换不同的模式进行交互行为的管理。
 
+存在 default 和 edit 两种（交互模式）:
 
-存在default和edit两种（交互模式）:
--   default 模式中包含点击选中节点行为和拖拽画布行为;
--   edit 模式中包含点击节点弹出编辑框行为和拖拽节点行为。
+- default 模式中包含点击选中节点行为和拖拽画布行为;
+- edit 模式中包含点击节点弹出编辑框行为和拖拽节点行为。
 
 ```js
 const graph = new G6.Graph({
@@ -588,31 +582,30 @@ const graph = new G6.Graph({
   modes: {
     default: [
       'drag-canvas', // 允许拖拽画布
-      'zoom-canvas',  // 放缩画布、
+      'zoom-canvas', // 放缩画布、
       'drag-node', // 拖拽节点
     ],
   },
 });
 ```
 
-demo演示： 
+demo 演示：
 https://stackblitz.com/edit/stackblitz-starters-gc3c2w?file=src%2FApp.js
-
 
 ### 交互状态 State
 
-G6 中的 `state`，指的是节点或边的状态，包括交互状态和业务状态两种。
+G6 中的  `state`，指的是节点或边的状态，包括交互状态和业务状态两种。
 
 **交互状态**
 
 用户使用鼠标选中某个节点则该节点被选中，hover 到某条边则该边被高亮等。
 
-G6 中默认处理的是交互状态。这种都是单值的情况，true或者false
+G6 中默认处理的是交互状态。这种都是单值的情况，true 或者 false
 
-- `hover`： 悬停状态       
-- `selected`：  选中状态                          
-- `disabled`：  禁用状态        
-- `active`  ：  激活状态（视觉高亮）
+- `hover`： 悬停状态
+- `selected`： 选中状态
+- `disabled`： 禁用状态
+- `active` ： 激活状态（视觉高亮）
 
 **业务状态**
 
@@ -620,27 +613,27 @@ G6 中默认处理的是交互状态。这种都是单值的情况，true或者f
 业务状态的状态量可能存在多个不同的值，如节点代表人，有“健康”、“疑似”、“确诊”、“死亡”四种状态；
 并且存在状态间互斥，“死亡”与其他三种就是互斥的，不可能同时存在“健康”和“死亡”两种状态；
 
-
 为了解决以上问题，我们将 G6 的状态管理分为以下几层：
 
--   定义状态：统一的定义方式；
--   设置状态：`setItemState` 方法；
--   更新状态：`updateItem` 支持更新状态；
--   取消状态：`clearItemStates` 方法。
+- 定义状态：统一的定义方式；
+- 设置状态：`setItemState`  方法；
+- 更新状态：`updateItem`  支持更新状态；
+- 取消状态：`clearItemStates`  方法。
 
-#### 配置state样式
+#### 配置 state 样式
+
 在 G6 中，有三种方式配置不同状态的样式：
 
--   在实例化 Graph 时，通过 `nodeStateStyles` 和 `edgeStateStyles` 对象定义；
--   在节点/边数据中，在 `stateStyles` 对象中定义状态；
--   在自定义节点/边时，在 options 配置项的 `stateStyles` 对象中定义状态。
+- 在实例化 Graph 时，通过  `nodeStateStyles`  和  `edgeStateStyles`  对象定义；
+- 在节点/边数据中，在  `stateStyles`  对象中定义状态；
+- 在自定义节点/边时，在 options 配置项的  `stateStyles`  对象中定义状态。
 
 #### 设置 state
 
-使用 `graph.setItemState(item, stateName, stateValue)`  来使定义的状态生效
-
+使用  `graph.setItemState(item, stateName, stateValue)`  来使定义的状态生效
 
 ##### 实例化 Graph 时定义 state 样式
+
 使用这种方式可以为图上的所有节点/边配置全局统一的 state 样式。
 
 ```js
@@ -664,7 +657,7 @@ const graph = new G6.Graph({
   },
   defaultEdge: {
     // ...
-  }
+  },
 });
 ```
 
@@ -718,7 +711,8 @@ G6.registerNode('customShape', {
 ```
 
 #### 子图形状态样式
-如果单独设置子形状的状态样式时，如下面我们定义了节点中 `name` 属性值为 `'sub-element'` 的样式，当我们通过 `graph.setItemState(item, 'selected', true)` 设置指定 item 的状态时，子元素 `'sub-element'`的样式也会同步更新。
+
+如果单独设置子形状的状态样式时，如下面我们定义了节点中  `name`  属性值为  `'sub-element'`  的样式，当我们通过  `graph.setItemState(item, 'selected', true)`  设置指定 item 的状态时，子元素  `'sub-element'`的样式也会同步更新。
 
 ```js
 const graph = new G6.Graph({
@@ -738,7 +732,7 @@ const graph = new G6.Graph({
 
 #### 调用的时机
 
-该函数可以在监听函数 `graph.on` 中被调用，也可以在自定义 Behavior 中调用，或在其他任意地方用于响应交互/业务的变化。
+该函数可以在监听函数  `graph.on`  中被调用，也可以在自定义 Behavior 中调用，或在其他任意地方用于响应交互/业务的变化。
 
 **graph.on**
 
@@ -749,7 +743,6 @@ graph.on('node:mouseenter', (evt) => {
   const { item } = evt;
   graph.setItemState(item, 'hover', true);
 });
-
 
 graph.on('node:mouseleave', (evt) => {
   const { item } = evt;
@@ -806,7 +799,7 @@ graph.updateItem(item, {
 
 #### 取消状态
 
-建议使用 `graph.clearItemStates` 来取消 `graph.setItemState` 设置的状态。`graph.clearItemStates` 支持一次取消单个或多个状态。
+建议使用  `graph.clearItemStates`  来取消  `graph.setItemState`  设置的状态。`graph.clearItemStates`  支持一次取消单个或多个状态。
 
 ```js
 graph.setItemState(item, 'bodyState', 'health');
@@ -818,11 +811,7 @@ graph.clearItemStates(item, ['selected']);
 graph.clearItemStates(item, ['bodyState:health', 'selected', 'active']);
 ```
 
-
-
-
-demo演示： https://stackblitz.com/edit/stackblitz-starters-hcafsb?file=src%2FApp.js
-
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-hcafsb?file=src%2FApp.js
 
 ## 监听和绑定事件
 
@@ -834,8 +823,8 @@ G6 提供了直接的单个事件、时机的监听方法，可以监听画布�
 
 G6 中的动画分为两个层次：
 
--   全局动画：全局性的动画，图整体变化时的动画过渡；
--   元素（边和节点）动画：节点或边上的独立动画。
+- 全局动画：全局性的动画，图整体变化时的动画过渡；
+- 元素（边和节点）动画：节点或边上的独立动画。
 
 全局动画
 
@@ -854,22 +843,18 @@ const graph = new G6.Graph({
 
 由于 G6 的内置节点和边是没有动画的，需要实现节点和边上的动画需要通过`自定义节点`、`自定义边`时复写  `afterDraw`  实现。
 
- demo演示：https://stackblitz.com/edit/stackblitz-starters-7bbplu?file=src%2FApp.js
-
-
+demo 演示：https://stackblitz.com/edit/stackblitz-starters-7bbplu?file=src%2FApp.js
 
 ## 使用组件
 
 <https://g6.antv.antgroup.com/manual/middle/plugins/plugins#menu>
 
-demo演示： https://stackblitz.com/edit/stackblitz-starters-pjqrjh?file=src%2FApp.js
+demo 演示： https://stackblitz.com/edit/stackblitz-starters-pjqrjh?file=src%2FApp.js
 
-
-
-# antv G6 5.0-beta版本
+# antv G6 5.0-beta 版本
 
 ## 数据格式
-  
+
 为了数据分层，防止数据污染，并更好地避免业务数据和渲染数据混杂的情况，和 v4 相比，v5 的数据结构有了比较大的变更，具体变更如下。G6 v5 提供了 v4 数据的转换处理器，可以在数据处理模块配置使用
 
 ```js
@@ -887,85 +872,84 @@ const graph = new Graph({
 
 ### v4 数据结构
 
-
 ```js
 type ItemModel = {
-  id: string;
-  type?: string; // 元素类型，e.g. 如是节点，则可能是 circle, rect 等注册过的节点类型名
-  label?: string; // label 的文本
-  color?: string; // keyShape 的颜色
-  size?: number | number[]; // keyShape 的大小
-  visible?: boolean;
-  style?: { [shapeAttr: string]: unkown }; // keyShape 的样式
+  id: string,
+  type?: string, // 元素类型，e.g. 如是节点，则可能是 circle, rect 等注册过的节点类型名
+  label?: string, // label 的文本
+  color?: string, // keyShape 的颜色
+  size?: number | number[], // keyShape 的大小
+  visible?: boolean,
+  style?: { [shapeAttr: string]: unkown }, // keyShape 的样式
   labelCfg?: {
-    position?: string;
-    offset: number;
-    refX: number;
-    refY: number;
-    style?: { [shapeAttr: string]: unkown }; // label 的样式
-    background?: { [shapeAttr: string]: unkown }; // label 背景的样式
-  };
+    position?: string,
+    offset: number,
+    refX: number,
+    refY: number,
+    style?: { [shapeAttr: string]: unkown }, // label 的样式
+    background?: { [shapeAttr: string]: unkown }, // label 背景的样式
+  },
 };
 
-
 type NodeModel = ItemModel & {
-  comboId?: string;
-  x?: number;
-  y?: number;
-  anchorPoints?: number[][];
+  comboId?: string,
+  x?: number,
+  y?: number,
+  anchorPoints?: number[][],
   icon?: {
-    show?: boolean;
-    img?: string;
-    text?: string;
-    width?: number;
-    height?: number;
-    offset?: number;
-  };
+    show?: boolean,
+    img?: string,
+    text?: string,
+    width?: number,
+    height?: number,
+    offset?: number,
+  },
   linkPoints?: {
-    top?: boolean;
-    right?: boolean;
-    bottom?: boolean;
-    left?: boolean;
-    size?: number;
-    [shapeAttr: string]: unkown;
-  };
+    top?: boolean,
+    right?: boolean,
+    bottom?: boolean,
+    left?: boolean,
+    size?: number,
+    [shapeAttr: string]: unkown,
+  },
   // 根据节点类型不同，有不同的图形相关配置，
   // e.g. modelRect 的 preRect, image 的 clipCfg 等
 };
 ```
 
-### V5数据结构
+### V5 数据结构
 
 ```js
 type NodeModel = {
-  id: string;
+  id: string,
   data: {
-    type?: string; // 元素类型，e.g. 可能是 circle-node, rect-node
-    x?: number;
-    y?: number;
-    z?: number;
-    parentId?: string; // 父 combo 的 id
-    label?: string; // label 的文本
-    anchorPoints?: number[][];
+    type?: string, // 元素类型，e.g. 可能是 circle-node, rect-node
+    x?: number,
+    y?: number,
+    z?: number,
+    parentId?: string, // 父 combo 的 id
+    label?: string, // label 的文本
+    anchorPoints?: number[][],
     badges?: {
-      type: 'icon' | 'text';
-      text: string;
-      position: BadgePosition;
-    }[];
+      type: 'icon' | 'text',
+      text: string,
+      position: BadgePosition,
+    }[],
     icon?: {
-      type: 'icon' | 'text';
-      text?: string;
-      img?: string;
-    };
-    [key: string]: unknown; // 其他业务属性
-  };
+      type: 'icon' | 'text',
+      text?: string,
+      img?: string,
+    },
+    [key: string]: unknown, // 其他业务属性
+  },
 };
 ```
-  
-## 数据读取  
-  
-  ### v4配置
-  ```js
+
+## 数据读取
+
+### v4 配置
+
+```js
 const graph = new Graph({
   // ... 配置
 });
@@ -975,7 +959,7 @@ graph.render();
 // 或合并上面两行变为：graph.read(data);
 ```
 
-### v5配置
+### v5 配置
 
 ```js
 const graph = new Graph({
@@ -986,23 +970,25 @@ const graph = new Graph({
 ```
 
 ## 视觉与动画规范
+
 v5 中将所有节点/边/ combo 的图形进行规范化，每种类型的元素基本都有若干个规范的图形名称。包括自定义的元素，也应当遵循这样的规范。如果有额外的图形，统一放入 otherShapes 中。
 
--   节点：keyShape（主图形）、labelShape（文本图形）、haloShape（某些状态下出现的背景光晕）、labelBackgroundShape（文本背景图形）、iconShape（节点中心的 icon 图形）、badgeShapes（节点四周的徽标图形）、anchorShapes（代表锚点的圆点图形）：
+- 节点：keyShape（主图形）、labelShape（文本图形）、haloShape（某些状态下出现的背景光晕）、labelBackgroundShape（文本背景图形）、iconShape（节点中心的 icon 图形）、badgeShapes（节点四周的徽标图形）、anchorShapes（代表锚点的圆点图形）：
 
+- 边：keyShape（主图形）、labelShape（文本图形）、haloShape（某些状态下出现的背景光晕）、labelBackgroundShape（文本背景图形）：
 
--   边：keyShape（主图形）、labelShape（文本图形）、haloShape（某些状态下出现的背景光晕）、labelBackgroundShape（文本背景图形）：
+demo 演示： <https://stackblitz.com/edit/stackblitz-starters-kva5rb?file=src%2FApp.js>
 
+## 元素类型名
 
-demo演示： <https://stackblitz.com/edit/stackblitz-starters-kva5rb?file=src%2FApp.js>
-  
-## 元素类型名  
 v4 中内置的节点类型有 circle、rect、ellipse、star、image 等。这些名称和图形的类型可能产生歧义。因此在 v5 中，将更名为 xx-node。例如 circle-node，rect-node，ellipse-node，star-node，image-node。  
-同理，边也将更名为 line-edge、polyline-edge、cubci-edge 等。 
+同理，边也将更名为 line-edge、polyline-edge、cubci-edge 等。
 
-## 样式配置  
- ### v4全局样式配置
-v4 由于没有数据分层，详细的图形样式可以配置在数据中，也可以配置在 graph 的 defaultNode defaultEdge 配置项中， 在graph.node()跟graph.edge()又有性能问题。这些问题导致用户对数据的管理略有混乱。 业务属性和样式配置可能混杂在一起。另外，v4 graph 的节点/边样式配置是静态的、全局的，不能根据不同数据做出不同的映射。
+## 样式配置
+
+### v4 全局样式配置
+
+v4 由于没有数据分层，详细的图形样式可以配置在数据中，也可以配置在 graph 的 defaultNode defaultEdge 配置项中， 在 graph.node()跟 graph.edge()又有性能问题。这些问题导致用户对数据的管理略有混乱。 业务属性和样式配置可能混杂在一起。另外，v4 graph 的节点/边样式配置是静态的、全局的，不能根据不同数据做出不同的映射。
 
 ```js
 const graph = new Graph({
@@ -1022,13 +1008,14 @@ const graph = new Graph({
   },
 });
 ```
+
 ### v5 样式映射
-  
+
 在 v5 中我们更建议用户数据中仅保留必要的业务属性，以及重要的简单样式配置（例如文本内容、badges 内容等），把样式配置放在图的节点/边 mapper 中。Mapper 是 v5 将内部流转数据转换为渲染数据的映射器，由用户配置在 Graph JSON 配置中。当然，也有部分内置的 mapper 逻辑，用于将用户数据中的文本内容、badges 内容等转换到对应的图形属性上。
 
 ```js
 const graph = new Graph({
-  // 节点配置 
+  // 节点配置
   node: nodeInnerModel => {
     const { id, data } = nodeInnerModel;
     return {
@@ -1053,9 +1040,11 @@ const graph = new Graph({
   }
 });
 ```
-  
+
 ## 包体积减小
- ### v4引入
+
+### v4 引入
+
 v4 中所有功能都默认已经加入 G6，因此在 graph 配置时可以用字符串的方式指定，这导致了包体积庞大，比如
 
 ```js
@@ -1080,19 +1069,21 @@ const graph = new Graph({
 });
 ```
 
-### v5引入
+### v5 引入
 
-  
-G6 v5 仅将最常用的功能默认注册到了 Graph 上，其他功能需要从 @antv/g6 或其他包中引入并注册到 Graph 上后，方可配置到 Graph 上。同样地，自定义的能力也需要同样方式注册：  
+G6 v5 仅将最常用的功能默认注册到了 Graph 上，其他功能需要从 @antv/g6 或其他包中引入并注册到 Graph 上后，方可配置到 Graph 上。同样地，自定义的能力也需要同样方式注册：
 
 ```js
 import { Graph, extend, Extensions } from '@antv/g6';
 
 // 外部引入的功能
-import { ForceLayout as ForceLayoutWASM, supportsThreads, initThreads } from '@antv/layout-wasm';
+import {
+  ForceLayout as ForceLayoutWASM,
+  supportsThreads,
+  initThreads,
+} from '@antv/layout-wasm';
 
 const ExtGraph = extend(Graph, {
-
   behaviors: {
     'activate-relations': Extensions.ActivateRelations, // 内置的交互，未提前注册
     'some-custom-behavior': CustomBehaviorClass, // 自定义交互
@@ -1109,9 +1100,7 @@ const ExtGraph = extend(Graph, {
   layouts: {
     'force-wasm': ForceLayoutWASM,
   },
-
 });
-
 
 const supported = await supportsThreads();
 
@@ -1143,28 +1132,26 @@ const graph = new ExtGraph({
     maxIteration: 200,
   },
 });
-
 ```
-  
-  ## 树图和图的融合
-  
-  ### v4 创建树
-  
-  v4 中由于树图特殊性，G6扩展出了TreeGraph
-  
-  ```js
-const graph = new TreeGraph({
-    // ...配置
-})
-  ```
 
+## 树图和图的融合
+
+### v4 创建树
+
+v4 中由于树图特殊性，G6 扩展出了 TreeGraph
+
+```js
+const graph = new TreeGraph({
+  // ...配置
+});
+```
 
 ### v5 新增树图相关
 
--   布局与 Graph 通用，Graph 可以指定根节点，使用最小生成树建立树结构后使用树图布局算法；
--   交互与 Graph 通用，Graph 也可以展开和收起“子树”了，即无回溯边的下游节点；
--   支持回溯边、环存在；
--   支持森林（多棵树）。
+- 布局与 Graph 通用，Graph 可以指定根节点，使用最小生成树建立树结构后使用树图布局算法；
+- 交互与 Graph 通用，Graph 也可以展开和收起“子树”了，即无回溯边的下游节点；
+- 支持回溯边、环存在；
+- 支持森林（多棵树）。
 
 如果需要使用 TreeGraphData，只需要在配置 Graph 时给出一个数据类型 type 为 'treeData' 后给 value 传入 TreeGraphData 类型的数据，那么 G6 将会存储树图结构，并转换为普通图数据进行存储。
 
@@ -1178,9 +1165,9 @@ const graph = new Graph({
 });
 ```
 
-  
-## 事件与事件参数  
-v4 中 mousexx 事件，在 v5 中更改为 pointerxx 事件，能更好地兼容移动端事件，：  
+## 事件与事件参数
+
+v4 中 mousexx 事件，在 v5 中更改为 pointerxx 事件，能更好地兼容移动端事件，：
 
 ```js
 // v4
@@ -1192,26 +1179,23 @@ graph.on('node:mousemove', (e) => {});
 graph.on('node:pointermove', (e) => {});
 ```
 
-## 性能飞跃 & 多渲染器 & 3D大图
+## 性能飞跃 & 多渲染器 & 3D 大图
 
 G6 支持了 WebGL 的 2D 和 3D 渲染，渲染性能得到极大提升。各个渲染器还可以在运行时切换。只需要在 Graph Shang 配置不同的 renderer [渲染器 DEMO](https://g6-next.antv.antgroup.com/zh/examples/feature/features/#mapView)。
 
 ```js
 const graph = new Graph({
-
   // ...其他图配置
 
   renderer: 'canvas', // 'canvas', 'svg', 'webgl', 'webgl-3d'
-
 });
 ```
 
 ## 主题配置
 
-G6 v5中 内置了亮色、暗色主题，也可自定义。
+G6 v5 中 内置了亮色、暗色主题，也可自定义。
 
 <https://g6-next.antv.antgroup.com/examples/feature/features/#themeSwitch>
-
 
 ## 支持文本配置轮廓
 
@@ -1220,7 +1204,6 @@ G6 v5中 内置了亮色、暗色主题，也可自定义。
 ## 折线支持自动避障：
 
 <https://g6-next.antv.antgroup.com/examples/item/defaultEdges/#polyline3>
-
 
 ## 优缺点分析
 
