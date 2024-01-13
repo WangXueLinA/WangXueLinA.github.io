@@ -135,30 +135,96 @@ pop，drop 同理。
 
 commit 合并流程：在本地提了好多 commit，最终合并成一个 commit
 
-1. `git log` 查看一下 commit
+### 查看 commit
 
-   ![](/images/git/image23.jpg)
-
-   或这个 `git log --oneline`查看简介版本
-
-git rebase -i HEAD
-将会弹出修改页面
-键盘 q 退出 Git log
-键盘 i 进行编辑页面 ，将不要的 commit 用 s 进行修改掉，然后按 esc 退出，然后按：wq 进行保存
-
-又进行编辑页面，在进行编辑，将不要的 commit 用#进行注释掉，然后 esc 退出，然后按住：wq 进行保存
+`git log` 查看一下 commit
 
 ![](/images/git/image23.jpg)
 
-再进行 Git log 查看一下 commit 是否正确
+或者执行 `git log --oneline`查看简介版本
 
-![](/images/git/image23.jpg)
+![](/images/git/image24.jpg)
 
-然后进行 Git push origin 分支名 -f
-在远程上查看 commit 是否合入成功，
-然后在进行 merge request
+键盘 `q` 退出 `git log`
+
+### 执行 rebase
+
+要选择一个 commitID , 比如我想要合并最近的三条 commit 为一个 commit，那我就得复制第四条的 commit，那就是 aa96ade，执行`git rebase -i aa96ade`
+
+![](/images/git/image26.jpg)
+
+按键盘 `i`进行编辑页面 ，将不要的 commit 用 `s`进行修改掉
+
+要保留一个 pick 一般把第一个 pick 保留
+
+修改成如下所示: 意思就是把下面 2 个 commit 提交 和 第一个 commit 合并在一起
+
+![](/images/git/image25.jpg)
+
+然后按 `esc` 退出，然后按`:wq` 回车进行保存，得到如下界面
+
+![](/images/git/image27.jpg)
+
+按键盘 `i` 进行编辑页面，将不要的 commit 用`#`进行注释掉
+
+![](/images/git/image29.jpg)
+
+然后 `esc`退出，然后按`:wq` 回车进行保存
+
+### 验证 commit
+
+再次输入 `git log` 验证 commit 记录时候是我们想要的两条
+
+![](/images/git/image30.jpg)
+
+### 推入远程仓库
+
+然后进行 `git push -f`，在远程上查看 commit 是否合入成功，然后在进行 merge request
 
 ## .gitignore（忽略文件）
+
+这个文件是用来指定哪些文件不被纳入 git 管理的。git commit 不会提交这些文件。
+
+这个文件不是自动生成的，需要你手动创建并编写规则。
+
+一些常见的例子：
+
+1. vscode 自动创建的.vscode 文件
+2. 前端安装依赖生成的巨大的 node_modules 文件夹
+3. Electron 打包生成的 build 文件夹
+4. 一些不想上传的文件，例如密码配置文件之类。
+5. ......
+
+### 例子
+
+![](/images/git/image28.jpg)
+
+### 匹配规则
+
+可以看到我们排除掉的目录都是以置灰的状态展示
+
+![](/images/git/image31.jpg)
+
+| 表达式        | 说明                                                                         |
+| ------------- | ---------------------------------------------------------------------------- |
+| \*.txt        | 忽略所有 .txt 后缀的文件                                                     |
+| !src.a        | 忽略除 src.a 外的其他文件                                                    |
+| /todo         | 仅忽略项目根目录下的 todo 文件，不包括 src/todo                              |
+| build/        | 忽略 build/目录下的所有文件，过滤整个 build 文件夹；                         |
+| doc/\*.txt    | 忽略 doc 目录下所有 .txt 后缀的文件，但不包括 doc 子目录的 .txt 的文件       |
+| bin/:         | 忽略当前路径下的 bin 文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin 文件 |
+| /bin:         | 忽略根目录下的 bin 文件                                                      |
+| /\_.c:        | 忽略 cat.c，不忽略 build/cat.c                                               |
+| debug/\_.obj: | 忽略 debug/io.obj，不忽略 debug/common/io.obj 和 tools/debug/io.obj          |
+| \*\*/foo:     | 忽略/foo, a/foo, a/b/foo 等                                                  |
+| a/\*\*/b:     | 忽略 a/b, a/x/b, a/x/y/b 等                                                  |
+| !/bin/run.sh  | 不忽略 bin 目录下的 run.sh 文件                                              |
+| \*.log:       | 忽略所有 .log 文件                                                           |
+| config.js:    | 忽略当前路径的 config.js 文件                                                |
+| /mtk/         | 忽略整个文件夹                                                               |
+| \*.zip        | 忽略所有.zip 文件                                                            |
+| /mtk/do.c     | 忽略某个具体文件                                                             |
+| dist          | 忽略所有 dist 目录 或文件                                                    |
 
 ### 配置不生效
 
