@@ -72,6 +72,13 @@ pbcopy < ~/.ssh/id_rsa.pub // 这时候公钥会存在剪切板里
 
 ### 测试连接是否成功
 
+输入命令
+
+```js
+ssh -T git@github.com
+
+```
+
 第一次设置公钥时测试连接成功
 
 ![](/images/git/image14.webp)
