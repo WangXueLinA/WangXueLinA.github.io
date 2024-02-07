@@ -3,7 +3,21 @@ toc: content
 title: Webpack
 ---
 
-# Webpack
+# Webpack5
+
+## 为什么需要 webpack
+
+想要理解为什么使用 webpack，我们可以先回顾下历史，在打包工具出来之前，我们是如何在 web 中使用 javaScript 的。
+
+在浏览器中运行 javaScript 有两种方式
+
+- 1、引用脚步来存放每个功能，比如：
+
+![](/images/webpack/image1.jpg)
+
+- 2、使用一个包含所有项目代码的大型 js 文件
+
+![](/images/webpack/image2.jpg)
 
 ## 介绍
 

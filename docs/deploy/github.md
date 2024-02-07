@@ -70,10 +70,6 @@ pbcopy < ~/.ssh/id_rsa.pub // 这时候公钥会存在剪切板里
 
 ![](/images/git/image12.webp)
 
-若是多次设置公钥则
-
-![](/images/git/image13.webp)
-
 ### 测试连接是否成功
 
 输入命令

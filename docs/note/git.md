@@ -26,6 +26,8 @@ git pull origin master:branchtest
 
 同样如果上述没有冒号，则表示将远程 origin 仓库的 master 分支拉取下来与本地当前分支合并
 
+## git pull --rebase
+
 ## git stash
 
 stash 命令能够将还未 commit 的代码存起来
