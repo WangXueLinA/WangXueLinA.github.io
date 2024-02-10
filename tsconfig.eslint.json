@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "types": ["@types/node"],
+    "noEmit": true,
+    "allowJs": true
+  },
+  "extends": "./tsconfig.json",
+  "include": [
+    ".eslintrc.js",
+    "./packages/**/src",
+    "./packages/**/vite.config.ts",
+    "./scripts",
+    "./template",
+    "./docs"
+  ]
+}

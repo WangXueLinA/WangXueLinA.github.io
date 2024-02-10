@@ -13,26 +13,56 @@ TODO
 
 TODO
 
-## Development
+## 命令行
 
-```bash
-# install dependencies
-$ yarn install
+```shell
+npm run create #创建模块
 
-# develop library by docs demo
-$ yarn start
+lerna link #软链接依赖
 
-# build library source code
-$ yarn run build
+npm start #运行文档
 
-# build library source code in watch mode
-$ yarn run build:watch
+cd packages/xxx npm run dev # 单独进入某个模块运行开发环境
 
-# build docs
-$ yarn run docs:build
+npm run install-lib #安装全局依赖
 
-# check your project for potential problems
-$ yarn run doctor
+
+npm run build #构建所有包
+
+npm run build --scope @wxl/dsc-api-detail #单独构建某一包，会先构建当前包依赖的包
+
+
+
+npm run release # 发布包
+npm run release:package # 单独发布某些包 可选
+
+
+```
+
+### 本地项目测试
+
+```
+
+npm i yalc -g
+yarn global add yalc
+
+// 1. 进入对用的 库
+cd packages/@wxl/<%= name %>
+
+// 2. 执行build
+npm run build
+
+// 3. 发布
+yalc publish
+
+// 4. 进入项目
+yalc add @wxl/<%= name %>
+
+// 5. 安装完成，重启项目
+
+// 6. 本地验证ok，执行移除命令
+yalc remove @wxl/<%= name %>
+
 ```
 
 ## LICENSE

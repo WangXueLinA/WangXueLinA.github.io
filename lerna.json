@@ -1,0 +1,25 @@
+{
+  "npmClient": "yarn",
+  "changelog": {
+    "cacheDir": ".changelog"
+  },
+  "command": {
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    },
+    "publish": {
+      "message": "chore(release): publish",
+      "npmClient": "npm",
+      "allowBranch": "master",
+      "verifyRegistry": false,
+      "verifyAccess": false,
+      "conventionalCommits": true
+    }
+  },
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent"
+}

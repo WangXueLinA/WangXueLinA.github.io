@@ -1,32 +1,18 @@
 {
   "name": "xuelin_dumi",
-  "version": "0.0.1",
-  "description": "A react library developed with dumi",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "npm run dev",
-    "dev": "dumi dev",
     "build": "father build",
     "build:watch": "father dev",
-    "docs:build": "dumi build",
+    "create": "node scripts/create.js",
     "deploy": "gh-pages -d dist",
-    "prepare": "husky install && dumi setup",
+    "docs:build": "dumi build",
     "doctor": "father doctor",
-    "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepublishOnly": "father doctor && npm run build"
-  },
-  "authors": [],
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "install-lib": "lerna clean -y && lerna bootstrap --use-workspaces",
+    "start": "dumi dev"
   },
   "lint-staged": {
     "*.{md,json}": [
@@ -45,42 +31,57 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.12.8",
+    "asmcrypto.js": "^2.3.2",
+    "axios": "^0.24.0",
+    "crypto-js": "^4.2.0",
+    "js-cookie": "^2.2.1",
+    "lerna": "^4.0.0",
+    "moment": "^2.30.1",
+    "prism-react-renderer": "^2.3.1",
+    "qs": "^6.11.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router": "^6.2.2",
+    "react-router-dom": "^6.2.2",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.23.3",
+    "@types/crypto-js": "^4.2.1",
+    "@types/js-cookie": "^2.2.1",
+    "@types/qs": "^6.9.11",
+    "@umijs/fabric": "^2.8.1",
+    "@umijs/test": "^3.0.5",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-react-require": "^4.0.2",
+    "cross-env": "^7.0.3",
+    "dumi": "^2.2.17",
+    "ejs": "^3.1.6",
+    "eslint": "^7.x",
+    "father": "^4.1.0",
+    "fs-extra": "^10.0.0",
+    "gh-pages": "^6.1.1",
+    "glob": "^7.2.0",
+    "husky": "^8.0.1",
+    "inquirer": "^8.2.0",
+    "lerna": "^4.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.9.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "@types/crypto-js": "^4.2.1",
-    "@types/qs": "^6.9.11",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@umijs/lint": "^4.0.0",
-    "dumi": "^2.2.13",
-    "eslint": "^8.23.0",
-    "father": "^4.1.0",
-    "gh-pages": "^6.1.1",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "prettier-plugin-organize-imports": "^3.0.0",
-    "prettier-plugin-packagejson": "^2.2.18",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "stylelint": "^14.9.1"
+  "publishConfig": {
+    "access": "public"
   },
-  "dependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "antd": "^5.12.8",
-    "asmcrypto.js": "^2.3.2",
-    "crypto-js": "^4.2.0",
-    "moment": "^2.30.1",
-    "prism-react-renderer": "^2.3.1",
-    "qs": "^6.11.2",
-    "resize-observer-polyfill": "^1.5.1"
+  "authors": [],
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node scripts/verifyCommit.js"
   }
 }
