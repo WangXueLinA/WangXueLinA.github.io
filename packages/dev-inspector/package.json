@@ -1,8 +1,8 @@
 {
-  "name": "@wxl/react-dev-inspector",
+  "name": "@wxl/dev-inspector",
   "version": "0.0.1",
   "description": "开发环境 vscode 组件定位",
-  "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/react-dev-inspector",
+  "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/dev-inspector",
   "author": "学麟",
   "main": "./lib/cjs",
   "module": "./lib/esm",

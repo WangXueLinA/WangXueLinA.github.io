@@ -9,9 +9,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/react-dev-inspector
+npm i @wxl/dev-inspector
 or
-yarn add @wxl/react-dev-inspector
+yarn add @wxl/dev-inspector
 ```
 
 ### 用法
@@ -19,7 +19,7 @@ yarn add @wxl/react-dev-inspector
 ```
 if(process.env.NODE_ENV === 'development'){
 
-  require('@wxl/react-dev-inspector').createDevInspector('wxl')//组件wxl前缀给弹窗使用
+  require('@wxl/dev-inspector').createDevInspector('wxl')//组件wxl前缀给弹窗使用
 }
 
 // mac command + 鼠标右键 跳转vscode文件

@@ -1,9 +1,9 @@
 ---
-title: react-dev-inspector
+title: flow-chart
 toc: content
 
 group:
-  title: react-dev-inspector
+  title: flow-chart
 ---
 
 <embed src="../README.md" ></embed>

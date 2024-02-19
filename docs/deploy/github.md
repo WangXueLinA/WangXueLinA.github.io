@@ -70,7 +70,7 @@ pbcopy < ~/.ssh/id_rsa.pub // 这时候公钥会存在剪切板里
 
 ![](/images/git/image12.webp)
 
-### 测试连接是否成功
+## 测试连接是否成功
 
 输入命令
 
