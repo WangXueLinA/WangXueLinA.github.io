@@ -1,6 +1,6 @@
 {
   "name": "@wxl/flow-chart",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "antv/x6 流程图",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/flow-chart",
   "author": "xuelin",
@@ -16,7 +16,6 @@
     "preview": "vite preview",
     "start": "npm run dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "@antv/x6": "2.18.1",
     "@antv/x6-plugin-clipboard": "^2.1.6",

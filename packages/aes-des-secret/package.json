@@ -1,6 +1,6 @@
 {
   "name": "@wxl/aes-des-secret",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "aes/des加密解密",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/aes-des-secret",
   "author": "xuelin",
@@ -16,7 +16,6 @@
     "preview": "vite preview",
     "start": "npm run dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@types/node": "^17.0.18",
