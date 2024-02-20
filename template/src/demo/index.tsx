@@ -1,4 +1,4 @@
-import App from '@wxl/<%= name %>';
+import App from '../index';
 
 const Demo: React.FC = () => {
   return <App />;

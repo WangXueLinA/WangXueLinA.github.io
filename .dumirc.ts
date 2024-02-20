@@ -18,6 +18,10 @@ export default defineConfig({
     forceKebabCaseRouting: false,
     atomDirs: [{ type: 'components', dir: '/packages' }],
   },
+  history: {
+    type: 'hash'
+  },
+  monorepoRedirect: {},
   extraBabelPlugins: [['import', { libraryName: 'wxl', style: true }]],
   themeConfig: {
     footer: false,
