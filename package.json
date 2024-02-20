@@ -11,6 +11,8 @@
     "deploy": "gh-pages -d dist",
     "docs:build": "dumi build",
     "doctor": "father doctor",
+    "release": "lerna publish --conventional-commits",
+    "release:package": "node scripts/release.js",
     "install-lib": "lerna clean -y && lerna bootstrap --use-workspaces",
     "start": "dumi dev"
   },
