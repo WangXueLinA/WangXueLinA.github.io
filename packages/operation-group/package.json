@@ -29,5 +29,9 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.12",
     "vite-plugin-style-import": "^2.0.0"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/"
+  },
+  "gitHead": "2f014e47b99c20f9a2c5c6f5accf8b386a4eb40b"
 }
