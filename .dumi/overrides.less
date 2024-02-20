@@ -6,7 +6,7 @@
     overflow: auto;
     position: relative;
     line-height: 1.75;
-    box-shadow: 0 0 8px hsla(0, 0%, 43.1%, 0.45);
+    box-shadow: 0 0 8px hsla(0deg, 0%, 43.1%, 45%);
     border-radius: 4px;
     margin: 16px;
 
@@ -21,6 +21,7 @@
         10px 10px no-repeat;
       background-size: 40px;
     }
+
     & > div {
       background: #eee;
       color: #f8f8f2;
@@ -59,8 +60,14 @@
 .dumi-default-navbar > li > a.active {
   color: #1677ff;
 }
-.dumi-default-doc-layout{
-  .dumi-default-sidebar{
+
+.dumi-default-doc-layout {
+  .dumi-default-header-content,
+  main {
+    max-width: unset;
+  }
+
+  .dumi-default-sidebar {
     width: unset;
   }
 }
