@@ -1130,14 +1130,14 @@ webpack 会按照数组顺序去解析这些后缀名，对于同名的文件，
 
 ### 外部扩展
 
-有时候我们为了减小bundle的体积，从而把一些不变的第三方库用cdn的形式引入进
-来，比如jQuery:index.html
+有时候我们为了减小 bundle 的体积，从而把一些不变的第三方库用 cdn 的形式引入进
+来，比如 jQuery:index.html
+
 ```js
-<script
-src="https://cdn.bootcdn.net/ajax/1ibs/jquery/3.6.0/jquery.js"
-></script>
+<script src="https://cdn.bootcdn.net/ajax/1ibs/jquery/3.6.0/jquery.js"></script>
 ```
-这个时候我们想在我们的代码里使用引入的jquery———但似乎三种模块引入方式都不行，这时候怎么办呢？webpack给我们提供了Externals的配置属性，让我们可以配置外部扩展模块:
+
+这个时候我们想在我们的代码里使用引入的 jquery———但似乎三种模块引入方式都不行，这时候怎么办呢？webpack 给我们提供了 Externals 的配置属性，让我们可以配置外部扩展模块:
 
 ```js
 module.exports= {
@@ -1147,14 +1147,15 @@ module.exports= {
 }；
 ```
 
-我们尝试在代码中使用jQuery:
+我们尝试在代码中使用 jQuery:
+
 ```js
 // index.js
 import $ from 'jquery';
 console.log($);
 ```
 
-发现打印成功，这说明我们已经在代码中使用它。 注意：我们如何得知{jquery:jQuery}中的'jQuery？其实就是cdn里打入到window中的变量名，比如jQuery不仅有jQuery变量名，还有$，那么我们也可以写成这样子：
+发现打印成功，这说明我们已经在代码中使用它。 注意：我们如何得知{jquery:jQuery}中的'jQuery？其实就是 cdn 里打入到 window 中的变量名，比如 jQuery 不仅有 jQuery 变量名，还有$，那么我们也可以写成这样子：
 
 ```js
 module.exports= {
@@ -1163,22 +1164,44 @@ module.exports= {
   }，
 }；
 ```
+
 重启服务效果一样
 
 ## 扩展功能
 
-### PostCSS 与 CSS模块
+### PostCSS 与 CSS 模块
+
 PostCSS 是一个用 JavaScript 工具和插件转换 CSS 代码的工具。比如可以使用 Autoprefixer 插件自动获取浏览器的流行度和能够支持的属性，并根据这些数据帮我们自动的 为 CSS 规则添加前缀，将最新的 CSS 语法转换成大多数浏览器都能理解的语法。
 CSS 模块 能让你永远不用担心命名太大众化而造成冲突，只要用最有意义的名字就行了。
- PostCSS
-
+PostCSS
 
 PosetCSS 与
-loader 三个loader：
+loader 三个 loader：
 
 结合，需要安装 style-loader , css-loader ,
 
+```js
 
+# autoprefixer 可以加载一些样式的前缀
+# postcss-nested 可以写一些嵌套样式
+npm i style-loader css-loader postcss-loader autoprefixer postcss-nested -D
 
+```
 
 然后在项目根目录下创建 postcss.config.js :
+
+```js
+module.exports = {
+  plugins: [require('autoprefixer')],
+};
+```
+
+package.json 中约定浏览器版本：
+
+```js
+  // 全球浏览器的使用率大于1%，浏览器最近的两个版本
+  "broeserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+```
