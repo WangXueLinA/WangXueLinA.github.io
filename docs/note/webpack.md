@@ -5,6 +5,10 @@ title: Webpack5
 
 # Webpack5
 
+## 官网
+
+官网地址： [webpack5](https://webpack.docschina.org/concepts/)
+
 ## 为什么需要 webpack
 
 想要理解为什么使用 webpack，我们可以先回顾下历史，在打包工具出来之前，我们是如何在 web 中使用 javaScript 的。
@@ -1172,36 +1176,189 @@ module.exports= {
 ### PostCSS 与 CSS 模块
 
 PostCSS 是一个用 JavaScript 工具和插件转换 CSS 代码的工具。比如可以使用 Autoprefixer 插件自动获取浏览器的流行度和能够支持的属性，并根据这些数据帮我们自动的 为 CSS 规则添加前缀，将最新的 CSS 语法转换成大多数浏览器都能理解的语法。
-CSS 模块 能让你永远不用担心命名太大众化而造成冲突，只要用最有意义的名字就行了。
-PostCSS
+CSS 模块 能让你永远不用担心命名太大众化而造成冲突。
 
-PosetCSS 与
-loader 三个 loader：
+具体可以查看官网配置： <https://webpack.docschina.org/loaders/postcss-loader/>
 
-结合，需要安装 style-loader , css-loader ,
+### Web Works
+
+有时我们需要在客户端进行大量的运算，但又不想让它阻塞我们的 js 主线程。你可能第一时间考虑到的是异步。
+但事实上，运算量过大(执行时间过长)的异步也会阻塞 js 事件循环，甚至会导致浏览器假死状态。
+这时候，HTML5 的新特性 WebWorker 就派上了用场。
+
+html5 之前，打开一个常规的网页，浏览器会启用几个线程？一般而言，至少存在三个线程(公用线程不计入在内):
+分别是 js 引擎线程(处理 js)、GUI 渲染线程(渲染页面)、浏览器事件触发线程(控制交互)。
+当一段 JS 脚本长时间占用着处理机,就会挂起浏览器的 GUI 更新，而后面的事件响应也被排在队列中得不到处理，从而造成了浏览器被锁定进入假死状态。
+现在如果遇到了这种情况，我们可以做的不仅仅是优化代码————html5 提供了解决方案，webworker。
+webWorkers 提供了 js 的后台处理线程的 API，它允许将复杂耗时的单纯 js 逻辑处理放在浏览器后台线程中进行处理，让 js 线程不阻塞 UI 线程的渲染。
+多个线程间也是可以通过相同的方法进行数据传递。
+它的使用方式如下：
 
 ```js
-
-# autoprefixer 可以加载一些样式的前缀
-# postcss-nested 可以写一些嵌套样式
-npm i style-loader css-loader postcss-loader autoprefixer postcss-nested -D
-
+//new Worker(scriptURL: string | URL, options?: WorkerOptions)
+new Worker('someWorker.js');
 ```
 
-然后在项目根目录下创建 postcss.config.js :
+也就是说，需要单独写一个 js 脚本，然后使用 new Worker 来创建一个 Work 线程实例。
+这意味着并不是将这个脚本当做一个模块引入进来，而是单独开一个线程去执行这个脚本。
+
+我们知道，常规模式下，我们的 webpack 工程化环境只会打包出一个 bundle.js，那我们的 worker 脚本怎么办？
+也许你会想到设置多入口(Entry)多出口(ouotput)的方式。
+事实上不需要那么麻烦，webpack4 的时候就提供了 worker-loader 专门配置
+webWorker。
+令人开心的是，webpack5 之后就不需要用 loader 啦，因为 webpack5 内置了这个功能。
+我们来试验一下：
+第一步
+创建一个 work 脚本 work.js,我们甚至不需要写任何内容，我们的重点不是 webWorker 的使用，而是在 webpack 环境中使用这个特性。
+当然，也可以写点什么，比如：
 
 ```js
-module.exports = {
-  plugins: [require('autoprefixer')],
+self.onmessage = ({ data: { question } }) => {
+  self.postMessage({
+    answer: 42,
+  });
 };
 ```
 
-package.json 中约定浏览器版本：
+在 index.js 中使用它
 
 ```js
-  // 全球浏览器的使用率大于1%，浏览器最近的两个版本
-  "broeserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+// 下面的代码属于业务逻辑
+const worker = new Worker(new URL('./work.js', import.meta.url));
+worker.postMessage({
+  question: 'hi，那边的workder线程，请告诉我今天的幸运数字是多少？',
+});
+worker.onmessage = ({ data: { answer } }) => {
+  console.log(answer);
+};
 ```
+
+(import.meta.url 这个参数能够锁定我们当前的这个模块——注意，它不能在 commonjs 中使用。)
+
+这时候我们执行打包命令，会发现,dist 目录下除了 bundle.js 之外，还有另外一个
+xxx.bundle.js!
+这说明我们的 webpack5 自动的将被 new Work 使用的脚本单独打出了一个 bundle。
+我们加上刚才的问答代码，执行 npm run dev，发现它是能够正常工作。并且在 network 里也可以发现多了一个 src_worker_js.bundle.js。
+
+总结：选择这种语法是为了实现不使用 bundler 就可以运行代码，它也可以在浏览器中的原生 ECMAScript 模块中使用。
+
+### TypeScript
+
+首先安装 typescript ts-loader
+
+```js
+npm install --save-dev typescript ts-loader
+```
+
+接下来我们需要在项目根目录下添加一个 ts 的配置文件————tsconfig.json，我们可以用 ts 自带的工具来自动化生成它。
+
+```
+npx tsc --init
+```
+
+我们发现生成了一个 tsconfig.json，里面注释掉了绝大多数配置。现在，根据我们想要的效果来打开对应的配置。
+
+```js
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node"
+  }
+}
+```
+
+例如：
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.ts',
+  devtool: 'inline-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(dirname, 'dist'),
+  },
+};
+```
+
+使用第三方类库
+在从 npm 上安装第三方库时，一定要记得同时安装这个库的类型声明文件(typing definition)。
+
+我们可以从 TypeSearch 中找到并安装这些第三方库的类型声明文件(https://www.typescriptlang.org/dt/search?search=) 。
+
+## Tree shaking
+
+tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码
+(dead-code)。它依赖于 ES2015 模块语法的 静态结构 特性，例如 和
+export 。这个术语和概念实际上是由 ES2015 模块打包工具 rollup 普及起来的。
+webpack 2 正式版本内置支持 ES2015 模块（也叫做 harmony modules）和未使用模块检测能力。新的 webpack 4 正式版本扩展了此检测能力，通过
+的 属性作为标记，向 compiler 提供提示，表明项目中的哪些文件
+是 "pure(纯正 ES2015 模块)"，由此可以安全地删除文件中未使用的部分
+
+src/math.js
+
+```js
+export function add(x, y) {
+  return x + y;
+}
+
+export function minus(x, y) {
+  return x - y;
+}
+```
+
+需要将 配置设置成 development，以确定 bundle 不会被压缩：
+
+webpack.config.js
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(dirname, 'dist'),
+  },
+  mode: 'development',
+  devtool: 'inline-source-map'
+  optimization: {
+    usedExports: true,
+  },
+};
+```
+
+配置完这些后，更新入口脚本，使用其中一个新方法：
+
+```js
+import { add } from './math.js';
+
+console.log(add(5, 6));
+```
+
+注意，我们没有从`src/math.js`模块中`import`另外一个`minus`方法。这个函数就是所谓的“未引用代码(dead code)”，也就是说，应该删除掉未被引用的`export`
+
+现在运行 `npm run build` ，并查看输出的 bundle：
+
+![](/images/webpack/image57.png)
+
+你会注意到虽然我们没有引用 `minus` ，但它仍然被包含在 bundle 中
