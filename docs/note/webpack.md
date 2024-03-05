@@ -1362,3 +1362,29 @@ console.log(add(5, 6));
 ![](/images/webpack/image57.png)
 
 你会注意到虽然我们没有引用 `minus` ，但它仍然被包含在 bundle 中
+
+如果此时修改配置`mode: 'production'`
+
+打包后发现无用的代码全部都消失了。Webpack 没看到你使用的代码。Webpack 跟踪整个应用程序的`import/export`语句，因此，如果它看到导入的东西最终没有被使用，它会认为那是未引用代码(或叫做“死代码”—— dead-code )，并会对其进行 tree-shaking 。死代码并不总是那么明确的。下面是一些死代码和“活”代码的例子
+
+```js
+// 这会被看作“活”代码，不会做 tree-shaking
+import { add } from './math';
+console.log(add(5, 6));
+
+// 导入并赋值给 JavaScript 对象，但在接下来的代码里没有用到
+// 这就会被当做“死”代码，会被 tree-shaking
+import { add, minus } from './math';
+console.log(add(5, 6));
+
+// 导入但没有赋值给 JavaScript 对象，也没有在代码里用到
+// 这会被当做“死”代码，会被 tree-shaking
+import { add, minus } from './math';
+console.log('hello webpack');
+
+// 导入整个库，但是没有赋值给 JavaScript 对象，也没有在代码里用到
+// 非常奇怪，这竟然被当做“活”代码，因为 Webpack 对库的导入和本地代码导入的处理方式不同。
+import { add, minus } from './math';
+import 'lodash';
+console.log('hello webpack');
+```
