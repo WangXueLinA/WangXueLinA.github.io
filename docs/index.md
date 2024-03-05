@@ -1,12 +1,12 @@
 ---
 hero:
-  title: library
-  description: A react library developed with dumi
-  actions:
-    - text: 笔记
-      link: /note
-    - text: 学习
-      link: /study
+  title: document
+  description: 前端学习笔记文档
+  # actions:
+  #   - text: 笔记
+  #     link: /note
+  #   - text: 学习
+  #     link: /study
 # features:
 #   - title: Hello
 #     emoji: 💎
