@@ -1,6 +1,6 @@
 {
   "name": "@wxl/dev-inspector",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "开发环境 vscode 组件定位",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/dev-inspector",
   "author": "学麟",
@@ -16,7 +16,6 @@
     "preview": "vite preview",
     "start": "npm run dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@types/node": "^17.0.18",
@@ -29,5 +28,9 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.12",
     "vite-plugin-style-import": "^2.0.0"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/"
+  },
+  "gitHead": "2f014e47b99c20f9a2c5c6f5accf8b386a4eb40b"
 }

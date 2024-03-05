@@ -5,6 +5,10 @@ title: Webpack5
 
 # Webpack5
 
+## 官网
+
+官网地址： [webpack5](https://webpack.docschina.org/concepts/)
+
 ## 为什么需要 webpack
 
 想要理解为什么使用 webpack，我们可以先回顾下历史，在打包工具出来之前，我们是如何在 web 中使用 javaScript 的。
@@ -1180,28 +1184,4 @@ loader 三个 loader：
 
 结合，需要安装 style-loader , css-loader ,
 
-```js
-
-# autoprefixer 可以加载一些样式的前缀
-# postcss-nested 可以写一些嵌套样式
-npm i style-loader css-loader postcss-loader autoprefixer postcss-nested -D
-
-```
-
 然后在项目根目录下创建 postcss.config.js :
-
-```js
-module.exports = {
-  plugins: [require('autoprefixer')],
-};
-```
-
-package.json 中约定浏览器版本：
-
-```js
-  // 全球浏览器的使用率大于1%，浏览器最近的两个版本
-  "broeserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
-```

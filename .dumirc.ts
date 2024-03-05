@@ -18,13 +18,20 @@ export default defineConfig({
     forceKebabCaseRouting: false,
     atomDirs: [{ type: 'components', dir: '/packages' }],
   },
+  favicons: ['/favicon.png'],
+  history: {
+    type: 'hash',
+  },
+  monorepoRedirect: {},
   extraBabelPlugins: [['import', { libraryName: 'wxl', style: true }]],
   themeConfig: {
     footer: false,
+    logo: '/logo.png',
     nav: [
       { title: '组件', link: '/components' },
       { title: '笔记', link: '/note/react18' },
       { title: '部署', link: '/deploy/web' },
+      { title: '源码', link: '/source' },
     ],
     sidebar: {
       '/components': [
