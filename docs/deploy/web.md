@@ -66,8 +66,10 @@ bt default
 
 ## 上传网站程序安装包到根目录
 
-将这个两个文件删除
+将 http 文件夹中内容删除，上传自己 build 打包好的项目后放置在 http 文件夹内
 
 ![](/images/web/image11.jpg)
 
-用自己打包好的 build 的文件进行上传到根目录中
+用导入成功后，再次查看网站，此时已经成功
+
+![](/images/web/image12.jpg)
