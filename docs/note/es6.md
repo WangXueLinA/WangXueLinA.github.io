@@ -1,23 +1,23 @@
 ---
 toc: content
 title: Es6
+group: JS
 ---
 
 # ES6
 
-
 ## var
 
-在ES5中，顶层对象的属性和全局变量是等价的，用var声明的变量既是全局变量，也是顶层变量
+在 ES5 中，顶层对象的属性和全局变量是等价的，用 var 声明的变量既是全局变量，也是顶层变量
 
-注意：顶层对象，在浏览器环境指的是window对象，在 Node 指的是global对象
+注意：顶层对象，在浏览器环境指的是 window 对象，在 Node 指的是 global 对象
 
 ```
 var a = 10;
 console.log(window.a) // 10
 ```
 
-使用var声明的变量存在变量提升的情况
+使用 var 声明的变量存在变量提升的情况
 
 ```
 console.log(a) // undefined
@@ -32,15 +32,15 @@ console.log(a)
 a = 20
 ```
 
-使用var，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明
+使用 var，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明
 
 ```
-var a = 20 
+var a = 20
 var a = 30
 console.log(a) // 30
 ```
 
-在函数中使用使用var声明变量时候，该变量是局部的
+在函数中使用使用 var 声明变量时候，该变量是局部的
 
 ```
 var a = 20
@@ -48,10 +48,10 @@ function change(){
     var a = 30
 }
 change()
-console.log(a) // 20 
+console.log(a) // 20
 ```
 
-而如果在函数内不使用var，该变量是全局的
+而如果在函数内不使用 var，该变量是全局的
 
 ```
 var a = 20
@@ -59,14 +59,14 @@ function change(){
    a = 30
 }
 change()
-console.log(a) // 30 
+console.log(a) // 30
 ```
 
 ## let
 
-let是ES6新增的命令，用来声明变量
+let 是 ES6 新增的命令，用来声明变量
 
-用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效
+用法类似于 var，但是所声明的变量，只在 let 命令所在的代码块内有效
 
 ```
 {
@@ -82,9 +82,9 @@ console.log(a) // 报错ReferenceError
 let a = 2
 ```
 
-这表示在声明它之前，变量a是不存在的，这时如果用到它，就会抛出一个错误
+这表示在声明它之前，变量 a 是不存在的，这时如果用到它，就会抛出一个错误
 
-只要块级作用域内存在let命令，这个区域就不再受外部影响
+只要块级作用域内存在 let 命令，这个区域就不再受外部影响
 
 ```
 var a = 123
@@ -94,9 +94,9 @@ if (true) {
 }
 ```
 
-使用let声明变量前，该变量都不可用，也就是大家常说的“暂时性死区”
+使用 let 声明变量前，该变量都不可用，也就是大家常说的“暂时性死区”
 
-最后，let不允许在相同作用域中重复声明
+最后，let 不允许在相同作用域中重复声明
 
 ```
 let a = 20
@@ -125,7 +125,7 @@ func()
 
 ## const
 
-const声明一个只读的常量，一旦声明，常量的值就不能改变
+const 声明一个只读的常量，一旦声明，常量的值就不能改变
 
 ```
 const a = 1
@@ -133,14 +133,14 @@ a = 3
 // TypeError: Assignment to constant variable.
 ```
 
-这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值
+这意味着，const 一旦声明变量，就必须立即初始化，不能留到以后赋值
 
 ```
 const a;
 // SyntaxError: Missing initializer in const declaration
 ```
 
-如果之前用var或let声明过变量，再用const声明同样会报错
+如果之前用 var 或 let 声明过变量，再用 const 声明同样会报错
 
 ```
 var a = 20
@@ -150,11 +150,11 @@ const b = 30
 // 都会报错
 ```
 
-const实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动
+const 实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动
 
 对于简单类型的数据，值就保存在变量指向的那个内存地址，因此等同于常量
 
-对于复杂类型的数据，变量指向的内存地址，保存的只是一个指向实际数据的指针，const只能保证这个指针是固定的，并不能确保改变量的结构不变
+对于复杂类型的数据，变量指向的内存地址，保存的只是一个指向实际数据的指针，const 只能保证这个指针是固定的，并不能确保改变量的结构不变
 
 ```
 const foo = {};
@@ -167,31 +167,31 @@ foo.prop // 123
 foo = {}; // TypeError: "foo" is read-only
 ```
 
-其它情况，const与let一致
+其它情况，const 与 let 一致
 
 ## 区别
 
-var、let、const三者区别可以围绕下面五点展开：
+var、let、const 三者区别可以围绕下面五点展开：
 
--   变量提升
--   暂时性死区
--   块级作用域
--   重复声明
--   修改声明的变量
--   使用
+- 变量提升
+- 暂时性死区
+- 块级作用域
+- 重复声明
+- 修改声明的变量
+- 使用
 
 ### 变量提升
 
-var声明的变量存在变量提升，即变量可以在声明之前调用，值为undefined
+var 声明的变量存在变量提升，即变量可以在声明之前调用，值为 undefined
 
-let和const不存在变量提升，即它们所声明的变量一定要在声明后使用，否则报错
+let 和 const 不存在变量提升，即它们所声明的变量一定要在声明后使用，否则报错
 
 ```
 // var
 console.log(a)  // undefined
 var a = 10
 
-// let 
+// let
 console.log(b)  // Cannot access 'b' before initialization
 let b = 10
 
@@ -202,9 +202,9 @@ const c = 10
 
 ### 暂时性死区
 
-var不存在暂时性死区
+var 不存在暂时性死区
 
-let和const存在暂时性死区，只有等到声明变量的那一行代码出现，才可以获取和使用该变量
+let 和 const 存在暂时性死区，只有等到声明变量的那一行代码出现，才可以获取和使用该变量
 
 ```
 // var
@@ -222,9 +222,9 @@ const c = 10
 
 ### 块级作用域
 
-var不存在块级作用域
+var 不存在块级作用域
 
-let和const存在块级作用域
+let 和 const 存在块级作用域
 
 ```
 // var
@@ -248,9 +248,9 @@ console.log(c)  // Uncaught ReferenceError: c is not defined
 
 ### 重复声明
 
-var允许重复声明变量
+var 允许重复声明变量
 
-let和const在同一作用域不允许重复声明变量
+let 和 const 在同一作用域不允许重复声明变量
 
 ```
 // var
@@ -268,9 +268,9 @@ const c = 20 // Identifier 'c' has already been declared
 
 ### 修改声明的变量
 
-var和let可以
+var 和 let 可以
 
-const声明一个只读的常量。一旦声明，常量的值就不能改变
+const 声明一个只读的常量。一旦声明，常量的值就不能改变
 
 ```
 // var
@@ -291,7 +291,7 @@ console.log(c) // Uncaught TypeError: Assignment to constant variable
 
 ### 使用
 
-能用const的情况尽量使用const，其他情况下大多数使用let，避免使用var
+能用 const 的情况尽量使用 const，其他情况下大多数使用 let，避免使用 var
 
 #
 
@@ -299,7 +299,7 @@ console.log(c) // Uncaught TypeError: Assignment to constant variable
 
 ## 扩展运算符的应用
 
-ES6通过扩展元素符...，好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列
+ES6 通过扩展元素符...，好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列
 
 ```
 console.log(...[1, 2, 3])
@@ -422,8 +422,8 @@ let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 
 关于构造函数，数组新增的方法有如下：
 
--   Array.from()
--   Array.of()
+- Array.from()
+- Array.of()
 
 ### Array.from()
 
@@ -472,15 +472,15 @@ Array(3, 11, 8) // [3, 11, 8]
 
 参数如下：
 
--   target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
--   start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示从末尾开始计算。
--   end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示从末尾开始计算。
+- target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+- start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示从末尾开始计算。
+- end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示从末尾开始计算。
 
 ```
 // 将从 3 号位直到数组结束的成员（4 和 5），复制到从 0 号位开始的位置，结果覆盖了原来的 1 和 2
-[1, 2, 3, 4, 5].copyWithin(0, 3) 
+[1, 2, 3, 4, 5].copyWithin(0, 3)
 
-// [4, 5, 3, 4, 5] 
+// [4, 5, 3, 4, 5]
 ```
 
 ### find()、findIndex()
@@ -495,7 +495,7 @@ find()用于找出第一个符合条件的数组成员
 }) // 10
 ```
 
-findIndex返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1
+findIndex 返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1
 
 ```
 [1, 5, 10, 15].findIndex(function(value, index, arr) {
@@ -503,7 +503,7 @@ findIndex返回第一个符合条件的数组成员的位置，如果所有成�
 }) // 2
 ```
 
-这两个方法都可以接受第二个参数，用来绑定回调函数的this对象。
+这两个方法都可以接受第二个参数，用来绑定回调函数的 this 对象。
 
 ```
 function f(v){
@@ -567,7 +567,7 @@ for (let [index, elem] of ['a', 'b'].entries()) {
 [1, 2, NaN].includes(NaN) // true
 ```
 
-方法的第二个参数表示搜索的起始位置，默认为0
+方法的第二个参数表示搜索的起始位置，默认为 0
 
 参数为负数则表示倒数的位置
 
@@ -585,7 +585,7 @@ for (let [index, elem] of ['a', 'b'].entries()) {
 // [1, 2, 3, 4]
 ```
 
-flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将flat()方法的参数写成一个整数，表示想要拉平的层数，默认为1
+flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将 flat()方法的参数写成一个整数，表示想要拉平的层数，默认为 1
 
 ```
 [1, 2, [3, [4, 5]]].flat()
@@ -596,11 +596,7 @@ flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套�
 // [1, 2, 3, 4, 5]
 ```
 
-  
-  
-
-
-flatMap()方法对原数组的每个成员执行一个函数相当于执行Array.prototype.map()，然后对返回值组成的数组执行flat()方法。该方法返回一个新数组，不改变原数组
+flatMap()方法对原数组的每个成员执行一个函数相当于执行 Array.prototype.map()，然后对返回值组成的数组执行 flat()方法。该方法返回一个新数组，不改变原数组
 
 ```
 // 相当于 [[2, 4], [3, 6], [4, 8]].flat()
@@ -608,19 +604,19 @@ flatMap()方法对原数组的每个成员执行一个函数相当于执行Array
 // [2, 4, 3, 6, 4, 8]
 ```
 
-flatMap()方法还可以有第二个参数，用来绑定遍历函数里面的this
+flatMap()方法还可以有第二个参数，用来绑定遍历函数里面的 this
 
 ### 数组的空位
 
 数组的空位指，数组的某一个位置没有任何值
 
-ES6 则是明确将空位转为undefined，包括Array.from、扩展运算符、copyWithin()、fill()、entries()、keys()、values()、find()和findIndex()
+ES6 则是明确将空位转为 undefined，包括 Array.from、扩展运算符、copyWithin()、fill()、entries()、keys()、values()、find()和 findIndex()
 
 建议大家在日常书写中，避免出现空位
 
 ### 排序稳定性
 
-将sort()默认设置为稳定的排序算法
+将 sort()默认设置为稳定的排序算法
 
 ```
 const arr = [
@@ -639,7 +635,7 @@ arr.sort(stableSorting)
 // ["apple", "peach", "straw", "spork"]
 ```
 
-排序结果中，straw在spork的前面，跟原始顺序一致
+排序结果中，straw 在 spork 的前面，跟原始顺序一致
 
 # Decorator （装饰器）
 
@@ -649,13 +645,13 @@ Decorator，即装饰器，从名字上很容易让我们联想到装饰者模�
 
 简单来讲，装饰者模式就是一种在不改变原类和使用继承的情况下，动态地扩展对象功能的设计理论。
 
-ES6中Decorator功能亦如此，其本质也不是什么高大上的结构，就是一个普通的函数，用于扩展类属性和类方法
+ES6 中 Decorator 功能亦如此，其本质也不是什么高大上的结构，就是一个普通的函数，用于扩展类属性和类方法
 
 这里定义一个士兵，这时候他什么装备都没有
 
 ```
-class soldier{ 
-  
+class soldier{
+
 }
 ```
 
@@ -681,17 +677,17 @@ class soldier{
 soldier.AK // true
 ```
 
-上述代码虽然简单，但也能够清晰看到了使用Decorator两大优点：
+上述代码虽然简单，但也能够清晰看到了使用 Decorator 两大优点：
 
--   代码可读性变强了，装饰器命名相当于一个注释
--   在不改变原有代码情况下，对原来功能进行扩展
+- 代码可读性变强了，装饰器命名相当于一个注释
+- 在不改变原有代码情况下，对原来功能进行扩展
 
 ## 用法
 
-Docorator修饰对象为下面两种：
+Docorator 修饰对象为下面两种：
 
--   类的装饰
--   类属性的装饰
+- 类的装饰
+- 类属性的装饰
 
 ### 类的装饰
 
@@ -712,7 +708,7 @@ class A {
 A = decorator(A) || A;
 ```
 
-下面@testable就是一个装饰器，target就是传入的类，即MyTestableClass，实现了为类添加静态属性
+下面@testable 就是一个装饰器，target 就是传入的类，即 MyTestableClass，实现了为类添加静态属性
 
 ```
 @testable
@@ -749,11 +745,11 @@ MyClass.isTestable // false
 
 当对类属性进行装饰的时候，能够接受三个参数：
 
--   类的原型对象
--   需要装饰的属性名
--   装饰属性名的描述对象
+- 类的原型对象
+- 需要装饰的属性名
+- 装饰属性名的描述对象
 
-首先定义一个readonly装饰器
+首先定义一个 readonly 装饰器
 
 ```
 function readonly(target, name, descriptor){
@@ -762,7 +758,7 @@ function readonly(target, name, descriptor){
 }
 ```
 
-使用readonly装饰类的name方法
+使用 readonly 装饰类的 name 方法
 
 ```
 class Person {
@@ -831,13 +827,13 @@ add = function () {
 };
 ```
 
-意图是执行后counter等于 1，但是实际上结果是counter等于 0
+意图是执行后 counter 等于 1，但是实际上结果是 counter 等于 0
 
 ## 使用场景
 
-基于Decorator强大的作用，我们能够完成各种场景的需求，下面简单列举几种：
+基于 Decorator 强大的作用，我们能够完成各种场景的需求，下面简单列举几种：
 
-使用react-redux的时候，如果写成下面这种形式，既不雅观也很麻烦
+使用 react-redux 的时候，如果写成下面这种形式，既不雅观也很麻烦
 
 ```
 class MyReactComponent extends React.Component {
@@ -854,7 +850,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyReactComponent);
 export default class MyReactComponent extends React.Component {}
 ```
 
-将mixins，也可以写成装饰器，让使用更为简洁了
+将 mixins，也可以写成装饰器，让使用更为简洁了
 
 ```
 function mixins(...list) {
@@ -875,11 +871,11 @@ let obj = new MyClass();
 obj.foo() // "foo"
 ```
 
-下面再讲讲core-decorators.js几个常见的装饰器
+下面再讲讲 core-decorators.js 几个常见的装饰器
 
 #### @antobind
 
-autobind装饰器使得方法中的this对象，绑定原始对象
+autobind 装饰器使得方法中的 this 对象，绑定原始对象
 
 ```
 import { autobind } from 'core-decorators';
@@ -900,7 +896,7 @@ getPerson() === person;
 
 #### @readonly
 
-readonly装饰器使得属性或方法不可写
+readonly 装饰器使得属性或方法不可写
 
 ```
 import { readonly } from 'core-decorators';
@@ -917,7 +913,7 @@ dinner.entree = 'salmon';
 
 #### @deprecate
 
-deprecate或deprecated装饰器在控制台显示一条警告，表示该方法将废除
+deprecate 或 deprecated 装饰器在控制台显示一条警告，表示该方法将废除
 
 ```
 import { deprecate } from 'core-decorators';
@@ -939,15 +935,11 @@ person.facepalmHard();
 // DEPRECATION Person#facepalmHard: 功能废除了
 ```
 
-  
-  
-
-
 # 对象新增的扩展
 
 ## 参数
 
-ES6允许为函数的参数设置默认值
+ES6 允许为函数的参数设置默认值
 
 ```
 function log(x, y = 'World') {
@@ -959,7 +951,7 @@ console.log('Hello', 'China') // Hello China
 console.log('Hello', '') // Hello
 ```
 
-函数的形参是默认声明的，不能使用let或const再次声明
+函数的形参是默认声明的，不能使用 let 或 const 再次声明
 
 ```
 function foo(x = 5) {
@@ -981,7 +973,7 @@ foo({x: 1, y: 2}) // 1 2
 foo() // TypeError: Cannot read property 'x' of undefined
 ```
 
-上面的foo函数，当参数为对象的时候才能进行解构，如果没有提供参数的时候，变量x和y就不会生成，从而报错，这里设置默认值避免
+上面的 foo 函数，当参数为对象的时候才能进行解构，如果没有提供参数的时候，变量 x 和 y 就不会生成，从而报错，这里设置默认值避免
 
 ```
 function foo({x, y = 5} = {}) {
@@ -1006,9 +998,9 @@ f(undefined, 1) // [1, 1]
 
 ## 属性
 
-### 函数的length属性
+### 函数的 length 属性
 
-length将返回没有指定默认值的参数个数
+length 将返回没有指定默认值的参数个数
 
 ```
 (function (a) {}).length // 1
@@ -1016,20 +1008,20 @@ length将返回没有指定默认值的参数个数
 (function (a, b, c = 5) {}).length // 2
 ```
 
-rest 参数也不会计入length属性
+rest 参数也不会计入 length 属性
 
 ```
 (function(...args) {}).length // 0
 ```
 
-如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数了
+如果设置了默认值的参数不是尾参数，那么 length 属性也不再计入后面的参数了
 
 ```
 (function (a = 0, b, c) {}).length // 0
 (function (a, b = 1, c) {}).length // 1
 ```
 
-### name属性
+### name 属性
 
 返回该函数的函数名
 
@@ -1043,20 +1035,20 @@ f.name // ""
 f.name // "f"
 ```
 
-如果将一个具名函数赋值给一个变量，则 name属性都返回这个具名函数原本的名字
+如果将一个具名函数赋值给一个变量，则 name 属性都返回这个具名函数原本的名字
 
 ```
 const bar = function baz() {};
 bar.name // "baz"
 ```
 
-Function构造函数返回的函数实例，name属性的值为anonymous
+Function 构造函数返回的函数实例，name 属性的值为 anonymous
 
 ```
 (new Function).name // "anonymous"
 ```
 
-bind返回的函数，name属性值会加上bound前缀
+bind 返回的函数，name 属性值会加上 bound 前缀
 
 ```
 function foo() {};
@@ -1071,14 +1063,14 @@ foo.bind({}).name // "bound foo"
 
 等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的
 
-下面例子中，y=x会形成一个单独作用域，x没有被定义，所以指向全局变量x
+下面例子中，y=x 会形成一个单独作用域，x 没有被定义，所以指向全局变量 x
 
 ```
 let x = 1;
 
-function f(y = x) { 
-  // 等同于 let y = x  
-  let x = 2; 
+function f(y = x) {
+  // 等同于 let y = x
+  let x = 2;
   console.log(y);
 }
 
@@ -1144,7 +1136,7 @@ var sum = function(num1, num2) {
 };
 ```
 
-如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回
+如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用 return 语句返回
 
 ```
 var sum = (num1, num2) => { return num1 + num2; }
@@ -1158,10 +1150,10 @@ let getTempItem = id => ({ id: id, name: "Temp" });
 
 注意点：
 
--   函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象
--   不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误
--   不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替
--   不可以使用yield命令，因此箭头函数不能用作 Generator 函数
+- 函数体内的 this 对象，就是定义时所在的对象，而不是使用时所在的对象
+- 不可以当作构造函数，也就是说，不可以使用 new 命令，否则会抛出一个错误
+- 不可以使用 arguments 对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替
+- 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数
 
 ## [ ](https://es6.ruanyifeng.com/#docs/function)
 
@@ -1173,21 +1165,21 @@ Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为�
 
 回顾下上文提到的解决异步的手段：
 
--   回调函数
--   promise
+- 回调函数
+- promise
 
-那么，上文我们提到promsie已经是一种比较流行的解决异步方案，那么为什么还出现Generator？甚至async/await呢？
+那么，上文我们提到 promsie 已经是一种比较流行的解决异步方案，那么为什么还出现 Generator？甚至 async/await 呢？
 
-该问题我们留在后面再进行分析，下面先认识下Generator
+该问题我们留在后面再进行分析，下面先认识下 Generator
 
-### Generator函数
+### Generator 函数
 
 执行 Generator 函数会返回一个遍历器对象，可以依次遍历 Generator 函数内部的每一个状态
 
-形式上，Generator函数是一个普通函数，但是有两个特征：
+形式上，Generator 函数是一个普通函数，但是有两个特征：
 
--   function关键字与函数名之间有一个星号
--   函数体内部使用yield表达式，定义不同的内部状态
+- function 关键字与函数名之间有一个星号
+- 函数体内部使用 yield 表达式，定义不同的内部状态
 
 ```
 function* helloWorldGenerator() {
@@ -1199,7 +1191,7 @@ function* helloWorldGenerator() {
 
 ## 使用
 
-Generator 函数会返回一个遍历器对象，即具有Symbol.iterator属性，并且返回给自己
+Generator 函数会返回一个遍历器对象，即具有 Symbol.iterator 属性，并且返回给自己
 
 ```
 function* gen(){
@@ -1212,7 +1204,7 @@ g[Symbol.iterator]() === g
 // true
 ```
 
-通过yield关键字可以暂停generator函数返回的遍历器对象的状态
+通过 yield 关键字可以暂停 generator 函数返回的遍历器对象的状态
 
 ```
 function* helloWorldGenerator() {
@@ -1225,12 +1217,12 @@ var hw = helloWorldGenerator();
 
 上述存在三个状态：hello、world、return
 
-通过next方法才会遍历到下一个内部状态，其运行逻辑如下：
+通过 next 方法才会遍历到下一个内部状态，其运行逻辑如下：
 
--   遇到yield表达式，就暂停执行后面的操作，并将紧跟在yield后面的那个表达式的值，作为返回的对象的value属性值。
--   下一次调用next方法时，再继续往下执行，直到遇到下一个yield表达式
--   如果没有再遇到新的yield表达式，就一直运行到函数结束，直到return语句为止，并将return语句后面的表达式的值，作为返回的对象的value属性值。
--   如果该函数没有return语句，则返回的对象的value属性值为undefined
+- 遇到 yield 表达式，就暂停执行后面的操作，并将紧跟在 yield 后面的那个表达式的值，作为返回的对象的 value 属性值。
+- 下一次调用 next 方法时，再继续往下执行，直到遇到下一个 yield 表达式
+- 如果没有再遇到新的 yield 表达式，就一直运行到函数结束，直到 return 语句为止，并将 return 语句后面的表达式的值，作为返回的对象的 value 属性值。
+- 如果该函数没有 return 语句，则返回的对象的 value 属性值为 undefined
 
 ```
 hw.next()
@@ -1246,11 +1238,11 @@ hw.next()
 // { value: undefined, done: true }
 ```
 
-done用来判断是否存在下个状态，value对应状态值
+done 用来判断是否存在下个状态，value 对应状态值
 
-yield表达式本身没有返回值，或者说总是返回undefined
+yield 表达式本身没有返回值，或者说总是返回 undefined
 
-通过调用next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值
+通过调用 next 方法可以带一个参数，该参数就会被当作上一个 yield 表达式的返回值
 
 ```
 function* foo(x) {
@@ -1270,7 +1262,7 @@ b.next(12) // { value:8, done:false }
 b.next(13) // { value:42, done:true }
 ```
 
-正因为Generator函数返回Iterator对象，因此我们还可以通过for...of进行遍历
+正因为 Generator 函数返回 Iterator 对象，因此我们还可以通过 for...of 进行遍历
 
 ```
 function* foo() {
@@ -1288,7 +1280,7 @@ for (let v of foo()) {
 // 1 2 3 4 5
 ```
 
-原生对象没有遍历接口，通过Generator函数为它加上这个接口，就能使用for...of进行遍历了
+原生对象没有遍历接口，通过 Generator 函数为它加上这个接口，就能使用 for...of 进行遍历了
 
 ```
 function* objectEntries(obj) {
@@ -1312,10 +1304,10 @@ for (let [key, value] of objectEntries(jane)) {
 
 回顾之前展开异步解决的方案：
 
--   回调函数
--   Promise 对象
--   generator 函数
--   async/await
+- 回调函数
+- Promise 对象
+- generator 函数
+- async/await
 
 这里通过文件读取案例，将几种解决异步的方案进行一个比较：
 
@@ -1334,11 +1326,11 @@ fs.readFile('/etc/fstab', function (err, data) {
 });
 ```
 
-readFile函数的第三个参数，就是回调函数，等到操作系统返回了/etc/passwd这个文件以后，回调函数才会执行
+readFile 函数的第三个参数，就是回调函数，等到操作系统返回了/etc/passwd 这个文件以后，回调函数才会执行
 
 ### Promise
 
-Promise就是为了解决回调地狱而产生的，将回调函数的嵌套，改成链式调用
+Promise 就是为了解决回调地狱而产生的，将回调函数的嵌套，改成链式调用
 
 ```
 const fs = require('fs');
@@ -1365,7 +1357,7 @@ readFile('/etc/fstab').then(data =>{
 
 ### generator
 
-yield表达式可以暂停函数执行，next方法用于恢复函数执行，这使得Generator函数非常适合将异步任务同步化
+yield 表达式可以暂停函数执行，next 方法用于恢复函数执行，这使得 Generator 函数非常适合将异步任务同步化
 
 ```
 const gen = function* () {
@@ -1378,7 +1370,7 @@ const gen = function* () {
 
 ### async/await
 
-将上面Generator函数改成async/await形式，更为简洁，语义化更强了
+将上面 Generator 函数改成 async/await 形式，更为简洁，语义化更强了
 
 ```
 const asyncReadFile = async function () {
@@ -1391,18 +1383,18 @@ const asyncReadFile = async function () {
 
 ### 区别：
 
-通过上述代码进行分析，将promise、Generator、async/await进行比较：
+通过上述代码进行分析，将 promise、Generator、async/await 进行比较：
 
--   promise和async/await是专门用于处理异步操作的
--   Generator并不是为异步而设计出来的，它还有其他功能（对象迭代、控制输出、部署Interator接口...）
--   promise编写代码相比Generator、async更为复杂化，且可读性也稍差
--   Generator、async需要与promise对象搭配处理异步情况
--   async实质是Generator的语法糖，相当于会自动执行Generator函数
--   async使用上更为简洁，将异步代码以同步的形式进行编写，是处理异步编程的最终方案
+- promise 和 async/await 是专门用于处理异步操作的
+- Generator 并不是为异步而设计出来的，它还有其他功能（对象迭代、控制输出、部署 Interator 接口...）
+- promise 编写代码相比 Generator、async 更为复杂化，且可读性也稍差
+- Generator、async 需要与 promise 对象搭配处理异步情况
+- async 实质是 Generator 的语法糖，相当于会自动执行 Generator 函数
+- async 使用上更为简洁，将异步代码以同步的形式进行编写，是处理异步编程的最终方案
 
 ## 使用场景
 
-Generator是异步解决的一种方案，最大特点则是将异步操作同步化表达出来
+Generator 是异步解决的一种方案，最大特点则是将异步操作同步化表达出来
 
 ```
 function* loadUI() {
@@ -1418,7 +1410,7 @@ loader.next()
 loader.next()
 ```
 
-包括redux-saga中间件也充分利用了Generator特性
+包括 redux-saga 中间件也充分利用了 Generator 特性
 
 ```
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
@@ -1444,7 +1436,7 @@ function* mySaga() {
 export default mySaga;
 ```
 
-还能利用Generator函数，在对象上实现Iterator接口
+还能利用 Generator 函数，在对象上实现 Iterator 接口
 
 ```
 function* iterEntries(obj) {
@@ -1473,34 +1465,34 @@ for (let [key, value] of iterEntries(myObj)) {
 
 两个基本的特征：外部特征和内部特征
 
--   外部特征是指模块跟外部环境联系的接口（即其他模块或程序调用该模块的方式，包括有输入输出参数、引用的全局变量）和模块的功能
--   内部特征是指模块的内部环境具有的特点（即该模块的局部数据和程序代码）
+- 外部特征是指模块跟外部环境联系的接口（即其他模块或程序调用该模块的方式，包括有输入输出参数、引用的全局变量）和模块的功能
+- 内部特征是指模块的内部环境具有的特点（即该模块的局部数据和程序代码）
 
 ### 为什么需要模块化
 
--   代码抽象
--   代码封装
--   代码复用
--   依赖管理
+- 代码抽象
+- 代码封装
+- 代码复用
+- 依赖管理
 
 如果没有模块化，我们代码会怎样？
 
--   变量和方法不容易维护，容易污染全局作用域
--   加载资源的方式通过script标签从上到下。
--   依赖的环境主观逻辑偏重，代码较多就会比较复杂。
--   大型项目资源难以维护，特别是多人合作的情况下，资源的引入会让人奔溃
+- 变量和方法不容易维护，容易污染全局作用域
+- 加载资源的方式通过 script 标签从上到下。
+- 依赖的环境主观逻辑偏重，代码较多就会比较复杂。
+- 大型项目资源难以维护，特别是多人合作的情况下，资源的引入会让人奔溃
 
-因此，需要一种将JavaScript程序模块化的机制，如
+因此，需要一种将 JavaScript 程序模块化的机制，如
 
--   CommonJs (典型代表：node.js早期)
--   AMD (典型代表：require.js)
--   CMD (典型代表：sea.js)
+- CommonJs (典型代表：node.js 早期)
+- AMD (典型代表：require.js)
+- CMD (典型代表：sea.js)
 
 ### AMD
 
 Asynchronous ModuleDefinition（AMD），异步模块定义，采用异步方式加载模块。所有依赖模块的语句，都定义在一个回调函数中，等到模块加载完成之后，这个回调函数才会运行
 
-代表库为require.js
+代表库为 require.js
 
 ```
 /** main.js 入口文件/主模块 **/
@@ -1532,16 +1524,16 @@ const { foo,bar } = require('./a.js')
 
 其有如下特点：
 
--   所有代码都运行在模块作用域，不会污染全局作用域
--   模块是同步加载的，即只有加载完成，才能执行后面的操作
--   模块在首次执行后就会缓存，再次加载只返回缓存结果，如果想要再次执行，可清除缓存
--   require返回的值是被输出的值的拷贝，模块内部的变化也不会影响这个值
+- 所有代码都运行在模块作用域，不会污染全局作用域
+- 模块是同步加载的，即只有加载完成，才能执行后面的操作
+- 模块在首次执行后就会缓存，再次加载只返回缓存结果，如果想要再次执行，可清除缓存
+- require 返回的值是被输出的值的拷贝，模块内部的变化也不会影响这个值
 
-既然存在了AMD以及CommonJs机制，ES6的Module又有什么不一样？
+既然存在了 AMD 以及 CommonJs 机制，ES6 的 Module 又有什么不一样？
 
-ES6 在语言标准的层面上，实现了Module，即模块功能，完全可以取代 CommonJS和 AMD规范，成为浏览器和服务器通用的模块解决方案
+ES6 在语言标准的层面上，实现了 Module，即模块功能，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案
 
-CommonJS 和AMD 模块，都只能在运行时确定这些东西。比如，CommonJS模块就是对象，输入时必须查找对象属性
+CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性
 
 ```
 // CommonJS模块
@@ -1554,29 +1546,29 @@ let exists = _fs.exists;
 let readfile = _fs.readfile;
 ```
 
-ES6设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
+ES6 设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
 
 ```
 // ES6模块
 import { stat, exists, readFile } from 'fs';
 ```
 
-上述代码，只加载3个方法，其他方法不加载，即 ES6 可以在编译时就完成模块加载
+上述代码，只加载 3 个方法，其他方法不加载，即 ES6 可以在编译时就完成模块加载
 
-由于编译加载，使得静态分析成为可能。包括现在流行的typeScript也是依靠静态分析实现功能
+由于编译加载，使得静态分析成为可能。包括现在流行的 typeScript 也是依靠静态分析实现功能
 
 ## 使用
 
-ES6模块内部自动采用了严格模式，这里就不展开严格模式的限制，毕竟这是ES5之前就已经规定好
+ES6 模块内部自动采用了严格模式，这里就不展开严格模式的限制，毕竟这是 ES5 之前就已经规定好
 
 模块功能主要由两个命令构成：
 
--   export：用于规定模块的对外接口
--   import：用于输入其他模块提供的功能
+- export：用于规定模块的对外接口
+- import：用于输入其他模块提供的功能
 
 ### export
 
-一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量
+一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用 export 关键字输出该变量
 
 ```
 // profile.js
@@ -1584,7 +1576,7 @@ export var firstName = 'Michael';
 export var lastName = 'Jackson';
 export var year = 1958;
 
-或 
+或
 // 建议使用下面写法，这样能瞬间确定输出了哪些变量
 var firstName = 'Michael';
 var lastName = 'Jackson';
@@ -1601,7 +1593,7 @@ export function multiply(x, y) {
 };
 ```
 
-通过as可以进行输出变量的重命名
+通过 as 可以进行输出变量的重命名
 
 ```
 function v1() { ... }
@@ -1616,7 +1608,7 @@ export {
 
 ### import
 
-使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块
+使用 export 命令定义了模块的对外接口以后，其他 JS 文件就可以通过 import 命令加载这个模块
 
 ```
 // main.js
@@ -1627,13 +1619,13 @@ function setName(element) {
 }
 ```
 
-同样如果想要输入变量起别名，通过as关键字
+同样如果想要输入变量起别名，通过 as 关键字
 
 ```
 import { lastName as surname } from './profile.js';
 ```
 
-当加载整个模块的时候，需要用到星号*
+当加载整个模块的时候，需要用到星号\*
 
 ```
 // circle.js
@@ -1661,7 +1653,7 @@ a = {}; // Syntax Error : 'a' is read-only;
 
 不过建议即使能修改，但我们不建议。因为修改之后，我们很难差错
 
-import后面我们常接着from关键字，from指定模块文件的位置，可以是相对路径，也可以是绝对路径
+import 后面我们常接着 from 关键字，from 指定模块文件的位置，可以是相对路径，也可以是绝对路径
 
 ```
 import { a } from './a';
@@ -1673,7 +1665,7 @@ import { a } from './a';
 import { myMethod } from 'util';
 ```
 
-在编译阶段，import会提升到整个模块的头部，首先执行
+在编译阶段，import 会提升到整个模块的头部，首先执行
 
 ```
 foo();
@@ -1690,7 +1682,7 @@ import 'lodash';
 
 上面的情况，大家都能看到用户在导入模块的时候，需要知道加载的变量名和函数，否则无法加载
 
-如果不需要知道变量名或函数就完成加载，就要用到export default命令，为模块指定默认输出
+如果不需要知道变量名或函数就完成加载，就要用到 export default 命令，为模块指定默认输出
 
 ```
 // export-default.js
@@ -1699,7 +1691,7 @@ export default function () {
 }
 ```
 
-加载该模块的时候，import命令可以为该函数指定任意名字
+加载该模块的时候，import 命令可以为该函数指定任意名字
 
 ```
 // import-default.js
@@ -1711,7 +1703,7 @@ customName(); // 'foo'
 
 允许您仅在需要时动态加载模块，而不必预先加载所有模块，这存在明显的性能优势
 
-这个新功能允许您将import()作为函数调用，将其作为参数传递给模块的路径。 它返回一个 promise，它用一个模块对象来实现，让你可以访问该对象的导出
+这个新功能允许您将 import()作为函数调用，将其作为参数传递给模块的路径。 它返回一个 promise，它用一个模块对象来实现，让你可以访问该对象的导出
 
 ```
 import('/modules/myModule.mjs')
@@ -1722,7 +1714,7 @@ import('/modules/myModule.mjs')
 
 ### 复合写法
 
-如果在一个模块之中，先输入后输出同一个模块，import语句可以与export语句写在一起
+如果在一个模块之中，先输入后输出同一个模块，import 语句可以与 export 语句写在一起
 
 ```
 export { foo, bar } from 'my_module';
@@ -1732,11 +1724,11 @@ import { foo, bar } from 'my_module';
 export { foo, bar };
 ```
 
-同理能够搭配as、*搭配使用
+同理能够搭配 as、\*搭配使用
 
 ## 使用场景
 
-如今，ES6模块化已经深入我们日常项目开发中，像vue、react项目搭建项目，组件化开发处处可见，其也是依赖模块化实现
+如今，ES6 模块化已经深入我们日常项目开发中，像 vue、react 项目搭建项目，组件化开发处处可见，其也是依赖模块化实现
 
 ```
 // vue组件
@@ -1773,7 +1765,7 @@ export default App;
 
 ## 属性的简写
 
-ES6中，当对象键名与对应值名相等的时候，可以进行简写
+ES6 中，当对象键名与对应值名相等的时候，可以进行简写
 
 ```
 const baz = {foo:foo}
@@ -1881,9 +1873,9 @@ const myObject = {
 myObject // Object {[object Object]: "valueB"}
 ```
 
-## super关键字
+## super 关键字
 
-this关键字总是指向函数所在的当前对象，ES6 又新增了另一个类似的关键字super，指向当前对象的原型对象
+this 关键字总是指向函数所在的当前对象，ES6 又新增了另一个类似的关键字 super，指向当前对象的原型对象
 
 ```
 const proto = {
@@ -1923,23 +1915,23 @@ obj.a.b = 2; // 修改obj里面a属性中键值
 x.a.b // 2，影响到了结构出来x的值
 ```
 
-对象的扩展运算符等同于使用Object.assign()方法
+对象的扩展运算符等同于使用 Object.assign()方法
 
 ## 属性的遍历
 
 ES6 一共有 5 种方法可以遍历对象的属性。
 
--   for...in：循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
--   Object.keys(obj)：返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名
--   Object.getOwnPropertyNames(obj)：回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
--   Object.getOwnPropertySymbols(obj)：返回一个数组，包含对象自身的所有 Symbol 属性的键名
--   Reflect.ownKeys(obj)：返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
+- for...in：循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
+- Object.keys(obj)：返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名
+- Object.getOwnPropertyNames(obj)：回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
+- Object.getOwnPropertySymbols(obj)：返回一个数组，包含对象自身的所有 Symbol 属性的键名
+- Reflect.ownKeys(obj)：返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
 
 上述遍历，都遵守同样的属性遍历的次序规则：
 
--   首先遍历所有数值键，按照数值升序排列
--   其次遍历所有字符串键，按照加入时间升序排列
--   最后遍历所有 Symbol 键，按照加入时间升序排
+- 首先遍历所有数值键，按照数值升序排列
+- 其次遍历所有字符串键，按照加入时间升序排列
+- 最后遍历所有 Symbol 键，按照加入时间升序排
 
 ```
 Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 })
@@ -1950,7 +1942,7 @@ Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 })
 
 ## Object.is()
 
-严格判断两个值是否相等，与严格比较运算符（===）的行为基本一致，不同之处只有两个：一是+0不等于-0，二是NaN等于自身
+严格判断两个值是否相等，与严格比较运算符（===）的行为基本一致，不同之处只有两个：一是+0 不等于-0，二是 NaN 等于自身
 
 ```
 +0 === -0 //true
@@ -1962,7 +1954,7 @@ Object.is(NaN, NaN) // true
 
 ## Object.assign()
 
-Object.assign()方法用于对象的合并，将源对象source的所有可枚举属性，复制到目标对象target
+Object.assign()方法用于对象的合并，将源对象 source 的所有可枚举属性，复制到目标对象 target
 
 Object.assign()方法的第一个参数是目标对象，后面的参数都是源对象
 
@@ -2003,7 +1995,7 @@ Object.getOwnPropertyDescriptors(obj)
 
 ## Object.setPrototypeOf()
 
-Object.setPrototypeOf方法用来设置一个对象的原型对象
+Object.setPrototypeOf 方法用来设置一个对象的原型对象
 
 ```
 Object.setPrototypeOf(object, prototype)
@@ -2113,7 +2105,7 @@ console.log('forEach()之后')  // 后执行
 
 理解：不会立即执行，会放在回调队列中将来执行
 
-例子：定时器回调，axaj回调，Promise的成功，失败的回调
+例子：定时器回调，axaj 回调，Promise 的成功，失败的回调
 
 ```
 // 先执行2,后执行 1
@@ -2124,7 +2116,7 @@ setTimeout(() => {
 console.log('2')
 ```
 
-### 理解js中的错误（Error）和错误处理
+### 理解 js 中的错误（Error）和错误处理
 
 错误的类型
 
@@ -2188,7 +2180,7 @@ function a () {
   } else { // 如果时间为偶数抛出异常，由调用者来处理，自己决定抛出什么样的异常信息
      throw new Error('当前时间为偶数无法执行任务')
   }
-  
+
 }
 
 // 捕获处理异常
@@ -2202,38 +2194,38 @@ function a () {
 
 3,错误对象
 
-message属性：错误的相关信息
+message 属性：错误的相关信息
 
-stack属性：函数调用栈记录信息
+stack 属性：函数调用栈记录信息
 
 ## 介绍
 
-### 初始Promise
+### 初始 Promise
 
-抽象表达：是js中进行异步编程的新解决方案（旧的为纯回调函数）
+抽象表达：是 js 中进行异步编程的新解决方案（旧的为纯回调函数）
 
 具体表达：
 
-从语法上来说，Promise是一个内置构造函数
+从语法上来说，Promise 是一个内置构造函数
 
-从功能上来说，Promise的实例对象用来封装一个异步操作并可以获取其成功/失败的值
+从功能上来说，Promise 的实例对象用来封装一个异步操作并可以获取其成功/失败的值
 
-1.  Promise不是回调，是一个内置的构造函数，是程序员自己new调用的
-1.  new Promise的时候，要传入一个回调函数，他是同步的回调，会立即在主线程上执行，它被称为executor函数
-1.  每个Promise实例都有3种状态，分别为：初始化（pending）、成功（fulfilled）、失败（rejected）
-1.  每个Promise实例在刚被new出来的那一刻，状态都是初始化（pending）
-1.  executor函数会接收到2个参数，他们都是函数，分别用形参resolve、rejecet接收
+1.  Promise 不是回调，是一个内置的构造函数，是程序员自己 new 调用的
+1.  new Promise 的时候，要传入一个回调函数，他是同步的回调，会立即在主线程上执行，它被称为 executor 函数
+1.  每个 Promise 实例都有 3 种状态，分别为：初始化（pending）、成功（fulfilled）、失败（rejected）
+1.  每个 Promise 实例在刚被 new 出来的那一刻，状态都是初始化（pending）
+1.  executor 函数会接收到 2 个参数，他们都是函数，分别用形参 resolve、rejecet 接收
 
 <!---->
 
-1.  1.  调用resolve，会让Promise实例状态变为：成功（fulfilled），同时可以指定成功的vaule
-    1.  调用reject，会让Promise实例状态变为：失败（rejected），同时可以指定失败的reason
+1.  1.  调用 resolve，会让 Promise 实例状态变为：成功（fulfilled），同时可以指定成功的 vaule
+    1.  调用 reject，会让 Promise 实例状态变为：失败（rejected），同时可以指定失败的 reason
 
 ```
 // 创建一个新的promist对象
 const promise = new Promise((resolve, reject) => { // executor执行器函数
   //这里执行同步代码
-  
+
   // 执行异步操作任务
   setTimeout(() => {
     const time = Date.now() // 如果当前时间是偶数，代表成功，否则代表失败
@@ -2242,7 +2234,7 @@ const promise = new Promise((resolve, reject) => { // executor执行器函数
     } else {
       reject('失败的数据， time=' + time)
     }
-  }, 1000) 
+  }, 1000)
 });
 
 p.then(value => {
@@ -2254,25 +2246,25 @@ p.then(value => {
 })
 ```
 
-Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject
+Promise 构造函数接受一个函数作为参数，该函数的两个参数分别是 resolve 和 reject
 
--   resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”
--   reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”
+- resolve 函数的作用是，将 Promise 对象的状态从“未完成”变为“成功”
+- reject 函数的作用是，将 Promise 对象的状态从“未完成”变为“失败”
 
 基本编码流程
 
-1.  创建Promise的实例对象（pending状态），传入executor函数
-1.  在executor中启动异步任务（定时器、ajax请求）
+1.  创建 Promise 的实例对象（pending 状态），传入 executor 函数
+1.  在 executor 中启动异步任务（定时器、ajax 请求）
 1.  根据异步任务的结果，做不同处理
 
 <!---->
 
-1.  1.  如果异步任务成功，我们调用resolve(value)，让Promise实例对象状态变为成功（fulfilled），同时指定成功的value
-    1.  如果异步任务失败，我们调用reject(reason)，让Promise实例对象状态变为失败（rejected），同时指定失败的reason
+1.  1.  如果异步任务成功，我们调用 resolve(value)，让 Promise 实例对象状态变为成功（fulfilled），同时指定成功的 value
+    1.  如果异步任务失败，我们调用 reject(reason)，让 Promise 实例对象状态变为失败（rejected），同时指定失败的 reason
 
 <!---->
 
-4.  通过then方法为Promise的实例指定成功、失败的回调函数，来获取成功的value、失败的reason。注意：then方法所指定的：成功的回调，失败的回调，都是异步的回调
+4.  通过 then 方法为 Promise 的实例指定成功、失败的回调函数，来获取成功的 value、失败的 reason。注意：then 方法所指定的：成功的回调，失败的回调，都是异步的回调
 
 关于状态的注意点
 
@@ -2281,8 +2273,8 @@ Promise构造函数接受一个函数作为参数，该函数的两个参数分�
 <!---->
 
 1.  1.  pending：未确定 -----初始状态
-    1.  fulfilled：成功的-------调用resolve()后的状态
-    1.  rejected：失败的------调用rejected()后的状态
+    1.  fulfilled：成功的-------调用 resolve()后的状态
+    1.  rejected：失败的------调用 rejected()后的状态
 
 <!---->
 
@@ -2296,16 +2288,16 @@ Promise构造函数接受一个函数作为参数，该函数的两个参数分�
 <!---->
 
 3.  状态只能改变一次
-3.  一个promise可以指定多个then的成功/失败的回调函数
+4.  一个 promise 可以指定多个 then 的成功/失败的回调函数
 
 ### 特点
 
--   对象的状态不受外界影响，只有异步操作的结果，可以决定当前是哪一种状态
--   一旦状态改变（从pending变为fulfilled和从pending变为rejected），就不会再变，任何时候都可以得到这个结果
+- 对象的状态不受外界影响，只有异步操作的结果，可以决定当前是哪一种状态
+- 一旦状态改变（从 pending 变为 fulfilled 和从 pending 变为 rejected），就不会再变，任何时候都可以得到这个结果
 
 ### 流程
 
-认真阅读下图，我们能够轻松了解promise整个流程
+认真阅读下图，我们能够轻松了解 promise 整个流程
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b59e09e431845d995a459b0586133b4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=801&h=297&s=27953&e=png&b=ffffff)
 
@@ -2350,7 +2342,7 @@ getTea(function (data) => {
 })
 ```
 
-纯回调函数在传递回调函数和异步操作之前必须定义好回调函数，然后在异步函数拿到数据后再调用回调函数拿到数据，但promise把异步和回调拆开，可以先拿到异步任务执行的结果，在决定拿到结果之后怎么处理
+纯回调函数在传递回调函数和异步操作之前必须定义好回调函数，然后在异步函数拿到数据后再调用回调函数拿到数据，但 promise 把异步和回调拆开，可以先拿到异步任务执行的结果，在决定拿到结果之后怎么处理
 
 第二条成功的数据是以第一条数据为前提，第三条成功的数据是以第二条数据为前提，
 
@@ -2368,7 +2360,7 @@ doSomething(function(result) {
 
 阅读上面代码，是不是很难受，上述形成了经典的回调地狱
 
-现在通过Promise的改写上面的代码
+现在通过 Promise 的改写上面的代码
 
 ```
 doSomething().then(function(result) {
@@ -2383,13 +2375,13 @@ doSomething().then(function(result) {
 .catch(failureCallback);
 ```
 
-可以感受到promise解决异步操作的优点：
+可以感受到 promise 解决异步操作的优点：
 
--   链式操作减低了编码难度
--   代码可读性明显增强
--   错误处理都在catch里进行处理，自己不要提前定义好回调函数来接受错误
+- 链式操作减低了编码难度
+- 代码可读性明显增强
+- 错误处理都在 catch 里进行处理，自己不要提前定义好回调函数来接受错误
 
-但是回调地狱的最终解决方案还async/await,因为Promise.then跟catch里还是利用回调函数来接受数据
+但是回调地狱的最终解决方案还 async/await,因为 Promise.then 跟 catch 里还是利用回调函数来接受数据
 
 ```
 async function request() {
@@ -2412,17 +2404,17 @@ async function request() {
 
 方法: (onResolved, onRejected) => {}
 
-onResolved函数: 成功的回调函数 (value) => {}
+onResolved 函数: 成功的回调函数 (value) => {}
 
-onRejected函数: 失败的回调函数 (reason) => {}
+onRejected 函数: 失败的回调函数 (reason) => {}
 
-说明: 指定用于得到成功value的成功回调和用于得到失败reason的失败回调
+说明: 指定用于得到成功 value 的成功回调和用于得到失败 reason 的失败回调
 
-返回一个新的promise对象
+返回一个新的 promise 对象
 
-then是实例状态发生改变时的回调函数，第一个参数是resolved状态的回调函数，第二个参数是rejected状态的回调函数
+then 是实例状态发生改变时的回调函数，第一个参数是 resolved 状态的回调函数，第二个参数是 rejected 状态的回调函数
 
-then方法返回的是一个新的Promise实例，也就是promise能链式书写的原因
+then 方法返回的是一个新的 Promise 实例，也就是 promise 能链式书写的原因
 
 ```
 getJSON("/posts.json").then(function(json) {
@@ -2449,7 +2441,7 @@ new Promise((resolve, reject) => {
 
 方法: (onRejected) => {}
 
-onRejected函数: 失败的回调函数 (reason) => {}
+onRejected 函数: 失败的回调函数 (reason) => {}
 
 catch()方法是.then(null, onRejected)或.then(undefined, onRejected)的语法糖，用于指定发生错误时的回调函数
 
@@ -2462,7 +2454,7 @@ getJSON('/posts.json').then(function(posts) {
 });
 ```
 
-Promise对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止
+Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止
 
 ```
 getJSON('/post/1.json').then(function(post) {
@@ -2474,9 +2466,9 @@ getJSON('/post/1.json').then(function(post) {
 });
 ```
 
-一般来说，使用catch方法代替then()第二个参数
+一般来说，使用 catch 方法代替 then()第二个参数
 
-Promise对象抛出的错误不会传递到外层代码，即不会有任何反应
+Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应
 
 ```
 const someAsyncThing = function() {
@@ -2487,9 +2479,9 @@ const someAsyncThing = function() {
 };
 ```
 
-浏览器运行到这一行，会打印出错误提示ReferenceError: x is not defined，但是不会退出进程
+浏览器运行到这一行，会打印出错误提示 ReferenceError: x is not defined，但是不会退出进程
 
-catch()方法之中，还能再抛出错误，通过后面catch方法捕获到
+catch()方法之中，还能再抛出错误，通过后面 catch 方法捕获到
 
 ### Promist.prototype.finally
 
@@ -2508,11 +2500,11 @@ promise
 
 方法: (value) => {}
 
-value: 成功的数据或promise对象
+value: 成功的数据或 promise 对象
 
-说明: 用于快速返回一个状态为fulfilled或rejected的Promise实例对象
+说明: 用于快速返回一个状态为 fulfilled 或 rejected 的 Promise 实例对象
 
-注意：value的值可能是非promise值或者为Promise值
+注意：value 的值可能是非 promise 值或者为 Promise 值
 
 ```
 // 此时就想直接得到成功的值为100，不涉及到异步请求
@@ -2535,7 +2527,7 @@ p.then(
 
 小坑：
 
-Promise.resolve可以接受非promise值，结果就为成功的返回值，若接受为promise值，则返回promise的成功或者失败的值
+Promise.resolve 可以接受非 promise 值，结果就为成功的返回值，若接受为 promise 值，则返回 promise 的成功或者失败的值
 
 ```
 const p0 = Promise.resolve(200)
@@ -2549,7 +2541,7 @@ p.then(
 const p0 = Promise.reject(-200)
 const p = Promise.resolve(p0)
 p.then(
-  value => { console.log('成功了', value) }, 
+  value => { console.log('成功了', value) },
   reason => { console.log('失败了', reason) } // 输出失败了，-200
 )
 ```
@@ -2560,12 +2552,12 @@ p.then(
 
 reason: 失败的原因
 
-说明: 用于快速返回一个状态必为rejected的Promise实例对象
+说明: 用于快速返回一个状态必为 rejected 的 Promise 实例对象
 
 ```
 const p = Promise.reject(-100)
 p.then(
-  value => { console.log('成功了', value) }, 
+  value => { console.log('成功了', value) },
   reason => { console.log('失败了', reason) } // 输出失败了，-100
 )
 ```
@@ -2577,7 +2569,7 @@ p.then(
 const p0 = Promise.resolve(200)
 const p = Promise.reject(p0)
 p.then(
-  value => { console.log('成功了', value) }, 
+  value => { console.log('成功了', value) },
   reason => { console.log('失败了', reason) } // 输出失败了，{<fulfilled>:100}
 )
 ```
@@ -2586,24 +2578,24 @@ p.then(
 
 方法: (promises) => {}
 
-promises: 包含n个promise的数组
+promises: 包含 n 个 promise 的数组
 
-说明: 返回一个新的promise, 只有所有的promise都成功才成功, 只要有一个失败了就直接失败
+说明: 返回一个新的 promise, 只有所有的 promise 都成功才成功, 只要有一个失败了就直接失败
 
-Promise.all()方法用于将多个 Promise实例，包装成一个新的 Promise实例
+Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
 
 ```
 const p = Promise.all([p1, p2, p3]);
 ```
 
-接受一个数组（迭代对象）作为参数，数组成员都应为Promise实例
+接受一个数组（迭代对象）作为参数，数组成员都应为 Promise 实例
 
-实例p的状态由p1、p2、p3决定，分为两种：
+实例 p 的状态由 p1、p2、p3 决定，分为两种：
 
--   只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数
--   只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数
+- 只有 p1、p2、p3 的状态都变成 fulfilled，p 的状态才会变成 fulfilled，此时 p1、p2、p3 的返回值组成一个数组，传递给 p 的回调函数
+- 只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数
 
-注意，如果作为参数的 Promise 实例，自己定义了catch方法，那么它一旦被rejected，并不会触发Promise.all()的catch方法
+注意，如果作为参数的 Promise 实例，自己定义了 catch 方法，那么它一旦被 rejected，并不会触发 Promise.all()的 catch 方法
 
 ```
 const p1 = new Promise((resolve, reject) => {
@@ -2624,7 +2616,7 @@ Promise.all([p1, p2])
 // ["hello", Error: 报错了]
 ```
 
-如果p2没有自己的catch方法，就会调用Promise.all()的catch方法
+如果 p2 没有自己的 catch 方法，就会调用 Promise.all()的 catch 方法
 
 ```
 const p1 = new Promise((resolve, reject) => {
@@ -2647,9 +2639,9 @@ Promise.all([p1, p2])
 
 方法: (promises) => {}
 
-promises: 包含n个promise的数组
+promises: 包含 n 个 promise 的数组
 
-说明: 返回一个新的promise, 第一个完成的promise的结果状态就是最终的结果状态
+说明: 返回一个新的 promise, 第一个完成的 promise 的结果状态就是最终的结果状态
 
 Promise.race()方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例
 
@@ -2657,9 +2649,9 @@ Promise.race()方法同样是将多个 Promise 实例，包装成一个新的 Pr
 const p = Promise.race([p1, p2, p3]);
 ```
 
-只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变
+只要 p1、p2、p3 之中有一个实例率先改变状态，p 的状态就跟着改变
 
-率先改变的 Promise 实例的返回值则传递给p的回调函数
+率先改变的 Promise 实例的返回值则传递给 p 的回调函数
 
 ```
 const p = Promise.race([
@@ -2678,7 +2670,7 @@ p
 
 Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例
 
-只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束
+只有等到所有这些参数实例都返回结果，不管是 fulfilled 还是 rejected，包装实例才会结束
 
 ```
 const promises = [
@@ -2691,13 +2683,13 @@ await Promise.allSettled(promises);
 removeLoadingIndicator();
 ```
 
-## Promise关键几个问题
+## Promise 关键几个问题
 
-### 如何改变Promise实例状态
+### 如何改变 Promise 实例状态
 
-1.  执行resolve(value)：如果当请是pending就会变为fulfilled
-1.  执行rejecte(reason)：如果当前是pending就会变为rejected
-1.  执行器函数(executor)抛出异常：如果当前是pending就会变为rejected
+1.  执行 resolve(value)：如果当请是 pending 就会变为 fulfilled
+1.  执行 rejecte(reason)：如果当前是 pending 就会变为 rejected
+1.  执行器函数(executor)抛出异常：如果当前是 pending 就会变为 rejected
 
 ```
 // 1.
@@ -2735,12 +2727,12 @@ p.then(
 
 <!---->
 
-1.  1.  在执行器中直接调用resolve()/reject()
-    1.  延迟一会在调用then
+1.  1.  在执行器中直接调用 resolve()/reject()
+    1.  延迟一会在调用 then
 
 <!---->
 
-3.  Promise实例什么时候才能得到数据
+3.  Promise 实例什么时候才能得到数据
 
 <!---->
 
@@ -2789,52 +2781,52 @@ setTimeout(() => {
 }, 3000);
 ```
 
-### then的链式调用
+### then 的链式调用
 
-Promise实例的then()返回的是一个【新Promise实例】，它的值跟状态由什么决定?
+Promise 实例的 then()返回的是一个【新 Promise 实例】，它的值跟状态由什么决定?
 
-1.  简单表达: 由then()指定的回调函数执行的结果决定
+1.  简单表达: 由 then()指定的回调函数执行的结果决定
 1.  详细表达:
 
 <!---->
 
-1.  1.  如果then所指定的回调返回的是非Promise的任意值,
+1.  1.  如果 then 所指定的回调返回的是非 Promise 的任意值,
 
 <!---->
 
-1.  1.  1.  【新promise实例】状态为成功（fulfilled）, value为返回的值
+1.  1.  1.  【新 promise 实例】状态为成功（fulfilled）, value 为返回的值
 
 <!---->
 
-1.  2.  如果then所指定的回调返回的是另一个新Promise实例p,
+1.  2.  如果 then 所指定的回调返回的是另一个新 Promise 实例 p,
 
 <!---->
 
-1.  1.  1.  【新promise实例】的状态，值与p一致
+1.  1.  1.  【新 promise 实例】的状态，值与 p 一致
 
 <!---->
 
-1.  3.  如果then所指定的回调抛出异常,
+1.  3.  如果 then 所指定的回调抛出异常,
 
 <!---->
 
-1.  1.  1.  【新promise实例】变为rejected, reason为抛出的异常
+1.  1.  1.  【新 promise 实例】变为 rejected, reason 为抛出的异常
 
 ```
 // 2.a
 const p =new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(1) 
+      resolve(1)
     }, 1000);
 })
 
 // 输出value1, 1，但是作为一个回调函数,没有return返回值，所以之后then为undefined
-const x = p.then(  
-    value => { console.log('value1', value) }, 
+const x = p.then(
+    value => { console.log('value1', value) },
     reason => { console.log('reason1', reason) }
 )
 
-x.then(  
+x.then(
     value => { console.log('value2', value) }, // 输出value2, undefined
     reason => { console.log('reason2', reason) }
 )
@@ -2843,43 +2835,43 @@ x.then(
 //2.b
 const p =new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(1) 
+      resolve(1)
     }, 1000);
 })
 
 
-const x = p.then(  
+const x = p.then(
     value => {
       console.log('value1', value) // 输出value1, 1
       return Promise.resolve(2)
       // return Promise.reject(-2)
-    }, 
+    },
     reason => { console.log('reason1', reason) }
 )
 
-x.then(  
+x.then(
     value => { console.log('value2', value) }, // 输出value2, 2
     reason => { console.log('reason2', reason) }
     // 上一个then返回rejected状态值为-2,此时就x接收到就是失败状态值为-2
-    // reason => { console.log('reason2', reason) } 
+    // reason => { console.log('reason2', reason) }
 )
 
 
 // reject状态时
 const p =new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(-1) 
+      reject(-1)
     }, 1000);
 })
 
 // 作为一个回调函数,没有return返回值，所以之后then为undefined
 // 因为undefined为非Promise值，所以会走x的成功回调，值为undefined
-const x = p.then(  
-    value => { console.log('value1', value) }, 
+const x = p.then(
+    value => { console.log('value1', value) },
     reason => { console.log('reason1', reason) }  // 输出reason1, -1
 )
 
-x.then(  
+x.then(
     value => { console.log('value2', value) }, // 输出value2, undefined
     reason => { console.log('reason2', reason) }
 )
@@ -2900,10 +2892,10 @@ new Promise((resolve, reject) => {
 )
 ```
 
-### promise如何串连多个操作任务
+### promise 如何串连多个操作任务
 
-1.  promise的then()返回一个新的promise, 可以开成then()的链式调用
-1.  通过then的链式调用串连多个同步/异步任务
+1.  promise 的 then()返回一个新的 promise, 可以开成 then()的链式调用
+1.  通过 then 的链式调用串连多个同步/异步任务
 
 ```
 new Promise((resolve, reject) => {
@@ -2936,12 +2928,12 @@ new Promise((resolve, reject) => {
 )
 ```
 
-### 中断promise链
+### 中断 promise 链
 
-场景：假如我一个请求失败了，我之后的操作都不往下进行，你没有在reject中做任何处理，之后每个then都会调用成功（fulfilled）的回调
+场景：假如我一个请求失败了，我之后的操作都不往下进行，你没有在 reject 中做任何处理，之后每个 then 都会调用成功（fulfilled）的回调
 
-1.  当使用promise的then链式调用时, 在中间中断, 不再调用后面的回调函数
-1.  办法: 在回调函数中返回一个pending状态的promise对象
+1.  当使用 promise 的 then 链式调用时, 在中间中断, 不再调用后面的回调函数
+1.  办法: 在回调函数中返回一个 pending 状态的 promise 对象
 
 ```
 new Promise((resolve, reject) => {
@@ -2953,7 +2945,7 @@ new Promise((resolve, reject) => {
     }
 ).then(
     value => { console.log('value1', value) },
-    reason => { 
+    reason => {
       return new Promise(()=>{}) // 返回一个pending的promise  中断promise链 之后then不会走
     }
 )
@@ -2961,9 +2953,9 @@ new Promise((resolve, reject) => {
 
 ### 错误穿透
 
-1.  当使用promise的then链式调用时，可以在最后用catch指定一个失败的回调
+1.  当使用 promise 的 then 链式调用时，可以在最后用 catch 指定一个失败的回调
 1.  前面任何操作出了错误，都会传到最后失败的回调中处理
-1.  注意：如果不存在then的链式调用，就不需要考虑then的错误穿透了
+1.  注意：如果不存在 then 的链式调用，就不需要考虑 then 的错误穿透了
 
 ```
 new Promise((resolve, reject) => {
@@ -2981,7 +2973,7 @@ new Promise((resolve, reject) => {
 })
 ```
 
-## 自定义Promise
+## 自定义 Promise
 
 ```
 // 自定义Promise
@@ -3165,7 +3157,7 @@ new Promise((resolve, reject) => {
 
 ## 使用场景
 
-将图片的加载写成一个Promise，一旦加载完成，Promise的状态就发生变化
+将图片的加载写成一个 Promise，一旦加载完成，Promise 的状态就发生变化
 
 ```
 const preloadImage = function (path) {
@@ -3178,7 +3170,7 @@ const preloadImage = function (path) {
 };
 ```
 
-通过链式操作，将多个渲染数据分别给个then，让其各司其职。或当下个异步请求依赖上个请求结果的时候，我们也能够通过链式操作友好解决问题
+通过链式操作，将多个渲染数据分别给个 then，让其各司其职。或当下个异步请求依赖上个请求结果的时候，我们也能够通过链式操作友好解决问题
 
 ```
 // 各司其职
@@ -3188,7 +3180,7 @@ getInfo().then(res=>{
     console.log(bannerList)
     return res
 }).then(res=>{
-    
+
     let { storeList } = res
     //渲染店铺列表
     console.log(storeList)
@@ -3201,7 +3193,7 @@ getInfo().then(res=>{
 })
 ```
 
-通过all()实现多个请求合并在一起，汇总所有请求结果，只需设置一个loading即可
+通过 all()实现多个请求合并在一起，汇总所有请求结果，只需设置一个 loading 即可
 
 ```
 function initLoad(){
@@ -3214,11 +3206,11 @@ function initLoad(){
         loading.hide()//关闭loading
     })
 }
-//数据初始化    
+//数据初始化
 initLoad()
 ```
 
-通过race可以设置图片请求超时
+通过 race 可以设置图片请求超时
 
 ```
 //请求某个图片资源
@@ -3279,15 +3271,15 @@ done
 chmod +x program
 ```
 
-这段程序每执行一次能帮我们生成一个名为program的文件，文件内容为1024行echo，如果我们手动来写1024行代码，效率显然低效
+这段程序每执行一次能帮我们生成一个名为 program 的文件，文件内容为 1024 行 echo，如果我们手动来写 1024 行代码，效率显然低效
 
--   元编程优点：与手工编写全部代码相比，程序员可以获得更高的工作效率，或者给与程序更大的灵活度去处理新的情形而无需重新编译
+- 元编程优点：与手工编写全部代码相比，程序员可以获得更高的工作效率，或者给与程序更大的灵活度去处理新的情形而无需重新编译
 
 Proxy 亦是如此，用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）
 
 ## 用法
 
-Proxy为 构造函数，用来生成 Proxy实例
+Proxy 为 构造函数，用来生成 Proxy 实例
 
 ```
 var proxy = new Proxy(target, handler)
@@ -3295,43 +3287,43 @@ var proxy = new Proxy(target, handler)
 
 ### 参数
 
-target表示所要拦截的目标对象（任何类型的对象，包括原生数组，函数，甚至另一个代理））
+target 表示所要拦截的目标对象（任何类型的对象，包括原生数组，函数，甚至另一个代理））
 
-handler通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为
+handler 通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为
 
-### handler解析
+### handler 解析
 
-关于handler拦截属性，有如下：
+关于 handler 拦截属性，有如下：
 
--   get(target,propKey,receiver)：拦截对象属性的读取
--   set(target,propKey,value,receiver)：拦截对象属性的设置
--   has(target,propKey)：拦截propKey in proxy的操作，返回一个布尔值
--   deleteProperty(target,propKey)：拦截delete proxy[propKey]的操作，返回一个布尔值
--   ownKeys(target)：拦截Object.keys(proxy)、for...in等循环，返回一个数组
--   getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象
--   defineProperty(target, propKey, propDesc)：拦截Object.defineProperty(proxy, propKey, propDesc），返回一个布尔值
--   preventExtensions(target)：拦截Object.preventExtensions(proxy)，返回一个布尔值
--   getPrototypeOf(target)：拦截Object.getPrototypeOf(proxy)，返回一个对象
--   isExtensible(target)：拦截Object.isExtensible(proxy)，返回一个布尔值
--   setPrototypeOf(target, proto)：拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值
--   apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作
--   construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作
+- get(target,propKey,receiver)：拦截对象属性的读取
+- set(target,propKey,value,receiver)：拦截对象属性的设置
+- has(target,propKey)：拦截 propKey in proxy 的操作，返回一个布尔值
+- deleteProperty(target,propKey)：拦截 delete proxy[propKey]的操作，返回一个布尔值
+- ownKeys(target)：拦截 Object.keys(proxy)、for...in 等循环，返回一个数组
+- getOwnPropertyDescriptor(target, propKey)：拦截 Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象
+- defineProperty(target, propKey, propDesc)：拦截 Object.defineProperty(proxy, propKey, propDesc），返回一个布尔值
+- preventExtensions(target)：拦截 Object.preventExtensions(proxy)，返回一个布尔值
+- getPrototypeOf(target)：拦截 Object.getPrototypeOf(proxy)，返回一个对象
+- isExtensible(target)：拦截 Object.isExtensible(proxy)，返回一个布尔值
+- setPrototypeOf(target, proto)：拦截 Object.setPrototypeOf(proxy, proto)，返回一个布尔值
+- apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作
+- construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作
 
 ### Reflect
 
-若需要在Proxy内部调用对象的默认行为，建议使用Reflect，其是ES6中操作对象而提供的新 API
+若需要在 Proxy 内部调用对象的默认行为，建议使用 Reflect，其是 ES6 中操作对象而提供的新 API
 
 基本特点：
 
--   只要Proxy对象具有的代理方法，Reflect对象全部具有，以静态方法的形式存在
--   修改某些Object方法的返回结果，让其变得更合理（定义不存在属性行为的时候不报错而是返回false）
--   让Object操作都变成函数行为
+- 只要 Proxy 对象具有的代理方法，Reflect 对象全部具有，以静态方法的形式存在
+- 修改某些 Object 方法的返回结果，让其变得更合理（定义不存在属性行为的时候不报错而是返回 false）
+- 让 Object 操作都变成函数行为
 
-下面我们介绍proxy几种用法：
+下面我们介绍 proxy 几种用法：
 
 ### get()
 
-get接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
+get 接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
 
 ```
 var person = {
@@ -3347,7 +3339,7 @@ var proxy = new Proxy(person, {
 proxy.name // "张三"
 ```
 
-get能够对数组增删改查进行拦截，下面是试下你数组读取负数的索引
+get 能够对数组增删改查进行拦截，下面是试下你数组读取负数的索引
 
 ```
 function createArray(...elements) {
@@ -3395,9 +3387,9 @@ proxy.foo
 
 ### set()
 
-set方法用来拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身
+set 方法用来拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身
 
-假定Person对象有一个age属性，该属性应该是一个不大于 200 的整数，那么可以使用Proxy保证age的属性值符合要求
+假定 Person 对象有一个 age 属性，该属性应该是一个不大于 200 的整数，那么可以使用 Proxy 保证 age 的属性值符合要求
 
 ```
 let validator = {
@@ -3425,7 +3417,7 @@ person.age = 'young' // 报错
 person.age = 300 // 报错
 ```
 
-如果目标对象自身的某个属性，不可写且不可配置，那么set方法将不起作用
+如果目标对象自身的某个属性，不可写且不可配置，那么 set 方法将不起作用
 
 ```
 const obj = {};
@@ -3445,7 +3437,7 @@ proxy.foo = 'baz';
 proxy.foo // "bar"
 ```
 
-注意，严格模式下，set代理如果没有返回true，就会报错
+注意，严格模式下，set 代理如果没有返回 true，就会报错
 
 ```
 'use strict';
@@ -3463,7 +3455,7 @@ proxy.foo = 'bar';
 
 ### deleteProperty()
 
-deleteProperty方法用于拦截delete操作，如果这个方法抛出错误或者返回false，当前属性就无法被delete命令删除
+deleteProperty 方法用于拦截 delete 操作，如果这个方法抛出错误或者返回 false，当前属性就无法被 delete 命令删除
 
 ```
 var handler = {
@@ -3485,7 +3477,7 @@ delete proxy._prop
 // Error: 无法删除私有属性
 ```
 
-注意，目标对象自身的不可配置（configurable）的属性，不能被deleteProperty方法删除，否则报错
+注意，目标对象自身的不可配置（configurable）的属性，不能被 deleteProperty 方法删除，否则报错
 
 ### 取消代理
 
@@ -3495,11 +3487,11 @@ Proxy.revocable(target, handler);
 
 ## 使用场景
 
-Proxy其功能非常类似于设计模式中的代理模式，常用功能如下：
+Proxy 其功能非常类似于设计模式中的代理模式，常用功能如下：
 
--   拦截和监视外部对对象的访问
--   降低函数或类的复杂度
--   在复杂操作前对操作进行校验或对所需资源进行管理
+- 拦截和监视外部对对象的访问
+- 降低函数或类的复杂度
+- 在复杂操作前对操作进行校验或对所需资源进行管理
 
 使用 Proxy 保障数据类型的准确性
 
@@ -3521,7 +3513,7 @@ numericDataStore.count = 333
 // 赋值成功
 ```
 
-声明了一个私有的 apiKey，便于 api 这个对象内部的方法调用，但不希望从外部也能够访问 api._apiKey
+声明了一个私有的 apiKey，便于 api 这个对象内部的方法调用，但不希望从外部也能够访问 api.\_apiKey
 
 ```
 let api = {
@@ -3549,11 +3541,11 @@ api._apiKey = '987654321'
 // 上述都抛出错误
 ```
 
-还能通过使用Proxy实现观察者模式
+还能通过使用 Proxy 实现观察者模式
 
 观察者模式（Observer mode）指的是函数自动观察数据对象，一旦对象有变化，函数就会自动执行
 
-observable函数返回一个原始对象的 Proxy 代理，拦截赋值操作，触发充当观察者的各个函数
+observable 函数返回一个原始对象的 Proxy 代理，拦截赋值操作，触发充当观察者的各个函数
 
 ```
 const queuedObservers = new Set();
@@ -3568,15 +3560,15 @@ function set(target, key, value, receiver) {
 }
 ```
 
-观察者函数都放进Set集合，当修改obj的值，在会set函数中拦截，自动执行Set所有的观察者
+观察者函数都放进 Set 集合，当修改 obj 的值，在会 set 函数中拦截，自动执行 Set 所有的观察者
 
 # Set、Map
 
 ## Set
 
-Set是Es6新增的数据结构，类似于数组，但是成员的值都是唯一的，没有重复的值，我们一般称为集合
+Set 是 Es6 新增的数据结构，类似于数组，但是成员的值都是唯一的，没有重复的值，我们一般称为集合
 
-Set本身是一个构造函数，用来生成 Set 数据结构
+Set 本身是一个构造函数，用来生成 Set 数据结构
 
 ```
 const s = new Set();
@@ -3586,7 +3578,7 @@ const s = new Set();
 
 添加某个值，返回 Set 结构本身
 
-当添加实例中已经存在的元素，set不会进行处理添加
+当添加实例中已经存在的元素，set 不会进行处理添加
 
 ```
 s.add(1).add(2).add(2); // 2只被添加了一次
@@ -3602,7 +3594,7 @@ s.delete(1)
 
 ### has()
 
-返回一个布尔值，判断该值是否为Set的成员
+返回一个布尔值，判断该值是否为 Set 的成员
 
 ```
 s.has(2)
@@ -3618,18 +3610,18 @@ s.clear()
 
 ### 遍历
 
-Set实例遍历的方法有如下：
+Set 实例遍历的方法有如下：
 
 关于遍历的方法，有如下：
 
--   keys()：返回键名的遍历器
--   values()：返回键值的遍历器
--   entries()：返回键值对的遍历器
--   forEach()：使用回调函数遍历每个成员
+- keys()：返回键名的遍历器
+- values()：返回键值的遍历器
+- entries()：返回键值对的遍历器
+- forEach()：使用回调函数遍历每个成员
 
-Set的遍历顺序就是插入顺序
+Set 的遍历顺序就是插入顺序
 
-keys方法、values方法、entries方法返回的都是遍历器对象，由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。
+keys 方法、values 方法、entries 方法返回的都是遍历器对象，由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以 keys 方法和 values 方法的行为完全一致。
 
 ```
 let set = new Set(['red', 'green', 'blue']);
@@ -3656,7 +3648,7 @@ for (let item of set.entries()) {
 // ["blue", "blue"]
 ```
 
-forEach()用于对每个成员执行某种操作，没有返回值，键值、键名都相等，同样的forEach方法有第二个参数，用于绑定处理函数的this
+forEach()用于对每个成员执行某种操作，没有返回值，键值、键名都相等，同样的 forEach 方法有第二个参数，用于绑定处理函数的 this
 
 ```
 let set = new Set([1, 4, 9]);
@@ -3666,7 +3658,7 @@ set.forEach((value, key) => console.log(key + ' : ' + value))
 // 9 : 9
 ```
 
-扩展运算符和Set 结构相结合实现数组或字符串去重
+扩展运算符和 Set 结构相结合实现数组或字符串去重
 
 ```
 // 数组
@@ -3699,9 +3691,9 @@ let difference = new Set([...a].filter(x => !b.has(x)));
 
 ## Map
 
-Map类型是键值对的有序列表，而键和值都可以是任意类型
+Map 类型是键值对的有序列表，而键和值都可以是任意类型
 
-Map本身是一个构造函数，用来生成 Map 数据结构
+Map 本身是一个构造函数，用来生成 Map 数据结构
 
 ```
 const m = new Map()
@@ -3709,7 +3701,7 @@ const m = new Map()
 
 ### size
 
-size属性返回 Map 结构的成员总数。
+size 属性返回 Map 结构的成员总数。
 
 ```
 const map = new Map();
@@ -3721,11 +3713,11 @@ map.size // 2
 
 ### set()
 
-设置键名key对应的键值为value，然后返回整个 Map 结构
+设置键名 key 对应的键值为 value，然后返回整个 Map 结构
 
-如果key已经有值，则键值会被更新，否则就新生成该键
+如果 key 已经有值，则键值会被更新，否则就新生成该键
 
-同时返回的是当前Map对象，可采用链式写法
+同时返回的是当前 Map 对象，可采用链式写法
 
 ```
 const m = new Map();
@@ -3738,7 +3730,7 @@ m.set(1, 'a').set(2, 'b').set(3, 'c') // 链式操作
 
 ### get()
 
-get方法读取key对应的键值，如果找不到key，返回undefined
+get 方法读取 key 对应的键值，如果找不到 key，返回 undefined
 
 ```
 const m = new Map();
@@ -3751,7 +3743,7 @@ m.get(hello)  // Hello ES6!
 
 ### has()
 
-has方法返回一个布尔值，表示某个键是否在当前 Map 对象之中
+has 方法返回一个布尔值，表示某个键是否在当前 Map 对象之中
 
 ```
 const m = new Map();
@@ -3768,7 +3760,7 @@ m.has(undefined)     // true
 
 ### delete()
 
-delete方法删除某个键，返回true。如果删除失败，返回false
+delete 方法删除某个键，返回 true。如果删除失败，返回 false
 
 ```
 const m = new Map();
@@ -3781,7 +3773,7 @@ m.has(undefined)       // false
 
 ### clear()
 
-clear方法清除所有成员，没有返回值
+clear 方法清除所有成员，没有返回值
 
 ```
 let map = new Map();
@@ -3795,12 +3787,12 @@ map.size // 0
 
 ### 遍历
 
-Map结构原生提供三个遍历器生成函数和一个遍历方法：
+Map 结构原生提供三个遍历器生成函数和一个遍历方法：
 
--   keys()：返回键名的遍历器
--   values()：返回键值的遍历器
--   entries()：返回所有成员的遍历器
--   forEach()：遍历 Map 的所有成员
+- keys()：返回键名的遍历器
+- values()：返回键值的遍历器
+- entries()：返回所有成员的遍历器
+- forEach()：遍历 Map 的所有成员
 
 遍历顺序就是插入顺序
 
@@ -3851,13 +3843,13 @@ map.forEach(function(value, key, map) {
 
 ### WeakSet
 
-创建WeakSet实例
+创建 WeakSet 实例
 
 ```
 const ws = new WeakSet();
 ```
 
-WeakSet可以接受一个具有 Iterable接口的对象作为参数
+WeakSet 可以接受一个具有 Iterable 接口的对象作为参数
 
 ```
 const a = [[1, 2], [3, 4]];
@@ -3865,12 +3857,12 @@ const ws = new WeakSet(a);
 // WeakSet {[1, 2], [3, 4]}
 ```
 
-在API中WeakSet与Set有两个区别：
+在 API 中 WeakSet 与 Set 有两个区别：
 
--   没有遍历操作的API
--   没有size属性
+- 没有遍历操作的 API
+- 没有 size 属性
 
-WeackSet只能成员只能是引用类型，而不能是其他类型的值
+WeackSet 只能成员只能是引用类型，而不能是其他类型的值
 
 ```
 let ws=new WeakSet();
@@ -3882,20 +3874,20 @@ console.log(weakSet) // 报错
 // 成员为引用类型
 let obj1={name:1}
 let obj2={name:1}
-let ws=new WeakSet([obj1,obj2]); 
+let ws=new WeakSet([obj1,obj2]);
 console.log(ws) //WeakSet {{…}, {…}}
 ```
 
-WeakSet里面的引用只要在外部消失，它在 WeakSet里面的引用就会自动消失
+WeakSet 里面的引用只要在外部消失，它在 WeakSet 里面的引用就会自动消失
 
 ### WeakMap
 
-WeakMap结构与Map结构类似，也是用于生成键值对的集合
+WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合
 
-在API中WeakMap与Map有两个区别：
+在 API 中 WeakMap 与 Map 有两个区别：
 
--   没有遍历操作的API
--   没有clear清空方法
+- 没有遍历操作的 API
+- 没有 clear 清空方法
 
 ```
 // WeakMap 可以使用 set 方法添加成员
@@ -3912,7 +3904,7 @@ const wm2 = new WeakMap([[k1, 'foo'], [k2, 'bar']]);
 wm2.get(k2) // "bar"
 ```
 
-WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名
+WeakMap 只接受对象作为键名（null 除外），不接受其他类型的值作为键名
 
 ```
 const map = new WeakMap();
@@ -3924,11 +3916,11 @@ map.set(null, 2)
 // TypeError: Invalid value used as weak map key
 ```
 
-WeakMap的键名所指向的对象，一旦不再需要，里面的键名对象和所对应的键值对会自动消失，不用手动删除引用
+WeakMap 的键名所指向的对象，一旦不再需要，里面的键名对象和所对应的键值对会自动消失，不用手动删除引用
 
 举个场景例子：
 
-在网页的 DOM 元素上添加数据，就可以使用WeakMap结构，当该 DOM 元素被清除，其所对应的WeakMap记录就会自动被移除
+在网页的 DOM 元素上添加数据，就可以使用 WeakMap 结构，当该 DOM 元素被清除，其所对应的 WeakMap 记录就会自动被移除
 
 ```
 const wm = new WeakMap();
@@ -3941,7 +3933,7 @@ wm.get(element) // "some information"
 
 注意：WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用
 
-下面代码中，键值obj会在WeakMap产生新的引用，当你修改obj不会影响到内部
+下面代码中，键值 obj 会在 WeakMap 产生新的引用，当你修改 obj 不会影响到内部
 
 ```
 const wm = new WeakMap();

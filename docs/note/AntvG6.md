@@ -1,6 +1,7 @@
 ---
 toc: content
 title: Antv G6
+group: 可视化
 ---
 
 # Antv G6 4.x 版本
