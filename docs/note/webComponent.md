@@ -23,9 +23,17 @@ w3c 提出浏览器应该原生去支持组件的一个标准，由于 react, vu
 ![](/images/webComponent/image1.png)
 demo: [demo 演示](https://stackblitz.com/edit/stackblitz-starters-xnvmfl?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-这就是我们生成一个比较简单的自定义标签了，我们可以看到我们自定义的标签其实是继承了 HTMLElement 对象的实例上的，其实所有的 HTML 元素都是 HTMLElement 对象的实例。然后开启 ShadowRoot 的 mode 为 open 开启(close 为关闭), 在 ShadowRoot 内部的创建 DOM 树。通过`<slot>` 元素占位符可以在后期使用自己的标记语言填充，最后再通过 Window 对象上的一个只读 customElements 属性的 define()方法定义和注册的自定义元素。
+这就是我们生成一个比较简单的自定义标签了，我们可以看到我们自定义的标签其实是继承了 HTMLElement 对象的实例上的，其实所有的 HTML 元素都是 HTMLElement 对象的实例。然后开启 ShadowRoot 的 mode 为 open 开启(close 为关闭), 在 ShadowRoot 内部的创建 DOM 树，最后通过 Window 对象上的一个只读 customElements 属性的 define 方法定义和注册的自定义元素。
 
 customElements.define ()方法的第一个参数是要创建的新元素的标签名称。这个参数用于指定自定义元素的名称，<font color="red">必须以小写字母开头，包含一个连字符</font>，第二个参数通常是一个继承了 HTMLElement 的类
+
+#### 自定义元素事件响应
+
+如果希望自定义元素能够响应属性更改，可以重写 attributeChangedCallback 方法，这是一个生命周期回调方法，当元素的任意属性发生变化时会被调用。
+
+demo: [点击事件](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+
+![](/images/webComponent/gif1.gif)
 
 ### Shadow DOM
 
@@ -35,7 +43,9 @@ DOM 编程模型令人诟病的一个方面就是缺乏封装，不同组件之�
 
 Shadow DOM 是 DOM nodes 的附属树。这种 Shadow DOM 子树可以与某宿主元素相关联，但并不作为该元素的普通子节点，而是会形成其自有的作用域；Shadow DOM 中的根及其子节点也不可见。
 
-相比于以前为了实现封装而只能使用 `<iframe>` 实现的情况，Shadow DOM 无疑是一种更优雅的创建隔离 DOM 树的方法。
+#### CSS 隔离：
+
+在 Shadow DOM 中定义的样式（CSS）仅对该 Shadow Tree 内部的元素生效，不会影响到外部 DOM 树中的元素，同样，外部的 CSS 规则也无法直接作用于 Shadow DOM 中的元素。除非使用特殊的 CSS 阴影部分（CSS Shadow Parts）和 CSS 自定义属性（CSS Variables）等技术进行通信和样式穿透
 
 demo: [样式隔离 demo1](https://stackblitz.com/edit/stackblitz-starters-sjr7ur?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
@@ -46,6 +56,16 @@ demo: [样式隔离 demo1](https://stackblitz.com/edit/stackblitz-starters-sjr7u
 demo: [样式隔离 demo2](https://stackblitz.com/edit/stackblitz-starters-zpriuk?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 ![](/images/webComponent/image3.png)
+
+#### JavaScript 隔离：
+
+JavaScript 也无法直接访问到 Shadow DOM 内部的元素，除非通过 Shadow Root 和相关的 API 方法。Shadow DOM 中的事件处理程序和脚本执行环境也是相对独立的，不会干扰到外部脚本，反之亦然。
+
+demo: [javaScript 隔离](https://stackblitz.com/edit/stackblitz-starters-zlpf1q?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+
+在上面的例子中，`JsIsolatedComponent` 是一个自定义元素，它拥有自己的 Shadow DOM。Shadow DOM 中的 JavaScript 能够监听并修改其内部元素的行为，而外部页面的 JavaScript 则不能直接访问或修改 Shadow DOM 内部的 DOM 结构和行为。这就体现了 Shadow DOM 带来的 JavaScript 隔离效果。
+
+相比于以前为了实现封装而只能使用 `<iframe>` 实现的情况，Shadow DOM 无疑是一种更优雅的创建隔离 DOM 树的方法。
 
 ### HTML Template
 
@@ -69,9 +89,11 @@ demo:[template](https://stackblitz.com/edit/stackblitz-starters-6bk5rb?descripti
 - adoptedCallback：当自定义元素被移动到新文档时被调用。
 - attributeChangedCallback：当自定义元素的一个属性被增加、移除或更改时被调用。
 
-## 属性传递
+## 组件通信
 
-### HTML 属性传递
+### 父传子
+
+#### HTML 传递
 
 这是最直接的方式，可以通过修改 HTML 模板来实现。例如，创建一个自定义元素`<my-div title="hello"></my-div>`，其中 title 就是传递给组件的属性，组件内部可以通过访问这个属性来获取数据
 
@@ -79,7 +101,7 @@ demo: [通过属性传递数据](https://stackblitz.com/edit/stackblitz-starters
 
 ![](/images/webComponent/image4.png)
 
-### JSON.stringify 处理复杂类型数据
+#### JSON.stringify 处理复杂类型数据
 
 当需要传递包含对象、数组等复杂类型的数据时，可以先使用 JSON.stringify()方法将这些复杂数据转化为字符串，然后再通过属性传递。接收方接收到字符串后，再使用 JSON.parse()方法将其转换回原始数据格式
 
@@ -87,19 +109,143 @@ demo: [JSON.stringify 处理复杂类型数据](https://stackblitz.com/edit/stac
 
 ![](/images/webComponent/image5.png)
 
-### 动态属性监听
+### 子传父
 
-如果希望自定义元素能够响应属性更改，可以重写 attributeChangedCallback 方法，这是一个生命周期回调方法，当元素的任意属性发生变化时会被调用。
+子组件 child.js
 
-demo: [点击事件](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+```js
+// 定义使用Shadow DOM的自定义元素
+class ShadowChildElement extends HTMLElement {
+  constructor() {
+    super();
 
-![](/images/webComponent/gif1.gif)
+    // 创建Shadow DOM根节点
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+
+    // 在Shadow DOM中创建模板
+    const template = document.createElement('template');
+    template.innerHTML = `
+            <button id="notifyButton">Click me</button>
+          `;
+
+    // 将模板内容附加到Shadow DOM中
+    shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // 为按钮添加点击事件监听器
+    const button = shadowRoot.getElementById('notifyButton');
+    button.addEventListener('click', () => {
+      // 触发自定义事件
+      this.dispatchEvent(
+        new CustomEvent('child-notification', {
+          bubbles: true,
+          detail: { message: '来自子组件的消息' },
+        }),
+      );
+    });
+  }
+}
+```
+
+父组件 main.js
+
+```js
+// 在父组件中监听自定义事件
+document.addEventListener('DOMContentLoaded', () => {
+  const parentContainer = document.body; // 或者任何父级元素
+
+  // 查找子组件并为其自定义事件添加监听器
+  const shadowChild = parentContainer.querySelector('shadow-child');
+  if (shadowChild) {
+    shadowChild.addEventListener('child-notification', (event) => {
+      const message = event.detail.message;
+      const child = document.getElementById('showCild');
+      child.innerHTML = message;
+    });
+  }
+});
+```
+
+在上述代码中，我们创建了一个名为 ShadowChildElement 的 Web Component，它开启了 Shadow DOM 模式。当点击该组件内部的按钮时，组件会触发一个名为 child-notification 的自定义事件，并附带一条消息。父组件通过在 DOM 加载完成后查找该自定义元素并添加事件监听器，从而能够接收到这个自定义事件并处理其中的消息内容。由于事件设置了 bubbles: true，所以即使在 Shadow DOM 内部触发，事件也会冒泡到 Shadow DOM 之外，允许外部元素监听到它。
+
+demo：[子传父](https://stackblitz.com/edit/stackblitz-starters-zmyzkf?description=HTML/CSS/JS%20Starter&file=child.js,index.html&terminalHeight=10&title=Static%20Starter)
+
+### 插槽通信
+
+虽然不是严格意义上的“通信”，但通过`<slot>`元素，可以让父组件插入内容到子组件中，从而间接实现内容交互。
+
+```html
+<!-- 子组件 -->
+<template id="my-template">
+  <div class="container">
+    <h2>Count:</h2>
+    <span id="display">{{count}}</span>
+    <slot name="controls"></slot>
+    <!-- 父组件可以在这里插入控件 -->
+  </div>
+</template>
+
+<!-- 父组件 -->
+<my-counter>
+  <button slot="controls" @click="increment">Increment</button>
+</my-counter>
+```
+
+### API 方法暴露
+
+子组件 child.js
+
+```js
+// 定义一个使用Shadow DOM的Web Component，并暴露API方法
+class ShadowAPICustomElement extends HTMLElement {
+  constructor() {
+    super();
+    // 创建Shadow DOM根节点
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    // 在Shadow DOM中定义内部状态
+    this._internalValue = '子组件内部的状态';
+  }
+
+  // 暴露API方法
+  getInternalValue() {
+    return this._internalValue;
+  }
+}
+
+// 注册自定义元素
+customElements.define('shadow-api-element', ShadowAPICustomElement);
+```
+
+父组件 main.js
+
+```js
+// 确保DOM加载完毕之后再执行
+window.onload = () => {
+  // 获取已实例化的自定义元素
+  const myComponent = document.getElementById('myElement');
+
+  // 调用暴露的方法获取内部状态
+  const valueFromComponent = myComponent?.getInternalValue();
+
+  const main = document.getElementById('main');
+  main.innerHTML = valueFromComponent;
+};
+```
+
+在这个例子中，我们创建了一个名为 ShadowAPICustomElement 的 Web Component，它使用了 Shadow DOM，并在其中定义了一个内部状态变量 internalValue。组件对外暴露了一个 API 方法 getInternalValue，允许外部代码通过调用此方法获取组件内部 Shadow DOM 中的状态。虽然实际 DOM 操作在 Shadow DOM 内部进行，但暴露的 API 方法不受此限制，依旧可以从外部访问组件内部的状态
+
+demo: [Api 方法暴露](https://stackblitz.com/edit/stackblitz-starters-pjepbx?description=HTML/CSS/JS%20Starter&file=index.html%3AL7-L7&terminalHeight=10&title=Static%20Starter)
+
+![](/images/webComponent/image9.jpg)
+
+### 全局状态管理
+
+对于更复杂的场景，可能需要结合第三方状态管理库如 Redux、MobX 等，在组件外共享全局状态，然后在组件内订阅这些状态变化
 
 ## css 穿透
 
-上面我们提到了 shadow Root，是完全隔离外部的 css 跟 js 的，为啥还会有 css 传递这一说呢？
+### CSS Variables
 
-有一种场景，就是我们切换主题样式改变整个页面的主题风格
+CSS Variables（CSS 自定义属性）是一种可以在整个文档甚至跨多个层叠上下文（包括 Shadow DOM）中定义和使用可重用值的方式。它们以--开头声明，并通过 var()函数引用
 
 我们可以利用如:root 在 CSS 中是一个伪类选择器，它代表的是整个文档的根元素。在 HTML 文档中，根元素始终是`<html>`标签。使用:root 选择器可以为整个文档设置全局的 CSS 变量（CSS Custom Properties）和样式规则，这些变量和规则可以被文档内的任何元素所继承或参考
 
@@ -116,9 +262,19 @@ demo: [点击事件](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?desc
 
 利用这一特性，我们就可以进行样式穿透
 
-demo: [css 样式穿透](https://stackblitz.com/edit/stackblitz-starters-q3dpnh?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+demo: [CSS 自定义属性](https://stackblitz.com/edit/stackblitz-starters-q3dpnh?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 ![](/images/webComponent/image6.png)
+
+### CSS Shadow Parts
+
+CSS Shadow Parts 是一项 Web Components 技术，它允许开发者指定 Shadow DOM 中的某些部分可以由外部样式表进行样式化。通过使用 ::part() 伪类选择器，外部样式可以定位到那些标记为可公开样式化的 Shadow DOM 元素。
+
+demo: [CSS Shadow Parts](https://stackblitz.com/edit/stackblitz-starters-jaaxlq?description=HTML/CSS/JS%20Starter&file=index.html&file=child.js&terminalHeight=10&title=Static%20Starter)
+
+![](/images/webComponent/image10.jpg)
+
+在这个例子中，`custom-element` 的头部部分通过 `part="header"` 标记为可公开样式化。外部样式表中的 `custom-element::part(header)` 选择器就用来给这个头部添加额外的样式，比如改变字体颜色和添加底部边框。这样，即便是在 Shadow DOM 中的元素，也能通过 CSS Shadow Parts 接受外部样式的影响。
 
 ## React 中使用
 
