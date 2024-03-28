@@ -35,6 +35,13 @@ demo: [点击事件](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?desc
 
 ![](/images/webComponent/gif1.gif)
 
+上面的这个例子中：
+
+1. get count() 方法相当于一个属性的 getter，它返回内部私有变量 count 属性值。
+2. set count(count) 设置元素的 count 属性，方法相当于一个属性的 setter，它接收一个新的值，并更新内部私有变量 count，同时也更新了对应的属性（通过 setAttribute），这会导致浏览器自动调用 attributeChangedCallback 方法。
+3. attributeChangedCallback 方法被浏览器调用，当元素的属性发生更改时。在这里，它调用 count setter 来同步内部状态。
+   这样一来，通过属性观察者模式，我们间接实现了对自定义元素属性的 get 和 set 操作，并且能够确保属性变更时，内部状态和界面显示的一致性
+
 ### Shadow DOM
 
 DOM 编程模型令人诟病的一个方面就是缺乏封装，不同组件之间的逻辑和样式很容易互相污染。
@@ -62,6 +69,8 @@ demo: [样式隔离 demo2](https://stackblitz.com/edit/stackblitz-starters-zpriu
 JavaScript 也无法直接访问到 Shadow DOM 内部的元素，除非通过 Shadow Root 和相关的 API 方法。Shadow DOM 中的事件处理程序和脚本执行环境也是相对独立的，不会干扰到外部脚本，反之亦然。
 
 demo: [javaScript 隔离](https://stackblitz.com/edit/stackblitz-starters-zlpf1q?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+
+![](/images/webComponent/gif4.gif)
 
 在上面的例子中，`JsIsolatedComponent` 是一个自定义元素，它拥有自己的 Shadow DOM。Shadow DOM 中的 JavaScript 能够监听并修改其内部元素的行为，而外部页面的 JavaScript 则不能直接访问或修改 Shadow DOM 内部的 DOM 结构和行为。这就体现了 Shadow DOM 带来的 JavaScript 隔离效果。
 
@@ -168,6 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
 在上述代码中，我们创建了一个名为 ShadowChildElement 的 Web Component，它开启了 Shadow DOM 模式。当点击该组件内部的按钮时，组件会触发一个名为 child-notification 的自定义事件，并附带一条消息。父组件通过在 DOM 加载完成后查找该自定义元素并添加事件监听器，从而能够接收到这个自定义事件并处理其中的消息内容。由于事件设置了 bubbles: true，所以即使在 Shadow DOM 内部触发，事件也会冒泡到 Shadow DOM 之外，允许外部元素监听到它。
 
 demo：[子传父](https://stackblitz.com/edit/stackblitz-starters-zmyzkf?description=HTML/CSS/JS%20Starter&file=child.js,index.html&terminalHeight=10&title=Static%20Starter)
+
+![](/images/webComponent/gif3.gif)
 
 ### 插槽通信
 
