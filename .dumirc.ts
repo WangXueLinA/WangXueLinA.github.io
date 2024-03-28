@@ -28,10 +28,10 @@ export default defineConfig({
     footer: false,
     logo: '/logo.png',
     nav: [
-      { title: '组件', link: '/components' },
+      { title: '组件', link: '/components/aes-des-secret' },
       { title: '笔记', link: '/note/react18' },
       { title: '部署', link: '/deploy/web' },
-      { title: '源码', link: '/source' },
+      { title: '源码', link: '/source/call' },
     ],
     sidebar: {
       '/components': [
