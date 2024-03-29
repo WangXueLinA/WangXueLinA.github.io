@@ -16,14 +16,15 @@ Web Components 是一套由 W3C 制定的标准集合，旨在让开发者能够
 
 ## 特性
 
-1. Custom Elements（自定义元素）：是 Web 标准中的一项功能，它允许开发者自定义新的 HTML 元素，开发者可以使用 JavaScript 和 DOM API，使新元素具有自定义的行为和功能
-2. Shadow DOM： 它可以将一个隐藏的、独立的 DOM 附加到一个元素上
-3. HTML template（HTML 模板）： `<template>` 和 `<slot>` 元素使你可以编写不在呈现页面中显示的标记模板。然后它们可以作为自定义元素结构的基础被多次重用。
+1. **Custom Elements（自定义元素）**：是 Web 标准中的一项功能，它允许开发者自定义新的 HTML 元素，开发者可以使用 JavaScript 和 DOM API，使新元素具有自定义的行为和功能
+2. **Shadow DOM**：它可以将一个隐藏的、独立的 DOM 附加到一个元素上
+3. **HTML template（HTML 模板）**：`<template>` 和 `<slot>` 元素使你可以编写不在呈现页面中显示的标记模板。然后它们可以作为自定义元素结构的基础被多次重用。
 
 ### 自定义元素
 
 ![](/images/webComponent/image1.png)
-demo: [demo 演示](https://stackblitz.com/edit/stackblitz-starters-xnvmfl?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+
+demo: [自定义元素](https://stackblitz.com/edit/stackblitz-starters-xnvmfl?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 这就是我们生成一个比较简单的自定义标签了，我们可以看到我们自定义的标签其实是继承了 HTMLElement 对象的实例上的，其实所有的 HTML 元素都是 HTMLElement 对象的实例。然后开启 ShadowRoot 的 mode 为 open 开启(close 为关闭), 在 ShadowRoot 内部的创建 DOM 树，最后通过 Window 对象上的一个只读 customElements 属性的 define 方法定义和注册的自定义元素。
 
@@ -33,7 +34,7 @@ customElements.define ()方法的第一个参数是要创建的新元素的标�
 
 如果希望自定义元素能够响应属性更改，可以重写 attributeChangedCallback 方法，这是一个生命周期回调方法，当元素的任意属性发生变化时会被调用。
 
-demo: [点击事件](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+demo: [自定义元素事件响应](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 ![](/images/webComponent/gif1.gif)
 
@@ -56,13 +57,13 @@ Shadow DOM 是 DOM nodes 的附属树。这种 Shadow DOM 子树可以与某宿�
 
 在 Shadow DOM 中定义的样式（CSS）仅对该 Shadow Tree 内部的元素生效，不会影响到外部 DOM 树中的元素，同样，外部的 CSS 规则也无法直接作用于 Shadow DOM 中的元素。除非使用特殊的 CSS 阴影部分（CSS Shadow Parts）和 CSS 自定义属性（CSS Variables）等技术进行通信和样式穿透
 
-demo: [样式隔离 demo1](https://stackblitz.com/edit/stackblitz-starters-sjr7ur?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+demo: [内部样式不影响外部元素](https://stackblitz.com/edit/stackblitz-starters-sjr7ur?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 ![](/images/webComponent/image2.png)
 
 可以看出我们在里面写的 div 样式并不会影响到外部，而且不仅仅是里面的样式影响不到外面，外面的样式也影响不到里面,不仅仅是样式，shadow 中的 div 不能被外面的全局的 js 所获取到，里面的也不能获取外面的
 
-demo: [样式隔离 demo2](https://stackblitz.com/edit/stackblitz-starters-zpriuk?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
+demo: [外部样式不影响内部样式](https://stackblitz.com/edit/stackblitz-starters-zpriuk?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
 ![](/images/webComponent/image3.png)
 
@@ -95,10 +96,10 @@ demo:[template](https://stackblitz.com/edit/stackblitz-starters-6bk5rb?descripti
 
 ## 生命周期
 
-- connectedCallback：当自定义元素第一次被连接到文档 DOM 时被调用。
-- disconnectedCallback：当自定义元素与文档 DOM 断开连接时被调用。
-- adoptedCallback：当自定义元素被移动到新文档时被调用。
-- attributeChangedCallback：当自定义元素的一个属性被增加、移除或更改时被调用。
+- **connectedCallback**：当自定义元素第一次被连接到文档 DOM 时被调用。
+- **disconnectedCallback**：当自定义元素与文档 DOM 断开连接时被调用。
+- **adoptedCallback**：当自定义元素被移动到新文档时被调用。
+- **attributeChangedCallback**：当自定义元素的一个属性被增加、移除或更改时被调用。
 
 ## 组件通信
 
@@ -262,18 +263,15 @@ CSS Variables（CSS 自定义属性）是一种可以在整个文档甚至跨多
 
 我们可以利用如:root 在 CSS 中是一个伪类选择器，它代表的是整个文档的根元素。在 HTML 文档中，根元素始终是`<html>`标签。使用:root 选择器可以为整个文档设置全局的 CSS 变量（CSS Custom Properties）和样式规则，这些变量和规则可以被文档内的任何元素所继承或参考
 
-例如：
-
 ```js
+// 例如：
 :root {
   --primary-color: #ff0000; /* 定义一个全局CSS变量 */
   font-size: 16px; /* 设置全局字体大小 */
 }
 ```
 
-在此例中，`--primary-color` 变量在整个 HTML 文档范围内都是可用的，而 font-size 样式将应用于整个文档的基础字体大小。任何子元素都可以通过 `var(--primary-color)`来引用这个颜色变量，从而保持样式的一致性与可维护性。同时，全局的字体大小设定会影响到所有没有明确设置字体大小的元素。
-
-利用这一特性，我们就可以进行样式穿透
+在此例中，`--primary-color` 变量在整个 HTML 文档范围内都是可用的，而 font-size 样式将应用于整个文档的基础字体大小。任何子元素都可以通过 `var(--primary-color)`来引用这个颜色变量，从而保持样式的一致性与可维护性。同时，全局的字体大小设定会影响到所有没有明确设置字体大小的元素。利用这一特性，我们就可以进行样式穿透
 
 demo: [CSS 自定义属性](https://stackblitz.com/edit/stackblitz-starters-q3dpnh?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
