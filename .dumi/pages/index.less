@@ -1,0 +1,43 @@
+.dumi-div-box::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../public/images/home.jpeg') no-repeat;
+  background-size: cover;
+}
+
+.dumi-h1-title {
+  position: relative;
+  text-align: center;
+  font-size: 140px;
+  margin: 12px 0 32px;
+  color: #ee9c9c;
+  font-weight: bold;
+  font-family: Alibaba-PuHuiTi, Gill Sans, Gill Sans MT, Calibri, Trebuchet MS,
+    sans-serif;
+
+  & > span {
+    color: transparent;
+    text-shadow: 0 10px 20px rgba(22, 119, 255, 0.15);
+    background: linear-gradient(30deg, #75e6f4 30%, #65a5ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+.dumi-p-title {
+  position: relative;
+  margin: 32px;
+  color: hsl(5deg 91.12% 46.96% / 73%);
+  font-size: 30px;
+  line-height: 1.6;
+  text-align: center;
+
+  & > span {
+    background-color: #fff;
+  }
+}
