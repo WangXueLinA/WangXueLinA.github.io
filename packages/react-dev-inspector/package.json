@@ -28,5 +28,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.12",
     "vite-plugin-style-import": "^2.0.0"
-  }
+  },
+  "gitHead": "733e82f2d6ca3f4e7a393c5d66e00e42c79a5d0e"
 }
