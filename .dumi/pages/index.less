@@ -14,7 +14,7 @@
   position: relative;
   text-align: center;
   font-size: 140px;
-  margin: 12px 0 32px;
+  margin: 16px 0 32px;
   color: #ee9c9c;
   font-weight: bold;
   font-family: Alibaba-PuHuiTi, Gill Sans, Gill Sans MT, Calibri, Trebuchet MS,
@@ -36,8 +36,25 @@
   font-size: 30px;
   line-height: 1.6;
   text-align: center;
+  margin-bottom: 50px;
 
   & > span {
     background-color: #fff;
+  }
+}
+
+.ant-card {
+  background-color: #d1c1c169;
+}
+
+@media only screen and (max-width: 766px) {
+  .dumi-div-box::before {
+    background: url('../../public/images/homeMove.jpg') no-repeat; /* 手机端背景图 */
+    background-size: cover;
+  }
+
+  .dumi-h1-title {
+    font-size: 70px;
+    margin-top: 80px;
   }
 }

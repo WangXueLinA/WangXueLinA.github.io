@@ -17,7 +17,7 @@ const promptList = [
   },
   {
     type: 'input',
-    message: '请输入模块描述',
+    message: '请输入模块描述:',
     name: 'description',
     validate(val) {
       if (val) return true;
@@ -26,7 +26,7 @@ const promptList = [
   },
   {
     type: 'input',
-    message: '维护者',
+    message: '维护者:',
     name: 'author',
     validate(val) {
       if (val) return true;

@@ -247,16 +247,16 @@ enum 枚举名{
 };
 
 enum Pay_status = {
-no_pay = 0,
-pay = 1,
-success = 2,
+  no_pay = 0,
+  pay = 1,
+  success = 2
 }
 var f:Pay_status = Pay_status.success
 console.log(f)    //2
 
 
 enum Color = {red, blue, orange}
-var c:Color = Color.blue
+var c: Color = Color.blue
 console.log(c)   //输出1，因为没有赋值，所以默认取索引值
 //如果blue赋值为5，orange默认赋值，orange输出的是6,这是规定
 ```
@@ -314,10 +314,10 @@ console.log(Direction.Up);           // Up
 
 ```js
 enum Direction {
-Up = 'UP',
-Down, // error TS1061: Enum member must have initializer
-Left, // error TS1061: Enum member must have initializer
-Right // error TS1061: Enum member must have initializer
+  Up = 'UP',
+  Down, // error TS1061: Enum member must have initializer
+  Left, // error TS1061: Enum member must have initializer
+  Right // error TS1061: Enum member must have initializer
 }
 ```
 
@@ -630,7 +630,7 @@ alert(getInfo(true))      //错误的写法，会报错
 
 ## 接口（interface）
 
-**接口**是一系列抽象方法的声明，是一些方法特征的集合，这些方法都应该是抽象的，需要由具体的**类**去实现，然后第三方就可以通过这组抽象方法调用，让具体的类执行具体的方法
+接口是一系列抽象方法的声明，是一些方法特征的集合，这些方法都应该是抽象的，需要由具体的**类**去实现，然后第三方就可以通过这组抽象方法调用，让具体的类执行具体的方法
 
 简单来讲，一个接口所描述的是一个对象相关的属性和方法，但并不提供具体创建此对象实例的方法
 
@@ -732,9 +732,9 @@ interface User {
 
 
 let user: User ={
-name: '小红',
-age: 18,
-address: '辽宁'  // 不报错
+  name: '小红',
+  age: 18,
+  address: '辽宁'  // 不报错
 }
 ```
 
@@ -759,10 +759,10 @@ interface Son extends Father,Mother{
 }
 
 const son: Son = {
-name: '小红',
-color: 'red',
-height: 18,
-age: 20
+  name: '小红',
+  color: 'red',
+  height: 18,
+  age: 20
 }
 ```
 
@@ -946,16 +946,16 @@ export default class Carousel extends React.Component<Props, State> {}
 ```js
 // props的类型
 export default class Props {
-public children: Array<React.ReactElement<any>> | React.ReactElement<any> | never[] = []
-public speed: number = 500
-public height: number = 160
-public animation: string = 'easeInOutQuad'
-public isAuto: boolean = true
-public autoPlayInterval: number = 4500
-public afterChange: () => {}
-public beforeChange: () => {}
-public selesctedColor: string
-public showDots: boolean = true
+  public children: Array<React.ReactElement<any>> | React.ReactElement<any> | never[] = []
+  public speed: number = 500
+  public height: number = 160
+  public animation: string = 'easeInOutQuad'
+  public isAuto: boolean = true
+  public autoPlayInterval: number = 4500
+  public afterChange: () => {}
+  public beforeChange: () => {}
+  public selesctedColor: string
+  public showDots: boolean = true
 }
 ```
 
@@ -1230,7 +1230,7 @@ let x!: number;
 b();
 console.log(2 * x); // 不报错
 function b() {
-x = 10;
+  x = 10;
 }
 ```
 
@@ -1238,7 +1238,7 @@ x = 10;
 
 类型别名会给一个类型起个新名字，类型别名有时和接口很像，但是可以作用于原始值、联合类型、元组以及其它任何你需要手写的类型
 
-可以使用 type SomeName = someValidTypeAnnotation 的语法来创建类型别名：
+可以使用 `type SomeName = someValidTypeAnnotation` 的语法来创建类型别名：
 
 ```js
 type some = boolean | string;
@@ -1272,9 +1272,9 @@ keyof 类似于 Object.keys ，用于获取一个接口中 Key 的联合类型�
 
 ```js
 interface Person {
-name: string;
-age: number;
-gender: string;
+  name: string;
+  age: number;
+  gender: string;
 }
 type P = keyof Person; // "name" | "age" | "gender"
 // 等效于
@@ -1299,13 +1299,13 @@ is 关键字用于类型保护，它用于在运行时检查一个值是否符�
 
 ```js
 function isString(value: any): value is string {
-return typeof value === "string";
+  return typeof value === "string";
 }
 
 function logIfString(value: any) {
-if (isString(value)) {
-  console.log(value);
-}
+  if (isString(value)) {
+    console.log(value);
+  }
 }
 
 ```
@@ -1364,7 +1364,7 @@ type BaseType = string | number | boolean
 // 这里表示 copy 的参数
 // 只能是字符串、数字、布尔这几种基础类型
 function copy<T extends BaseType>(arg: T): T {
-return arg
+  return arg
 }
 ```
 
@@ -1372,7 +1372,7 @@ return arg
 
 ```js
 function getValue<T, K extends keyof T>(obj: T, key: K) {
-return obj[key]
+  return obj[key]
 }
 
 const obj = { a: 1 }
@@ -1395,8 +1395,8 @@ type Readonly<T> = {
 };
 
 interface Obj {
-a: string
-b: string
+  a: string
+  b: string
 }
 
 type ReadOnlyObj = Readonly<Obj>
@@ -1590,10 +1590,9 @@ type ReturnPromise<T> = T extends (...args: infer A) => infer R
 // 提取对象指定属性的例子。
 
 type MyType<T> = T extends {
-a: infer M;
-b: infer N;
-}
-? [M, N]
+  a: infer M;
+  b: infer N;
+} ? [M, N]
 : never;
 
 type T = MyType<{ a: string; b: number }>;
@@ -1703,11 +1702,11 @@ constructor.prototype.age = 18;
 
 @addAge
 class Person{
-name: string;
-age!: number;
-constructor() {
-  this.name = 'huihui';
-}
+  name: string;
+  age!: number;
+  constructor() {
+    this.name = 'huihui';
+  }
 }
 
 let person = new Person();
@@ -1845,18 +1844,18 @@ class Person {
 
 ```js
 function addAge(age: number) {
-return function(constructor: Function) {
-  constructor.prototype.age = age
-}
+  return function(constructor: Function) {
+    constructor.prototype.age = age
+  }
 }
 
 @addAge(10)
 class Person{
-name: string;
-age!: number;
-constructor() {
-  this.name = 'huihui';
-}
+  name: string;
+  age!: number;
+  constructor() {
+    this.name = 'huihui';
+  }
 }
 
 let person = new Person();
