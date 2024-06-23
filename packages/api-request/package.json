@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "description": "api 请求封装",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/api-request",
+  "license": "MIT",
   "author": "xueliln",
   "main": "./lib/cjs",
   "module": "./lib/esm",
