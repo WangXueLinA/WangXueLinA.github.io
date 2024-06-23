@@ -1,0 +1,43 @@
+{
+  "name": "@wxl/general-form",
+  "version": "0.0.1",
+  "description": "通用form组件",
+  "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/general-form",
+  "author": "xuelin",
+  "main": "./lib/cjs",
+  "module": "./lib/esm",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "start": "npm run dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@types/lodash": "^4.14.157",
+    "@types/node": "^17.0.18",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vue/reactivity": "^3.3.4",
+    "@vue/shared": "^3.3.4",
+    "antd": "^5.12.8",
+    "async-validator": "^3.5.2",
+    "less": "^4.1.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.12",
+    "vite-plugin-style-import": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://www.npmjs.com/"
+  }
+}
