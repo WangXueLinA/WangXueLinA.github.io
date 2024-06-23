@@ -1,6 +1,9 @@
 {
   "name": "xuelin_dumi",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WangXueLinA/dumi_document"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -86,9 +89,8 @@
     "react-dom": ">=16.9.0"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://www.npmjs.com/"
   },
-  "authors": [],
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "node scripts/verifyCommit.js"
