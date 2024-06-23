@@ -33,6 +33,7 @@
     "vite-plugin-style-import": "^2.0.0"
   },
   "publishConfig": {
-    "registry": "https://www.npmjs.com/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
