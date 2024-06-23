@@ -89,7 +89,7 @@
     "react-dom": ">=16.9.0"
   },
   "publishConfig": {
-    "registry": "https://www.npmjs.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",

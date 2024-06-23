@@ -130,3 +130,51 @@ npm create vite@latest template
 说明模版组件生成成功
 
 ![](/images/component/image5.jpg)
+
+## 注册 npm 账号
+
+代码 push 到远程后，我们想要发布到 npm 仓库，就必须要有一个账号，去[npm](https://www.npmjs.com/)官网注册一个账号，注意记住用户名、密码和邮箱，发布的时候可能会用到。
+
+## 设置 npm 源
+
+本地的 npm 镜像源采用的是淘宝镜像源或者其它的，如果想要发布 npm 包，我们得把 npm 源切换为官方得源，命令如下：
+
+```js
+npm config set registry=https://registry.npmjs.org
+
+```
+
+我们可以安装 nrm 命令行工具，可以看到我们本地的各种本地镜像源
+
+```js
+npm install -g nrm
+```
+
+执行命令
+
+```js
+nrm ls
+```
+
+就可以看到我们本地的各种命令的镜像源
+
+```js
+* npm ---------- https://registry.npmjs.org/
+  yarn --------- https://registry.yarnpkg.com/
+  tencent ------ https://mirrors.cloud.tencent.com/npm/
+  cnpm --------- https://r.cnpmjs.org/
+  taobao ------- https://registry.npmmirror.com/
+  npmMirror ---- https://skimdb.npmjs.com/registry/
+```
+
+## 添加 npm 用户
+
+打开我们的要上传的目录文件，添加 npm 用户，执行命令：
+
+```js
+npm adduser
+```
+
+这里会让你填写用户名等等，如果之前设置过即可跳过此步。
+
+![](/images/component/image6.jpg)
