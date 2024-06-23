@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 0.1.0 (2024-06-23)
+
+### Features
+
+- 增加文档 ([714e85f](https://github.com/WangXueLinA/dumi_document/commit/714e85f34919e9b48e42b4d559211e2a67e4490f))
+- 增加文档 ([4c811f4](https://github.com/WangXueLinA/dumi_document/commit/4c811f4c339debc0bfbcf9e6d6795a9eafd2a59f))

@@ -1,6 +1,6 @@
 {
   "name": "@wxl/general-form",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "通用form组件",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/general-form",
   "author": "xuelin",
@@ -16,7 +16,6 @@
     "preview": "vite preview",
     "start": "npm run dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@types/lodash": "^4.14.157",
