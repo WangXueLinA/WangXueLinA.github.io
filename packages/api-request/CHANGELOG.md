@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/WangXueLinA/dumi_document/compare/@wxl/api-request@0.3.0...@wxl/api-request@0.4.0) (2024-06-23)
+
+### Features
+
+- package.json ([ee3eec1](https://github.com/WangXueLinA/dumi_document/commit/ee3eec16e000d636bb6197b17a1b20a8bab05246))
+
 # [0.3.0](https://github.com/WangXueLinA/dumi_document/compare/@wxl/api-request@0.2.0...@wxl/api-request@0.3.0) (2024-06-23)
 
 ### Features
