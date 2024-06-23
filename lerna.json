@@ -5,9 +5,7 @@
   },
   "command": {
     "bootstrap": {
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
+      "npmClientArgs": ["--no-package-lock"]
     },
     "publish": {
       "message": "chore(release): publish",
@@ -15,11 +13,10 @@
       "allowBranch": "master",
       "verifyRegistry": false,
       "verifyAccess": false,
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "exec": "npx commitlint --from $LERNA_PACKAGE_NAME"
     }
   },
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "version": "independent"
 }
