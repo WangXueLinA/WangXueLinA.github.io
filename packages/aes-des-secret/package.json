@@ -1,6 +1,6 @@
 {
   "name": "@wxl/aes-des-secret",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "description": "aes/des加密解密",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/aes-des-secret",
   "author": "xuelin",
@@ -32,6 +32,5 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  },
-  "gitHead": "733e82f2d6ca3f4e7a393c5d66e00e42c79a5d0e"
+  }
 }
