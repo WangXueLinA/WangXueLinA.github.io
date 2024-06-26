@@ -9,9 +9,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/dev-proxy
+npm i @xuelin/dev-proxy
 or
-yarn add @wxl/dev-proxy
+yarn add @xuelin/dev-proxy
 ```
 
 ## 用法

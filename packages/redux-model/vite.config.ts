@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/redux-model': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/redux-model': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/redux-model": ["./src"]
+      "@xuelin/redux-model": ["./src"]
     }
   },
   "include": ["./src"]

@@ -29,7 +29,7 @@ npm run install-lib #安装全局依赖
 
 npm run build #构建所有包
 
-npm run build --scope @wxl/dsc-api-detail #单独构建某一包，会先构建当前包依赖的包
+npm run build --scope @xuelin/dsc-api-detail #单独构建某一包，会先构建当前包依赖的包
 
 
 
@@ -47,7 +47,7 @@ npm i yalc -g
 yarn global add yalc
 
 // 1. 进入对用的 库
-cd packages/@wxl/<%= name %>
+cd packages/@xuelin/<%= name %>
 
 // 2. 执行build
 npm run build
@@ -56,12 +56,12 @@ npm run build
 yalc publish
 
 // 4. 进入项目
-yalc add @wxl/<%= name %>
+yalc add @xuelin/<%= name %>
 
 // 5. 安装完成，重启项目
 
 // 6. 本地验证ok，执行移除命令
-yalc remove @wxl/<%= name %>
+yalc remove @xuelin/<%= name %>
 
 ```
 

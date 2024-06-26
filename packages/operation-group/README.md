@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/operation-group
+npm i @xuelin/operation-group
 or
-yarn add @wxl/operation-group
+yarn add @xuelin/operation-group
 ```
 
 ## API

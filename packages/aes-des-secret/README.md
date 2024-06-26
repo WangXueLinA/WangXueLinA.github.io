@@ -1,4 +1,4 @@
-# aes/des加密解密
+# aes/des 加密解密
 
 维护人： xuelin
 
@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/aes-des-secret
+npm i @xuelin/aes-des-secret
 or
-yarn add @wxl/aes-des-secret
+yarn add @xuelin/aes-des-secret
 ```
 
 ## API

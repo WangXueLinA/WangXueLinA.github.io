@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/react-store": ["./src"]
+      "@xuelin/react-store": ["./src"]
     }
   },
   "include": ["./src"]

@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/api-request": ["./src"]
+      "@xuelin/api-request": ["./src"]
     }
   },
   "include": ["./src"]

@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/flow-chart": ["./src"]
+      "@xuelin/flow-chart": ["./src"]
     }
   },
   "include": ["./src"]

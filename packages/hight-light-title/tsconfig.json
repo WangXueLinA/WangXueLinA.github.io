@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/hight-light-title": ["./src"]
+      "@xuelin/hight-light-title": ["./src"]
     }
   },
   "include": ["./src"]

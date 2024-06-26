@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/vite-plugin-build
+npm i @xuelin/vite-plugin-build
 or
-yarn add @wxl/vite-plugin-build
+yarn add @xuelin/vite-plugin-build
 ```
 
 ## API

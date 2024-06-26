@@ -1,14 +1,16 @@
 import react from '@vitejs/plugin-react';
-
+import build from '@xuelin/vite-plugin-build';
 import path from 'path';
 import { defineConfig, UserConfig } from 'vite';
 
+console.log(build, 'build');
+
 export default defineConfig(() => {
   const config: UserConfig = {
-    plugins: [react()],
+    plugins: [react(), build()],
     resolve: {
       alias: {
-        '@wxl/aes-des-secret': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/aes-des-secret': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

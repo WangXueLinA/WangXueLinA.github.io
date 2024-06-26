@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/vite-plugin-build": ["./src"]
+      "@xuelin/vite-plugin-build": ["./src"]
     }
   },
   "include": ["./src"]

@@ -1,4 +1,4 @@
-# redux模型model
+# redux 模型 model
 
 维护人： xuelin
 
@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/redux-model
+npm i @xuelin/redux-model
 or
-yarn add @wxl/redux-model
+yarn add @xuelin/redux-model
 ```
 
 ## API

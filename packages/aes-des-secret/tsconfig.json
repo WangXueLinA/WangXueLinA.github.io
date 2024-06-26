@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/aes-des-secret": ["./src"]
+      "@xuelin/aes-des-secret": ["./src"]
     }
   },
   "include": ["./src"]

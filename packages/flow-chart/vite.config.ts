@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/flow-chart': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/flow-chart': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

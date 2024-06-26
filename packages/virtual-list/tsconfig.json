@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/virtual-list": ["./src"]
+      "@xuelin/virtual-list": ["./src"]
     }
   },
   "include": ["./src"]

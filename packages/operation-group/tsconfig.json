@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/operation-group": ["./src"]
+      "@xuelin/operation-group": ["./src"]
     }
   },
   "include": ["./src"]

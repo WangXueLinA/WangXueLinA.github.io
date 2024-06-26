@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/dev-proxy': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/dev-proxy': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

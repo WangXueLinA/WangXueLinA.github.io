@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/general-form': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/general-form': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

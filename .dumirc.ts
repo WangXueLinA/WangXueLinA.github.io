@@ -7,7 +7,7 @@ const listDir = list.map((str) => `packages/${str}/src`);
 const alias = list.reduce((obj, key, index) => {
   return {
     ...obj,
-    [`@wxl/${key}`]: resolve(listDir[index]),
+    [`@xuelin/${key}`]: resolve(listDir[index]),
   };
 }, {});
 
@@ -37,7 +37,7 @@ export default defineConfig({
       '/components': [
         {
           children: list.map((item) => ({
-            title: `@wxl/${item}`,
+            title: `@xuelin/${item}`,
             link: `/components/${item}`,
           })),
         },

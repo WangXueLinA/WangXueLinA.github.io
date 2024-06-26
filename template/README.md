@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/<%= name %>
+npm i @xuelin/<%= name %>
 or
-yarn add @wxl/<%= name %>
+yarn add @xuelin/<%= name %>
 ```
 
 ## API

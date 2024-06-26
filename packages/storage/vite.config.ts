@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/storage': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/storage': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

@@ -9,9 +9,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/dev-inspector
+npm i @xuelin/dev-inspector
 or
-yarn add @wxl/dev-inspector
+yarn add @xuelin/dev-inspector
 ```
 
 ### 用法
@@ -19,7 +19,7 @@ yarn add @wxl/dev-inspector
 ```
 if(process.env.NODE_ENV === 'development'){
 
-  require('@wxl/dev-inspector').createDevInspector('wxl')//组件wxl前缀给弹窗使用
+  require('@xuelin/dev-inspector').createDevInspector('wxl')//组件wxl前缀给弹窗使用
 }
 
 // mac command + 鼠标右键 跳转vscode文件

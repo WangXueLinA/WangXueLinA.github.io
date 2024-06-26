@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/virtual-list': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/virtual-list': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

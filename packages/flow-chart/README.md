@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/flow-chart
+npm i @xuelin/flow-chart
 or
-yarn add @wxl/flow-chart
+yarn add @xuelin/flow-chart
 ```
 
 ## API
@@ -17,7 +17,7 @@ yarn add @wxl/flow-chart
 ### useGraph
 
 ```tsx | pure
-import { useGraph } from '@wxl/flow-chart';
+import { useGraph } from '@xuelin/flow-chart';
 
 export default () => {
   const graph = useGraph();

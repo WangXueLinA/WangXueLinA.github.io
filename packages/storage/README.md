@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/storage
+npm i @xuelin/storage
 or
-yarn add @wxl/storage
+yarn add @xuelin/storage
 ```
 
 ### 功能

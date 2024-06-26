@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/general-form
+npm i @xuelin/general-form
 or
-yarn add @wxl/general-form
+yarn add @xuelin/general-form
 ```
 
 ## API
@@ -157,7 +157,7 @@ export type DynamicParameter = {
 创建 Form 实例，用于管理所有数据状态。
 
 ```js
-import { useForm } from '@wxl/general-form';
+import { useForm } from '@xuelin/general-form';
 
 export default () => {
   const form = useForm();
@@ -172,7 +172,7 @@ export default () => {
 
 ```js
 import React from 'react';
-import { useFormInstance, useForm } from '@wxl/general-form';
+import { useFormInstance, useForm } from '@xuelin/general-form';
 
 const Sub = () => {
   const form = useFormInstance();
@@ -196,7 +196,7 @@ export default () => {
 用于直接获取 form 中字段对应的值。通过该 Hooks 可以触发当前组件的更新
 
 ```js
-import { useWatch, useForm, FormItem, Form } from '@wxl/general-form';
+import { useWatch, useForm, FormItem, Form } from '@xuelin/general-form';
 
 const Demo = () => {
   const form = useForm();

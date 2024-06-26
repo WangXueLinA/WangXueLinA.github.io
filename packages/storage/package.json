@@ -1,5 +1,5 @@
 {
-  "name": "@wxl/storage",
+  "name": "@xuelin/storage",
   "version": "0.3.0",
   "description": "封装 localStorage, sessionStorage",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/storage",

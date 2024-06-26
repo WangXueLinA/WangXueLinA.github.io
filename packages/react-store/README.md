@@ -1,4 +1,4 @@
-# 基于useContext封装的全局store
+# 基于 useContext 封装的全局 store
 
 维护人： xuelin
 
@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/react-store
+npm i @xuelin/react-store
 or
-yarn add @wxl/react-store
+yarn add @xuelin/react-store
 ```
 
 ## API

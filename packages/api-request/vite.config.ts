@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/api-request': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/api-request': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

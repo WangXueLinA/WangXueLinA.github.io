@@ -7,7 +7,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/react-dev-inspector': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/react-dev-inspector': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     server: {

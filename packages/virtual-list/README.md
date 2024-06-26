@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/virtual-list
+npm i @xuelin/virtual-list
 or
-yarn add @wxl/virtual-list
+yarn add @xuelin/virtual-list
 ```
 
 ## API

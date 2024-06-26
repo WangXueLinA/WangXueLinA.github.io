@@ -7,9 +7,9 @@
 ## 安装
 
 ```sh
-npm i @wxl/hight-light-title
+npm i @xuelin/hight-light-title
 or
-yarn add @wxl/hight-light-title
+yarn add @xuelin/hight-light-title
 ```
 
 ## API

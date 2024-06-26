@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@wxl/hight-light-title': path.resolve(__dirname, 'src/index.tsx'),
+        '@xuelin/hight-light-title': path.resolve(__dirname, 'src/index.tsx'),
       },
     },
     css: {

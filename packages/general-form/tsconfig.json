@@ -19,7 +19,7 @@
     "experimentalDecorators": true,
     "jsx": "react-jsx",
     "paths": {
-      "@wxl/general-form": ["./src"]
+      "@xuelin/general-form": ["./src"]
     }
   },
   "include": ["./src"]
