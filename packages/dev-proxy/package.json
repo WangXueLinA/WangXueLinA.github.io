@@ -1,6 +1,6 @@
 {
   "name": "@xuelin/dev-proxy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "本地开发环境 浏览器中代理映射配置",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/dev-proxy",
   "author": "xuelin",
