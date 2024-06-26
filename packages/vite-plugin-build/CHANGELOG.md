@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/WangXueLinA/dumi_document/compare/@xuelin/vite-plugin-build@0.2.0...@xuelin/vite-plugin-build@0.2.1) (2024-06-26)
+
+### Bug Fixes
+
+- vite-plugin-build 中 vite.config 文件 ([0f65fc9](https://github.com/WangXueLinA/dumi_document/commit/0f65fc96dc8d8596c54afd657528c5b21f3502aa))
+
 # 0.2.0 (2024-06-26)
 
 ### Bug Fixes
