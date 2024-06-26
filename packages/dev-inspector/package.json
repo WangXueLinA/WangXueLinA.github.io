@@ -1,6 +1,6 @@
 {
   "name": "@xuelin/dev-inspector",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "开发环境 vscode 组件定位",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/dev-inspector",
   "author": "xuelin",
