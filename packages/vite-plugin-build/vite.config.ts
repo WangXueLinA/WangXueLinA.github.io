@@ -1,26 +1,21 @@
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import build from './src';
 
-import path from 'path';
-import { defineConfig, UserConfig } from 'vite';
-
-export default defineConfig(() => {
-  const config: UserConfig = {
-    plugins: [react()],
-    resolve: {
-      alias: {
-        '@wxl/vite-plugin-build': path.resolve(__dirname, 'src/index.tsx'),
-      },
-    },
-    css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-          modifyVars: {
-            'dt-prefix': 'dt',
-          },
+export default defineConfig({
+  plugins: [
+    react(),
+    build({
+      esm: {
+        targets: {
+          node: 14,
         },
       },
-    },
-  };
-  return config;
+      cjs: {
+        targets: {
+          node: 14,
+        },
+      },
+    }),
+  ],
 });
