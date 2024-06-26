@@ -14,7 +14,7 @@ const choices = glob.sync(resolve('./packages/*/package.json')).map((p) => ({
 const publish = async ({ name }) => {
   await cp.spawnSync(npm, ['publish'], {
     stdio: 'inherit',
-    cwd: resolve(`./packages/${name.replace('@xuelinw/', '')}`),
+    cwd: resolve(`./packages/${name.replace('@xuelin/', '')}`),
   });
 };
 inquirer

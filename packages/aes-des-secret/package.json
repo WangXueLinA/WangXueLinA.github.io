@@ -1,5 +1,5 @@
 {
-  "name": "@wxl/aes-des-secret",
+  "name": "@xuelin/aes-des-secret",
   "version": "0.4.0",
   "description": "aes/des加密解密",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/aes-des-secret",
