@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.5.0 (2024-06-26)
+
+### Features
+
+- 上传 git ([cd02c93](https://github.com/WangXueLinA/dumi_document/commit/cd02c93a2578edcb4a3d36b5c39e375f84d7cbe5))
+- 增加发布地址 ([f49ad8b](https://github.com/WangXueLinA/dumi_document/commit/f49ad8b897decb73c7f18f18038c8257f0fc1095))
+- 增加文档 ([4c811f4](https://github.com/WangXueLinA/dumi_document/commit/4c811f4c339debc0bfbcf9e6d6795a9eafd2a59f))
+- dev.js ([301b748](https://github.com/WangXueLinA/dumi_document/commit/301b7480ab2ad94ac57d752001b1061cfa53b857))
+- package.json ([0128bba](https://github.com/WangXueLinA/dumi_document/commit/0128bba8bec9751c6282549eb595f95b1ac192f8))
+- package.json ([3fe47a6](https://github.com/WangXueLinA/dumi_document/commit/3fe47a64f9815d6b3bea1aaaeff0932dcd19e4ff))
+
 # [0.4.0](https://github.com/WangXueLinA/dumi_document/compare/@wxl/aes-des-secret@0.3.0...@wxl/aes-des-secret@0.4.0) (2024-06-26)
 
 ### Features
