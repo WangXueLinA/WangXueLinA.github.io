@@ -1,6 +1,6 @@
 {
   "name": "@xuleinw/api-request",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "api 请求封装",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/api-request",
   "license": "MIT",
