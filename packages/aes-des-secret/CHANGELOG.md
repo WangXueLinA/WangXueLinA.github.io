@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/WangXueLinA/dumi_document/compare/@xuelin/aes-des-secret@0.5.0...@xuelin/aes-des-secret@0.6.0) (2024-06-26)
+
+### Features
+
+- dev.js ([aaf87d3](https://github.com/WangXueLinA/dumi_document/commit/aaf87d355f17108af931967141b2e23d54ffab29))
+
 # 0.5.0 (2024-06-26)
 
 ### Features
