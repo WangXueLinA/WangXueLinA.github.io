@@ -1,5 +1,5 @@
 {
-  "name": "@wxl/<%= name %>",
+  "name": "@xuelin/<%= name %>",
   "version": "0.0.1",
   "description": "<%= description %>",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/<%= name %>",

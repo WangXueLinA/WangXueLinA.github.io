@@ -1,5 +1,5 @@
 {
-  "name": "@wxl/vite-plugin-build",
+  "name": "@xuelin/vite-plugin-build",
   "version": "0.1.0",
   "description": "vite打包插件",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/vite-plugin-build",
@@ -32,5 +32,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "gitHead": "c18f0365c6131ac47ba15326bc293e2bb55a83bc"
 }
