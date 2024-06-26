@@ -175,6 +175,24 @@ nrm ls
 npm adduser
 ```
 
-这里会让你填写用户名等等，如果之前设置过即可跳过此步。
+这里会让你填写用户名等等，如果之前设置过即可跳过此步。这里的密码是隐藏的，你输入时候他就显示空白，你输入密码正确就行，然后回车
 
 ![](/images/component/image6.jpg)
+
+## 添加 npm 中组织
+
+因为我们创建的组件是私有的，是带前缀`@`符的，所以需要先在 npm 中添加组织，否则会报错，或者添加不进去。这个`@`私包使您可以创建与其他用户或组织创建的包同名的包，而不会发生冲突。因为我们组件为`@xuelin`，所以我们需要在 npm 官网的组织中添加`xuelin`。
+
+![](/images/component/image7.jpg)
+
+![](/images/component/image8.jpg)
+
+## 发布 npm 包
+
+执行你脚本的发布命令
+
+![](/images/component/image9.jpg)
+
+然后就可以在 npm 网中可以看到你的包发布成功了
+
+![](/images/component/image10.jpg)

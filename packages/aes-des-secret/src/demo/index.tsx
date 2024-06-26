@@ -12,7 +12,7 @@ const Demo: React.FC = () => {
       <p>aes解密:{decrypt(encrypt(value))}</p>
       <Divider />
 
-      <p>des加密: {encryptByDes(value)}</p>
+      <p>des加密:{encryptByDes(value)}</p>
       <p>des解密:{decryptByDes(encryptByDes(value))}</p>
     </>
   );
