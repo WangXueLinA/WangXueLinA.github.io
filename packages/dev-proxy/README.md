@@ -18,8 +18,8 @@ yarn add @xuelin/dev-proxy
 
 ```js
 //webpack devserve
-const before = require('@dtd/dsc-dev-proxy/lib/before');
-const middleware = require('@dtd/dsc-dev-proxy/lib/middlewares');
+const before = require('@xuelin/dev-proxy/lib/before');
+const middleware = require('@xuelin/dev-proxy/lib/middlewares');
 
 // umi
 {
@@ -74,7 +74,7 @@ export default {
 import proxyConfig from '../proxyConfig';
 
 if (process.env.NODE_ENV === 'development') {
-    require('@dtd/dsc-dev-proxy').default(proxyConfig);
+    require('@xuelin/dev-proxy').default(proxyConfig);
 }
 ```
 

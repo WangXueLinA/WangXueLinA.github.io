@@ -29,7 +29,7 @@ interface Attribute<T = any, R = any> {
 ```
 
 ```typescript
-import { Attribute, Get } from '@dtd/dsc-request';
+import { Attribute, Get } from '@xuelin/api-request';
 
 class Api {
   @Get({ url: 'xxxx' })

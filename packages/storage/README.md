@@ -25,7 +25,7 @@ yarn add @xuelin/storage
 
 ```JS
 // utils.js
-import storage from '@dtd/dsc-storage'
+import storage from '@xuelin/storage'
 export const local = new storage({
     name: 'local-',
     type: 'localStorage'
