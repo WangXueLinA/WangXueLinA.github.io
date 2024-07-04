@@ -6,91 +6,93 @@ group: JS
 
 # ES6
 
-## var
+## var、let、const
+
+### var
 
 在 ES5 中，顶层对象的属性和全局变量是等价的，用 var 声明的变量既是全局变量，也是顶层变量
 
 注意：顶层对象，在浏览器环境指的是 window 对象，在 Node 指的是 global 对象
 
-```
+```js
 var a = 10;
-console.log(window.a) // 10
+console.log(window.a); // 10
 ```
 
 使用 var 声明的变量存在变量提升的情况
 
-```
-console.log(a) // undefined
-var a = 20
+```js
+console.log(a); // undefined
+var a = 20;
 ```
 
 在编译阶段，编译器会将其变成以下执行
 
-```
-var a
-console.log(a)
-a = 20
+```js
+var a;
+console.log(a);
+a = 20;
 ```
 
 使用 var，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明
 
-```
-var a = 20
-var a = 30
-console.log(a) // 30
+```js
+var a = 20;
+var a = 30;
+console.log(a); // 30
 ```
 
 在函数中使用使用 var 声明变量时候，该变量是局部的
 
-```
-var a = 20
-function change(){
-    var a = 30
+```js
+var a = 20;
+function change() {
+  var a = 30;
 }
-change()
-console.log(a) // 20
+change();
+console.log(a); // 20
 ```
 
 而如果在函数内不使用 var，该变量是全局的
 
-```
-var a = 20
-function change(){
-   a = 30
+```js
+var a = 20;
+function change() {
+  a = 30;
 }
-change()
-console.log(a) // 30
+change();
+console.log(a); // 30
 ```
 
-## let
+### let
 
 let 是 ES6 新增的命令，用来声明变量
 
 用法类似于 var，但是所声明的变量，只在 let 命令所在的代码块内有效
 
-```
+```js
 {
-    let a = 20
+  let a = 20;
 }
-console.log(a) // ReferenceError: a is not defined.
+console.log(a); // ReferenceError: a is not defined.
 ```
 
 不存在变量提升
 
-```
-console.log(a) // 报错ReferenceError
-let a = 2
+```js
+console.log(a); // 报错ReferenceError
+let a = 2;
 ```
 
 这表示在声明它之前，变量 a 是不存在的，这时如果用到它，就会抛出一个错误
 
 只要块级作用域内存在 let 命令，这个区域就不再受外部影响
 
-```
-var a = 123
+```js
+var a = 123;
 if (true) {
-    a = 'abc' // ReferenceError
-    let a;
+  a = 'abc'; // ReferenceError
+  let a;
 }
 ```
 
@@ -98,55 +100,55 @@ if (true) {
 
 最后，let 不允许在相同作用域中重复声明
 
-```
-let a = 20
-let a = 30
+```js
+let a = 20;
+let a = 30;
 // Uncaught SyntaxError: Identifier 'a' has already been declared
 ```
 
 注意的是相同作用域，下面这种情况是不会报错的
 
-```
-let a = 20
+```js
+let a = 20;
 {
-    let a = 30
+  let a = 30;
 }
 ```
 
 因此，我们不能在函数内部重新声明参数
 
-```
+```js
 function func(arg) {
   let arg;
 }
-func()
+func();
 // Uncaught SyntaxError: Identifier 'arg' has already been declared
 ```
 
-## const
+### const
 
 const 声明一个只读的常量，一旦声明，常量的值就不能改变
 
-```
-const a = 1
-a = 3
+```js
+const a = 1;
+a = 3;
 // TypeError: Assignment to constant variable.
 ```
 
 这意味着，const 一旦声明变量，就必须立即初始化，不能留到以后赋值
 
-```
+```js
 const a;
 // SyntaxError: Missing initializer in const declaration
 ```
 
 如果之前用 var 或 let 声明过变量，再用 const 声明同样会报错
 
-```
-var a = 20
-let b = 20
-const a = 30
-const b = 30
+```js
+var a = 20;
+let b = 20;
+const a = 30;
+const b = 30;
 // 都会报错
 ```
 
@@ -156,12 +158,12 @@ const 实际上保证的并不是变量的值不得改动，而是变量指向�
 
 对于复杂类型的数据，变量指向的内存地址，保存的只是一个指向实际数据的指针，const 只能保证这个指针是固定的，并不能确保改变量的结构不变
 
-```
+```js
 const foo = {};
 
 // 为 foo 添加一个属性，可以成功
 foo.prop = 123;
-foo.prop // 123
+foo.prop; // 123
 
 // 将 foo 指向另一个对象，就会报错
 foo = {}; // TypeError: "foo" is read-only
@@ -169,139 +171,122 @@ foo = {}; // TypeError: "foo" is read-only
 
 其它情况，const 与 let 一致
 
-## 区别
-
 var、let、const 三者区别可以围绕下面五点展开：
 
-- 变量提升
-- 暂时性死区
-- 块级作用域
-- 重复声明
-- 修改声明的变量
-- 使用
-
-### 变量提升
+#### 变量提升
 
 var 声明的变量存在变量提升，即变量可以在声明之前调用，值为 undefined
 
 let 和 const 不存在变量提升，即它们所声明的变量一定要在声明后使用，否则报错
 
-```
+```js
 // var
-console.log(a)  // undefined
-var a = 10
+console.log(a); // undefined
+var a = 10;
 
 // let
-console.log(b)  // Cannot access 'b' before initialization
-let b = 10
+console.log(b); // Cannot access 'b' before initialization
+let b = 10;
 
 // const
-console.log(c)  // Cannot access 'c' before initialization
-const c = 10
+console.log(c); // Cannot access 'c' before initialization
+const c = 10;
 ```
 
-### 暂时性死区
+#### 暂时性死区
 
 var 不存在暂时性死区
 
 let 和 const 存在暂时性死区，只有等到声明变量的那一行代码出现，才可以获取和使用该变量
 
-```
+```js
 // var
-console.log(a)  // undefined
-var a = 10
+console.log(a); // undefined
+var a = 10;
 
 // let
-console.log(b)  // Cannot access 'b' before initialization
-let b = 10
+console.log(b); // Cannot access 'b' before initialization
+let b = 10;
 
 // const
-console.log(c)  // Cannot access 'c' before initialization
-const c = 10
+console.log(c); // Cannot access 'c' before initialization
+const c = 10;
 ```
 
-### 块级作用域
+#### 块级作用域
 
 var 不存在块级作用域
 
 let 和 const 存在块级作用域
 
-```
+```js
 // var
 {
-    var a = 20
+  var a = 20;
 }
-console.log(a)  // 20
+console.log(a); // 20
 
 // let
 {
-    let b = 20
+  let b = 20;
 }
-console.log(b)  // Uncaught ReferenceError: b is not defined
+console.log(b); // Uncaught ReferenceError: b is not defined
 
 // const
 {
-    const c = 20
+  const c = 20;
 }
-console.log(c)  // Uncaught ReferenceError: c is not defined
+console.log(c); // Uncaught ReferenceError: c is not defined
 ```
 
-### 重复声明
+#### 重复声明
 
 var 允许重复声明变量
 
 let 和 const 在同一作用域不允许重复声明变量
 
-```
+```js
 // var
-var a = 10
-var a = 20 // 20
+var a = 10;
+var a = 20; // 20
 
 // let
-let b = 10
-let b = 20 // Identifier 'b' has already been declared
+let b = 10;
+let b = 20; // Identifier 'b' has already been declared
 
 // const
-const c = 10
-const c = 20 // Identifier 'c' has already been declared
+const c = 10;
+const c = 20; // Identifier 'c' has already been declared
 ```
 
-### 修改声明的变量
+#### 修改声明的变量
 
 var 和 let 可以
 
 const 声明一个只读的常量。一旦声明，常量的值就不能改变
 
-```
+```js
 // var
-var a = 10
-a = 20
-console.log(a)  // 20
+var a = 10;
+a = 20;
+console.log(a); // 20
 
 //let
-let b = 10
-b = 20
-console.log(b)  // 20
+let b = 10;
+b = 20;
+console.log(b); // 20
 
 // const
-const c = 10
-c = 20
-console.log(c) // Uncaught TypeError: Assignment to constant variable
+const c = 10;
+c = 20;
+console.log(c); // Uncaught TypeError: Assignment to constant variable
 ```
 
-### 使用
-
-能用 const 的情况尽量使用 const，其他情况下大多数使用 let，避免使用 var
-
-#
-
-# 数组新增的扩展
-
-## 扩展运算符的应用
+## 扩展运算符
 
 ES6 通过扩展元素符...，好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列
 
-```
+```js
 console.log(...[1, 2, 3])
 // 1 2 3
 
@@ -314,7 +299,7 @@ console.log(1, ...[2, 3, 4], 5)
 
 主要用于函数调用的时候，将一个数组变为参数序列
 
-```
+```js
 function push(array, ...items) {
   array.push(...items);
 }
@@ -324,18 +309,18 @@ function add(x, y) {
 }
 
 const numbers = [4, 38];
-add(...numbers) // 42
+add(...numbers); // 42
 ```
 
 可以将某些数据结构转为数组
 
-```
-[...document.querySelectorAll('div')]
+```js
+[...document.querySelectorAll('div')];
 ```
 
 能够更简单实现数组复制
 
-```
+```js
 const a1 = [1, 2];
 const [...a2] = a1;
 // [1,2]
@@ -343,11 +328,11 @@ const [...a2] = a1;
 
 数组的合并也更为简洁了
 
-```
+```js
 const arr1 = ['a', 'b'];
 const arr2 = ['c'];
 const arr3 = ['d', 'e'];
-[...arr1, ...arr2, ...arr3]
+[...arr1, ...arr2, ...arr3];
 // [ 'a', 'b', 'c', 'd', 'e' ]
 ```
 
@@ -355,33 +340,33 @@ const arr3 = ['d', 'e'];
 
 下面看个例子就清楚多了
 
-```
-const arr1 = ['a', 'b',[1,2]];
+```js
+const arr1 = ['a', 'b', [1, 2]];
 const arr2 = ['c'];
-const arr3  = [...arr1,...arr2]
-arr[1][0] = 9999 // 修改arr1里面数组成员值
-console.log(arr[3]) // 影响到arr3,['a','b',[9999,2],'c']
+const arr3 = [...arr1, ...arr2];
+arr[1][0] = 9999; // 修改arr1里面数组成员值
+console.log(arr[3]); // 影响到arr3,['a','b',[9999,2],'c']
 ```
 
 扩展运算符可以与解构赋值结合起来，用于生成数组
 
-```
+```js
 const [first, ...rest] = [1, 2, 3, 4, 5];
-first // 1
-rest  // [2, 3, 4, 5]
+first; // 1
+rest; // [2, 3, 4, 5]
 
 const [first, ...rest] = [];
-first // undefined
-rest  // []
+first; // undefined
+rest; // []
 
-const [first, ...rest] = ["foo"];
-first  // "foo"
-rest   // []
+const [first, ...rest] = ['foo'];
+first; // "foo"
+rest; // []
 ```
 
 如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错
 
-```
+```js
 const [...butLast, last] = [1, 2, 3, 4, 5];
 // 报错
 
@@ -391,14 +376,14 @@ const [first, ...middle, last] = [1, 2, 3, 4, 5];
 
 可以将字符串转为真正的数组
 
-```
-[...'hello']
+```js
+[...'hello'];
 // [ "h", "e", "l", "l", "o" ]
 ```
 
 定义了遍历器（Iterator）接口的对象，都可以用扩展运算符转为真正的数组
 
-```
+```js
 let nodeList = document.querySelectorAll('div');
 let array = [...nodeList];
 
@@ -413,8 +398,8 @@ let arr = [...map.keys()]; // [1, 2, 3]
 
 如果对没有 Iterator 接口的对象，使用扩展运算符，将会报错
 
-```
-const obj = {a: 1, b: 2};
+```js
+const obj = { a: 1, b: 2 };
 let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 ```
 
@@ -429,20 +414,20 @@ let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 
 将两类对象转为真正的数组：类似数组的对象和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
 
-```
+```js
 let arrayLike = {
-    '0': 'a',
-    '1': 'b',
-    '2': 'c',
-    length: 3
+  0: 'a',
+  1: 'b',
+  2: 'c',
+  length: 3,
 };
 let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
 ```
 
 还可以接受第二个参数，用来对每个元素进行处理，将处理后的值放入返回的数组
 
-```
-Array.from([1, 2, 3], (x) => x * x)
+```js
+Array.from([1, 2, 3], (x) => x * x);
 // [1, 4, 9]
 ```
 
@@ -450,8 +435,8 @@ Array.from([1, 2, 3], (x) => x * x)
 
 用于将一组值，转换为数组
 
-```
-Array.of(3, 11, 8) // [3,11,8]
+```js
+Array.of(3, 11, 8); // [3,11,8]
 ```
 
 没有参数的时候，返回一个空数组
@@ -460,10 +445,10 @@ Array.of(3, 11, 8) // [3,11,8]
 
 参数个数不少于 2 个时，Array()才会返回由参数组成的新数组
 
-```
-Array() // []
-Array(3) // [, , ,]
-Array(3, 11, 8) // [3, 11, 8]
+```js
+Array(); // []
+Array(3); // [, , ,]
+Array(3, 11, 8); // [3, 11, 8]
 ```
 
 ### copyWithin()
@@ -476,170 +461,55 @@ Array(3, 11, 8) // [3, 11, 8]
 - start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示从末尾开始计算。
 - end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示从末尾开始计算。
 
-```
+```js
 // 将从 3 号位直到数组结束的成员（4 和 5），复制到从 0 号位开始的位置，结果覆盖了原来的 1 和 2
-[1, 2, 3, 4, 5].copyWithin(0, 3)
+[1, 2, 3, 4, 5].copyWithin(0, 3);
 
 // [4, 5, 3, 4, 5]
-```
-
-### find()、findIndex()
-
-find()用于找出第一个符合条件的数组成员
-
-参数是一个回调函数，接受三个参数依次为当前的值、当前的位置和原数组
-
-```
-[1, 5, 10, 15].find(function(value, index, arr) {
-  return value > 9;
-}) // 10
-```
-
-findIndex 返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1
-
-```
-[1, 5, 10, 15].findIndex(function(value, index, arr) {
-  return value > 9;
-}) // 2
-```
-
-这两个方法都可以接受第二个参数，用来绑定回调函数的 this 对象。
-
-```
-function f(v){
-  return v > this.age;
-}
-let person = {name: 'John', age: 20};
-[10, 12, 26, 15].find(f, person);    // 26
 ```
 
 ### fill()
 
 使用给定值，填充一个数组
 
-```
-['a', 'b', 'c'].fill(7)
+```js
+['a', 'b', 'c'].fill(7);
 // [7, 7, 7]
 
-new Array(3).fill(7)
+new Array(3).fill(7);
 // [7, 7, 7]
 ```
 
 还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置
 
-```
-['a', 'b', 'c'].fill(7, 1, 2)
+```js
+['a', 'b', 'c'].fill(7, 1, 2);
 // ['a', 7, 'c']
 ```
 
 注意，如果填充的类型为对象，则是浅拷贝
 
-### entries()，keys()，values()
-
-keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历
-
-```
-for (let index of ['a', 'b'].keys()) {
-  console.log(index);
-}
-// 0
-// 1
-
-for (let elem of ['a', 'b'].values()) {
-  console.log(elem);
-}
-// 'a'
-// 'b'
-
-for (let [index, elem] of ['a', 'b'].entries()) {
-  console.log(index, elem);
-}
-// 0 "a"
-```
-
-### includes()
-
-用于判断数组是否包含给定的值
-
-```
-[1, 2, 3].includes(2)     // true
-[1, 2, 3].includes(4)     // false
-[1, 2, NaN].includes(NaN) // true
-```
-
-方法的第二个参数表示搜索的起始位置，默认为 0
-
-参数为负数则表示倒数的位置
-
-```
-[1, 2, 3].includes(3, 3);  // false
-[1, 2, 3].includes(3, -1); // true
-```
-
-### flat()，flatMap()
-
-将数组扁平化处理，返回一个新数组，对原数据没有影响
-
-```
-[1, 2, [3, 4]].flat()
-// [1, 2, 3, 4]
-```
-
-flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将 flat()方法的参数写成一个整数，表示想要拉平的层数，默认为 1
-
-```
-[1, 2, [3, [4, 5]]].flat()
-// [1, 2, 3, [4, 5]]
-
-
-[1, 2, [3, [4, 5]]].flat(2)
-// [1, 2, 3, 4, 5]
-```
-
-flatMap()方法对原数组的每个成员执行一个函数相当于执行 Array.prototype.map()，然后对返回值组成的数组执行 flat()方法。该方法返回一个新数组，不改变原数组
-
-```
-// 相当于 [[2, 4], [3, 6], [4, 8]].flat()
-[2, 3, 4].flatMap((x) => [x, x * 2])
-// [2, 4, 3, 6, 4, 8]
-```
-
-flatMap()方法还可以有第二个参数，用来绑定遍历函数里面的 this
-
-### 数组的空位
-
-数组的空位指，数组的某一个位置没有任何值
-
-ES6 则是明确将空位转为 undefined，包括 Array.from、扩展运算符、copyWithin()、fill()、entries()、keys()、values()、find()和 findIndex()
-
-建议大家在日常书写中，避免出现空位
-
 ### 排序稳定性
 
 将 sort()默认设置为稳定的排序算法
 
-```
-const arr = [
-  'peach',
-  'straw',
-  'apple',
-  'spork'
-];
+```js
+const arr = ['peach', 'straw', 'apple', 'spork'];
 
 const stableSorting = (s1, s2) => {
   if (s1[0] < s2[0]) return -1;
   return 1;
 };
 
-arr.sort(stableSorting)
+arr.sort(stableSorting);
 // ["apple", "peach", "straw", "spork"]
 ```
 
 排序结果中，straw 在 spork 的前面，跟原始顺序一致
 
-# Decorator （装饰器）
+## Decorator （装饰器）
 
-## 介绍
+### 介绍
 
 Decorator，即装饰器，从名字上很容易让我们联想到装饰者模式
 
@@ -1155,9 +1025,7 @@ let getTempItem = id => ({ id: id, name: "Temp" });
 - 不可以使用 arguments 对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替
 - 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数
 
-## [ ](https://es6.ruanyifeng.com/#docs/function)
-
-# Generator
+## Generator
 
 ## 介绍
 
@@ -1332,25 +1200,26 @@ readFile 函数的第三个参数，就是回调函数，等到操作系统返�
 
 Promise 就是为了解决回调地狱而产生的，将回调函数的嵌套，改成链式调用
 
-```
+```js
 const fs = require('fs');
 
 const readFile = function (fileName) {
   return new Promise(function (resolve, reject) {
-    fs.readFile(fileName, function(error, data) {
+    fs.readFile(fileName, function (error, data) {
       if (error) return reject(error);
       resolve(data);
     });
   });
 };
 
-
-readFile('/etc/fstab').then(data =>{
-    console.log(data)
-    return readFile('/etc/shells')
-}).then(data => {
-    console.log(data)
-})
+readFile('/etc/fstab')
+  .then((data) => {
+    console.log(data);
+    return readFile('/etc/shells');
+  })
+  .then((data) => {
+    console.log(data);
+  });
 ```
 
 这种链式操作形式，使异步任务的两段执行更清楚了，但是也存在了很明显的问题，代码变得冗杂了，语义化并不强
@@ -1359,29 +1228,42 @@ readFile('/etc/fstab').then(data =>{
 
 yield 表达式可以暂停函数执行，next 方法用于恢复函数执行，这使得 Generator 函数非常适合将异步任务同步化
 
-```
-const gen = function* () {
-  const f1 = yield readFile('/etc/fstab');
-  const f2 = yield readFile('/etc/shells');
-  console.log(f1.toString());
-  console.log(f2.toString());
-};
+```js
+const co = require('co'); // 引入co 库，会自动执行next 方法
+co(function* () {
+  try {
+    const f1 = yield readFile('/etc/fstab');
+    console.log(f1.toString());
+
+    const f2 = yield readFile('/etc/shells');
+    console.log(f2.toString());
+  } catch (e) {
+    console.log(e);
+  }
+});
 ```
 
 ### async/await
 
 将上面 Generator 函数改成 async/await 形式，更为简洁，语义化更强了
 
-```
-const asyncReadFile = async function () {
-  const f1 = await readFile('/etc/fstab');
-  const f2 = await readFile('/etc/shells');
-  console.log(f1.toString());
-  console.log(f2.toString());
+```js
+async function () {
+
+  try{
+    const f1 = await readFile('/etc/fstab');
+    console.log(f1.toString());
+
+    const f2 = await readFile('/etc/shells');
+    console.log(f2.toString());
+  } catch (e) {
+    message.error(e);
+  }
+
 };
 ```
 
-### 区别：
+### 区别
 
 通过上述代码进行分析，将 promise、Generator、async/await 进行比较：
 
@@ -1392,11 +1274,11 @@ const asyncReadFile = async function () {
 - async 实质是 Generator 的语法糖，相当于会自动执行 Generator 函数
 - async 使用上更为简洁，将异步代码以同步的形式进行编写，是处理异步编程的最终方案
 
-## 使用场景
+### 使用场景
 
 Generator 是异步解决的一种方案，最大特点则是将异步操作同步化表达出来
 
-```
+```js
 function* loadUI() {
   showLoadingScreen();
   yield loadUIDataAsynchronously();
@@ -1404,33 +1286,33 @@ function* loadUI() {
 }
 var loader = loadUI();
 // 加载UI
-loader.next()
+loader.next();
 
 // 卸载UI
-loader.next()
+loader.next();
 ```
 
 包括 redux-saga 中间件也充分利用了 Generator 特性
 
-```
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import Api from '...'
+```js
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import Api from '...';
 
 function* fetchUser(action) {
-   try {
-      const user = yield call(Api.fetchUser, action.payload.userId);
-      yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-   } catch (e) {
-      yield put({type: "USER_FETCH_FAILED", message: e.message});
-   }
+  try {
+    const user = yield call(Api.fetchUser, action.payload.userId);
+    yield put({ type: 'USER_FETCH_SUCCEEDED', user: user });
+  } catch (e) {
+    yield put({ type: 'USER_FETCH_FAILED', message: e.message });
+  }
 }
 
 function* mySaga() {
-  yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+  yield takeEvery('USER_FETCH_REQUESTED', fetchUser);
 }
 
 function* mySaga() {
-  yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
+  yield takeLatest('USER_FETCH_REQUESTED', fetchUser);
 }
 
 export default mySaga;
@@ -1438,10 +1320,10 @@ export default mySaga;
 
 还能利用 Generator 函数，在对象上实现 Iterator 接口
 
-```
+```js
 function* iterEntries(obj) {
   let keys = Object.keys(obj);
-  for (let i=0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     let key = keys[i];
     yield [key, obj[key]];
   }
@@ -1457,9 +1339,7 @@ for (let [key, value] of iterEntries(myObj)) {
 // bar 7
 ```
 
-# Module
-
-## 介绍
+## Module
 
 模块，（Module），是能够单独命名并独立地完成一定功能的程序语句的**集合（即程序代码和数据结构的集合体）** 。
 
@@ -1494,18 +1374,18 @@ Asynchronous ModuleDefinition（AMD），异步模块定义，采用异步方式
 
 代表库为 require.js
 
-```
+```js
 /** main.js 入口文件/主模块 **/
 // 首先用config()指定各模块路径和引用名
 require.config({
-  baseUrl: "js/lib",
+  baseUrl: 'js/lib',
   paths: {
-    "jquery": "jquery.min",  //实际路径为js/lib/jquery.min.js
-    "underscore": "underscore.min",
-  }
+    jquery: 'jquery.min', //实际路径为js/lib/jquery.min.js
+    underscore: 'underscore.min',
+  },
 });
 // 执行基本操作
-require(["jquery","underscore"],function($,_){
+require(['jquery', 'underscore'], function ($, _) {
   // some code here
 });
 ```
@@ -1514,12 +1394,12 @@ require(["jquery","underscore"],function($,_){
 
 CommonJS 是一套 Javascript 模块规范，用于服务端
 
-```
+```js
 // a.js
-module.exports={ foo , bar}
+module.exports = { foo, bar };
 
 // b.js
-const { foo,bar } = require('./a.js')
+const { foo, bar } = require('./a.js');
 ```
 
 其有如下特点：
@@ -1535,7 +1415,7 @@ ES6 在语言标准的层面上，实现了 Module，即模块功能，完全可
 
 CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性
 
-```
+```js
 // CommonJS模块
 let { stat, exists, readfile } = require('fs');
 
@@ -1548,7 +1428,7 @@ let readfile = _fs.readfile;
 
 ES6 设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
 
-```
+```js
 // ES6模块
 import { stat, exists, readFile } from 'fs';
 ```
@@ -1557,7 +1437,7 @@ import { stat, exists, readFile } from 'fs';
 
 由于编译加载，使得静态分析成为可能。包括现在流行的 typeScript 也是依靠静态分析实现功能
 
-## 使用
+### 使用
 
 ES6 模块内部自动采用了严格模式，这里就不展开严格模式的限制，毕竟这是 ES5 之前就已经规定好
 
@@ -1566,17 +1446,17 @@ ES6 模块内部自动采用了严格模式，这里就不展开严格模式的�
 - export：用于规定模块的对外接口
 - import：用于输入其他模块提供的功能
 
-### export
+#### export
 
 一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用 export 关键字输出该变量
 
-```
+```js
 // profile.js
 export var firstName = 'Michael';
 export var lastName = 'Jackson';
 export var year = 1958;
 
-或
+或;
 // 建议使用下面写法，这样能瞬间确定输出了哪些变量
 var firstName = 'Michael';
 var lastName = 'Jackson';
@@ -1587,15 +1467,15 @@ export { firstName, lastName, year };
 
 输出函数或类
 
-```
+```js
 export function multiply(x, y) {
   return x * y;
-};
+}
 ```
 
 通过 as 可以进行输出变量的重命名
 
-```
+```js
 function v1() { ... }
 function v2() { ... }
 
@@ -1606,11 +1486,11 @@ export {
 };
 ```
 
-### import
+#### import
 
 使用 export 命令定义了模块的对外接口以后，其他 JS 文件就可以通过 import 命令加载这个模块
 
-```
+```js
 // main.js
 import { firstName, lastName, year } from './profile.js';
 
@@ -1621,13 +1501,13 @@ function setName(element) {
 
 同样如果想要输入变量起别名，通过 as 关键字
 
-```
+```js
 import { lastName as surname } from './profile.js';
 ```
 
 当加载整个模块的时候，需要用到星号\*
 
-```
+```js
 // circle.js
 export function area(radius) {
   return Math.PI * radius * radius;
@@ -1639,13 +1519,13 @@ export function circumference(radius) {
 
 // main.js
 import * as circle from './circle';
-console.log(circle)   // {area:area,circumference:circumference}
+console.log(circle); // {area:area,circumference:circumference}
 ```
 
 输入的变量都是只读的，不允许修改，但是如果是对象，允许修改属性
 
-```
-import {a} from './xxx.js'
+```js
+import { a } from './xxx.js';
 
 a.foo = 'hello'; // 合法操作
 a = {}; // Syntax Error : 'a' is read-only;
@@ -1655,19 +1535,19 @@ a = {}; // Syntax Error : 'a' is read-only;
 
 import 后面我们常接着 from 关键字，from 指定模块文件的位置，可以是相对路径，也可以是绝对路径
 
-```
+```js
 import { a } from './a';
 ```
 
 如果只有一个模块名，需要有配置文件，告诉引擎模块的位置
 
-```
+```js
 import { myMethod } from 'util';
 ```
 
 在编译阶段，import 会提升到整个模块的头部，首先执行
 
-```
+```js
 foo();
 
 import { foo } from 'my_module';
@@ -1675,7 +1555,7 @@ import { foo } from 'my_module';
 
 多次重复执行同样的导入，只会执行一次
 
-```
+```js
 import 'lodash';
 import 'lodash';
 ```
@@ -1684,39 +1564,38 @@ import 'lodash';
 
 如果不需要知道变量名或函数就完成加载，就要用到 export default 命令，为模块指定默认输出
 
-```
+```js
 // export-default.js
 export default function () {
-    console.log('foo');
+  console.log('foo');
 }
 ```
 
 加载该模块的时候，import 命令可以为该函数指定任意名字
 
-```
+```js
 // import-default.js
 import customName from './export-default';
 customName(); // 'foo'
 ```
 
-### 动态加载
+#### 动态加载
 
 允许您仅在需要时动态加载模块，而不必预先加载所有模块，这存在明显的性能优势
 
 这个新功能允许您将 import()作为函数调用，将其作为参数传递给模块的路径。 它返回一个 promise，它用一个模块对象来实现，让你可以访问该对象的导出
 
-```
-import('/modules/myModule.mjs')
-  .then((module) => {
-    // Do something with the module.
-  });
+```js
+import('/modules/myModule.mjs').then((module) => {
+  // Do something with the module.
+});
 ```
 
-### 复合写法
+#### 复合写法
 
 如果在一个模块之中，先输入后输出同一个模块，import 语句可以与 export 语句写在一起
 
-```
+```js
 export { foo, bar } from 'my_module';
 
 // 可以简单理解为
@@ -1726,11 +1605,11 @@ export { foo, bar };
 
 同理能够搭配 as、\*搭配使用
 
-## 使用场景
+### 使用场景
 
 如今，ES6 模块化已经深入我们日常项目开发中，像 vue、react 项目搭建项目，组件化开发处处可见，其也是依赖模块化实现
 
-```
+```js
 // vue组件
 <template>
   <div class="App">
@@ -2056,87 +1935,27 @@ Object.fromEntries([
 
 ## [ ](https://es6.ruanyifeng.com/#docs/object)
 
-# Promise
-
-## 前言
-
-### 函数对象跟实例对象
-
-```
-/*
-  函数对象与实例对象
-  函数对象：将函数作为对象使用时，简称为函数对象
-  实例对象：new构造函数或者类产生的对象，简称为实例对象又称对象
-*/
-
-function Fn() {  // Fn函数
-
-}
-const fn = new Fn() // Fn是构造函数，fn是实例对象（简称对象）
-console.log(Fn.prototype) // Fn是函数对象
-Fn.call({}) //Fn是函数对象
-$('#test') // Jquery函数
-$.get('/test') // Jquery函数对象
-
-
-简而言之括号左边是函数，点的左边是对象
-```
-
-两种类型的回调函数
-
-什么是回调？---我们定义的，但是我们没有调用，但是最终执行了
-
-同步回调
-
-理解：立即执行，完全执行完才结束，不会放在回调队列中
-
-例子：数组遍历相关的回调函数
-
-```
-const arr = [1,2,3]
-arr.forEach((item) => { // 遍历回调
-  console.log(item)  // 先执行
-})
-
-console.log('forEach()之后')  // 后执行
-```
-
-异步回调
-
-理解：不会立即执行，会放在回调队列中将来执行
-
-例子：定时器回调，axaj 回调，Promise 的成功，失败的回调
-
-```
-// 先执行2,后执行 1
-setTimeout(() => {
-  console.log('1')
-}, 0)
-
-console.log('2')
-```
-
-### 理解 js 中的错误（Error）和错误处理
+## js 中的错误（Error）和错误处理
 
 错误的类型
 
-#### Error
+### Error
 
 所有错误的父类型
 
-#### ReferenceError
+### ReferenceError
 
 引用的变量不错在
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/da31be49aeda43b0ab7efabf149eeaee~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1083&h=302&s=25916&e=png&b=fefafa)
 
-#### TypeError
+### TypeError
 
 数据类型不正确的错误
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/163fb2535af5465f981de8ac8d016d36~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1204&h=495&s=46945&e=png&b=fefbfb)
 
-#### RangeError
+### RangeError
 
 数据值不在其所允许的范围内
 
@@ -2144,51 +1963,48 @@ console.log('2')
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2cd81fdf5fd3423abb9610fc1c81063a~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1325&h=702&s=87800&e=png&b=fff7f7)
 
-#### SyntaxError
+### SyntaxError
 
 语法错误
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/056aa69554104727967f57059f8f6f3d~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1250&h=529&s=56623&e=png&b=fefdfd)
 
-2.错误处理
-
-#### try catch
+### try catch
 
 捕获错误
 
-```
+```js
 // try中放可能出现错误的代码，一旦出现错误立即停止try中的代码，调用catch，并携带错误信息
- try {
-    const a = null
-    a.say()
-
+try {
+  const a = null;
+  a.say();
 } catch (err) {
-    message.error(err.message)
+  message.error(err.message);
 }
 
-console.log('catch捕获错误后不影响之后代码执行')
+console.log('catch捕获错误后不影响之后代码执行');
 ```
 
-#### throw error
+### throw error
 
 抛出错误：
 
-```
-function a () {
-  if (Date.now()%2 === 1) {
-    console.log('当前时间为奇数，可以执行任务')
-  } else { // 如果时间为偶数抛出异常，由调用者来处理，自己决定抛出什么样的异常信息
-     throw new Error('当前时间为偶数无法执行任务')
+```js
+function a() {
+  if (Date.now() % 2 === 1) {
+    console.log('当前时间为奇数，可以执行任务');
+  } else {
+    // 如果时间为偶数抛出异常，由调用者来处理，自己决定抛出什么样的异常信息
+    throw new Error('当前时间为偶数无法执行任务');
   }
-
 }
 
 // 捕获处理异常
- try {
-    a()
+try {
+  a();
 } catch (err) {
-   message.error(err.message)
-   message.error(err.stack)
+  message.error(err.message);
+  message.error(err.stack);
 }
 ```
 
@@ -2198,52 +2014,51 @@ message 属性：错误的相关信息
 
 stack 属性：函数调用栈记录信息
 
-## 介绍
-
-### 初始 Promise
+## Promise
 
 抽象表达：是 js 中进行异步编程的新解决方案（旧的为纯回调函数）
 
 具体表达：
 
 从语法上来说，Promise 是一个内置构造函数
-
 从功能上来说，Promise 的实例对象用来封装一个异步操作并可以获取其成功/失败的值
 
 1.  Promise 不是回调，是一个内置的构造函数，是程序员自己 new 调用的
-1.  new Promise 的时候，要传入一个回调函数，他是同步的回调，会立即在主线程上执行，它被称为 executor 函数
-1.  每个 Promise 实例都有 3 种状态，分别为：初始化（pending）、成功（fulfilled）、失败（rejected）
-1.  每个 Promise 实例在刚被 new 出来的那一刻，状态都是初始化（pending）
-1.  executor 函数会接收到 2 个参数，他们都是函数，分别用形参 resolve、rejecet 接收
+2.  new Promise 的时候，要传入一个回调函数，他是同步的回调，会立即在主线程上执行，它被称为 executor 函数
+3.  每个 Promise 实例都有 3 种状态，分别为：初始化（pending）、成功（fulfilled）、失败（rejected）
+4.  每个 Promise 实例在刚被 new 出来的那一刻，状态都是初始化（pending）
+5.  executor 函数会接收到 2 个参数，他们都是函数，分别用形参 resolve、rejecet 接收
 
-<!---->
-
-1.  1.  调用 resolve，会让 Promise 实例状态变为：成功（fulfilled），同时可以指定成功的 vaule
+6.  1.  调用 resolve，会让 Promise 实例状态变为：成功（fulfilled），同时可以指定成功的 vaule
     1.  调用 reject，会让 Promise 实例状态变为：失败（rejected），同时可以指定失败的 reason
 
-```
+```js
 // 创建一个新的promist对象
-const promise = new Promise((resolve, reject) => { // executor执行器函数
+const promise = new Promise((resolve, reject) => {
+  // executor执行器函数
   //这里执行同步代码
 
   // 执行异步操作任务
   setTimeout(() => {
-    const time = Date.now() // 如果当前时间是偶数，代表成功，否则代表失败
+    const time = Date.now(); // 如果当前时间是偶数，代表成功，否则代表失败
     if (time % 2 === 0) {
-      resolve('成功的数据， time=' + time)
+      resolve('成功的数据， time=' + time);
     } else {
-      reject('失败的数据， time=' + time)
+      reject('失败的数据， time=' + time);
     }
-  }, 1000)
+  }, 1000);
 });
 
-p.then(value => {
-  // 接受成功的vaule数据
-  console.log('成功的回调', value)
-}, reason => {
-  // 接受失败的reason数据
-  console.log('失败的回调', reason)
-})
+p.then(
+  (value) => {
+    // 接受成功的vaule数据
+    console.log('成功的回调', value);
+  },
+  (reason) => {
+    // 接受失败的reason数据
+    console.log('失败的回调', reason);
+  },
+);
 ```
 
 Promise 构造函数接受一个函数作为参数，该函数的两个参数分别是 resolve 和 reject
@@ -2254,39 +2069,28 @@ Promise 构造函数接受一个函数作为参数，该函数的两个参数分
 基本编码流程
 
 1.  创建 Promise 的实例对象（pending 状态），传入 executor 函数
-1.  在 executor 中启动异步任务（定时器、ajax 请求）
-1.  根据异步任务的结果，做不同处理
+2.  在 executor 中启动异步任务（定时器、ajax 请求）
+3.  根据异步任务的结果，做不同处理
+
+4.  1.  如果异步任务成功，我们调用 resolve(value)，让 Promise 实例对象状态变为成功（fulfilled），同时指定成功的 value
+    2.  如果异步任务失败，我们调用 reject(reason)，让 Promise 实例对象状态变为失败（rejected），同时指定失败的 reason
 
 <!---->
 
-1.  1.  如果异步任务成功，我们调用 resolve(value)，让 Promise 实例对象状态变为成功（fulfilled），同时指定成功的 value
-    1.  如果异步任务失败，我们调用 reject(reason)，让 Promise 实例对象状态变为失败（rejected），同时指定失败的 reason
-
-<!---->
-
-4.  通过 then 方法为 Promise 的实例指定成功、失败的回调函数，来获取成功的 value、失败的 reason。注意：then 方法所指定的：成功的回调，失败的回调，都是异步的回调
+5.  通过 then 方法为 Promise 的实例指定成功、失败的回调函数，来获取成功的 value、失败的 reason。注意：then 方法所指定的：成功的回调，失败的回调，都是异步的回调
 
 关于状态的注意点
 
-1.  三个状态
+**三个状态**
 
-<!---->
+1.  pending：未确定 -----初始状态
+2.  fulfilled：成功的-------调用 resolve()后的状态
+3.  rejected：失败的------调用 rejected()后的状态
 
-1.  1.  pending：未确定 -----初始状态
-    1.  fulfilled：成功的-------调用 resolve()后的状态
-    1.  rejected：失败的------调用 rejected()后的状态
+**两种状态的改变**
 
-<!---->
-
-2.  两种状态的改变
-
-<!---->
-
-1.  1.  pending ==> fulfilled
-    1.  pending ==> rejected
-
-<!---->
-
+1.  pending ==> fulfilled
+2.  pending ==> rejected
 3.  状态只能改变一次
 4.  一个 promise 可以指定多个 then 的成功/失败的回调函数
 
@@ -2299,13 +2103,13 @@ Promise 构造函数接受一个函数作为参数，该函数的两个参数分
 
 认真阅读下图，我们能够轻松了解 promise 整个流程
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b59e09e431845d995a459b0586133b4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=801&h=297&s=27953&e=png&b=ffffff)
+![](/images/es6/image1.png)
 
-## 回调函数
+### 回调函数弊端
 
 在以往我们如果处理多层异步操作，我们往往会像下面那样编写我们的代码
 
-```
+```js
 // 获取奶茶的方法
 function getTea (fn) {
   // 模拟异步取数据
@@ -2348,13 +2152,21 @@ getTea(function (data) => {
 
 回调地狱缺点，不便于阅读，不便于做异常处理
 
-```
-doSomething(function(result) {
-  doSomethingElse(result, function(newResult) {
-    doThirdThing(newResult, function(finalResult) {
-      console.log('得到最终结果: ' + finalResult);
-    }, failureCallback);
-  }, failureCallback);
+```js
+doSomething(function (result) {
+  doSomethingElse(
+    result,
+    function (newResult) {
+      doThirdThing(
+        newResult,
+        function (finalResult) {
+          console.log('得到最终结果: ' + finalResult);
+        },
+        failureCallback,
+      );
+    },
+    failureCallback,
+  );
 }, failureCallback);
 ```
 
@@ -2362,17 +2174,18 @@ doSomething(function(result) {
 
 现在通过 Promise 的改写上面的代码
 
-```
-doSomething().then(function(result) {
-  return doSomethingElse(result);
-})
-.then(function(newResult) {
-  return doThirdThing(newResult);
-})
-.then(function(finalResult) {
-  console.log('得到最终结果: ' + finalResult);
-})
-.catch(failureCallback);
+```js
+doSomething()
+  .then(function (result) {
+    return doSomethingElse(result);
+  })
+  .then(function (newResult) {
+    return doThirdThing(newResult);
+  })
+  .then(function (finalResult) {
+    console.log('得到最终结果: ' + finalResult);
+  })
+  .catch(failureCallback);
 ```
 
 可以感受到 promise 解决异步操作的优点：
@@ -2383,22 +2196,341 @@ doSomething().then(function(result) {
 
 但是回调地狱的最终解决方案还 async/await,因为 Promise.then 跟 catch 里还是利用回调函数来接受数据
 
-```
+```js
 async function request() {
   try {
-    const result = await doSomething()
-    const newResult = await doSomethingElse(result)
-    const finalResult = await doThirdThing(newResult)
+    const result = await doSomething();
+    const newResult = await doSomethingElse(result);
+    const finalResult = await doThirdThing(newResult);
     console.log('得到最终结果: ' + finalResult);
   } catch (err) {
-    failureCallback(err)
+    failureCallback(err);
   }
 }
 ```
 
-####
+### Promise 关键几个问题
 
-## 实例方法
+#### 如何改变 Promise 实例状态
+
+1.  执行 resolve(value)：如果当请是 pending 就会变为 fulfilled
+1.  执行 rejecte(reason)：如果当前是 pending 就会变为 rejected
+1.  执行器函数(executor)抛出异常：如果当前是 pending 就会变为 rejected
+
+```js
+let p = new Promise((resolve, reject) => {
+  //resolve('Promise状态会被标记为resolved')
+  // reject('Promise状态会被标记为rejected')
+  throw new Error('Promise状态会被标记为rejected');
+  // console.log(a)  Promise状态会被标记为rejected
+});
+
+p.then(
+  (value) => {
+    console.log('value', value);
+  },
+  (reason) => {
+    console.log('reason', reason);
+  },
+);
+
+// 只会输入value为100，因为状态只为改变一次，成功了就不能失败
+let p = new Promise((resolve, reject) => {
+  resolve(100);
+  // 只要指定成功/失败状态，之后再指定成功/失败不会执行
+  resolve(1); // 不会执行
+});
+
+p.then(
+  (value) => {
+    console.log('value', value);
+  },
+  (reason) => {
+    console.log('reason', reason);
+  },
+);
+```
+
+#### 改变实例状态与指定回调函数谁先执行
+
+1.  都有可能，正常情况下是先指定的回调再改变状态，但也可以先改变状态再指定回调
+
+```js
+// 1. 常规: 先指定回调函数, 后改变的状态
+const p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1); // 后改变的状态(同时指定数据), 异步执行回调函数
+  }, 1000);
+});
+
+p.then(
+  // 先指定回调函数, 保存当前指定的回调函数
+  (value) => {
+    console.log('value', value);
+  },
+  (reason) => {
+    console.log('reason', reason);
+  },
+);
+```
+
+2.  如何先改状态在指定回调
+
+    1.  在执行器中直接调用 resolve()/reject()
+
+    ```js
+    const p = new Promise((resolve, reject) => {
+      resolve(1); // 先改变的状态(同时指定数据)
+    });
+
+    p.then(
+      // 后指定回调函数, 异步执行回调函数
+      (value) => {
+        console.log('value2', value);
+      },
+      (reason) => {
+        console.log('reason2', reason);
+      },
+    );
+    ```
+
+    2.  延迟一会在调用 then
+
+    ```js
+    const p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1); // 先改变的状态(同时指定数据), 异步执行回调函数
+      }, 1000);
+    });
+
+    setTimeout(() => {
+      p.then(
+        (value) => {
+          console.log('value3', value);
+        },
+        (reason) => {
+          console.log('reason3', reason);
+        },
+      );
+    }, 3000);
+    ```
+
+3.  Promise 实例什么时候才能得到数据
+
+    1.  如果先指定的回调，那当状态发生改变时，回调函数就会调用，得到数据
+    2.  如果先改变状态，那当指定回调时，回调函数就会调用，得到数据
+
+#### then 的链式调用
+
+Promise 实例的 then()返回的是一个【新 Promise 实例】，它的值跟状态由什么决定?
+
+1.  简单表达: 由 then()指定的回调函数执行的结果决定
+2.  详细表达:
+
+    1.  如果 then 所指定的回调返回的是非 Promise 的任意值，【新 promise 实例】状态为成功（fulfilled）, value 为返回的值
+
+    ```js
+    const p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1);
+      }, 1000);
+    });
+
+    // 输出value1, 1，但是作为一个回调函数,没有return返回值，所以之后then为undefined
+    const x = p.then(
+      (value) => {
+        console.log('value1', value);
+      },
+      (reason) => {
+        console.log('reason1', reason);
+      },
+    );
+
+    x.then(
+      (value) => {
+        console.log('value2', value);
+      }, // 输出value2, undefined
+      (reason) => {
+        console.log('reason2', reason);
+      },
+    );
+    ```
+
+    2.  如果 then 所指定的回调返回的是另一个新 Promise 实例 p, 【新 promise 实例】的状态，值与 p 一致
+
+    ```js
+    const p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1);
+      }, 1000);
+    });
+
+    const x = p.then(
+      (value) => {
+        console.log('value1', value); // 输出value1, 1
+        return Promise.resolve(2);
+        // return Promise.reject(-2)
+      },
+      (reason) => {
+        console.log('reason1', reason);
+      },
+    );
+
+    x.then(
+      (value) => {
+        console.log('value2', value);
+      }, // 输出value2, 2
+      (reason) => {
+        console.log('reason2', reason);
+      },
+      // 上一个then返回rejected状态值为-2,此时就x接收到就是失败状态值为-2
+      // reason => { console.log('reason2', reason) }
+    );
+
+    // reject状态时
+    const p = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(-1);
+      }, 1000);
+    });
+
+    // 作为一个回调函数,没有return返回值，所以之后then为undefined
+    // 因为undefined为非Promise值，所以会走x的成功回调，值为undefined
+    const x = p.then(
+      (value) => {
+        console.log('value1', value);
+      },
+      (reason) => {
+        console.log('reason1', reason);
+      }, // 输出reason1, -1
+    );
+
+    x.then(
+      (value) => {
+        console.log('value2', value);
+      }, // 输出value2, undefined
+      (reason) => {
+        console.log('reason2', reason);
+      },
+    );
+    ```
+
+    3.  如果 then 所指定的回调抛出异常, 【新 promise 实例】变为 rejected, reason 为抛出的异常
+
+    ```js
+    new Promise((resolve, reject) => {
+      resolve(1);
+    })
+      .then(
+        (value) => {
+          console.log('value1', value); // 输出value, 1
+          throw 5;
+        },
+        (reason) => {
+          console.log('reason1', reason);
+        },
+      )
+      .then(
+        (value) => {
+          console.log('value2', value);
+        },
+        (reason) => {
+          console.log('reason2', reason);
+        }, // 输出reason2, 5
+      );
+    ```
+
+#### promise 如何串连多个操作任务
+
+1.  promise 的 then()返回一个新的 promise, 可以开成 then()的链式调用
+2.  通过 then 的链式调用串连多个同步/异步任务
+
+```js
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    console.log('执行任务1(异步)');
+    resolve(1);
+  }, 1000);
+})
+  .then((value) => {
+    console.log('任务1的结果: ', value); // value=1
+    console.log('执行任务2(同步)');
+    return 2;
+  })
+  .then((value) => {
+    console.log('任务2的结果:', value); // value=2
+
+    return new Promise((resolve, reject) => {
+      // 启动任务3(异步)
+      setTimeout(() => {
+        console.log('执行任务3(异步))');
+        resolve(3);
+      }, 1000);
+    });
+  })
+  .then((value) => {
+    console.log('任务3的结果: ', value); // value=3
+  });
+```
+
+#### 中断 promise 链
+
+场景：假如我一个请求失败了，我之后的操作都不往下进行，你没有在 reject 中做任何处理，之后每个 then 都会调用成功（fulfilled）的回调
+
+当使用 promise 的 then 链式调用时, 在中间中断, 不再调用后面的回调函数
+
+办法: 在回调函数中返回一个 pending 状态的 promise 对象
+
+```js
+new Promise((resolve, reject) => {
+  reject(1);
+})
+  .then(
+    (value) => {
+      console.log(value);
+    },
+    (reason) => {
+      return new Promise(() => {}); // 返回一个pending的promise  中断promise链 之后then不会走
+    },
+  )
+  .then(
+    (value) => {
+      console.log('value1', value);
+    },
+    (reason) => {
+      return new Promise(() => {}); // 返回一个pending的promise  中断promise链 之后then不会走
+    },
+  );
+```
+
+#### 错误穿透
+
+当使用 promise 的 then 链式调用时，可以在最后用 catch 指定一个失败的回调，前面任何操作出了错误，都会传到最后失败的回调中处理
+
+注意：如果不存在 then 的链式调用，就不需要考虑 then 的错误穿透了
+
+```js
+new Promise((resolve, reject) => {
+  reject(1);
+})
+  .then(
+    (value) => {
+      console.log(value);
+    },
+    // 要是不写失败的回调函数，其实底层会自己加上这一段代码
+    // reason => { throw reason }
+  )
+  .then(
+    (value) => {
+      console.log('value1', value);
+    },
+    // 要是不写失败的回调函数，其实底层会自己加上这一段代码
+    // reason => { throw reason }
+  )
+  .catch((reason) => {
+    console.log('失败了', reason);
+  });
+```
 
 ### Promise.prototype.then
 
@@ -2416,25 +2548,19 @@ then 是实例状态发生改变时的回调函数，第一个参数是 resolved
 
 then 方法返回的是一个新的 Promise 实例，也就是 promise 能链式书写的原因
 
-```
-getJSON("/posts.json").then(function(json) {
-  return json.post;
-}).then(function(post) {
-  // ...
-});
-```
-
-```
+```js
 new Promise((resolve, reject) => {
- setTimeout(() => {
-   resolve('成功的回调')
-   reject('失败的回调') // 会面这个不会有效果，因为只会改变一次状态，为成功就不会走失败
- }, 1000)
-}).then(() => {
-  // 成功的
-}).catch(() => {
-  // 失败
+  setTimeout(() => {
+    resolve('成功的回调');
+    reject('失败的回调'); // 会面这个不会有效果，因为只会改变一次状态，为成功就不会走失败
+  }, 1000);
 })
+  .then(() => {
+    // 成功的
+  })
+  .catch(() => {
+    // 失败
+  });
 ```
 
 ### Promise.prototype.catch
@@ -2445,41 +2571,46 @@ onRejected 函数: 失败的回调函数 (reason) => {}
 
 catch()方法是.then(null, onRejected)或.then(undefined, onRejected)的语法糖，用于指定发生错误时的回调函数
 
-```
-getJSON('/posts.json').then(function(posts) {
-  // ...
-}).catch(function(error) {
-  // 处理 getJSON 和 前一个回调函数运行时发生的错误
-  console.log('发生错误！', error);
-});
+```js
+getJSON('/posts.json')
+  .then(function (posts) {
+    // ...
+  })
+  .catch(function (error) {
+    // 处理 getJSON 和 前一个回调函数运行时发生的错误
+    console.log('发生错误！', error);
+  });
 ```
 
 Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止
 
-```
-getJSON('/post/1.json').then(function(post) {
-  return getJSON(post.commentURL);
-}).then(function(comments) {
-  // some code
-}).catch(function(error) {
-  // 处理前面三个Promise产生的错误
-});
+```js
+getJSON('/post/1.json')
+  .then(function (post) {
+    return getJSON(post.commentURL);
+  })
+  .then(function (comments) {
+    // some code
+  })
+  .catch(function (error) {
+    // 处理前面三个Promise产生的错误
+  });
 ```
 
 一般来说，使用 catch 方法代替 then()第二个参数
 
 Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应
 
-```
-const someAsyncThing = function() {
-  return new Promise(function(resolve, reject) {
+```js
+const someAsyncThing = function () {
+  return new Promise(function (resolve, reject) {
     // 下面一行会报错，因为x没有声明
     resolve(x + 2);
   });
 };
 ```
 
-浏览器运行到这一行，会打印出错误提示 ReferenceError: x is not defined，但是不会退出进程
+浏览器运行到这一行，会打印出错误提示 `ReferenceError: x is not defined`，但是不会退出进程
 
 catch()方法之中，还能再抛出错误，通过后面 catch 方法捕获到
 
@@ -2487,14 +2618,12 @@ catch()方法之中，还能再抛出错误，通过后面 catch 方法捕获到
 
 finally()方法用于指定不管 Promise 对象最后状态如何，都会执行的操作
 
-```
+```js
 promise
-.then(result => {···})
-.catch(error => {···})
-.finally(() => {···});
+  .then(result => {···})
+  .catch(error => {···})
+  .finally(() => {···});
 ```
-
-## 构造函数方法
 
 ### Promise.resolve
 
@@ -2506,44 +2635,59 @@ value: 成功的数据或 promise 对象
 
 注意：value 的值可能是非 promise 值或者为 Promise 值
 
-```
+```js
 // 此时就想直接得到成功的值为100，不涉及到异步请求
 // 这种写法在new Promise是为pending状态会瞬间为fulfilled状态
 const p = new Promise((resolve, reject) => {
-  resolve(100)
-})
+  resolve(100);
+});
 p.then(
-  value => { console.log('成功了', value) },
-  reason => { console.log('失败了', reason) }
-)
+  (value) => {
+    console.log('成功了', value);
+  },
+  (reason) => {
+    console.log('失败了', reason);
+  },
+);
 
 // 这种写法不会有pending的状态，直接就是fulfilled的状态了
-const p = Promise.resolve(100)
+const p = Promise.resolve(100);
 p.then(
-  value => { console.log('成功了', value) },
-  reason => { console.log('失败了', reason) }
-)
+  (value) => {
+    console.log('成功了', value);
+  },
+  (reason) => {
+    console.log('失败了', reason);
+  },
+);
 ```
 
-小坑：
+**<span style="color:red;">小坑</span>**
 
 Promise.resolve 可以接受非 promise 值，结果就为成功的返回值，若接受为 promise 值，则返回 promise 的成功或者失败的值
 
-```
-const p0 = Promise.resolve(200)
-const p = Promise.resolve(p0)
+```js
+const p0 = Promise.resolve(200);
+const p = Promise.resolve(p0);
 p.then(
-  value => { console.log('成功了', value) }, // 输出成功了，200
-  reason => { console.log('失败了', reason) }
-)
+  (value) => {
+    console.log('成功了', value);
+  }, // 输出成功了，200
+  (reason) => {
+    console.log('失败了', reason);
+  },
+);
 
-
-const p0 = Promise.reject(-200)
-const p = Promise.resolve(p0)
+const p0 = Promise.reject(-200);
+const p = Promise.resolve(p0);
 p.then(
-  value => { console.log('成功了', value) },
-  reason => { console.log('失败了', reason) } // 输出失败了，-200
-)
+  (value) => {
+    console.log('成功了', value);
+  },
+  (reason) => {
+    console.log('失败了', reason);
+  }, // 输出失败了，-200
+);
 ```
 
 ### Promise.reject
@@ -2554,24 +2698,32 @@ reason: 失败的原因
 
 说明: 用于快速返回一个状态必为 rejected 的 Promise 实例对象
 
-```
-const p = Promise.reject(-100)
+```js
+const p = Promise.reject(-100);
 p.then(
-  value => { console.log('成功了', value) },
-  reason => { console.log('失败了', reason) } // 输出失败了，-100
-)
+  (value) => {
+    console.log('成功了', value);
+  },
+  (reason) => {
+    console.log('失败了', reason);
+  }, // 输出失败了，-100
+);
 ```
 
-小坑：
+**<span style="color:red;">小坑</span>**
 
-```
+```js
 // 这样意思就是输出为失败了，值为一个成功的promise值为100
-const p0 = Promise.resolve(200)
-const p = Promise.reject(p0)
+const p0 = Promise.resolve(200);
+const p = Promise.reject(p0);
 p.then(
-  value => { console.log('成功了', value) },
-  reason => { console.log('失败了', reason) } // 输出失败了，{<fulfilled>:100}
-)
+  (value) => {
+    console.log('成功了', value);
+  },
+  (reason) => {
+    console.log('失败了', reason);
+  }, // 输出失败了，{<fulfilled>:100}
+);
 ```
 
 ### Promise.all
@@ -2584,7 +2736,7 @@ promises: 包含 n 个 promise 的数组
 
 Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例
 
-```
+```js
 const p = Promise.all([p1, p2, p3]);
 ```
 
@@ -2597,41 +2749,39 @@ const p = Promise.all([p1, p2, p3]);
 
 注意，如果作为参数的 Promise 实例，自己定义了 catch 方法，那么它一旦被 rejected，并不会触发 Promise.all()的 catch 方法
 
-```
+```js
 const p1 = new Promise((resolve, reject) => {
   resolve('hello');
 })
-.then(result => result)
-.catch(e => e);
+  .then((result) => result)
+  .catch((e) => e);
 
 const p2 = new Promise((resolve, reject) => {
   throw new Error('报错了');
 })
-.then(result => result)
-.catch(e => e);
+  .then((result) => result)
+  .catch((e) => e);
 
 Promise.all([p1, p2])
-.then(result => console.log(result))
-.catch(e => console.log(e));
-// ["hello", Error: 报错了]
+  .then((result) => console.log(result))
+  .catch((e) => console.log(e));
+// 输出["hello", Error: 报错了]
 ```
 
 如果 p2 没有自己的 catch 方法，就会调用 Promise.all()的 catch 方法
 
-```
+```js
 const p1 = new Promise((resolve, reject) => {
   resolve('hello');
-})
-.then(result => result);
+}).then((result) => result);
 
 const p2 = new Promise((resolve, reject) => {
   throw new Error('报错了');
-})
-.then(result => result);
+}).then((result) => result);
 
 Promise.all([p1, p2])
-.then(result => console.log(result))
-.catch(e => console.log(e));
+  .then((result) => console.log(result))
+  .catch((e) => console.log(e));
 // Error: 报错了
 ```
 
@@ -2645,7 +2795,7 @@ promises: 包含 n 个 promise 的数组
 
 Promise.race()方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例
 
-```
+```js
 const p = Promise.race([p1, p2, p3]);
 ```
 
@@ -2653,17 +2803,15 @@ const p = Promise.race([p1, p2, p3]);
 
 率先改变的 Promise 实例的返回值则传递给 p 的回调函数
 
-```
+```js
 const p = Promise.race([
   fetch('/resource-that-may-take-a-while'),
   new Promise(function (resolve, reject) {
-    setTimeout(() => reject(new Error('request timeout')), 5000)
-  })
+    setTimeout(() => reject(new Error('request timeout')), 5000);
+  }),
 ]);
 
-p
-.then(console.log)
-.catch(console.error);
+p.then(console.log).catch(console.error);
 ```
 
 ### Promise.allSettled
@@ -2672,582 +2820,25 @@ Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一
 
 只有等到所有这些参数实例都返回结果，不管是 fulfilled 还是 rejected，包装实例才会结束
 
-```
-const promises = [
-  fetch('/api-1'),
-  fetch('/api-2'),
-  fetch('/api-3'),
-];
+```js
+const promises = [fetch('/api-1'), fetch('/api-2'), fetch('/api-3')];
 
 await Promise.allSettled(promises);
 removeLoadingIndicator();
 ```
 
-## Promise 关键几个问题
+### Promise.withResolvers
 
-### 如何改变 Promise 实例状态
+ECMAScript 2024 新的版本带来的全新的特性，
+一个新方法来创建一个 promise，直接返回 resolve 和 reject 的回调。使用 Promise.withResolvers ，我们可以创建直接在其执行函数之外 resolve 和 reject
 
-1.  执行 resolve(value)：如果当请是 pending 就会变为 fulfilled
-1.  执行 rejecte(reason)：如果当前是 pending 就会变为 rejected
-1.  执行器函数(executor)抛出异常：如果当前是 pending 就会变为 rejected
+```js
+const { promise, resolve, reject } = Promise.withResolvers();
 
+setTimeout(() => resolve('Resolved after 2 seconds'), 2000);
+
+promise.then((value) => console.log(value));
 ```
-// 1.
-let p = new Promise((resolve, reject) => {
-   //resolve('Promise状态会被标记为resolved')
-   // reject('Promise状态会被标记为rejected')
-   throw new Error('Promise状态会被标记为rejected')
-   // console.log(a)  Promise状态会被标记为rejected
-});
-
-p.then(
-    value => { console.log('value', value) },
-    reason => { console.log('reason', reason) }
-)
-
-
-// 2.
-// 只会输入value为100，因为状态只为改变一次，成功了就不能失败
-let p = new Promise((resolve, reject) => {
-  resolve(100)
-  // 只要指定状态，这之后的代码就不会走了
-  console.log(a)
-});
-
-p.then(
-    value => { console.log('value', value) },
-    reason => { console.log('reason', reason) }
-)
-```
-
-### 改变实例状态与指定回调函数谁先执行
-
-1.  都有可能，正常情况下是先指定的回调再改变状态，但也可以先改变状态再指定回调
-1.  如何先改状态在指定回调
-
-<!---->
-
-1.  1.  在执行器中直接调用 resolve()/reject()
-    1.  延迟一会在调用 then
-
-<!---->
-
-3.  Promise 实例什么时候才能得到数据
-
-<!---->
-
-1.  1.  如果先指定的回调，那当状态发生改变时，回调函数就会调用，得到数据
-    1.  如果先改变状态，那当指定回调时，回调函数就会调用，得到数据
-
-```
-// 1常规: 先指定回调函数, 后改变的状态
-const p =new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve(1) // 后改变的状态(同时指定数据), 异步执行回调函数
-    }, 1000);
-})
-p.then(  // 先指定回调函数, 保存当前指定的回调函数
-    value => { console.log('value', value) },
-    reason => { console.log('reason', reason) }
-)
-
-
-
-// 如何先改状态, 后指定回调函数
-// 2.a
-const p = new Promise((resolve, reject) => {
-  resolve(1) // 先改变的状态(同时指定数据)
-})
-
-p.then(          // 后指定回调函数, 异步执行回调函数
-  value => { console.log('value2', value) },
-  reason => { console.log('reason2', reason) }
-)
-
-
-
-// 2.b
-const p = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(1) // 先改变的状态(同时指定数据), 异步执行回调函数
-  }, 1000);
-})
-
-setTimeout(() => {
-  p.then(
-    value => { console.log('value3', value) },
-    reason => {  console.log('reason3', reason) }
-  )
-}, 3000);
-```
-
-### then 的链式调用
-
-Promise 实例的 then()返回的是一个【新 Promise 实例】，它的值跟状态由什么决定?
-
-1.  简单表达: 由 then()指定的回调函数执行的结果决定
-1.  详细表达:
-
-<!---->
-
-1.  1.  如果 then 所指定的回调返回的是非 Promise 的任意值,
-
-<!---->
-
-1.  1.  1.  【新 promise 实例】状态为成功（fulfilled）, value 为返回的值
-
-<!---->
-
-1.  2.  如果 then 所指定的回调返回的是另一个新 Promise 实例 p,
-
-<!---->
-
-1.  1.  1.  【新 promise 实例】的状态，值与 p 一致
-
-<!---->
-
-1.  3.  如果 then 所指定的回调抛出异常,
-
-<!---->
-
-1.  1.  1.  【新 promise 实例】变为 rejected, reason 为抛出的异常
-
-```
-// 2.a
-const p =new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(1)
-    }, 1000);
-})
-
-// 输出value1, 1，但是作为一个回调函数,没有return返回值，所以之后then为undefined
-const x = p.then(
-    value => { console.log('value1', value) },
-    reason => { console.log('reason1', reason) }
-)
-
-x.then(
-    value => { console.log('value2', value) }, // 输出value2, undefined
-    reason => { console.log('reason2', reason) }
-)
-
-
-//2.b
-const p =new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(1)
-    }, 1000);
-})
-
-
-const x = p.then(
-    value => {
-      console.log('value1', value) // 输出value1, 1
-      return Promise.resolve(2)
-      // return Promise.reject(-2)
-    },
-    reason => { console.log('reason1', reason) }
-)
-
-x.then(
-    value => { console.log('value2', value) }, // 输出value2, 2
-    reason => { console.log('reason2', reason) }
-    // 上一个then返回rejected状态值为-2,此时就x接收到就是失败状态值为-2
-    // reason => { console.log('reason2', reason) }
-)
-
-
-// reject状态时
-const p =new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(-1)
-    }, 1000);
-})
-
-// 作为一个回调函数,没有return返回值，所以之后then为undefined
-// 因为undefined为非Promise值，所以会走x的成功回调，值为undefined
-const x = p.then(
-    value => { console.log('value1', value) },
-    reason => { console.log('reason1', reason) }  // 输出reason1, -1
-)
-
-x.then(
-    value => { console.log('value2', value) }, // 输出value2, undefined
-    reason => { console.log('reason2', reason) }
-)
-
-
-// 2.c
-new Promise((resolve, reject) => {
-    resolve(1)
-}).then(
-    value => {
-        console.log('value1', value) // 输出value, 1
-        throw 5
-    },
-    reason => { console.log('reason1', reason) }
-).then(
-    value => { console.log('value2', value) },
-    reason => { console.log('reason2', reason) } // 输出reason2, 5
-)
-```
-
-### promise 如何串连多个操作任务
-
-1.  promise 的 then()返回一个新的 promise, 可以开成 then()的链式调用
-1.  通过 then 的链式调用串连多个同步/异步任务
-
-```
-new Promise((resolve, reject) => {
-    setTimeout(() => {
-        console.log("执行任务1(异步)")
-        resolve(1)
-    }, 1000);
-}).then(
-    value => {
-        console.log('任务1的结果: ', value)
-        console.log('执行任务2(同步)')
-        return 2
-    }
-).then(
-    value => {
-        console.log('任务2的结果:', value)
-
-        return new Promise((resolve, reject) => {
-            // 启动任务3(异步)
-            setTimeout(() => {
-                console.log('执行任务3(异步))')
-                resolve(3)
-            }, 1000);
-        })
-    }
-).then(
-    value => {
-        console.log('任务3的结果: ', value)
-    }
-)
-```
-
-### 中断 promise 链
-
-场景：假如我一个请求失败了，我之后的操作都不往下进行，你没有在 reject 中做任何处理，之后每个 then 都会调用成功（fulfilled）的回调
-
-1.  当使用 promise 的 then 链式调用时, 在中间中断, 不再调用后面的回调函数
-1.  办法: 在回调函数中返回一个 pending 状态的 promise 对象
-
-```
-new Promise((resolve, reject) => {
-    reject(1)
-}).then(
-    value => { console.log(value) },
-    reason => {
-      return new Promise(()=>{}) // 返回一个pending的promise  中断promise链 之后then不会走
-    }
-).then(
-    value => { console.log('value1', value) },
-    reason => {
-      return new Promise(()=>{}) // 返回一个pending的promise  中断promise链 之后then不会走
-    }
-)
-```
-
-### 错误穿透
-
-1.  当使用 promise 的 then 链式调用时，可以在最后用 catch 指定一个失败的回调
-1.  前面任何操作出了错误，都会传到最后失败的回调中处理
-1.  注意：如果不存在 then 的链式调用，就不需要考虑 then 的错误穿透了
-
-```
-new Promise((resolve, reject) => {
-    reject(1)
-}).then(
-    value => { console.log(value) },
-    // 要是不写失败的回调函数，其实底层会自己加上这一段代码
-    // reason => { throw reason }
-).then(
-    value => { console.log('value1', value) },
-    // 要是不写失败的回调函数，其实底层会自己加上这一段代码
-    // reason => { throw reason }
-).catch((reason) => {
-  console.log('失败了', reason)
-})
-```
-
-## 自定义 Promise
-
-```
-// 自定义Promise
-// ES5匿名函数自调用实现模块化
-(function (window) {
-  const PENDING = 'pending'
-  const RESOLVED = 'resolved'
-  const REJECTED = 'rejected'
-
-  // 参数为executor函数
-  function Promise(executor) {
-    const that = this
-    // 三个属性
-    that.status = PENDING //Promise对象状态属性，初始状态为 pending
-    that.data = 'undefined' // 用于存储结果数据
-    that.callbacks = [] //保存待执行的回调函数 ，数据结构：{onResolved(){},onRejected(){}}
-
-    function resolve(value) {
-      // RESOLVED 状态只能改变一次
-      if (that.status !== PENDING) {
-        return
-      }
-      that.status = RESOLVED
-      that.data = value
-      //执行异步回调函数 onResolved
-      if (that.callbacks.length > 0) {
-        setTimeout(() => { // 放入队列中执行所有成功的回调
-          that.callbacks.forEach(callbackObj => {
-            callbackObj.onResolved(value)
-          })
-        })
-      }
-    }
-
-    function reject(seaon) {
-      if (that.status !== PENDING) {
-        return
-      }
-      that.status = REJECTED
-      that.data = seaon
-      //执行异步回调函数 onRejected
-      if (that.callbacks.length > 0) {
-        setTimeout(() => { // 放入队列中执行所有失败的回调
-          that.callbacks.forEach(callbackObj => {
-            callbackObj.onRejected(seaon)
-          })
-        })
-      }
-    }
-
-    try { //执行器函数立即执行
-      executor(resolve, reject)
-    } catch (e) {
-      reject(e)
-    }
-  }
-
-  //Promise原型对象 then ,两个回掉函数 成功 onResolved ，失败onRejected
-  //返回一个新的Promise对象
-  Promise.prototype.then = function (onResolved, onRejected) {
-    onResolved = typeof onResolved === 'function' ? onResolved : value => value // 向后传递成功的value
-    // 指定默认的失败的回调(实现错误/异常传透的关键点)
-    onRejected = typeof onRejected === 'function' ? onRejected : reason => {
-      throw reason
-    } // 抽后传递失败的reason
-    const that = this
-    return new Promise((resolve, reject) => {
-
-      //调用指定回调函数处理, 根据执行结果, 改变return的promise的状态
-      function handle(callback) {
-        // 调用成功的回调函数 onResolved
-        //1.如果抛出异常，return的promise就 会失败，reason就 是error
-        //2.如果回调函数返回不是promise, return的promise就 会成功，value就是返回的值
-        //3.如果回调函数返回是promise, return的promise结 果就是这个promise的结果
-        try {
-          const result = callback(that.data);
-          if (result instanceof Promise) {
-            result.then(value => resolve(value), reason => reject(reason))
-          } else {
-            resolve(result)
-          }
-        } catch (e) {
-          reject(e)
-        }
-      }
-
-      // 当前状态还是pending状态, 将回调函数保存起来
-      if (that.status === PENDING) {
-        that.callbacks.push({
-          onResolved(value) {
-            handle(onResolved)
-          },
-          onRejected(reason) {
-            handle(onRejected)
-          }
-        })
-      } else if (that.status === RESOLVED) {
-        setTimeout(() => {
-          handle(onResolved)
-        })
-      } else {
-        setTimeout(() => {
-          //调用失败的回调函数 onRejected
-          handle(onRejected)
-        })
-      }
-    })
-  }
-
-  //Promise原型对象 catch ,参数为失败的回掉函数 onRejected
-  //返回一个新的Promise对象
-  Promise.prototype.catch = function (onRejected) {
-    return this.then(undefined, onRejected)
-  }
-
-  // Promise函数对象的 resolve 方法
-  //返回一个新的Promise对象,Promise.resolve()中可以传入Promise
-  Promise.resolve = function (value) {
-    return new Promise((resolve, reject) => {
-      if (value instanceof Promise) {
-        value.then(resolve, reject)
-      } else {
-        resolve(value)
-      }
-    })
-  }
-
-  // Promise函数对象的 reject 方法
-  //返回一个新的Promise对象 Promise.reject中不能再传入Promise
-  Promise.reject = function (reason) {
-    return new Promise((resolve, reject) => {
-      reject(reason)
-    })
-  }
-
-  // Promise函数对象的 all 方法,接受一个promise类型的数组
-  // 返回一个新的Promise对象
-  Promise.all = function (promises) {
-    // 保证返回的值得结果的顺序和传进来的时候一致
-    // 只有全部都成功长才返回成功
-    const values = new Array(promises.length) // 指定数组的初始长度
-    let successCount = 0
-    return new Promise((resolve, reject) => {
-      promises.forEach((p, index) => { // 由于p有可能不是一个Promise
-        Promise.resolve(p).then(
-          value => {
-            successCount++
-            values[index] = value
-            if (successCount === promises.length) {
-              resolve(values)
-            }
-          },
-          // 如果失败
-          reason => {
-            reject(reason)
-          })
-      })
-    })
-
-  }
-  // Promise函数对象的 race 方法,接受一个promise类型的数组
-  // 返回一个新的Promise对象
-  Promise.race = function (promises) {
-    return new Promise((resolve, reject) => {
-      promises.forEach(p => {
-        Promise.resolve(p).then(
-          value => {
-            resolve(value)
-          }, reason => {
-            reject(reason)
-          })
-      })
-    })
-
-  }
-
-  // 把Promise暴露出去
-  window.Promise = Promise
-})(window)
-```
-
-## 使用场景
-
-将图片的加载写成一个 Promise，一旦加载完成，Promise 的状态就发生变化
-
-```
-const preloadImage = function (path) {
-  return new Promise(function (resolve, reject) {
-    const image = new Image();
-    image.onload  = resolve;
-    image.onerror = reject;
-    image.src = path;
-  });
-};
-```
-
-通过链式操作，将多个渲染数据分别给个 then，让其各司其职。或当下个异步请求依赖上个请求结果的时候，我们也能够通过链式操作友好解决问题
-
-```
-// 各司其职
-getInfo().then(res=>{
-    let { bannerList } = res
-    //渲染轮播图
-    console.log(bannerList)
-    return res
-}).then(res=>{
-
-    let { storeList } = res
-    //渲染店铺列表
-    console.log(storeList)
-    return res
-}).then(res=>{
-    let { categoryList } = res
-    console.log(categoryList)
-    //渲染分类列表
-    return res
-})
-```
-
-通过 all()实现多个请求合并在一起，汇总所有请求结果，只需设置一个 loading 即可
-
-```
-function initLoad(){
-    // loading.show() //加载loading
-    Promise.all([getBannerList(),getStoreList(),getCategoryList()]).then(res=>{
-        console.log(res)
-        loading.hide() //关闭loading
-    }).catch(err=>{
-        console.log(err)
-        loading.hide()//关闭loading
-    })
-}
-//数据初始化
-initLoad()
-```
-
-通过 race 可以设置图片请求超时
-
-```
-//请求某个图片资源
-function requestImg(){
-    var p = new Promise(function(resolve, reject){
-        var img = new Image();
-        img.onload = function(){
-           resolve(img);
-        }
-        //img.src = "https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg"; 正确的
-        img.src = "https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg1";
-    });
-    return p;
-}
-
-//延时函数，用于给请求计时
-function timeout(){
-    var p = new Promise(function(resolve, reject){
-        setTimeout(function(){
-            reject('图片请求超时');
-        }, 5000);
-    });
-    return p;
-}
-
-Promise
-.race([requestImg(), timeout()])
-.then(function(results){
-    console.log(results);
-})
-.catch(function(reason){
-    console.log(reason);
-});
-```
-
-[  
-](https://es6.ruanyifeng.com/#docs/promise)
 
 # Proxy
 

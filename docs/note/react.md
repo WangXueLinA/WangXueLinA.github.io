@@ -1,41 +1,249 @@
 ---
 toc: content
-title: React
+title: React Class
 group: 框架
 ---
 
 # React
 
-## React 事件和 HTML 事件
+## JSX
 
-- 事件绑定与代理：在 HTML 中，事件处理器直接绑定到具体的 DOM 元素上。
-  而在 React 中，事件不是直接绑定到实际的 DOM 节点上，而是通过 React 自身的合成事件系统（SyntheticEvent system）进行管理。React 会在顶层（通常是 document）设置一个事件监听器，然后通过事件委托的方式处理所有子元素的事件。这意味着，当你在 React 组件内声明一个事件处理器时，React 会在底层帮你把事件处理逻辑绑定到适当的 DOM 节点，并确保在事件冒泡到 document 时正确触发。
+一个 JSX 语法的示例，如下所示
 
-- 事件命名：HTML 事件使用全小写命名，例如 onclick、onmouseover 等。
-  React 中的事件采用驼峰式命名（camelCase），例如 onClick、onMouseOver。
+```js
+const element = <h1>Hello, world!</h1>;
+```
 
-- 事件处理器：在 HTML 中，事件处理器通常作为字符串函数名或内联 JavaScript 代码来指定。
-  在 React 中，事件处理器是一个明确的 JavaScript 函数引用，可以直接作为一个属性值传给组件。
+这种语法形式，既不是 HTML，也不是字符串，而是称之为 JSX，是 React 里用来描述 UI 和样式的语法，JSX 最终会被编译为合法的 JS 语句调用（编译器在遇到`{`时采用 JS 语法进行解析，遇到`<`就采用 HTML 规则进行解析）
 
-- 默认行为阻止：在 HTML 中，可以简单地在事件处理器内部返回 false 来阻止事件的默认行为（例如点击链接跳转）。
-  而在 React 中，阻止默认行为需要明确调用事件对象的 preventDefault() 方法。
+JSX 实质通过 babel 编译，而 babel 实际上把 JSX 编译给`React.createElement()`调用。
 
-- 合成事件：React 提供了一套跨浏览器的合成事件层，它对原生 DOM 事件进行了封装，确保了在各个浏览器中的表现一致性。这些合成事件对象模仿了 W3C 规范中的事件接口，但在所有浏览器中都能正常工作。
+```js
+const element = <h1 className="greeting">Hello, world!</h1>;
+```
 
-因此，React 的事件处理机制不仅简化了跨浏览器兼容性问题，还增强了性能，因为它减少了直接操作 DOM 的次数，并且能够更好地配合 React 的虚拟 DOM 和组件更新机制。同时，由于 React 的事件是在合成事件系统中统一调度的，所以在处理事件时需要注意避免原生事件与合成事件混合使用可能导致的问题，比如如果原生事件阻止了事件冒泡，那么依赖冒泡的合成事件可能无法正常执行。
+是等同于以下的语句的
 
-## React 组件事件代理
+```js
+const elem = React.createElement(
+  'h1',
+  { className: 'greeting' },
+  'Hello, world!',
+);
+```
 
-React 并不直接将事件处理器（handler）绑定到每个特定的 DOM 元素上，而是采用了事件代理机制，即在组件渲染树的最外层（通常是 React 生成的实际 DOM 元素的容器）注册单一的事件监听器。当任何子元素触发事件时，事件会按照事件冒泡的顺序逐级向上传播至父元素，直至到达已注册监听器所在的顶层元素。
+React.createElement()方法会首先进行一些避免 BUG 的检查，然后返回类似以下例子的对象：
 
-具体步骤如下：
+```js
+const element = {
+  type: 'h1',
+  props: {
+    className: 'greeting',
+    children: 'Hello, world',
+  },
+};
+```
 
-1. 当你在 React 组件内编写如 onClick={this.handleClick}这样的事件处理器时，React 并不会立即将其绑定到 DOM 元素上。
-2. 当组件渲染时，React 构建了一个虚拟 DOM 并最终同步到实际 DOM 中。在这个过程中，React 并没有为每个可交互的子元素单独绑定事件，而是将事件处理器“代理”到组件挂载到的最近的原生 DOM 节点上。
-3. 当事件发生时，它首先在触发事件的子元素上触发，然后冒泡到父元素。React 的事件监听器捕获到这个冒泡事件后，能够根据事件的目标元素（event.target）判断哪个子元素真正触发了事件，并调用相应的事件处理器。
-4. 合成事件对象（SyntheticEvent）会被传递给事件处理器，这个对象是对原生 DOM 事件的封装，提供了一致的 API，并且自动处理了一些兼容性问题。
+## Diff 算法
 
-通过这种方式，React 能够在不为每个子组件单独绑定事件的情况下，高效地处理大量子组件的事件，从而优化性能和内存使用。同时，由于 React 维护了一个事件处理器与组件实例之间的映射关系，所以事件处理器内的 this 上下文会被正确地绑定到组件实例上。
+React 是基于 vdom 的前端框架，组件 render 产生 vdom，然后渲染器把 vdom 渲染出来。
+state 更新的时候，组件会重新 render，产生新的 vdom，在浏览器平台下，为了减少 dom 的创建，React 会对两次的 render 结果做 diff，尽量复用 dom，提高性能。
+
+![](/images/react/image4.jpg)
+
+一句话总结虚拟 DOM 就是一个用来描述真实 DOM 的 javaScript 对象
+
+Diff 算法是虚拟 DOM 技术的核心，其目的是为了高效地找出虚拟 DOM 树变化的部分，并将这些变化应用到真实 DOM 上，从而避免不必要的 DOM 操作，提升性能。
+
+### React 16 前
+
+Diff 算法基本步骤
+
+- 树的遍历比较：从根节点开始，递归比较两棵树的节点，直到叶子节点。
+
+![](/images/react/image1.jpg)
+
+只有删除、创建操作，没有移动操作
+
+![](/images/react/image2.jpg)
+
+react 发现新树中，R 节点下没有了 A，那么直接删除 A，在 D 节点下创建 A 以及下属节点
+上述操作中，只有删除和创建操作
+
+- 节点的类型比较：如果新旧节点的类型不同，直接替换整个节点。
+- 节点的属性比较：如果节点类型相同，对比它们的属性是否有变化，如有变化则更新属性。
+- 子节点的比较：递归地对子节点进行上述过程，同时利用“key”属性来优化列表的更新逻辑，确保元素的正确对应和移动。
+
+![](/images/react/image3.jpg)
+
+通过 key 可以准确地发现新旧集合中的节点都是相同的节点，因此无需进行节点删除和创建，只需要将旧集合中节点的位置进行移动
+
+### React 16 后
+
+React 16 以前递归对比虚拟 DOM 树的方案有一个明显的问题：阻塞主线程。旧的 React 架构中，Diff 算法和组件更新都是同步执行的。这意味着一旦更新开始，React 会一直占用主线程直到整个更新过程完成。在这期间，浏览器无法响应用户操作，导致界面卡顿，尤其是在执行大规模的 DOM 更新时。
+
+![](/images/react/image5.jpg)
+
+React 16 为了优化性能，会先把虚拟 DOM 树转换成 Fiber，也就是从树转换成链表，再基于 Fiber 进行渲染。这个过程分成两个阶段：
+
+- reconcile（可中断） ：从虚拟 DOM 转换成 Fiber，并给需要操作的节点打上标记。
+- commit（不可中断） ：对有标记的 Fiber 节点进行操作。
+
+Fiber 架构通过将渲染工作划分为小的、可管理的单元，使得 React 能够更好地利用浏览器的主线程，并提供更流畅的用户体验。
+
+#### 创建 fiber
+
+第一次渲染不需要 Diff，直接将虚拟 Dom 转为 Fiber。
+
+![](/images/react/image7.jpg)
+
+#### 更新 fiber
+
+再次渲染的时候，就需要更新 Fiber 了。这一步的关键是：**<span style='color: red'>尽可能复用</span>**，尽可能复用旧的 Fiber(这里举例的旧 fiber 是我们上图第一次创建的 fiber)，来生成本次的 Fiber。
+
+![](/images/react/image8.jpg)
+
+具体的实现方法为两次遍历
+
+**第一次遍历**
+
+- 方法是对比 vdom 和老的 fiber，复用<span style='color: red'>位置和内容都相同</span>的结点。如果可以复用就处理下一个节点，否则就结束遍历。
+
+- 如果所有的新的 vdom 都处理完了，那就把剩下的老 fiber 节点删掉就行。
+
+- 如果还有 vdom 没处理，那就进行第二次遍历：
+
+如上图，相比初始的 Fiber，A、B、C 都是完全没变的，直接复用，再往下走原本是 E，但现在变成了 D，发现不能复用，直接返回，然后来到第二次遍历。
+
+**第二次遍历**
+
+把剩下的内容填上，方法是先把剩余的旧 Fiber 结点做成一个 Map，key 就是节点的 key，然后遍历新 DOM 树，构建新 Fiber 的时候查查 Map，能复用就复用，用不了就新建。
+
+如上图，构建 D、F、H 的时候发现旧 Fiber 里有，那么可以拿过来复用，M 以前没有，那就新建一个。
+
+第二轮遍历完了之后，把剩余的老 fiber 删掉，剩余的 vdom 新增。
+
+## React 的事件机制
+
+React 基于浏览器的事件机制自身实现了一套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等
+在 React 中这套事件机制被称之为合成事件
+
+### 合成事件
+
+合成事件是 React 模拟原生 DOM 事件所有能力的一个事件对象，即浏览器原生事件的跨浏览器包装器
+根据 W3C 规范来定义合成事件，兼容所有浏览器，拥有与浏览器原生事件相同的接口，例如：
+
+```js
+<button onClick={handleClick}>按钮</button>
+```
+
+如果想要获得原生 DOM 事件，可以通过 e.nativeEvent 属性获取
+
+```js
+<button onClick={(e) => console.log(e.nativeEvent)}>按钮</button>
+```
+
+从上面可以看到 React 事件和原生事件也非常的相似，但也有一定的区别
+
+```js
+
+● 事件名称命名方式不同
+
+// 原生事件绑定方式
+<button onclick="handleClick()">按钮命名</button>
+
+// React 合成事件绑定方式
+<button onClick={handleClick}>按钮命名</button>
+
+
+● 事件处理函数书写不同
+
+// 原生事件 事件处理函数写法
+<button onclick="handleClick()">按钮命名</button>
+
+// React 合成事件 事件处理函数写法
+<button onClick={handleClick}>按钮命名</button>
+```
+
+关于 React 合成事件与原生事件执行顺序，可以看看下面一个例子
+
+```js
+import React from 'react';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.parentRef = React.createRef();
+    this.childRef = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log('React componentDidMount！');
+
+    this.parentRef.current?.addEventListener('click', () => {
+      console.log('原生事件：父元素 DOM 事件监听！');
+    });
+
+    this.childRef.current?.addEventListener('click', () => {
+      console.log('原生事件：子元素 DOM 事件监听！');
+    });
+
+    document.addEventListener('click', (e) => {
+      console.log('原生事件：document DOM 事件监听！');
+    });
+  }
+
+  parentClickFun = () => {
+    console.log('React 事件：父元素事件监听！');
+  };
+
+  childClickFun = () => {
+    console.log('React 事件：子元素事件监听！');
+  };
+
+  render() {
+    return (
+      <div ref={this.parentRef} onClick={this.parentClickFun}>
+        <div ref={this.childRef} onClick={this.childClickFun}>
+          分析事件执行顺序
+        </div>
+      </div>
+    );
+  }
+}
+export default App;
+```
+
+输出代码为顺序为
+
+```
+原生事件：子元素 DOM 事件监听！
+原生事件：父元素 DOM 事件监听！
+React 事件：子元素事件监听！
+React 事件：父元素事件监听！
+原生事件：document DOM 事件监听！
+```
+
+可以得出以下结论：
+
+- React 所有事件都挂载在 document 对象上
+- 当真实 DOM 元素触发事件，会冒泡到 document 对象后，再处理 React 事件
+- 所以会先执行原生事件，然后处理 React 事件
+- 最后真正执行 document 上挂载的事件
+
+![](/images/react/image9.png)
+
+所以想要阻止不同时间段的冒泡行为，对应使用不同的方法，对应如下：
+
+- 阻止合成事件间的冒泡，用 e.stopPropagation()
+- 阻止合成事件与最外层 document 上的事件间的冒泡，用 e.nativeEvent.stopImmediatePropagation()
+- 阻止合成事件与除最外层 document 上的原生事件上的冒泡，通过判断 e.target 来避免
+
+React 事件机制总结如下：
+
+- React 上注册的事件最终会绑定在 document 这个 DOM 上，而不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)
+- React 自身实现了一套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()无效的原因。
+- React 通过队列的形式，从触发的组件向父组件回溯，然后调用他们 JSX 中定义的 callback
+- React 有一套自己的合成事件
 
 ## 路由原理
 

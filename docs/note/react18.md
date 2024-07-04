@@ -51,7 +51,7 @@ ReactDOM.createRoot：这将创建一个在 React 18 中运行的 root，它添�
 
 ![](/images/react18/image1.png)
 
-### 服务端渲染
+## 服务端渲染
 
 hydrateRoot
 
@@ -69,7 +69,7 @@ const root = hydrateRoot(container, <App tab="home" />);
 - 继续使用 renderToString (对 Suspense 支持有限)
 - 继续使用 renderToStaticMarkup (对 Suspense 支持有限)
 
-## Concurrent Mode(并发模式)
+## 并发模式
 
 对于并发模式并不是第一次听说，在 react16 的时候就已经开始铺路，react17 出现的试验性的并发模式，react18 正式发布。
 
@@ -81,11 +81,9 @@ const root = hydrateRoot(container, <App tab="home" />);
 
 并发的关键是具备处理多个任务的能力，但不是在同一时刻处理，而是交替处理多个任务。比如吃饭到一半，开始打电话，打电话到一半发现信号不好挂断了，继续吃饭，又来电话了...但是每次只会处理一个任务。
 
-**Concurrent Mode 本身并不是一个功能，而是一个底层设计**
+**Concurrent Mode（并发模式） 本身并不是一个功能，而是一个底层设计**
 
-### 历史 react 版本机制
-
-#### React15
+### React15
 
 react15 版本为了对比新老 dom，diff 算法底层架构中用的是堆栈 diff 这种算法，不可中断式的递归更新方式
 
@@ -97,7 +95,7 @@ react15 版本为了对比新老 dom，diff 算法底层架构中用的是堆栈
 
 ![](/images/react18/image2.png)
 
-#### React16
+### React16
 
 react16 出现了 fiber 这个概念，取代了之前 15 这种堆栈式协调器这种模式。react16 就是可中断式更新机制
 
@@ -117,25 +115,25 @@ fiber 分两个阶段
 
 ![](/images/react18/image4.png)
 
-所以为啥 react16 中删除了.componentWillMount. componentWillReceiveProps. componentWillUpdate 这几个生命周期，有几个新的生命周期的出现，因为有些老的生命周期可能会多次执行，低优先级任务被打断了，高优先级执行完之后重新再执行低优先级任务，可能这时候就会再走一次生命周期
+所以为啥 react16 中删除了 componentWillMount，componentWillReceiveProps，componentWillUpdate 这几个生命周期，有几个新的生命周期的出现，因为有些老的生命周期可能会多次执行，低优先级任务被打断了，高优先级执行完之后重新再执行低优先级任务，可能这时候就会再走一次生命周期
 
 演示 15 跟 16 的区别
 
 <https://claudiopro.github.io/react-fiber-vs-stack-demo/>
 
-#### React17
+### React17
 
 试运行并发模式
 
-#### React18
+### React18
 
 ![](/images/react18/image5.png)
 
-### 自动批处理更新 State
+## 自动批处理更新 State
 
 React18 默认开启批处理来实现性能提升
 
-#### React 18 前
+### React 18 前
 
 我们只在 React 事件处理函数 中进行批处理更新。默认情况下，在 promise、setTimeout、原生事件处理函数中、或任何其它事件内的更新都不会进行批处理：
 
@@ -151,7 +149,7 @@ React18 默认开启批处理来实现性能提升
 
 <https://codepen.io/wangxuelina/pen/XWPYbgY>
 
-#### react18 后
+### react18 后
 
 所有的更新都将自动批处理
 
@@ -161,7 +159,7 @@ React18 默认开启批处理来实现性能提升
 
 <https://codepen.io/wangxuelina/pen/QWVxbBq>
 
-#### 总结
+### 总结
 
 在 React18 前
 
@@ -181,21 +179,21 @@ setState 和 useState 函数都是同步执行，立即重新渲染组件
 
 任何情况都会自动执行批处理，多次更新始终合并为一次
 
-### flushSync
+## flushSync
 
 批处理是一个破坏性改动，如果你想退出批量更新，你可以使用 flushSync
 
-#### Demo
+### Demo
 
 <https://codepen.io/wangxuelina/pen/PodaPom>
 
-#### 注意
+### 注意
 
 flushSync 函数内部的多个 setState 仍然为批量更新，这样可以精准控制哪些不需要的批量更新。
 
 flushSync 会对性能产生很大影响。尽量少用。
 
-### Transition
+## Transition
 
 Transition 本质上解决了渲染并发的问题，在 React 18 关于 startTransition 描述的时候，多次提到 ‘大屏幕’ 的情况，这里的大屏幕并不是单纯指的是尺寸，而是一种数据量大，DOM 元素节点多的场景，比如数据可视化大屏情况，在这一场景下，一次更新带来的变化可能是巨大的，所以频繁的更新，执行 js 事务频繁调用，浏览器要执行大量的渲染工作，所以给用户感觉就是卡顿。
 
@@ -214,25 +212,23 @@ useTransition 会返回一个数组，数组中有两个元素，第一个元素
 
 除了 useTransition 外，React 还直接为为我们提供了一个 startTransition 函数，在不需要使用 isPending 时，可以直接使用 startTransition 也可以达到相同的效果。
 
-#### 使用场景
+### 使用场景
 
 <https://codepen.io/wangxuelina/pen/NWLBwLY>
 
-#### 对比
-
-跟 setTimeout 区别：
+### 对比 setTimeout
 
 一个重要的区别是 startTransition 不像 setTimeout 那样在稍后执行，它是立即执行。传递给 startTransition 的函数同步运行，但函数内部的任何更新都标记为 "transitions"。React 将在稍后处理更新时使用该信息来决定如何渲染更新。这意味着我们开始渲染更新的时间比在定时器中包裹的更新的时间要早。在一个网速较快的设备上，两次更新之间的延迟非常小。在一个网速较慢的设备上，延迟会更大，但 UI 会依然保持响应。
 
 另一个重要的区别是 setTimeout 内的存在较大更新时仍然会锁定页面，只不过是在定时器执行之后。当定时触发时，如果用户仍在输入或与页面交互，它们仍将被阻止与页面交互。但是用 startTransition 标记的状态更新是可以中断的，所以它们不会锁定页面
 
-跟防抖节流区别：
+### 对比防抖节流
 
 一方面，节流防抖 本质上也是 setTimeout ，只不过控制了执行的频率，那么通过打印的内容就能发现，原理就是让 render 次数减少了。而 transitions 和它相比，并没有减少渲染的次数。
 
 另一方面，节流和防抖需要有效掌握 Delay Time 延时时间，如果时间过长，那么给人一种渲染滞后的感觉，如果时间过短，那么就类似于 setTimeout(fn,0) 还会造成前面的问题。而 startTransition 就不需要考虑这么多。
 
-### useDeferredValue
+## useDeferredValue
 
 useDeferredValue 用来设置一个延迟的 state，比如我们创建一个 state，并使用 useDeferredValue 获取延迟值，useDeferredValue 需要一个 state 作为参数，会为该 state 创建一个延迟值。必须结合 React.memo 或 us 额 Memo 才能发挥作用
 
@@ -245,23 +241,23 @@ const deferredStr = useDeferredValue(str);
 
 上边的代码中 str 就是一个常规的 state，deferredStr 就是 str 的延迟值。设置延迟值后每次调用 setState 后都会触发两次组件的重新渲染。第一次时，deferredStr 的值是 str 修改前的值，第二次才是修改后的值。换句话，延迟值相较于 state 来说总会慢一步更新。
 
-#### 使用 Demo
+### 使用 Demo
 
 <https://codepen.io/wangxuelina/pen/XWPBgeG>
 
-#### 使用场景
+### 使用场景
 
 <https://codepen.io/wangxuelina/pen/poOZWaP>
 
-### useDebugValue
+## useDebugValue
 
-#### 定义
+### 定义
 
 useDebugValue 用于在 React 开发者工具（如果已安装，在浏览器控制台 React 选项查看）中显示 自定义 Hook 的标签，用来调试自定义钩子，不常用
 
 useDebugValue 接受一个格式化函数作为可选的第二个参数。该函数只有在 Hook 被检查时才会被调用。它接受 debug 值作为参数，并且会返回一个格式化的显示值。
 
-#### 使用
+### 使用
 
 <https://codepen.io/wangxuelina/pen/xxazWoO>
 
@@ -269,19 +265,19 @@ useDebugValue 接受一个格式化函数作为可选的第二个参数。该函
 
 ![](/images/react18/image7.png)
 
-#### 应用场景
+### 应用场景
 
 <https://codepen.io/wangxuelina/pen/zYJaWaY>
 
 ![](/images/react18/image8.gif)
 
-#### 注意
+### 注意
 
 我们不推荐你向每个自定义 Hook 添加 debug 值。当它作为共享库的一部分时才最有价值。
 
 <!-- ## -->
 
-### useId
+## useId
 
 你想生成唯一 ID
 
@@ -289,7 +285,7 @@ useDebugValue 接受一个格式化函数作为可选的第二个参数。该函
 
 但不适用于列表的 key
 
-#### 应用场景
+### 应用场景
 
 例如，如果一个 label 元素的 htmlFor 属性值为 username，那么当用户点击该 label 元素时，与 id 属性值为 username 的表单控件就会获得焦点。这样可以提高表单的可用性和易用性。
 
@@ -337,7 +333,7 @@ useEffect 跟 useLayoutEffect 效果区别
 
 <!-- ### -->
 
-### useSyncExternalStore
+## useSyncExternalStore
 
 前面提到的几个新 API 都是通过并发更新的形式解决渲染阻塞的问题，但是并发同样会带来新的问题。
 
@@ -359,27 +355,11 @@ function useSyncExternalStore<Snapshot>(
 ): Snapshot;
 ```
 
-#### 应用场景
+### 应用场景
 
 <https://codepen.io/wangxuelina/pen/XWPBVxN>
 
 目前 React-Redux 8.0 已经基于 useSyncExternalStore 实现。
-
-## 严格模式
-
-### 场景 demo
-
-<https://codepen.io/wangxuelina/pen/poOZGdR>
-
-安装插件 React Developer Tools 大于 4.18 版本才能看出来效果
-
-react18 前会渲染两次，React 会在严格模式下执行两次渲染，以确保组件的渲染结果是一致的。这是一种开发模式下的优化，但是有点误导
-
-![](/images/react18/image10.png)
-
-react18 后也会渲染两次，不过有一次时置灰的状态，便于区分
-
-![](/images/react18/image11.png)
 
 ## Suspense 组件的变化
 
@@ -472,6 +452,22 @@ react17 最外层不写 fallback 报错
 
 ![](/images/react18/image13.png)
 
+## 严格模式
+
+### 场景 demo
+
+<https://codepen.io/wangxuelina/pen/poOZGdR>
+
+安装插件 React Developer Tools 大于 4.18 版本才能看出来效果
+
+react18 前会渲染两次，React 会在严格模式下执行两次渲染，以确保组件的渲染结果是一致的。这是一种开发模式下的优化，但是有点误导
+
+![](/images/react18/image10.png)
+
+react18 后也会渲染两次，不过有一次时置灰的状态，便于区分
+
+![](/images/react18/image11.png)
+
 ## React 空组件的返回值
 
 ![](/images/react18/image14.png)
@@ -490,6 +486,6 @@ react17 最外层不写 fallback 报错
 
 ![](/images/react18/image15.png)
 
-## 场景 demo
+### 场景 demo
 
 <https://codepen.io/wangxuelina/pen/vYzaozR>

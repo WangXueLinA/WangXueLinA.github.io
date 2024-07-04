@@ -398,6 +398,16 @@ parentElement.addEventListener('click', function (event) {
 
 ### 节流防抖
 
+相同点：
+
+- 都可以通过使用 setTimeout 实现
+- 目的都是，降低回调执行频率。节省计算资源
+
+不同点：
+
+- 函数防抖，在一段连续操作结束后，处理回调，利用 clearTimeout 和 setTimeout 实现。函数节流，在一段连续操作中，每一段时间只执行一次，频率较高的事件中使用来提高性能
+- 函数防抖关注一定时间连续触发的事件，只在最后执行一次，而函数节流一段时间内只执行一次
+
 ```js
 // 节流
 function throttle(fn, timeout) {
@@ -963,6 +973,42 @@ showName.apply(person2); // 输出'David'
 // 使用.bind()创建一个新的函数，其this值预先设定为person1
 const boundShowName = showName.bind(person1);
 boundShowName(); // 输出'Charlie'
+```
+
+## 回调函数 TODO
+
+两种类型的回调函数
+
+什么是回调？---我们定义的，但是我们没有调用，但是最终执行了
+
+同步回调
+
+理解：立即执行，完全执行完才结束，不会放在回调队列中
+
+例子：数组遍历相关的回调函数
+
+```
+const arr = [1,2,3]
+arr.forEach((item) => { // 遍历回调
+  console.log(item)  // 先执行
+})
+
+console.log('forEach()之后')  // 后执行
+```
+
+异步回调
+
+理解：不会立即执行，会放在回调队列中将来执行
+
+例子：定时器回调，axaj 回调，Promise 的成功，失败的回调
+
+```
+// 先执行2,后执行 1
+setTimeout(() => {
+  console.log('1')
+}, 0)
+
+console.log('2')
 ```
 
 ## 闭包
