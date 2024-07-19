@@ -1558,7 +1558,18 @@ userRd.name = 'xioahong'; // 报错
 
 ### Record (key=>value)
 
-标记 K 中的属性为 T 类型
+它用于创建一个具有特定键值对的新类型。Record 接受两个类型参数：一个是键的类型，另一个是值的类型。它将第一个类型（键）映射为第二个类型（值），生成一个新的对象类型，其中每个键的类型对应于指定的值类型
+
+Record 的基本语法如下：
+
+```ts
+Record<Keys, Type>;
+```
+
+- Keys 是一个联合类型，表示你希望在结果类型中拥有的所有键。
+- Type 是你希望这些键所具有的值的类型。
+
+例如：
 
 ```js
 type Api = Record<'get' | 'post', { url: string, type: string }>;
@@ -1985,3 +1996,159 @@ var Letter;
 - 命名空间是位于全局命名空间下的一个普通的带有名字的 JavaScript 对象，使用起来十分容易。但就像其它的全局命名空间污染一样，它很难去识别组件之间的依赖关系，尤其是在大型的应用中
 - 像命名空间一样，模块可以包含代码和声明。 不同的是模块可以声明它的依赖
 - 在正常的 TS 项目开发过程中并不建议用命名空间，但通常在通过 d.ts 文件标记 js 库类型的时候使用命名空间，主要作用是给编译器编写代码的时候参考使用
+
+## type 和 interface 的区别
+
+### 相同点
+
+#### 都可以定义一个对象或函数
+
+**type**
+
+```js
+type Person = {
+  name: string,
+  age: number,
+};
+type addType = (num1: number, num2: number) => number;
+```
+
+**interface**
+
+```js
+interface Person {
+  name: string;
+  age: number;
+}
+interface addType {
+  (num1: number, num2: number): number;
+}
+```
+
+#### 都允许继承
+
+interface 使用 extends 实现继承， type 使用交叉类型实现继承
+
+**interface 继承 interface**
+
+```js
+interface Person {
+  name: string;
+}
+
+interface Student extends Person {
+  grade: number;
+}
+```
+
+**type 继承 type**
+
+```js
+type Person = {
+  name: string
+}
+
+type Student = Person & { grade: number  }    用交叉类型
+```
+
+**interface 继承 type**
+
+```js
+type Person = {
+  name: string,
+};
+
+interface Student extends Person {
+  grade: number;
+}
+```
+
+**type 继承 interface**
+
+```js
+interface Person {
+  name: string;
+}
+
+type Student = Person & { grade: number }; // 用交叉类型
+```
+
+### 不同点
+
+type 可以声明基本类型、联合类型、交叉类型、元组， interface 只能声明对象类型
+
+```js
+type Name = string; // 基本类型
+
+type arrItem = number | string; // 联合类型
+
+type Person = {
+  name: Name,
+};
+type Student = Person & { grade: number }; // 交叉类型
+type Teacher = Person & { major: string };
+
+type StudentAndTeacherList = [Student, Teacher]; // 元组类型
+
+const list: StudentAndTeacherList = [
+  { name: 'lin', grade: 100 },
+  { name: 'liu', major: 'Chinese' },
+];
+```
+
+interface 可以合并重复声明，type 不行
+
+```js
+interface Person {
+  name: string;
+}
+
+interface Person {
+  // 重复声明 interface，就合并了
+  age: number;
+}
+
+const person: Person = {
+  name: 'lin',
+  age: 18,
+};
+```
+
+重复声明 type ，就报错了
+
+```js
+type Person = {
+  name: string,
+};
+
+type Person = {
+  // 报错：Duplicate identifier 'Person'
+  age: number,
+};
+```
+
+赋值给 Record 类型时候，interface 可能会报错，type 不会报错
+
+```js
+type Obj = {
+  name: string,
+};
+
+interface Obj2 {
+  name: string;
+}
+
+const a: Obj = { name: 'xiaoming' };
+const b: Obj2 = { name: 'xiaohong' };
+
+// 把interface的值赋值给Record时候，需要明确interface里的属性
+// 因为interface它会进行声明合并，所以明确不了里面的值
+// 解决方案：增加索引签名
+// interface Obj2 {
+//    name: string
+//    [key: string]: string
+// }
+
+let c: Record<string, string> = a;
+let d: Record<string, string> = b; //报错： Type 'Obj2' is not assignable to type 'Record<string, string>'.Index signature for type 'string' is missing in type 'Obj2'
+```

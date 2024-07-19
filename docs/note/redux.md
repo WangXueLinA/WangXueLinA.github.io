@@ -277,76 +277,7 @@ composedFunction(5); // 14
 // 然后执行addTwo(multiplyThree(subtractOne(x))), 依次从里面开始执行到外侧
 ```
 
-所以洋葱模式的执行流程就是这样
-
-![](/images/redux/image2.png)
-
-然后我们可以再看一些平时用到的第三方中间件的简易源码展示
-
-**redux-logger**
-
-```js
-function logger({ getState }) {
-  return (next) => (action) => {
-    // 打印 action
-    console.log('Action:', action);
-
-    // 调用下一个中间件或 reducer
-    const result = next(action);
-
-    // 获取新的 state
-    const currentState = getState();
-
-    // 打印新的 state
-    console.log('New State:', currentState);
-
-    return result;
-  };
-}
-```
-
-**redux-thunk**
-
-```js
-function thunkMiddleware({ dispatch, getState }) {
-  return (next) => (action) => {
-    // 如果 action 是一个函数，那么调用它并传递 dispatch 和 getState
-    if (typeof action === 'function') {
-      return action(dispatch, getState);
-    }
-
-    // 否则，action 是一个普通的 action 对象，直接传递给下一个中间件或 reducer
-    return next(action);
-  };
-}
-```
-
-**redux-saga**
-
-```js
-
-```
-
-### 工作流程图
-
-大概的工作流程是这样的：
-用户触发一个动作或者组件中通过事件触发一个方法叫做 dispatch，传进一个 action（本质就是一个普通对象），这个 action 是由我们的 Action Creators 所生成的，action 到了 Store 中无法进行修改，我们必须放在 Reducers 中进行修改，Reducers 会记录你所有的状态，而 Reducers 在设计中有一个原则，请保证 Reducers 是纯函数设计（接受老状态，但是这个老状态得进行深复制一份，不能进行修改，而且得返回一个新的状态）新状态一返回，我们的 Store 更改了，内部会自动会触发订阅发布者模式的发布动作，这时候我们会通知我们组件中的监听器，订阅者，进行回调函数来实现我们的功能
-
-![](/images/redux/image1.png)
-
-## React-redux
-
-react-redux 是 Redux 库的官方 React 绑定库，它作为一个桥梁，使得在 React 应用中使用 Redux 进行状态管理变得更加方便和高效。Redux 本身是一个独立的状态管理库，可以与多种前端框架或库集成，而 react-redux 专门针对 React 进行了优化，简化了 React 组件与 Redux store 之间的交互过程
-
-具体来说，react-redux 提供了以下几个核心功能：
-
-- Provider 组件：这是一个 React 组件，作为根组件包裹整个应用，负责将 Redux store 传递给所有子组件。这意味着，无需手动将 store 层层传递，所有组件都可以访问到 store。
-- connect 函数：这是一个高阶函数，用来连接 React 组件与 Redux store。它让你能够从 store 中选取需要的状态（mapStateToProps），以及将 action dispatchers 映射为 props（mapDispatchToProps），这样 React 组件就可以通过 props 直接与 store 互动，而不需要关心如何订阅 store 或处理更新。
-- useSelector 和 useDispatch Hooks：随着 React Hooks 的引入，react-redux 也提供了 Hooks API，使得在函数组件中使用 Redux 变得更加直接。它允许组件直接从 Redux store 中选择状态（state），从而替代了以前使用 connect 高阶组件的方式。useDispatch 则提供了一个直接获取 dispatch 函数的方法，用于触发 actions。
-
-demo：https://stackblitz.com/edit/vitejs-vite-8ayfsz?file=src%2FApp.tsx
-
-首先，我们有这样一个 funcs 数组
+<!-- 首先，我们有这样一个 funcs 数组
 
 ```js
 const funcs = [
@@ -398,4 +329,82 @@ const composedFunc = (...args) => {
 
 综上所述，由于 funcs 数组中的所有函数都只是简单地将 action 传递给下一个函数（即 next），并且在数组的末尾没有其他函数，最终的结果就是 composedFunc 接收 action 并直接返回它，没有做任何额外的处理。
 
-这就是为什么在 funcs 中的函数都只是简单地传递 action 给 next 的情况下，composedFunc 会简单地接收 action 并直接返回，不做任何额外的处理的原因。
+这就是为什么在 funcs 中的函数都只是简单地传递 action 给 next 的情况下，composedFunc 会简单地接收 action 并直接返回，不做任何额外的处理的原因。 -->
+
+![](/images/redux/image3.jpg)
+
+为啥需要这样的设计模式
+
+1. 异步操作的处理：
+   Redux 中间件允许你在 action 到达 reducer 之前进行拦截，执行异步操作，如 API 调用，然后在操作完成时分发另一个 action 来更新 store。这使得 Redux 可以处理异步数据流而不破坏其原有的同步数据流模型。
+2. 链式调用与控制流：
+   Redux 中间件利用了“next => action => next(action)”的模式，形成了一个职责链（Chain of Responsibility），其中每个中间件可以决定是否继续传递 action 给下一个中间件，或者在某个点停止传递。这为控制 action 的流动和处理提供了灵活性。
+
+3. 功能插拔与可扩展性：
+   通过将功能封装在中间件中，Redux 允许开发者根据需要选择和组合不同的中间件，这增加了应用的可扩展性和可定制性。你可以选择使用现成的中间件，如 redux-thunk 或 redux-saga，也可以编写自己的中间件来满足特定需求。
+
+4. 无侵入性：
+   中间件的设计是无侵入性的，意味着它们不会改变 Redux 核心的任何部分。它们只是添加在 store 创建时的一个额外层，这使得 Redux 保持其核心的简洁性，同时也允许外部功能的无缝集成。
+
+所以洋葱模式的执行流程就是这样
+
+![](/images/redux/image2.png)
+
+然后我们可以再看一些平时用到的第三方中间件的简易源码展示
+
+**redux-logger**
+
+```js
+function logger({ getState }) {
+  return (next) => (action) => {
+    // 打印 action
+    console.log('Action:', action);
+
+    // 调用下一个中间件或 reducer
+    const result = next(action);
+
+    // 获取新的 state
+    const currentState = getState();
+
+    // 打印新的 state
+    console.log('New State:', currentState);
+
+    return result;
+  };
+}
+```
+
+**redux-thunk**
+
+```js
+function thunkMiddleware({ dispatch, getState }) {
+  return (next) => (action) => {
+    // 如果 action 是一个函数，那么调用它并传递 dispatch 和 getState
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
+
+    // 否则，action 是一个普通的 action 对象，直接传递给下一个中间件或 reducer
+    return next(action);
+  };
+}
+```
+
+### 工作流程图
+
+大概的工作流程是这样的：
+用户触发一个动作或者组件中通过事件触发一个方法叫做 dispatch，传进一个 action（本质就是一个普通对象），这个 action 是由我们的 Action Creators 所生成的，action 到了 Store 中无法进行修改，我们必须放在 Reducers 中进行修改，Reducers 会记录你所有的状态，而 Reducers 在设计中有一个原则，请保证 Reducers 是纯函数设计（接受老状态，但是这个老状态得进行深复制一份，不能进行修改，而且得返回一个新的状态）新状态一返回，我们的 Store 更改了，内部会自动会触发订阅发布者模式的发布动作，这时候我们会通知我们组件中的监听器，订阅者，进行回调函数来实现我们的功能
+
+![](/images/redux/image1.png)
+
+## React-redux
+
+react-redux 是 Redux 库的官方 React 绑定库，它作为一个桥梁，使得在 React 应用中使用 Redux 进行状态管理变得更加方便和高效。Redux 本身是一个独立的状态管理库，可以与多种前端框架或库集成，而 react-redux 专门针对 React 进行了优化，简化了 React 组件与 Redux store 之间的交互过程
+
+具体来说，react-redux 提供了以下几个核心功能：
+
+- Provider 组件：这是一个 React 组件，作为根组件包裹整个应用，负责将 Redux store 传递给所有子组件。这意味着，无需手动将 store 层层传递，所有组件都可以访问到 store。
+- connect 函数：这是一个高阶函数，用来连接 React 组件与 Redux store。它让你能够从 store 中选取需要的状态（mapStateToProps），以及将 action dispatchers 映射为 props（mapDispatchToProps），这样 React 组件就可以通过 props 直接与 store 互动，而不需要关心如何订阅 store 或处理更新。
+- useSelector 和 useDispatch Hooks：随着 React Hooks 的引入，react-redux 也提供了 Hooks API，使得在函数组件中使用 Redux 变得更加直接。它允许组件直接从 Redux store 中选择状态（state），从而替代了以前使用 connect 高阶组件的方式。useDispatch 则提供了一个直接获取 dispatch 函数的方法，用于触发 actions。
+
+demo：https://stackblitz.com/edit/vitejs-vite-8ayfsz?file=src%2FApp.tsx

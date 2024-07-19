@@ -987,13 +987,14 @@ boundShowName(); // 输出'Charlie'
 
 例子：数组遍历相关的回调函数
 
-```
-const arr = [1,2,3]
-arr.forEach((item) => { // 遍历回调
-  console.log(item)  // 先执行
-})
+```js
+const arr = [1, 2, 3];
+arr.forEach((item) => {
+  // 遍历回调
+  console.log(item); // 先执行
+});
 
-console.log('forEach()之后')  // 后执行
+console.log('forEach()之后'); // 后执行
 ```
 
 异步回调
@@ -1002,13 +1003,452 @@ console.log('forEach()之后')  // 后执行
 
 例子：定时器回调，axaj 回调，Promise 的成功，失败的回调
 
-```
+```js
 // 先执行2,后执行 1
 setTimeout(() => {
-  console.log('1')
-}, 0)
+  console.log('1');
+}, 0);
 
-console.log('2')
+console.log('2');
 ```
 
 ## 闭包
+
+## 原型与原型链
+
+### 构造函数创建对象
+
+```js
+function Person() {}
+var person = new Person();
+person.name = 'xuelin';
+console.log(person.name); // xuelin
+```
+
+### prototype
+
+每个函数都有一个 prototype 属性，就是我们经常在各种例子中看到的那个 prototype
+
+```js
+function Person() {}
+// 虽然写在注释里，但是你要注意：
+// prototype是函数才会有的属性
+Person.prototype.name = 'xuelin';
+
+var person1 = new Person();
+var person2 = new Person();
+
+console.log(person1.name); // xuelin
+console.log(person2.name); // xuelin
+```
+
+函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的原型，也就是这个例子中的 person1 和 person2 的原型。
+
+每一个 JavaScript 对象(null 除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型"继承"属性。
+
+用一张图表示构造函数和实例原型之间的关系
+
+![](/images/js/image2.jpg)
+
+### \_\__proto_\_\_
+
+这是每一个 JavaScript 对象(除了 null )都具有的一个属性，叫\_\__proto_\_\_，这个属性会指向该对象的原型。
+
+```js
+function Person() {}
+var person = new Person();
+console.log(person.__proto__ === Person.prototype); // true
+```
+
+所以此时的关系图如图
+
+![](/images/js/image3.jpg)
+
+### constructor
+
+每个原型都有一个 constructor 属性指向关联的构造函数
+
+```js
+function Person() {}
+console.log(Person === Person.prototype.constructor); // true
+```
+
+所以此时的关系图如图
+
+![](/images/js/image4.jpg)
+
+综上我们已经得出：
+
+```js
+function Person() {}
+
+var person = new Person();
+
+console.log(person.__proto__ == Person.prototype); // true
+console.log(Person.prototype.constructor == Person); // true
+// 顺便学习一个ES5的方法,可以获得对象的原型
+console.log(Object.getPrototypeOf(person) === Person.prototype); // true
+```
+
+实例对象的 constructor 属性指向构造函数
+
+```js
+function Person() {}
+var person = new Person();
+console.log(person.constructor === Person); // true
+```
+
+当获取 person.constructor 时，其实 person 中并没有 constructor 属性,当不能读取到 constructor 属性时，会从 person 的原型也就是 Person.prototype 中读取，正好原型中有该属性，所以：
+
+```js
+person.constructor === Person.prototype.constructor;
+```
+
+所以此时的关系图如图
+
+![](/images/js/image7.jpg)
+
+### 实例与原型
+
+当读取实例的属性时，如果找不到，就会查找与对象关联的原型中的属性，如果还查不到，就去找原型的原型，一直找到最顶层为止
+
+```js
+function Person() {}
+
+Person.prototype.name = 'xuelin';
+
+var person = new Person();
+
+person.name = 'xuelin2';
+console.log(person.name); // xuelin2
+
+delete person.name;
+console.log(person.name); // xuelin
+```
+
+在这个例子中，我们给实例对象 person 添加了 name 属性，当我们打印 person.name 的时候，结果自然为 xuelin2
+
+但是当我们删除了 person 的 name 属性时，读取 person.name，从 person 对象中找不到 name 属性就会从 person 的原型也就是 `person.__proto__` ，也就是 Person.prototype 中查找，幸运的是我们找到了 name 属性，结果为 xuelin
+
+### 原型的原型
+
+在前面，我们已经讲了原型也是一个对象，既然是对象，我们就可以用最原始的方式创建它，那就是
+
+```js
+var obj = new Object();
+obj.name = 'xuelin';
+console.log(obj.name); // xuelin
+```
+
+其实原型对象就是通过 Object 构造函数生成的，结合之前所讲，实例的 **proto** 指向构造函数的 prototype ，所以我们的关系图：
+
+![](/images/js/image5.jpg)
+
+### 原型链
+
+那 Object.prototype 的原型呢？
+
+```js
+console.log(Object.prototype.__proto__ === null); // true
+```
+
+所以 `Object.prototype.__proto__` 的值为 null 跟 Object.prototype 没有原型，其实表达了一个意思。
+
+所以查找属性的时候查到 Object.prototype 就可以停止查找了。
+
+![](/images/js/image6.jpg)
+
+## DOM
+
+-----补充----
+
+## BOM
+
+BOM (Browser Object Model)，浏览器对象模型，提供了独立于内容与浏览器窗口进行交互的对象
+
+其作用就是跟浏览器做一些交互效果,比如如何进行页面的后退，前进，刷新，浏览器的窗口发生变化，滚动条的滚动，以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率
+
+浏览器的全部内容可以看成 DOM，整个浏览器可以看成 BOM。
+
+### window
+
+Bom 的核心对象是 window，它表示浏览器的一个实例
+在浏览器中，window 对象有双重角色，即是浏览器窗口的一个接口，又是全局对象
+
+1. 在全局作用域中声明的变量、函数都会变成 window 对象的属性和方法
+
+```js
+var name = 'js每日一题';
+function lookName() {
+  alert(this.name);
+}
+
+console.log(window.name); //js每日一题
+lookName(); //js每日一题
+window.lookName(); //js每日一题
+```
+
+2. 查看浏览器窗口尺寸（或者叫可视区域，不包括工具栏和滚动条）
+   ```js
+   window.innerWidth;
+   window.innerHeight;
+   ```
+3. 打开一个窗口
+
+```js
+window.open(URL, name, specs, replace);
+```
+
+说明：
+
+- URL：表示要打开的页面地址。如果没有指定 URL，打开空白窗口
+- name：指定 target 属性或窗口的名称
+  - \_blank - URL 加载到一个新的窗口。这是默认
+  - \_parent - URL 加载到父框架
+  - \_self - URL 替换当前页面
+  - \_top - URL 替换任何可加载的框架集
+  - name - 窗口名称
+- specs：设置窗口规格，可选。一个逗号分隔的项目列表
+
+  - height=pixels 窗口的高度。最小值为 100
+  - left=pixels 该窗口的左侧位置
+  - location=yes|no|1|0 是否显示地址字段.默认值是 yes
+  - menubar=yes|no|1|0 是否显示菜单栏.默认值是 yes
+  - resizable=yes|no|1|0 是否可调整窗口大小.默认值是 yes
+  - scrollbars=yes|no|1|0 是否显示滚动条.默认值是 yes
+  - status=yes|no|1|0 是否要添加一个状态栏.默认值是 yes
+  - titlebar=yes|no|1|0 是否显示标题栏.被忽略，除非调用 HTML 应用程序或一个值得信赖的对话框.默认值是 yes
+  - toolbar=yes|no|1|0 是否显示浏览器工具栏.默认值是 yes
+  - width=pixels 窗口的宽度.最小.值为 100
+
+- replace：可选，用于替换浏览历史中的当前条目
+  Optional.Specifies 规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：
+
+  - true - URL 替换浏览历史中的当前条目。
+  - false - URL 在浏览历史中创建新的条目。
+
+### location
+
+url 地址如下：
+
+```js
+http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents
+```
+
+location 属性描述如下：
+|属性名 |例子 |说明|
+|:---|:---|:---|
+|hash| "#contents" |url 中#后面的字符，没有则返回空串|
+|host |www.wrox.com:80 |服务器名称和端口号|
+|hostname |www.wrox.com| 域名，不带端口号|
+|href |http://www.wrox.com:80/WileyCDA/?q=javascript#contents |完整 url|
+|pathname |"/WileyCDA/"| 服务器下面的文件路径
+|port |80 |url 的端口号，没有则为空|
+|protocol| http: |使用的协议|
+|search |?q=javascript| url 的查询字符串，通常为？后面的内容|
+
+### navigator
+
+navigator 对象主要用来获取浏览器的属性，区分浏览器类型。属性较多，且兼容性比较复杂
+
+navigator 对象包含有关浏览器的信息
+navigator.appCodeName 返回浏览器的代码名
+navigator.appName 返回浏览器的名称
+navigator.appVersion 返回浏览器的平台和版本信息
+navigator.cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
+navigator.platform 返回运行浏览器的操作系统平台
+navigator.userAgent 返回由客户机发送服务器的 user-agent 头部的值
+
+![](/images/js/image8.jpg)
+
+### screen
+
+保存的纯粹是客户端能力信息，也就是浏览器窗口外面的客户端显示器的信息，比如像素宽度和像素高度
+
+可用的屏幕宽度和高度完整的分辨率：
+
+- screen.width
+- screen.height
+
+![](/images/js/image9.jpg)
+
+### history
+
+history 对象主要用来操作浏览器 URL 的历史记录，可以通过参数向前，向后，或者向指定 URL 跳转
+常用的属性如下：
+
+- history.go()
+
+接收一个整数数字或者字符串参数：向最近的一个记录中包含指定字符串的页面跳转，
+
+```js
+history.go('https://www.baidu.com/');
+```
+
+当参数为整数数字的时候，正数表示向前跳转指定的页面，负数为向后跳转指定的页面
+
+```js
+history.go(3); //向前跳转三个记录
+history.go(-1); //向后跳转一个记录
+```
+
+- history.forward()：向前跳转一个页面
+- history.back()：向后跳转一个页面
+- history.length：获取历史记录数
+
+## Ajax
+
+即异步的 JavaScript 和 XML，是一种创建交互式网页应用的网页开发技术，可以在不重新加载整个网页的情况下，与服务器交换数据，并且更新部分网页。最大优势，<span style='color: red'>无刷新获取页面</span>
+
+Ajax 的原理简单来说通过 XmlHttpRequest 对象来向服务器发异步请求，从服务器获得数据，然后用 JavaScript 来操作 DOM 而更新页面
+
+流程图如下
+
+![](/images/js/image10.jpg)
+
+优点：
+
+1. 可以无需刷新页面与服务器端进行通信
+2. 允许你根据用户事件来更新部分页面内容（如 onClick...）
+
+缺点：
+
+1. 没有浏览历史，不能后退
+2. 存在跨域问题（同源）
+3. SEO 不友好
+
+### 过程
+
+实现 Ajax 异步交互需要服务器逻辑进行配合，需要完成以下步骤：
+
+- 创建 Ajax 的核心对象 XMLHttpRequest 对象
+- 通过 XMLHttpRequest 对象的 open() 方法与服务端建立连接
+- 构建请求所需的数据内容，并通过 XMLHttpRequest 对象的 send() 方法发送给服务器端
+- 通过 XMLHttpRequest 对象提供的 onreadystatechange 事件监听服务器端你的通信状态
+- 接受并处理服务端向客户端响应的数据结果
+- 将处理结果更新到 HTML 页面中
+
+### 创建 XMLHttpRequest 对象
+
+通过 XMLHttpRequest() 构造函数用于初始化一个 XMLHttpRequest 实例对象
+
+```js
+const xhr = new XMLHttpRequest();
+```
+
+### 与服务器建立连接
+
+通过 XMLHttpRequest 对象的 open() 方法与服务器建立连接
+
+```js
+xhr.open(method, url, async);
+```
+
+参数说明：
+
+- method：表示当前的请求方式，常见的有 GET、POST
+- url：服务端地址
+- async：布尔值，表示是否异步执行操作，默认为 true
+
+如：
+
+```js
+xhr.open('POST', '/try/Ajax/demo_post2.php', true);
+```
+
+### 给服务端发送数据
+
+通过 XMLHttpRequest 对象的 send() 方法，将客户端页面的数据发送给服务端
+
+```js
+xhr.send([body]);
+```
+
+body: 在 XHR 请求中要发送的数据体，如果不传递数据则为 null
+如果使用 GET 请求发送数据的时候，需要注意如下：
+
+- 将请求数据添加到 open()方法中的 url 地址中
+- 发送请求数据中的 send()方法中参数设置为 null
+
+如 post 请求：
+
+```js
+xhr.send('fname=Henry&lname=Ford');
+```
+
+### 绑定 onreadystatechange 事件
+
+onreadystatechange 事件用于监听服务器端的通信状态，主要监听的属性为 XMLHttpRequest.readyState
+
+关于 XMLHttpRequest.readyState 属性有五个状态，如下图显示
+
+![](/images/js/image11.jpg)
+
+只要 readyState 属性值一变化，就会触发一次 readystatechange 事件
+
+XMLHttpRequest.responseText 属性用于接收服务器端的响应结果
+
+### 封装
+
+```js
+
+//封装一个ajax请求
+function ajax(options) {
+    //创建XMLHttpRequest对象
+    const xhr = new XMLHttpRequest()
+
+
+    //初始化参数的内容
+    options = options || {}
+    options.type = (options.type || 'GET').toUpperCase()
+    options.dataType = options.dataType || 'json'
+    const params = options.data
+
+    //发送请求
+    if (options.type === 'GET') {
+        xhr.open('GET', options.url + '?' + params, true)
+        xhr.send(null)
+    } else if (options.type === 'POST') {
+        xhr.open('POST', options.url, true)
+        xhr.send(params)
+
+    //接收请求
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            let status = xhr.status
+            if (status >= 200 && status < 300) {
+                options.success && options.success(xhr.responseText, xhr.responseXML)
+            } else {
+                options.fail && options.fail(status)
+            }
+        }
+    }
+    xhr.abort() //用于停止正在进行的请求
+}
+```
+
+使用方法如下：
+
+```js
+ajax({
+  type: 'post',
+  dataType: 'json',
+  data: {},
+  url: 'https://xxxx',
+  success: function (text, xml) {
+    //请求成功后的回调函数
+    console.log(text);
+  },
+  fail: function (status) {
+    ////请求失败后的回调函数
+    console.log(status);
+  },
+});
+```
+
+## 浏览器事件（循环）处理机制
+
+1. js 遇到异步并不会一直等待返回结果，而是将这个事件挂起，继续执行执行栈中的任务，当一个异步事件返回结果后，js 将这个事件加入与当前执行栈不同的另外一个队列中，我们称为事件队列，被放入事件队列不会立刻执行回调，而是等待当前执行栈中的所有任务都执行完毕之后，主线程处于闲置状态时，主线程会查看事件队列中是否有任务，如果有，那么主线程会从中取出排在第一位的事件，并把事件对应的回调放在执行栈中，然后执行其中的同步代码，如此反复，就成了一个无限循环
+2. 宏任务：script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI rendering
+3. 微任务：promise 的回调如 then 和 catch，process.nextTick, Object.observe, MutationObserver
+4. 第一次事件循环中，JavaScript 引擎会把整个 script 代码当成一个宏任务执行，执行完成之后，再检测本次循环中是否寻在微任务，存在的话就依次从微任务的任务队列中读取执行完所有的微任务，再读取宏任务的任务队列中的任务执行，再执行所有的微任务，如此循环。JS 的执行顺序就是每次事件循环中的宏任务-微任务。
