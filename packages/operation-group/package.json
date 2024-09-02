@@ -28,6 +28,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.12",
+    "vite-plugin-import": "^0.4.0",
     "vite-plugin-style-import": "^2.0.0"
   },
   "publishConfig": {

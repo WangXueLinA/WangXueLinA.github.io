@@ -36,7 +36,7 @@
     }
 
     .parameter {
-      color: pink;
+      color: hsl(5, 74%, 59%);
     }
 
     .imports,
@@ -51,9 +51,14 @@
   }
 }
 
-// .token.comment {
-//   color: hsl(119.41deg 58.13% 46.08%);
-// }
+.token.comment {
+  color: hsl(119, 34%, 47%);
+}
+
+.token.string,
+.token.attr-value > .token.punctuation {
+  color: chocolate;
+}
 
 .dumi-default-source-code-copy {
   background-color: transparent;

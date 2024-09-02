@@ -28,6 +28,8 @@ git pull origin master:branchtest
 
 ## git pull --rebase
 
+当你希望将远程仓库的最新更改合并到你的本地分支，并且希望你的本地提交能够按照时间顺序排列在远程分支的顶部，不产生的<span style='color: red'>额外合并提交（merge commit）</span>，使提交历史更加简洁可以使用 `git pull --rebase`
+
 ## git stash
 
 stash 命令能够将还未 commit 的代码存起来

@@ -1389,3 +1389,214 @@ import { add, minus } from './math';
 import 'lodash';
 console.log('hello webpack');
 ```
+
+## 面试
+
+### webpack 中 loader 跟 plugin 区别
+
+#### Loaders（加载器）
+
+Loaders 主要用于转换文件内容。当你导入一个文件时，Webpack 会从左到右依次执行所有相关的 loader，并将输出传递给下一个 loader 或者直接打包到最终的 bundle 中。Loaders 可以同步或异步执行，并且可以被链式调用。
+
+特点：
+
+- 转换文件：Loaders 可以处理各种类型的文件，如 JavaScript、CSS、图片、字体等。
+- 链式调用：多个 loaders 可以串联使用，后一个 loader 接收前一个 loader 的输出作为输入。
+- 配置方式：在 webpack.config.js 文件中通过 module.rules 配置来指定哪些文件需要经过哪些 loader 处理。
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          { loader: 'babel-loader' }, // 转换 ES6+ 代码到浏览器兼容的版本
+          { loader: 'eslint-loader' }, // 检查代码风格
+        ],
+        exclude: /node_modules/,
+      },
+    ],
+  },
+};
+```
+
+#### Plugins（插件）
+
+Plugins 是用来扩展 Webpack 功能性的。它们可以在构建过程中注入额外的行为，比如清理旧的 build 文件夹、定义全局变量、压缩文件等。与 loaders 不同，plugins 在整个编译生命周期的特定时机运行。
+
+特点：
+
+- 扩展功能：Plugins 可以添加、修改或优化 Webpack 的行为。
+- 生命周期挂钩：Plugins 可以在编译过程中的特定阶段被触发，比如开始编译之前 (beforeCompile) 或生成文件之后 (afterEmit)。
+- 配置方式：在 webpack.config.js 文件中通过 plugins 数组来注册插件实例。
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+module.exports = {
+  //...
+  plugins: [
+    new CleanWebpackPlugin(), // 清除旧的构建文件
+    new HtmlWebpackPlugin({
+      // 生成 HTML 文件
+      template: './src/index.html',
+    }),
+  ],
+};
+```
+
+总结
+
+- Loaders 负责转换文件内容，而 Plugins 用来扩展 Webpack 的功能。
+- Loaders 在文件被导入时按顺序执行，而 Plugins 在编译的不同阶段被调用。
+- Loaders 主要处理单个文件的转换，而 Plugins 更多处理整体构建流程的优化和管理。
+
+### Plugin 就是插件，基于事件流框架 Tapable，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
+
+### css-loader 和 style-loader
+
+- css-loader 的主要负责解析 CSS 文件，并将 CSS 文件中的 @import 和 url() 等语法导入的资源路径进行解析，是将 CSS 文件转化为 JavaScript 模块
+- style-loader 的作用是在运行时（runtime）将 CSS 动态地插入到 DOM 中。这意味着当你的应用加载时，style-loader 会负责创建一个新的 `<style>` 标签，并将 CSS 内容插入到该标签中，然后将其添加到页面的`<head>` 部分。
+
+### webpack 打包原理
+
+1. 模块解析：
+
+   Webpack 从入口文件（entry point）开始，递归地查找项目中的所有依赖模块。这个过程涉及到解析每个文件中的 import/require 语句，找到所有被引用的模块。Webpack 将这些模块组织成一个依赖图谱，其中每个节点代表一个模块，边表示模块间的依赖关系。
+
+2. 模块转换：
+
+   在找到所有依赖模块后，Webpack 会使用配置好的 Loader 对这些模块进行转换。Loader 是可配置的函数，用于转换特定类型的文件。例如，babel-loader 用于将现代 JavaScript 代码转换为浏览器兼容的版本，css-loader 和 style-loader 用于处理 CSS 文件等。
+
+3. 构建模块：
+
+   一旦所有模块都被转换完毕，Webpack 会开始构建模块。这个过程包括将所有模块合并成一个或多个输出文件（chunks）。在构建过程中，Webpack 还会执行一些优化，例如：
+
+   - 提取公共代码：Webpack 可以识别并提取出多个模块之间共有的代码，减少冗余。
+   - 代码分割：通过动态 import 等技术，Webpack 可以将代码分割成多个较小的文件，实现按需加载。
+   - 压缩：Webpack 可以压缩 JavaScript、CSS 等文件，减少文件大小。
+   - 定义环境变量：Webpack 可以在构建时替换某些变量，例如定义 process.env.NODE_ENV 为 'production' 或 'development'。
+
+4. 输出文件:
+
+   最后，Webpack 会根据配置输出最终的文件。这些文件通常会被放置在一个指定的输出目录中，例如 dist。Webpack 支持多种输出格式，可以针对不同的环境和需求进行定制。
+
+5. 插件机制：
+
+   在整个构建过程中，Webpack 的插件系统允许开发者在构建的不同阶段注入自定义的行为。插件可以监听 Webpack 生命周期中的各种事件，并在这些事件发生时执行相应的操作，例如清除输出目录、优化输出文件等
+
+### 手写 loader
+
+Loader 本质就是一个函数
+
+loader 分类：同步 loader，异步 loader，Rawloader，Pitchingloader
+
+#### 实现一个简单加载的 txt 文档的 loader
+
+1. 初始化项目
+   ```js
+   yarn init -y
+   ```
+2. 安装 webpack 依赖
+   ```js
+   yarn add webpack webpack-cil
+   ```
+3. 创建 webpack.config.js 文件
+4. 创建如图下文件，打包`npm run build`后执行`node dist/bundle.js`打印文件内容
+
+![](/images/webpack/image58.jpg)
+
+loader 上下文（this 上的属性跟方法）：
+
+1. this.context：被处理的文件所在的路径
+2. this.data: loader 有两个阶段，一个是 normal 阶段，一个是 pitching 阶段，通过这个属性，拿到 pitching 阶段保存的值，如果是 loader 中没有定义 pitching 阶段，则值为 null
+3. this.callback
+4. this.cacheable
+5. this.async
+6. this.emitFile
+
+### 手写 Plugin
+
+从形态上看，插件通常是一个带有 apply 函数的类
+
+```js
+class SomePlugin {
+  apply(compiler) {}
+}
+```
+
+## Webpack 的 Tree Shaking 原理
+
+Webpack 的 Tree Shaking 是一个利用 ES6 模块静态结构特性来去除生产环境下不必要代码的优化过程。其工作原理在于：
+
+- 当 Webpack 分析代码时，它会标记出所有的 import 语句和 export 语句。
+- 然后，当 Webpack 确定某个模块没有被导入时，它会在生成的 bundle 中排除这个模块的代码。
+- 同时，Webpack 还会进行递归的标记清理，以确保所有未使用的依赖项都不会出现在最终的 bundle 中。
+
+确保你使用的是 ES6 模块语法（即 import 和 export），因为只有这样才能让 Tree Shaking 发挥作用。
+
+## 什么是 Webpack 的热更新（Hot Module Replacement）？原理是什么？
+
+Webpack 的热更新，在不刷新页面的前提下，将新代码替换掉旧代码。
+
+HRM 的原理实际上是 webpack-dev-server（WDS）和浏览器之间维护了一个 websocket 服务。当本地资源发生变化后，webpack 会先将打包生成新的模块代码放入内存中，然后 WDS 向浏览器推送更新，并附带上构建时的 hash，让客户端和上一次资源进行对比.
+
+## 11. vite 比 webpack 快在哪里
+
+### 开发模式的差异
+
+在开发环境中，Webpack 是先打包再启动开发服务器，而 Vite 则是直接启动，然后再按需编译依赖文件。（大家可以启动项目后检查源码 Sources 那里看到）
+这意味着，当使用 Webpack 时，所有的模块都需要在开发前进行打包，这会增加启动时间和构建时间。
+而 Vite 则采用了不同的策略，它会在请求模块时再进行实时编译，这种按需动态编译的模式极大地缩短了编译时间，特别是在大型项目中，文件数量众多，Vite 的优势更为明显。
+
+**Webpack 启动**
+
+![](/images/webpack/image59.jpg)
+
+**Vite 启动**
+
+![](/images/webpack/image60.jpg)
+
+### 对 ES Modules 的支持
+
+现代浏览器本身就支持 ES Modules，会主动发起请求去获取所需文件。Vite 充分利用了这一点，将开发环境下的模块文件直接作为浏览器要执行的文件，而不是像 Webpack 那样先打包，再交给浏览器执行。这种方式减少了中间环节，提高了效率。
+
+**什么是 ES Modules？**
+
+通过使用 export 和 import 语句，ES Modules 允许在浏览器端导入和导出模块。
+当使用 ES Modules 进行开发时，开发者实际上是在构建一个依赖关系图，不同依赖项之间通过导入语句进行关联。
+
+### 底层语言的差异
+
+Webpack 是基于 Node.js 构建的，而 Vite 则是基于 esbuild 进行预构建依赖。esbuild 是采用 Go 语言编写的，Go 语言是纳秒级别的，而 Node.js 是毫秒级别的。因此，Vite 在打包速度上相比 Webpack 有 10-100 倍的提升。
+
+**什么是预构建依赖？**
+
+预构建依赖通常指的是在项目启动或构建之前，对项目中所需的依赖项进行预先的处理或构建。这样做的好处在于，当项目实际运行时，可以直接使用这些已经预构建好的依赖，而无需再进行实时的编译或构建，从而提高了应用程序的运行速度和效率。
+
+### 热更新的处理
+
+在 Webpack 中，当一个模块或其依赖的模块内容改变时，需要重新编译这些模块。
+而在 Vite 中，当某个模块内容改变时，只需要让浏览器重新请求该模块即可，这大大减少了热更新的时间。
+
+## webpack 构建流程
+
+webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
+
+- 初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数
+- 开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译
+- 确定入口：根据配置中的 entry 找出所有的入口文件
+- 编译模块：从入口文件出发，调用所有配置的 loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理
+- 完成模块编译：在经过上一步使用 loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系
+- 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会
+- 输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+
+在以上过程中，webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 webpack 提供的 API 改变 webpack 的运行结果。
+简单说：
+
+- 初始化：启动构建，读取与合并配置参数，加载 Plugin，实例化 Compiler
+- 编译：从 entry 出发，针对每个 Module 串行调用对应的 loader 去翻译文件的内容，再找到该 Module 依赖的 Module，递归地进行编译处理
+- 输出：将编译后的 Module 组合成 Chunk，将 Chunk 转换成文件，输出到文件系统中

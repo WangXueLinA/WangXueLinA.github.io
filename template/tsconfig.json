@@ -17,7 +17,7 @@
     "declarationDir": "./lib", // 声明文件的路径
     "emitDeclarationOnly": true,
     "experimentalDecorators": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "paths": {
       "@xuelin/<%= name %>": ["./src"]
     }

@@ -7,16 +7,302 @@ title: css
 
 ## 盒子居中
 
+### flex 布局
+
+demo: https://stackblitz.com/edit/stackblitz-starters-wikqaz?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    display: flex; //flex代码三件套
+    justify-content: center;
+    align-items: center;
+  }
+  .inner {
+    width: 40px;
+    height: 50px;
+    background-color: lightblue;
+  }
+</style>
+
+<div class="wrap">
+  <div class="inner"></div>
+</div>
+```
+
+### absolute + transform
+
+demo: https://stackblitz.com/edit/stackblitz-starters-k2m3eg?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    position: relative;
+  }
+  .inner {
+    background-color: lightblue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+
+<div class="wrap">
+  <span class="inner">绝对定位+transform</span>
+</div>
+```
+
+### absolute + 负 margin
+
+该方法也适用于子元素是行内元素、行内块元素、块元素，唯一的要求是子元素的 高度 和 宽度 已知的情况。
+
+demo: https://stackblitz.com/edit/stackblitz-starters-hy5orq?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    position: relative;
+  }
+  .inner {
+    background-color: lightblue;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -40px;
+    height: 80px;
+    width: 100px;
+  }
+</style>
+<div class="wrap">
+  <span class="inner"></span>
+</div>
+```
+
+### absolute + calc
+
+该方法也适用于子元素是行内元素、行内块元素、块元素，唯一的要求是子元素的 高度 和 宽度 已知的情况
+
+demo: https://stackblitz.com/edit/stackblitz-starters-d6k1nd?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    position: relative;
+  }
+  .inner {
+    background-color: lightblue;
+    position: absolute;
+    top: calc(50% - 40px);
+    left: calc(50% - 50px);
+    height: 80px;
+    width: 100px;
+  }
+</style>
+<div class="wrap">
+  <span class="inner"></span>
+</div>
+```
+
+### absolute + margin:auto
+
+该方法也适用于子元素是行内元素、行内块元素、块元素，唯一的要求是子元素要有 高度 和 宽度 。不然，子元素会完全填充父元素
+
+demo: https://stackblitz.com/edit/stackblitz-starters-rbxypy?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    position: relative;
+  }
+  .inner {
+    background-color: lightblue;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+  }
+</style>
+<div class="wrap">
+  <span class="inner">absolute + margin:auto</span>
+</div>
+```
+
+### 借助 display:table-cell
+
+demo: https://stackblitz.com/edit/stackblitz-starters-3uujgc?file=index.html
+
+```html
+<style>
+  .wrap {
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .inner {
+    background-color: lightblue;
+    margin: 0 auto;
+    height: 110px;
+    width: 100px;
+  }
+</style>
+<div class="wrap">
+  <div class="inner"></div>
+</div>
+```
+
+### grid
+
+grid 的兼容性较差，所以没有流行使用
+
+demo: https://stackblitz.com/edit/stackblitz-starters-lbur9h?file=index.html
+
+```html
+<style>
+  .wrap {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    background-color: lightcoral;
+  }
+  .inner {
+    background-color: lightblue;
+    height: 110px;
+    width: 100px;
+  }
+</style>
+<div class="wrap">
+  <div class="inner"></div>
+</div>
+```
+
+### BFC + margin
+
+如果父子元素的高度和宽度都是固定的话，可以直接利用 margin-top 和 margin-left 对子元素进行定位，从而实现居中。同时，利用 position: absolute; 让子元素成为一个 BFC，从而解决父子元素 margin collapsing 的问题
+
+demo: https://stackblitz.com/edit/stackblitz-starters-yhbsxu?file=index.html
+
+```html
+<style>
+  .container {
+    background-color: silver;
+    width: 400px;
+    height: 500px;
+  }
+  .content {
+    width: 200px;
+    height: 300px;
+    background-color: red;
+    margin-top: 100px;
+    margin-left: 100px;
+    position: absolute;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="content"></div>
+  </div>
+</body>
+```
+
 ## flex
 
-https://codesandbox.io/p/sandbox/he-zi-ju-zhong-flex-6nzdx6?file=%2Findex.html%3A3%2C16
+### flex-grow
 
-https://juejin.cn/post/6905921139164315661#heading-2
+子容器在父容器的“主轴”上还有多少空间可以“瓜分”，这个可以被“瓜分”的空间就叫做剩余空间。
+
+flex-grow 为 0 : https://stackblitz.com/edit/stackblitz-starters-syrbj2?file=index.html
+
+![](/images/css/image7.jpg)
+
+父容器的主轴还有这么多剩余空间，子容器有什么办法将这些剩余空间瓜分来实现弹性的效果呢？
+
+flex-grow 定义子容器的瓜分剩余空间的比例，默认为 0，即如果存在剩余空间，也不会去瓜分。
+
+flex-grow 为 1 : https://stackblitz.com/edit/stackblitz-starters-zks1xd?file=index.html
+
+![](/images/css/image8.jpg)
+
+计算方式如下：
+
+- 剩余空间：x
+- 假设有三个 flex item 元素，flex-grow 的值分别为 a, b, c
+- 每个元素可以分配的剩余空间为：a/(a+b+c) _ x，b/(a+b+c) _ x，c/(a+b+c) \* x
+
+以 A 为例子进行说明：当时父盒子剩余空间的为 150， A 占比剩余空间：`1/(1+2+3) = 1/6`，那么 A “瓜分”到的 `150\*1/6=25`，实际宽度为 `100+25=125`。
+
+### flex-shrink
+
+我们知道了子容器设置了 flex-grow 有可能会被拉伸。那么什么情况下子容器被压缩呢？考虑一种情况：如果子容器宽度超过父容器宽度，即使是设置了 flex-grow，但是由于没有剩余空间，就分配不到剩余空间了。这时候有两个办法：换行和压缩。由于 flex 默认不换行，那么压缩的话，怎么压缩呢，压缩多少？此时就需要用到 flex-shrink 属性了。
+
+flex 元素的收缩规则，默认值是 1
+
+计算方式：
+
+- 三个 flex item 元素的 width: w1, w2, w3
+- 三个 flex item 元素的 flex-shrink：a, b, c
+- 计算总压缩权重：
+- sum = a _ w1 + b _ w2 + c \_ w3
+- 计算每个元素压缩率：
+- S1 = a _ w1 / sum，S2 =b _ w2 / sum，S3 =c \_ w3 / sum
+- 计算每个元素宽度：width - 压缩率 \* 溢出空间
+
+子容器宽度总和为 650，溢出空间为 150
+总压缩：300 _ 1 + 150 _ 2 + 200 * 3 = 1200
+A 的压缩率：300*1 / 1200 = 0.25
+A 的压缩值：150 \* 0.25 = 37.5
+A 的实际宽度：300 - 37.5 = 262.5
+
+![](/images/css/image10.jpg)
+
+flex-shrink 为 0 时:
+
+![](/images/css/image9.jpg)
+
+### flex-basis
+
+flex-basis 即用于定义了在分配多余空间之前，弹性元素在主轴方向上所占的初始大小。这个初始大小可以是具体的像素值、百分比或者是关键词 auto
+
+flex-basis: 0%意味着在分配额外空间之前，元素不占用任何固定的空间，完全依赖于 flex-grow 来分配空间
+
+flex-basis: https://stackblitz.com/edit/stackblitz-starters-d31xfm?file=index.html
+
+![](/images/css/image11.jpg)
+
+可以看出几个属性的优先级关系：
+
+`max-width/min-width > flex-basis > width > box`
 
 ## 相对定位，绝对定位
 
-relative： 占位不脱标，相对于自身在原文档流中位置，不改变元素大小
-absoulte: 脱标不占位，参照上级或者上上级有无定位，没有则根据 body 元素定位，改变元素大小，不设置宽高，依赖内容决定
+- relative： 占位不脱标，相对于自身在原文档流中位置，不改变元素大小
+- absoulte: 脱标不占位，参照上级或者上上级有无定位，没有则根据 body 元素定位，改变元素大小，不设置宽高，依赖内容决定
 
 ## display 的 block、inline 和 inline-block 的区别
 

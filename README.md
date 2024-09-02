@@ -1,21 +1,22 @@
-# xuelin_dumi
+# DOCUMENT
 
-[![NPM version](https://img.shields.io/npm/v/xuelin_dumi.svg?style=flat)](https://npmjs.org/package/xuelin_dumi)
-[![NPM downloads](http://img.shields.io/npm/dm/xuelin_dumi.svg?style=flat)](https://npmjs.org/package/xuelin_dumi)
+## 项目说明
 
-A react library developed with dumi
+四个模块：组件库， 前端知识笔记， 前端项目部署，源码
 
-## Usage
+### 前端知识笔记
 
-TODO
+js，Es6，typescript
+涉及框架：react，react18
+微前端：qiankun， webComponent
+可视化：antdG6，Graphin
+状态管理：redux
+http
+git 等
 
-## Options
+## 组件库创建
 
-TODO
-
-## 命令行
-
-```shell
+```bash
 npm run create #创建模块
 
 lerna link #软链接依赖
@@ -29,8 +30,7 @@ npm run install-lib #安装全局依赖
 
 npm run build #构建所有包
 
-npm run build --scope @xuelin/dsc-api-detail #单独构建某一包，会先构建当前包依赖的包
-
+npm run build --scope @xuelin/tools #单独构建某一包，会先构建当前包依赖的包
 
 
 npm run release # 发布包
@@ -41,7 +41,7 @@ npm run release:package # 单独发布某些包 可选
 
 ### 本地项目测试
 
-```
+```js
 
 npm i yalc -g
 yarn global add yalc
@@ -64,7 +64,3 @@ yalc add @xuelin/<%= name %>
 yalc remove @xuelin/<%= name %>
 
 ```
-
-## LICENSE
-
-MIT

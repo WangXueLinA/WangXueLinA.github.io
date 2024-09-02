@@ -19,7 +19,7 @@ const keyArr = new Uint8Array([
  * @param unencryptedData 要加密的数据
  * @returns 加密后的数据
  */
-export const encrypt = (unencryptedData: string) => {
+export const encrypt = (unencryptedData?: string) => {
   if (!unencryptedData) {
     return '';
   }
@@ -78,18 +78,18 @@ export const decrypt = (encryptedData: string) => {
  * @param key 密钥
  * @returns 加密后的数据
  */
-export const encryptByDes = (message: string, key?: string) => {
+export const encryptByDes = (message?: string, key?: string) => {
   if (!message) {
     return '';
   }
   try {
-    const keyHex = CryptoJS.enc.Utf8.parse(key);
+    const keyHex = CryptoJS.enc.Utf8.parse(key || '');
     const encrypted = CryptoJS.DES.encrypt(message, keyHex, {
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,
     });
 
-    return encrypted.toString();
+    return encrypted?.toString();
   } catch (error) {
     console.error(error);
   }
@@ -107,7 +107,7 @@ export const decryptByDes = (message: string, key?: string) => {
     return '';
   }
   try {
-    const keyHex = CryptoJS.enc.Utf8.parse(key);
+    const keyHex = CryptoJS.enc.Utf8.parse(key || '');
     const decrypted = CryptoJS.DES.decrypt(message, keyHex, {
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,

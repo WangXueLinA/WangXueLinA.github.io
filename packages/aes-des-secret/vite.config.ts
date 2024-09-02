@@ -3,8 +3,6 @@ import build from '@xuelin/vite-plugin-build';
 import path from 'path';
 import { defineConfig, UserConfig } from 'vite';
 
-console.log(build, 'build');
-
 export default defineConfig(() => {
   const config: UserConfig = {
     plugins: [react(), build()],

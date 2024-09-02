@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { decrypt, decryptByDes, encrypt, encryptByDes } from '../index';
 
 const Demo: React.FC = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string | undefined>('');
+
   return (
     <>
       <Input onChange={(e) => setValue(e.target.value)} placeholder="请输入" />

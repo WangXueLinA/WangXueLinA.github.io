@@ -10,6 +10,8 @@ group: 微前端
 
 官网： https://qiankun.umijs.org/zh/guide
 
+搭建 demo 使用：https://github.com/WangXueLinA/simple-qiankun
+
 qiankun 的优势有哪些
 
 - 技术栈无关：主框架不限制接入应用的技术栈，微应用具备完全自主权独立开发

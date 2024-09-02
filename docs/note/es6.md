@@ -519,32 +519,29 @@ ES6 中 Decorator 功能亦如此，其本质也不是什么高大上的结构�
 
 这里定义一个士兵，这时候他什么装备都没有
 
-```
-class soldier{
-
-}
+```js
+class soldier {}
 ```
 
 定义一个得到 AK 装备的函数，即装饰器
 
-```
-function strong(target){
-    target.AK = true
+```js
+function strong(target) {
+  target.AK = true;
 }
 ```
 
 使用该装饰器对士兵进行增强
 
-```
+```js
 @strong
-class soldier{
-}
+class soldier {}
 ```
 
 这时候士兵就有武器了
 
-```
-soldier.AK // true
+```js
+soldier.AK; // true
 ```
 
 上述代码虽然简单，但也能够清晰看到了使用 Decorator 两大优点：
@@ -552,35 +549,31 @@ soldier.AK // true
 - 代码可读性变强了，装饰器命名相当于一个注释
 - 在不改变原有代码情况下，对原来功能进行扩展
 
-## 用法
+### 用法
 
 Docorator 修饰对象为下面两种：
 
 - 类的装饰
 - 类属性的装饰
 
-### 类的装饰
+#### 类的装饰
 
 当对类本身进行装饰的时候，能够接受一个参数，即类本身
 
 将装饰器行为进行分解，大家能够有个更深入的了解
 
-```
+```js
 @decorator
-class A {
-
-}
+class A {}
 
 // 等同于
-class A {
-
-}
+class A {}
 A = decorator(A) || A;
 ```
 
 下面@testable 就是一个装饰器，target 就是传入的类，即 MyTestableClass，实现了为类添加静态属性
 
-```
+```js
 @testable
 class MyTestableClass {
   // ...
@@ -590,28 +583,28 @@ function testable(target) {
   target.isTestable = true;
 }
 
-MyTestableClass.isTestable // true
+MyTestableClass.isTestable; // true
 ```
 
 如果想要传递参数，可以在装饰器外层再封装一层函数
 
-```
+```js
 function testable(isTestable) {
-  return function(target) {
+  return function (target) {
     target.isTestable = isTestable;
-  }
+  };
 }
 
 @testable(true)
 class MyTestableClass {}
-MyTestableClass.isTestable // true
+MyTestableClass.isTestable; // true
 
 @testable(false)
 class MyClass {}
-MyClass.isTestable // false
+MyClass.isTestable; // false
 ```
 
-### 类属性的装饰
+#### 类属性的装饰
 
 当对类属性进行装饰的时候，能够接受三个参数：
 
@@ -621,8 +614,8 @@ MyClass.isTestable // false
 
 首先定义一个 readonly 装饰器
 
-```
-function readonly(target, name, descriptor){
+```js
+function readonly(target, name, descriptor) {
   descriptor.writable = false; // 将可写属性设为false
   return descriptor;
 }
@@ -630,31 +623,33 @@ function readonly(target, name, descriptor){
 
 使用 readonly 装饰类的 name 方法
 
-```
+```js
 class Person {
   @readonly
-  name() { return `${this.first} ${this.last}` }
+  name() {
+    return `${this.first} ${this.last}`;
+  }
 }
 ```
 
 相当于以下调用
 
-```
+```js
 readonly(Person.prototype, 'name', descriptor);
 ```
 
 如果一个方法有多个装饰器，就像洋葱一样，先从外到内进入，再由内到外执行
 
-```
-function dec(id){
-    console.log('evaluated', id);
-    return (target, property, descriptor) =>console.log('executed', id);
+```js
+function dec(id) {
+  console.log('evaluated', id);
+  return (target, property, descriptor) => console.log('executed', id);
 }
 
 class Example {
-    @dec(1)
-    @dec(2)
-    method(){}
+  @dec(1)
+  @dec(2)
+  method() {}
 }
 // evaluated 1
 // evaluated 2
@@ -668,7 +663,7 @@ class Example {
 
 装饰器不能用于修饰函数，因为函数存在变量声明情况
 
-```
+```js
 var counter = 0;
 
 var add = function () {
@@ -682,7 +677,7 @@ function foo() {
 
 编译阶段，变成下面
 
-```
+```js
 var counter;
 var add;
 
@@ -699,30 +694,28 @@ add = function () {
 
 意图是执行后 counter 等于 1，但是实际上结果是 counter 等于 0
 
-## 使用场景
+### 使用场景
 
 基于 Decorator 强大的作用，我们能够完成各种场景的需求，下面简单列举几种：
 
 使用 react-redux 的时候，如果写成下面这种形式，既不雅观也很麻烦
 
-```
-class MyReactComponent extends React.Component {
-
-}
+```js
+class MyReactComponent extends React.Component {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyReactComponent);
 ```
 
 通过装饰器就变得简洁多了
 
-```
+```js
 @connect(mapStateToProps, mapDispatchToProps)
 export default class MyReactComponent extends React.Component {}
 ```
 
 将 mixins，也可以写成装饰器，让使用更为简洁了
 
-```
+```js
 function mixins(...list) {
   return function (target) {
     Object.assign(target.prototype, ...list);
@@ -731,14 +724,16 @@ function mixins(...list) {
 
 // 使用
 const Foo = {
-  foo() { console.log('foo') }
+  foo() {
+    console.log('foo');
+  },
 };
 
 @mixins(Foo)
 class MyClass {}
 
 let obj = new MyClass();
-obj.foo() // "foo"
+obj.foo(); // "foo"
 ```
 
 下面再讲讲 core-decorators.js 几个常见的装饰器
@@ -747,7 +742,7 @@ obj.foo() // "foo"
 
 autobind 装饰器使得方法中的 this 对象，绑定原始对象
 
-```
+```js
 import { autobind } from 'core-decorators';
 
 class Person {
@@ -768,7 +763,7 @@ getPerson() === person;
 
 readonly 装饰器使得属性或方法不可写
 
-```
+```js
 import { readonly } from 'core-decorators';
 
 class Meal {
@@ -785,7 +780,7 @@ dinner.entree = 'salmon';
 
 deprecate 或 deprecated 装饰器在控制台显示一条警告，表示该方法将废除
 
-```
+```js
 import { deprecate } from 'core-decorators';
 
 class Person {
@@ -805,57 +800,57 @@ person.facepalmHard();
 // DEPRECATION Person#facepalmHard: 功能废除了
 ```
 
-# 对象新增的扩展
+## 对象新增的扩展
 
-## 参数
+### 参数
 
 ES6 允许为函数的参数设置默认值
 
-```
+```js
 function log(x, y = 'World') {
   console.log(x, y);
 }
 
-console.log('Hello') // Hello World
-console.log('Hello', 'China') // Hello China
-console.log('Hello', '') // Hello
+console.log('Hello'); // Hello World
+console.log('Hello', 'China'); // Hello China
+console.log('Hello', ''); // Hello
 ```
 
 函数的形参是默认声明的，不能使用 let 或 const 再次声明
 
-```
+```js
 function foo(x = 5) {
-    let x = 1; // error
-    const x = 2; // error
+  let x = 1; // error
+  const x = 2; // error
 }
 ```
 
 参数默认值可以与解构赋值的默认值结合起来使用
 
-```
-function foo({x, y = 5}) {
+```js
+function foo({ x, y = 5 }) {
   console.log(x, y);
 }
 
-foo({}) // undefined 5
-foo({x: 1}) // 1 5
-foo({x: 1, y: 2}) // 1 2
-foo() // TypeError: Cannot read property 'x' of undefined
+foo({}); // undefined 5
+foo({ x: 1 }); // 1 5
+foo({ x: 1, y: 2 }); // 1 2
+foo(); // TypeError: Cannot read property 'x' of undefined
 ```
 
 上面的 foo 函数，当参数为对象的时候才能进行解构，如果没有提供参数的时候，变量 x 和 y 就不会生成，从而报错，这里设置默认值避免
 
-```
-function foo({x, y = 5} = {}) {
+```js
+function foo({ x, y = 5 } = {}) {
   console.log(x, y);
 }
 
-foo() // undefined 5
+foo(); // undefined 5
 ```
 
 参数默认值应该是函数的尾参数，如果不是非尾部的参数设置默认值，实际上这个参数是没发省略的
 
-```
+```js
 function f(x = 1, y) {
   return [x, y];
 }
@@ -866,68 +861,81 @@ f(, 1) // 报错
 f(undefined, 1) // [1, 1]
 ```
 
-## 属性
+### 属性
 
-### 函数的 length 属性
+#### 函数的 length 属性
 
 length 将返回没有指定默认值的参数个数
 
-```
-(function (a) {}).length // 1
-(function (a = 5) {}).length // 0
-(function (a, b, c = 5) {}).length // 2
+```js
+(function (a) {})
+  .length(
+    // 1
+    function (a = 5) {},
+  )
+  .length(
+    // 0
+    function (a, b, c = 5) {},
+  ).length; // 2
 ```
 
 rest 参数也不会计入 length 属性
 
-```
-(function(...args) {}).length // 0
+```js
+(function (...args) {}).length; // 0
 ```
 
 如果设置了默认值的参数不是尾参数，那么 length 属性也不再计入后面的参数了
 
-```
-(function (a = 0, b, c) {}).length // 0
-(function (a, b = 1, c) {}).length // 1
+```js
+(function (a = 0, b, c) {}).length(
+  // 0
+  function (a, b = 1, c) {},
+).length; // 1
 ```
 
 ### name 属性
 
 返回该函数的函数名
 
-```
+```js
 var f = function () {};
 
 // ES5
-f.name // ""
+f.name; // ""
 
 // ES6
-f.name // "f"
+f.name; // "f"
 ```
 
 如果将一个具名函数赋值给一个变量，则 name 属性都返回这个具名函数原本的名字
 
-```
+```js
 const bar = function baz() {};
-bar.name // "baz"
+bar.name; // "baz"
 ```
 
 Function 构造函数返回的函数实例，name 属性的值为 anonymous
 
-```
-(new Function).name // "anonymous"
+```js
+new Function().name; // "anonymous"
 ```
 
 bind 返回的函数，name 属性值会加上 bound 前缀
 
-```
-function foo() {};
-foo.bind({}).name // "bound foo"
+```js
+function foo() {}
+foo
+  .bind({})
+  .name(
+    // "bound foo"
 
-(function(){}).bind({}).name // "bound "
+    function () {},
+  )
+  .bind({}).name; // "bound "
 ```
 
-## 作用域
+### 作用域
 
 一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域
 
@@ -935,7 +943,7 @@ foo.bind({}).name // "bound foo"
 
 下面例子中，y=x 会形成一个单独作用域，x 没有被定义，所以指向全局变量 x
 
-```
+```js
 let x = 1;
 
 function f(y = x) {
@@ -944,14 +952,14 @@ function f(y = x) {
   console.log(y);
 }
 
-f() // 1
+f(); // 1
 ```
 
-## 严格模式
+### 严格模式
 
 只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错
 
-```
+```js
 // 报错
 function doSomething(a, b = a) {
   'use strict';
@@ -983,8 +991,8 @@ const obj = {
 
 使用“箭头”（=>）定义函数
 
-```
-var f = v => v;
+```js
+var f = (v) => v;
 
 // 等同于
 var f = function (v) {
@@ -994,28 +1002,32 @@ var f = function (v) {
 
 如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分
 
-```
+```js
 var f = () => 5;
 // 等同于
-var f = function () { return 5 };
+var f = function () {
+  return 5;
+};
 
 var sum = (num1, num2) => num1 + num2;
 // 等同于
-var sum = function(num1, num2) {
+var sum = function (num1, num2) {
   return num1 + num2;
 };
 ```
 
 如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用 return 语句返回
 
-```
-var sum = (num1, num2) => { return num1 + num2; }
+```js
+var sum = (num1, num2) => {
+  return num1 + num2;
+};
 ```
 
 如果返回对象，需要加括号将对象包裹
 
-```
-let getTempItem = id => ({ id: id, name: "Temp" });
+```js
+let getTempItem = (id) => ({ id: id, name: 'Temp' });
 ```
 
 注意点：
@@ -1027,7 +1039,7 @@ let getTempItem = id => ({ id: id, name: "Temp" });
 
 ## Generator
 
-## 介绍
+### 介绍
 
 Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同
 
@@ -1049,7 +1061,7 @@ Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为�
 - function 关键字与函数名之间有一个星号
 - 函数体内部使用 yield 表达式，定义不同的内部状态
 
-```
+```js
 function* helloWorldGenerator() {
   yield 'hello';
   yield 'world';
@@ -1057,24 +1069,24 @@ function* helloWorldGenerator() {
 }
 ```
 
-## 使用
+### 使用
 
 Generator 函数会返回一个遍历器对象，即具有 Symbol.iterator 属性，并且返回给自己
 
-```
-function* gen(){
+```js
+function* gen() {
   // some code
 }
 
 var g = gen();
 
-g[Symbol.iterator]() === g
+g[Symbol.iterator]() === g;
 // true
 ```
 
 通过 yield 关键字可以暂停 generator 函数返回的遍历器对象的状态
 
-```
+```js
 function* helloWorldGenerator() {
   yield 'hello';
   yield 'world';
@@ -1092,17 +1104,17 @@ var hw = helloWorldGenerator();
 - 如果没有再遇到新的 yield 表达式，就一直运行到函数结束，直到 return 语句为止，并将 return 语句后面的表达式的值，作为返回的对象的 value 属性值。
 - 如果该函数没有 return 语句，则返回的对象的 value 属性值为 undefined
 
-```
-hw.next()
+```js
+hw.next();
 // { value: 'hello', done: false }
 
-hw.next()
+hw.next();
 // { value: 'world', done: false }
 
-hw.next()
+hw.next();
 // { value: 'ending', done: true }
 
-hw.next()
+hw.next();
 // { value: undefined, done: true }
 ```
 
@@ -1112,27 +1124,27 @@ yield 表达式本身没有返回值，或者说总是返回 undefined
 
 通过调用 next 方法可以带一个参数，该参数就会被当作上一个 yield 表达式的返回值
 
-```
+```js
 function* foo(x) {
-  var y = 2 * (yield (x + 1));
-  var z = yield (y / 3);
-  return (x + y + z);
+  var y = 2 * (yield x + 1);
+  var z = yield y / 3;
+  return x + y + z;
 }
 
 var a = foo(5);
-a.next() // Object{value:6, done:false}
-a.next() // Object{value:NaN, done:false}
-a.next() // Object{value:NaN, done:true}
+a.next(); // Object{value:6, done:false}
+a.next(); // Object{value:NaN, done:false}
+a.next(); // Object{value:NaN, done:true}
 
 var b = foo(5);
-b.next() // { value:6, done:false }
-b.next(12) // { value:8, done:false }
-b.next(13) // { value:42, done:true }
+b.next(); // { value:6, done:false }
+b.next(12); // { value:8, done:false }
+b.next(13); // { value:42, done:true }
 ```
 
 正因为 Generator 函数返回 Iterator 对象，因此我们还可以通过 for...of 进行遍历
 
-```
+```js
 function* foo() {
   yield 1;
   yield 2;
@@ -1150,7 +1162,7 @@ for (let v of foo()) {
 
 原生对象没有遍历接口，通过 Generator 函数为它加上这个接口，就能使用 for...of 进行遍历了
 
-```
+```js
 function* objectEntries(obj) {
   let propKeys = Reflect.ownKeys(obj);
 
@@ -1933,7 +1945,7 @@ Object.fromEntries([
 // { foo: "bar", baz: 42 }
 ```
 
-## [ ](https://es6.ruanyifeng.com/#docs/object)
+## (https://es6.ruanyifeng.com/#docs/object)
 
 ## js 中的错误（Error）和错误处理
 
@@ -2614,6 +2626,58 @@ const someAsyncThing = function () {
 
 catch()方法之中，还能再抛出错误，通过后面 catch 方法捕获到
 
+**catch 中的 return 值**
+
+当在 catch 方法中使用 return 时，返回的值将成为 Promise 的解决（resolved）值。这意味着即使 catch 是因为错误而被调用的，catch 之后的链式调用仍然会按照成功的情况继续执行。
+
+```js
+new Promise((resolve, reject) => {
+  reject(new Error('Something went wrong'));
+})
+  .catch((error) => {
+    console.error('Error caught:', error.message); // 输出: Error caught: Something went wrong
+    return 'Recovered value'; // 返回一个值
+  })
+  .then((value) => {
+    console.log('This will be called with:', value);
+    // 输出: This will be called with: Recovered value
+  });
+```
+
+尽管 Promise 被拒绝了，但是 catch 方法中的 return 值使得链式调用继续往下执行，并将 return 的值传递给了下一个 .then 方法。
+
+**错误处理与传播**
+
+如果你希望在 catch 中处理错误后继续传播错误，可以显式地抛出错误或返回一个被拒绝的 Promise。
+
+```js
+new Promise((resolve, reject) => {
+  reject(new Error('Something went wrong'));
+})
+  .catch((error) => {
+    console.error('Error caught:', error.message); // 输出: Error caught: Something went wrong
+    throw error; // 抛出错误
+  })
+  .catch((error) => {
+    console.error('Error re-thrown:', error.message); // 输出: Error re-thrown: Something went wrong
+  });
+```
+
+或者
+
+```js
+new Promise((resolve, reject) => {
+  reject(new Error('Something went wrong'));
+})
+  .catch((error) => {
+    console.error('Error caught:', error.message); // 输出: Error caught: Something went wrong
+    return Promise.reject(error); // 返回一个被拒绝的 Promise
+  })
+  .catch((error) => {
+    console.error('Error re-thrown:', error.message); // 输出: Error re-thrown: Something went wrong
+  });
+```
+
 ### Promist.prototype.finally
 
 finally()方法用于指定不管 Promise 对象最后状态如何，都会执行的操作
@@ -2840,9 +2904,9 @@ setTimeout(() => resolve('Resolved after 2 seconds'), 2000);
 promise.then((value) => console.log(value));
 ```
 
-# Proxy
+## Proxy
 
-## 介绍
+### 介绍
 
 **定义：** 用于定义基本操作的自定义行为
 
@@ -2852,7 +2916,7 @@ promise.then((value) => console.log(value));
 
 一段代码来理解
 
-```
+```js
 #!/bin/bash
 # metaprogram
 echo '#!/bin/bash' >program
@@ -2868,12 +2932,12 @@ chmod +x program
 
 Proxy 亦是如此，用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）
 
-## 用法
+### 用法
 
 Proxy 为 构造函数，用来生成 Proxy 实例
 
-```
-var proxy = new Proxy(target, handler)
+```js
+var proxy = new Proxy(target, handler);
 ```
 
 ### 参数
@@ -2916,23 +2980,23 @@ handler 通常以函数作为属性的对象，各属性中的函数分别定义
 
 get 接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
 
-```
+```js
 var person = {
-  name: "张三"
+  name: '张三',
 };
 
 var proxy = new Proxy(person, {
-  get: function(target, propKey) {
-    return Reflect.get(target,propKey)
-  }
+  get: function (target, propKey) {
+    return Reflect.get(target, propKey);
+  },
 });
 
-proxy.name // "张三"
+proxy.name; // "张三"
 ```
 
 get 能够对数组增删改查进行拦截，下面是试下你数组读取负数的索引
 
-```
+```js
 function createArray(...elements) {
   let handler = {
     get(target, propKey, receiver) {
@@ -2941,7 +3005,7 @@ function createArray(...elements) {
         propKey = String(target.length + index);
       }
       return Reflect.get(target, propKey, receiver);
-    }
+    },
   };
 
   let target = [];
@@ -2950,29 +3014,32 @@ function createArray(...elements) {
 }
 
 let arr = createArray('a', 'b', 'c');
-arr[-1] // c
+arr[-1]; // c
 ```
 
 注意：如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则会报错
 
-```
-const target = Object.defineProperties({}, {
-  foo: {
-    value: 123,
-    writable: false,
-    configurable: false
+```js
+const target = Object.defineProperties(
+  {},
+  {
+    foo: {
+      value: 123,
+      writable: false,
+      configurable: false,
+    },
   },
-});
+);
 
 const handler = {
   get(target, propKey) {
     return 'abc';
-  }
+  },
 };
 
 const proxy = new Proxy(target, handler);
 
-proxy.foo
+proxy.foo;
 // TypeError: Invariant check failed
 ```
 
@@ -2982,9 +3049,9 @@ set 方法用来拦截某个属性的赋值操作，可以接受四个参数，�
 
 假定 Person 对象有一个 age 属性，该属性应该是一个不大于 200 的整数，那么可以使用 Proxy 保证 age 的属性值符合要求
 
-```
+```js
 let validator = {
-  set: function(obj, prop, value) {
+  set: function (obj, prop, value) {
     if (prop === 'age') {
       if (!Number.isInteger(value)) {
         throw new TypeError('The age is not an integer');
@@ -2996,21 +3063,21 @@ let validator = {
 
     // 对于满足条件的 age 属性以及其他属性，直接保存
     obj[prop] = value;
-  }
+  },
 };
 
 let person = new Proxy({}, validator);
 
 person.age = 100;
 
-person.age // 100
-person.age = 'young' // 报错
-person.age = 300 // 报错
+person.age; // 100
+person.age = 'young'; // 报错
+person.age = 300; // 报错
 ```
 
 如果目标对象自身的某个属性，不可写且不可配置，那么 set 方法将不起作用
 
-```
+```js
 const obj = {};
 Object.defineProperty(obj, 'foo', {
   value: 'bar',
@@ -3018,26 +3085,26 @@ Object.defineProperty(obj, 'foo', {
 });
 
 const handler = {
-  set: function(obj, prop, value, receiver) {
+  set: function (obj, prop, value, receiver) {
     obj[prop] = 'baz';
-  }
+  },
 };
 
 const proxy = new Proxy(obj, handler);
 proxy.foo = 'baz';
-proxy.foo // "bar"
+proxy.foo; // "bar"
 ```
 
 注意，严格模式下，set 代理如果没有返回 true，就会报错
 
-```
+```js
 'use strict';
 const handler = {
-  set: function(obj, prop, value, receiver) {
+  set: function (obj, prop, value, receiver) {
     obj[prop] = receiver;
     // 无论有没有下面这一行，都会报错
     return false;
-  }
+  },
 };
 const proxy = new Proxy({}, handler);
 proxy.foo = 'bar';
@@ -3048,15 +3115,15 @@ proxy.foo = 'bar';
 
 deleteProperty 方法用于拦截 delete 操作，如果这个方法抛出错误或者返回 false，当前属性就无法被 delete 命令删除
 
-```
+```js
 var handler = {
-  deleteProperty (target, key) {
+  deleteProperty(target, key) {
     invariant(key, 'delete');
-    Reflect.deleteProperty(target,key)
+    Reflect.deleteProperty(target, key);
     return true;
-  }
+  },
 };
-function invariant (key, action) {
+function invariant(key, action) {
   if (key[0] === '_') {
     throw new Error(`无法删除私有属性`);
   }
@@ -3064,7 +3131,7 @@ function invariant (key, action) {
 
 var target = { _prop: 'foo' };
 var proxy = new Proxy(target, handler);
-delete proxy._prop
+delete proxy._prop;
 // Error: 无法删除私有属性
 ```
 
@@ -3072,11 +3139,11 @@ delete proxy._prop
 
 ### 取消代理
 
-```
+```js
 Proxy.revocable(target, handler);
 ```
 
-## 使用场景
+### 使用场景
 
 Proxy 其功能非常类似于设计模式中的代理模式，常用功能如下：
 
@@ -3086,49 +3153,51 @@ Proxy 其功能非常类似于设计模式中的代理模式，常用功能如�
 
 使用 Proxy 保障数据类型的准确性
 
-```
+```js
 let numericDataStore = { count: 0, amount: 1234, total: 14 };
 numericDataStore = new Proxy(numericDataStore, {
-    set(target, key, value, proxy) {
-        if (typeof value !== 'number') {
-            throw Error("属性只能是number类型");
-        }
-        return Reflect.set(target, key, value, proxy);
+  set(target, key, value, proxy) {
+    if (typeof value !== 'number') {
+      throw Error('属性只能是number类型');
     }
+    return Reflect.set(target, key, value, proxy);
+  },
 });
 
-numericDataStore.count = "foo"
+numericDataStore.count = 'foo';
 // Error: 属性只能是number类型
 
-numericDataStore.count = 333
+numericDataStore.count = 333;
 // 赋值成功
 ```
 
 声明了一个私有的 apiKey，便于 api 这个对象内部的方法调用，但不希望从外部也能够访问 api.\_apiKey
 
-```
+```js
 let api = {
-    _apiKey: '123abc456def',
-    getUsers: function(){ },
-    getUser: function(userId){ },
-    setUser: function(userId, config){ }
+  _apiKey: '123abc456def',
+  getUsers: function () {},
+  getUser: function (userId) {},
+  setUser: function (userId, config) {},
 };
 const RESTRICTED = ['_apiKey'];
 api = new Proxy(api, {
-    get(target, key, proxy) {
-        if(RESTRICTED.indexOf(key) > -1) {
-            throw Error(`${key} 不可访问.`);
-        } return Reflect.get(target, key, proxy);
-    },
-    set(target, key, value, proxy) {
-        if(RESTRICTED.indexOf(key) > -1) {
-            throw Error(`${key} 不可修改`);
-        } return Reflect.get(target, key, value, proxy);
+  get(target, key, proxy) {
+    if (RESTRICTED.indexOf(key) > -1) {
+      throw Error(`${key} 不可访问.`);
     }
+    return Reflect.get(target, key, proxy);
+  },
+  set(target, key, value, proxy) {
+    if (RESTRICTED.indexOf(key) > -1) {
+      throw Error(`${key} 不可修改`);
+    }
+    return Reflect.get(target, key, value, proxy);
+  },
 });
 
-console.log(api._apiKey)
-api._apiKey = '987654321'
+console.log(api._apiKey);
+api._apiKey = '987654321';
 // 上述都抛出错误
 ```
 
@@ -3138,30 +3207,30 @@ api._apiKey = '987654321'
 
 observable 函数返回一个原始对象的 Proxy 代理，拦截赋值操作，触发充当观察者的各个函数
 
-```
+```js
 const queuedObservers = new Set();
 
-const observe = fn => queuedObservers.add(fn);
-const observable = obj => new Proxy(obj, {set});
+const observe = (fn) => queuedObservers.add(fn);
+const observable = (obj) => new Proxy(obj, { set });
 
 function set(target, key, value, receiver) {
   const result = Reflect.set(target, key, value, receiver);
-  queuedObservers.forEach(observer => observer());
+  queuedObservers.forEach((observer) => observer());
   return result;
 }
 ```
 
 观察者函数都放进 Set 集合，当修改 obj 的值，在会 set 函数中拦截，自动执行 Set 所有的观察者
 
-# Set、Map
+## Set、Map
 
-## Set
+### Set
 
 Set 是 Es6 新增的数据结构，类似于数组，但是成员的值都是唯一的，没有重复的值，我们一般称为集合
 
 Set 本身是一个构造函数，用来生成 Set 数据结构
 
-```
+```js
 const s = new Set();
 ```
 
@@ -3171,7 +3240,7 @@ const s = new Set();
 
 当添加实例中已经存在的元素，set 不会进行处理添加
 
-```
+```js
 s.add(1).add(2).add(2); // 2只被添加了一次
 ```
 
@@ -3179,24 +3248,24 @@ s.add(1).add(2).add(2); // 2只被添加了一次
 
 删除某个值，返回一个布尔值，表示删除是否成功
 
-```
-s.delete(1)
+```js
+s.delete(1);
 ```
 
 ### has()
 
 返回一个布尔值，判断该值是否为 Set 的成员
 
-```
-s.has(2)
+```js
+s.has(2);
 ```
 
 ### clear()
 
 清除所有成员，没有返回值
 
-```
-s.clear()
+```js
+s.clear();
 ```
 
 ### 遍历
@@ -3214,7 +3283,7 @@ Set 的遍历顺序就是插入顺序
 
 keys 方法、values 方法、entries 方法返回的都是遍历器对象，由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以 keys 方法和 values 方法的行为完全一致。
 
-```
+```js
 let set = new Set(['red', 'green', 'blue']);
 
 for (let item of set.keys()) {
@@ -3241,9 +3310,9 @@ for (let item of set.entries()) {
 
 forEach()用于对每个成员执行某种操作，没有返回值，键值、键名都相等，同样的 forEach 方法有第二个参数，用于绑定处理函数的 this
 
-```
+```js
 let set = new Set([1, 4, 9]);
-set.forEach((value, key) => console.log(key + ' : ' + value))
+set.forEach((value, key) => console.log(key + ' : ' + value));
 // 1 : 1
 // 4 : 4
 // 9 : 9
@@ -3251,19 +3320,19 @@ set.forEach((value, key) => console.log(key + ' : ' + value))
 
 扩展运算符和 Set 结构相结合实现数组或字符串去重
 
-```
+```js
 // 数组
 let arr = [3, 5, 2, 2, 5, 5];
 let unique = [...new Set(arr)]; // [3, 5, 2]
 
 // 字符串
-let str = "352255";
-let unique = [...new Set(str)].join(""); // '352'
+let str = '352255';
+let unique = [...new Set(str)].join(''); // '352'
 ```
 
 实现并集、交集、和差集
 
-```
+```js
 let a = new Set([1, 2, 3]);
 let b = new Set([4, 3, 2]);
 
@@ -3272,11 +3341,11 @@ let union = new Set([...a, ...b]);
 // Set {1, 2, 3, 4}
 
 // 交集
-let intersect = new Set([...a].filter(x => b.has(x)));
+let intersect = new Set([...a].filter((x) => b.has(x)));
 // Set {2, 3}
 
 // （a 相对于 b 的）差集
-let difference = new Set([...a].filter(x => !b.has(x)));
+let difference = new Set([...a].filter((x) => !b.has(x)));
 // Set {1}
 ```
 
@@ -3286,20 +3355,20 @@ Map 类型是键值对的有序列表，而键和值都可以是任意类型
 
 Map 本身是一个构造函数，用来生成 Map 数据结构
 
-```
-const m = new Map()
+```js
+const m = new Map();
 ```
 
 ### size
 
 size 属性返回 Map 结构的成员总数。
 
-```
+```js
 const map = new Map();
 map.set('foo', true);
 map.set('bar', false);
 
-map.size // 2
+map.size; // 2
 ```
 
 ### set()
@@ -3310,70 +3379,72 @@ map.size // 2
 
 同时返回的是当前 Map 对象，可采用链式写法
 
-```
+```js
 const m = new Map();
 
-m.set('edition', 6)        // 键是字符串
-m.set(262, 'standard')     // 键是数值
-m.set(undefined, 'nah')    // 键是 undefined
-m.set(1, 'a').set(2, 'b').set(3, 'c') // 链式操作
+m.set('edition', 6); // 键是字符串
+m.set(262, 'standard'); // 键是数值
+m.set(undefined, 'nah'); // 键是 undefined
+m.set(1, 'a').set(2, 'b').set(3, 'c'); // 链式操作
 ```
 
 ### get()
 
 get 方法读取 key 对应的键值，如果找不到 key，返回 undefined
 
-```
+```js
 const m = new Map();
 
-const hello = function() {console.log('hello');};
-m.set(hello, 'Hello ES6!') // 键是函数
+const hello = function () {
+  console.log('hello');
+};
+m.set(hello, 'Hello ES6!'); // 键是函数
 
-m.get(hello)  // Hello ES6!
+m.get(hello); // Hello ES6!
 ```
 
 ### has()
 
 has 方法返回一个布尔值，表示某个键是否在当前 Map 对象之中
 
-```
+```js
 const m = new Map();
 
 m.set('edition', 6);
 m.set(262, 'standard');
 m.set(undefined, 'nah');
 
-m.has('edition')     // true
-m.has('years')       // false
-m.has(262)           // true
-m.has(undefined)     // true
+m.has('edition'); // true
+m.has('years'); // false
+m.has(262); // true
+m.has(undefined); // true
 ```
 
 ### delete()
 
 delete 方法删除某个键，返回 true。如果删除失败，返回 false
 
-```
+```js
 const m = new Map();
 m.set(undefined, 'nah');
-m.has(undefined)     // true
+m.has(undefined); // true
 
-m.delete(undefined)
-m.has(undefined)       // false
+m.delete(undefined);
+m.has(undefined); // false
 ```
 
 ### clear()
 
 clear 方法清除所有成员，没有返回值
 
-```
+```js
 let map = new Map();
 map.set('foo', true);
 map.set('bar', false);
 
-map.size // 2
-map.clear()
-map.size // 0
+map.size; // 2
+map.clear();
+map.size; // 0
 ```
 
 ### 遍历
@@ -3387,10 +3458,10 @@ Map 结构原生提供三个遍历器生成函数和一个遍历方法：
 
 遍历顺序就是插入顺序
 
-```
+```js
 const map = new Map([
   ['F', 'no'],
-  ['T',  'yes'],
+  ['T', 'yes'],
 ]);
 
 for (let key of map.keys()) {
@@ -3425,8 +3496,8 @@ for (let [key, value] of map) {
 // "F" "no"
 // "T" "yes"
 
-map.forEach(function(value, key, map) {
-  console.log("Key: %s, Value: %s", key, value);
+map.forEach(function (value, key, map) {
+  console.log('Key: %s, Value: %s', key, value);
 });
 ```
 
@@ -3436,14 +3507,17 @@ map.forEach(function(value, key, map) {
 
 创建 WeakSet 实例
 
-```
+```js
 const ws = new WeakSet();
 ```
 
 WeakSet 可以接受一个具有 Iterable 接口的对象作为参数
 
-```
-const a = [[1, 2], [3, 4]];
+```js
+const a = [
+  [1, 2],
+  [3, 4],
+];
 const ws = new WeakSet(a);
 // WeakSet {[1, 2], [3, 4]}
 ```
@@ -3455,18 +3529,18 @@ const ws = new WeakSet(a);
 
 WeackSet 只能成员只能是引用类型，而不能是其他类型的值
 
-```
-let ws=new WeakSet();
+```js
+let ws = new WeakSet();
 
 // 成员不是引用类型
-let weakSet=new WeakSet([2,3]);
-console.log(weakSet) // 报错
+let weakSet = new WeakSet([2, 3]);
+console.log(weakSet); // 报错
 
 // 成员为引用类型
-let obj1={name:1}
-let obj2={name:1}
-let ws=new WeakSet([obj1,obj2]);
-console.log(ws) //WeakSet {{…}, {…}}
+let obj1 = { name: 1 };
+let obj2 = { name: 1 };
+let ws = new WeakSet([obj1, obj2]);
+console.log(ws); //WeakSet {{…}, {…}}
 ```
 
 WeakSet 里面的引用只要在外部消失，它在 WeakSet 里面的引用就会自动消失
@@ -3480,30 +3554,33 @@ WeakMap 结构与 Map 结构类似，也是用于生成键值对的集合
 - 没有遍历操作的 API
 - 没有 clear 清空方法
 
-```
+```js
 // WeakMap 可以使用 set 方法添加成员
 const wm1 = new WeakMap();
-const key = {foo: 1};
+const key = { foo: 1 };
 wm1.set(key, 2);
-wm1.get(key) // 2
+wm1.get(key); // 2
 
 // WeakMap 也可以接受一个数组，
 // 作为构造函数的参数
 const k1 = [1, 2, 3];
 const k2 = [4, 5, 6];
-const wm2 = new WeakMap([[k1, 'foo'], [k2, 'bar']]);
-wm2.get(k2) // "bar"
+const wm2 = new WeakMap([
+  [k1, 'foo'],
+  [k2, 'bar'],
+]);
+wm2.get(k2); // "bar"
 ```
 
 WeakMap 只接受对象作为键名（null 除外），不接受其他类型的值作为键名
 
-```
+```js
 const map = new WeakMap();
-map.set(1, 2)
+map.set(1, 2);
 // TypeError: 1 is not an object!
-map.set(Symbol(), 2)
+map.set(Symbol(), 2);
 // TypeError: Invalid value used as weak map key
-map.set(null, 2)
+map.set(null, 2);
 // TypeError: Invalid value used as weak map key
 ```
 
@@ -3513,26 +3590,26 @@ WeakMap 的键名所指向的对象，一旦不再需要，里面的键名对象
 
 在网页的 DOM 元素上添加数据，就可以使用 WeakMap 结构，当该 DOM 元素被清除，其所对应的 WeakMap 记录就会自动被移除
 
-```
+```js
 const wm = new WeakMap();
 
 const element = document.getElementById('example');
 
 wm.set(element, 'some information');
-wm.get(element) // "some information"
+wm.get(element); // "some information"
 ```
 
 注意：WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用
 
 下面代码中，键值 obj 会在 WeakMap 产生新的引用，当你修改 obj 不会影响到内部
 
-```
+```js
 const wm = new WeakMap();
 let key = {};
-let obj = {foo: 1};
+let obj = { foo: 1 };
 
 wm.set(key, obj);
 obj = null;
-wm.get(key)
+wm.get(key);
 // Object {foo: 1}
 ```

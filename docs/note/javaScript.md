@@ -405,8 +405,11 @@ parentElement.addEventListener('click', function (event) {
 
 不同点：
 
-- 函数防抖，在一段连续操作结束后，处理回调，利用 clearTimeout 和 setTimeout 实现。函数节流，在一段连续操作中，每一段时间只执行一次，频率较高的事件中使用来提高性能
-- 函数防抖关注一定时间连续触发的事件，只在最后执行一次，而函数节流一段时间内只执行一次
+1.  - 函数防抖：在一段连续操作结束后，处理回调，利用 clearTimeout 和 setTimeout 实现。
+    - 函数节流：在一段连续操作中，每一段时间只执行一次，频率较高的事件中使用来提高性能
+
+2.  - 函数防抖：在事件被触发后，在指定的时间内如果事件没有再次被触发，则执行一次函数；如果在这段时间内事件再次被触发，则重新计时。输入框搜索、窗口大小调整等。
+    - 函数节流：在规定的时间间隔内，无论事件触发了多少次，都只执行一次函数。如滚动监听、鼠标移动等。
 
 ```js
 // 节流
@@ -649,7 +652,55 @@ CORS 是一种更为灵活的跨域请求方式，通过在 HTTP 响应头中添
 - 优点：灵活，可以处理各种复杂场景。可以统一处理跨域问题，简化前端配置。
 - 缺点：需要额外维护代理服务器。增加了网络延迟。
 
-**使用 Node.js 和 Express 创建代理服务器**
+#### 打包工具（如 webpack）自带的服务器
+
+Webpack 自带的服务器 (Webpack Dev Server) 支持代理功能（仅针对开发环境），Webpack Dev Server 使用了 Node.js 的 http 模块来处理 HTTP 请求。当配置了代理时，它实际上是使用了一个内置的代理中间件来处理请求。当请求到达时，Webpack Dev Server 会检查请求路径是否匹配任何代理规则。如果匹配，它会使用 Node.js 的 http 模块发送请求到目标服务器，并将响应返回给客户端。
+
+1. 安装 Webpack Dev Server:
+
+```bash
+npm install --save-dev webpack-dev-server
+```
+
+1. 配置 webpack.config.js:在 webpack.config.js 文件中，你可以配置 devServer 的 proxy 属性来实现代理。
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    historyApiFallback: true,
+    proxy: {
+      '/api': 'http://backend.example.com', // 代理所有以 /api 开头的请求到 http://backend.example.com
+    },
+  },
+};
+```
+
+这个配置将把所有以 /api 开头的请求代理到 `http://backend.example.com。`
+
+3. 启动 Webpack Dev Server:修改 package.json 文件中的 scripts 部分，增加启动命令
+
+```js
+"scripts": {
+  "start": "webpack serve --open",
+  "build": "webpack"
+}
+```
+
+然后运行 npm start，这将会启动 Webpack Dev Server 并自动打开浏览器。
+
+#### 使用 Node.js 和 Express 创建代理服务器
 
 1. 安装依赖
 
@@ -714,6 +765,39 @@ axios.get('/api/data');
 ```
 
 这里的/api/data 请求会被我们的代理服务器捕获，并转发到`http://target-api.example.com/data`。通过这种方式，前端可以绕过浏览器的同源策略限制，成功访问到不同源的 API 数据，而无需修改浏览器的安全策略或服务器的 CORS 设置。
+
+#### 使用 Nginx 服务器
+
+原理：服务器和服务器之间的通信不存在跨域，因此我们可以开一台中间服务器（nginx），后端无需改变。前端把请求发给 nginx , nginx 服务器把请求毫无变化地转发给后端的服务器，后端的服务器响应给 nginx 服务器，nginx 服务器加上响应头以后，再返回给前端。
+
+![](/images/js/image13.jpg)
+
+```bash
+server {
+	listen 8866 default_server; # 因为我的 80 端口被其它服务占用了，因此改一下
+	listen [::]:8866 default_server;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+  #允许跨域请求的域，* 代表所有
+  add_header 'Access-Control-Allow-Origin' *;
+  #允许带上cookie请求
+  add_header 'Access-Control-Allow-Credentials' 'true';
+  #允许请求的方法，比如 GET/POST/PUT/DELETE
+  add_header 'Access-Control-Allow-Methods' *;
+  #允许请求的header
+  add_header 'Access-Control-Allow-Headers' *;
+  location /api {
+    proxy_pass http://172.17.16.1:3000; # 把所有的/api 开头的path 代理到这个位置,和vite 配置类似
+  }
+
+}
+
+```
 
 ### WebSocket
 
@@ -1452,3 +1536,51 @@ ajax({
 2. 宏任务：script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI rendering
 3. 微任务：promise 的回调如 then 和 catch，process.nextTick, Object.observe, MutationObserver
 4. 第一次事件循环中，JavaScript 引擎会把整个 script 代码当成一个宏任务执行，执行完成之后，再检测本次循环中是否寻在微任务，存在的话就依次从微任务的任务队列中读取执行完所有的微任务，再读取宏任务的任务队列中的任务执行，再执行所有的微任务，如此循环。JS 的执行顺序就是每次事件循环中的宏任务-微任务。
+
+## 去重
+
+### ES6 的 Set 去重(最推荐)
+
+new Set 是 ES6 新推出的一种类型。他和数组的区别在于，Set 类型中的数据不可以有重复的值。
+
+将一个数组转化为 Set 数据，再转化回来，就完成了去重。
+
+```js
+const arr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
+const setData = Array.from(new Set(arr));
+console.log(setData);
+```
+
+弊端： 无法去重引用类型的数据。比如对象数组。
+
+![](/images/js/image12.jpg)
+
+### 双重 for 循环去重(最古老的方法)
+
+```js
+//双重循环去重
+const handleRemoveRepeat = (arr) => {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      if (arr[i] === arr[j]) {
+        arr.splice(j, 1);
+        j--;
+        len--;
+      }
+    }
+  }
+  return arr;
+};
+```
+
+### indexOf 去重
+
+```js
+//去重
+const handleRemoveRepeat = (arr) => {
+  let repeatArr = [];
+  for (let i = 0, len = arr.length; i < len; i++)
+    if (repeatArr.indexOf(arr[i]) === -1) repeatArr.push(arr[i]);
+  return repeatArr;
+};
+```
