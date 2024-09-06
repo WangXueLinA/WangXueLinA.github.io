@@ -1,7 +1,21 @@
 import { Card, Col, Row } from 'antd';
+import { Link, useLocation } from 'react-router-dom';
 import './index.less';
+import { groupAndTransform, tools } from './utils';
+
+// @ts-expect-error: Unreachable code errorß
+const files = require.context('../../docs/note', false, /\w.md$/);
+
+const modules = files.keys().map((key: string) => {
+  const name = key.replace(/^\.\//, '').replace(/\.md$/, '');
+  return name;
+});
+
+const finalResult = groupAndTransform(modules, 2);
+console.log(finalResult);
 
 export default () => {
+  const location = useLocation();
   return (
     <>
       <div className="dumi-div-box">
@@ -12,8 +26,25 @@ export default () => {
           <span>前端学习笔记</span>
         </p>
       </div>
+      {Object.keys(tools).map((key) => (
+        <>
+          <div className="dumi-site-who-are">{key}</div>
+          <ul className="dumi-site-who-are-using">
+            {tools?.[key]
+              ?.filter((item) => modules.includes(item.title))
+              ?.map(({ href, title }) => (
+                <li>
+                  <Link to={`${location.pathname}note/${title}`}>
+                    <img src={href} alt="Ant Design" />
+                    {title}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </>
+      ))}
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={8}>
           <Card title="vpn" bordered={false}>
             <p>
               <a

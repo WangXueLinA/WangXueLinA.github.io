@@ -1450,11 +1450,9 @@ module.exports = {
 
 总结
 
-- Loaders 负责转换文件内容，而 Plugins 用来扩展 Webpack 的功能。
+- Loaders 负责转换文件内容，而 Plugins 用来扩展 Webpack 的功能。（对于 loader，它就是一个转换器，将 A 文件进行编译形成 B 文件，这里操作的是文件，比如将 A.scss 或 A.less 转变为 B.css，单纯的文件转换过程。plugin 是一个扩展器，它丰富了 wepack 本身，针对是 loader 结束后，webpack 打包的整个过程，它并不直接操作文件，而是基于事件机制工作，会监听 webpack 打包过程中的某些节点，执行广泛的任务。）
 - Loaders 在文件被导入时按顺序执行，而 Plugins 在编译的不同阶段被调用。
 - Loaders 主要处理单个文件的转换，而 Plugins 更多处理整体构建流程的优化和管理。
-
-### Plugin 就是插件，基于事件流框架 Tapable，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
 
 ### css-loader 和 style-loader
 
@@ -1488,13 +1486,13 @@ module.exports = {
 
    在整个构建过程中，Webpack 的插件系统允许开发者在构建的不同阶段注入自定义的行为。插件可以监听 Webpack 生命周期中的各种事件，并在这些事件发生时执行相应的操作，例如清除输出目录、优化输出文件等
 
-### 手写 loader
+## 手写 loader
 
 Loader 本质就是一个函数
 
 loader 分类：同步 loader，异步 loader，Rawloader，Pitchingloader
 
-#### 实现一个简单加载的 txt 文档的 loader
+### 实现一个简单加载的 txt 文档的 loader
 
 1. 初始化项目
    ```js
@@ -1509,23 +1507,435 @@ loader 分类：同步 loader，异步 loader，Rawloader，Pitchingloader
 
 ![](/images/webpack/image58.jpg)
 
-loader 上下文（this 上的属性跟方法）：
+### loader 上下文（this 上的属性跟方法）
 
 1. this.context：被处理的文件所在的路径
+
+   ```js
+   module.exports = function (content) {
+     console.log(this.context, '===='); // /Users/xuelin/workspace/wepack-loader-plugin/src
+
+     const result = `export default '${content}'`;
+     return result;
+   };
+   ```
+
 2. this.data: loader 有两个阶段，一个是 normal 阶段，一个是 pitching 阶段，通过这个属性，拿到 pitching 阶段保存的值，如果是 loader 中没有定义 pitching 阶段，则值为 null
-3. this.callback
-4. this.cacheable
-5. this.async
-6. this.emitFile
+3. this.callback: 返回 loader 的处理结果，可能是成功的结果，也可能是失败的结果，失败的结果通过 callback 返回第一个参数传递，成功的结果通过第二个参数传递，如果一个参数不为 null，则第二个参数会被无视
 
-### 手写 Plugin
+4. this.cacheable: 当前 loader 是否可以缓存，默认为 true，如果为 false，则每次都会执行 loader
 
-从形态上看，插件通常是一个带有 apply 函数的类
+   ```js
+   module.exports = function (content) {
+     this.cacheable(false);
+     const result = `export default '${content}'`;
+     return result;
+   };
+   ```
+
+5. this.async：函数作用为声明当前的 loader 是异步的，并返回一个 cāllback 函数，通过调用 callback 函数，向 webpack 引擎传递 loader 返回处理结果
+6. this.emitFile：生成一个文件，到 output 目录下，函数的第一个参数为路径，第二个参数为文件内容
+
+```js
+module.exports = function (content) {
+  this.emitFile('index-output.js', content);
+  const result = `export default '${content}'`;
+  return result;
+};
+```
+
+### loader 类型
+
+**同步 loader**
+
+```bash
+需求文档
+1. loader要处理的文件扩展名为xxx.qianfeng
+2. 文件的内容，引用到两个全局变量 qianfengName、qianfengUrl（不需要自己定义，由我们webpack为我们定义）
+3. 这两个变量的值，从json文件中读取出来
+4. 导出js语法正确的转换结果
+5. 在页面中执行导出js文件
+```
+
+1. 创建 json 文件, var.json
+
+```js
+{
+    "qianfengName": "千峰",
+    "qianfengUrl": "https://www.qianfeng.com"
+}
+```
+
+2. 创建 main.qianfengw 文件
+
+```js
+const h3 = document.createElement('h3');
+h3.innerHTML = qianfengName;
+
+const anchor = document.createElement('a');
+anchor.innerHTML = '千峰HTML';
+anchor.href = qianfengUrl;
+
+document.body.appendChild(anchor);
+document.body.appendChild(h3);
+```
+
+3. 配置 webpack.config.js 文件
+
+```js
+const path = require('path');
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.qianfeng$/,
+        use: './loaders/my-loader.js',
+      },
+    ],
+  },
+};
+```
+
+4. 创建 my-loader.js 文件
+
+```js
+const path = require('path');
+const fs = require('fs');
+module.exports = function (content) {
+  // 读取json文件
+  const jsonPath = path.resolve(__dirname, 'var.json');
+  const varResult = fs.readFileSync(jsonPath, 'utf-8');
+  const varJson = JSON.parse(varResult);
+  // 同步loader直接可以使用return可以返回loader的转换结果
+  // 也可以使用this.callback来返回
+
+  const result = `
+    var qianfengName = ${JSON.stringify(varJson.qianfengName)};
+    var qianfengUrl = ${JSON.stringify(varJson.qianfengUrl)};
+    ${content}
+    `;
+
+  this.callback(null, result); // 或者使用return result
+  // return result;
+};
+```
+
+5. 在 src 文件下创建 index.js 并引入 main.qianfeng 文件
+6. 执行打包并在 html 引入 bundle.js 文件在浏览器中查看
+
+![](/images/webpack/image61.jpg)
+
+**异步 loader**
+
+将上面的 my-loader.js 文件重写为异步方式
+
+```js
+const path = require('path');
+const fs = require('fs');
+module.exports = function (content) {
+  // 异步loader必须通过callback来返回文件的处理结果，不能使用return
+  // 这样还有一个问题，不写return的话，webpack 默认会return undefined 的，这样会导致错误
+  // 在异步loader中，使用异步方式调用this.callback之前，必须调用this.async方法
+  // 这样webpack就不会把loader函数返回undefined作为loader的执行结果，而会等待this.callback的调用
+  this.async();
+  const jsonPath = path.resolve(__dirname, 'var.json');
+
+  fs.readFile(jsonPath, 'utf-8', (err, data) => {
+    if (err) {
+      this.callback(new Error('读取JSON文件失败'));
+      return;
+    }
+    const varJson = JSON.parse(data);
+
+    const result = `
+      var qianfengName = ${JSON.stringify(varJson.qianfengName)};
+      var qianfengUrl = ${JSON.stringify(varJson.qianfengUrl)};
+      ${content}
+    `;
+
+    this.callback(null, result);
+  });
+};
+```
+
+**Raw loader**
+
+默认情况下，webpack 会将处理的文件以 UTF-8 的字符串形式传递给 loader, 有些时候，我们处理的是二进制文件，如果转换为字符串就会出错。这时候我们可以使用 raw-loader 来处理二进制文件 Buffer，当读取二进制文件（如图片、音频或视频文件）时，Buffer 可以用来保存文件内容。
+
+这是我们自己的 loader 去打印的图片的信息，我们发现是一堆乱码是处理不了的，并且复制的图片加载失败就是我们上面说的原因
+
+![](/images/webpack/image62.jpg)
+
+当我们开启 raw-loader 的时候，可以正常打印出图片的信息并且图片加载成功
+
+![](/images/webpack/image63.jpg)
+
+**Pitching loader**
+
+loader 模块中导出函数的 pitching 属性指向的函数称为 pitching loader
+
+我们创建三个 loader，a-loader，b-loader，c-loader，在 webpack.config.js 中配置如下
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        use: [
+          './loaders/a-loader.js',
+          './loaders/b-loader.js',
+          './loaders/c-loader.js',
+        ],
+      },
+    ],
+  },
+};
+```
+
+创建 a-loader.js
+
+```js
+function aLoader(content, map, meta) {
+  console.log('开始执行aLoader Normal Loader');
+}
+
+aLoader.pitch = function (remainingRequest, precedingRequest, data) {
+  console.log('开始执行aLoader Pitching Loader');
+  //   console.log(remainingRequest, precedingRequest, data)
+};
+
+module.exports = aLoader;
+```
+
+b-loader.js、c-loader.js 依次创建如上
+
+我们执行 webpack 命令，发现 loader 执行顺序为：
+
+```bash
+aLoader Pitching Loader
+bLoader Pitching Loader
+cLoader Pitching Loader
+cLoader Normal Loader
+bLoader Normal Loader
+aLoader Normal Loader
+```
+
+Pitching Loader 的执行顺序是 从左到右，而 Normal Loader 的执行顺序是 从右到左。具体的执行过程如下图所示:
+
+![](/images/webpack/image64.jpg)
+
+webpack 在解析完配置文件后，会将 loader 转化为内联格式，其实就是文件所在的路径进行加载，如`a-loader.js!b-loader.js!c-loader.js!index.txt`，我们分别看下 aLoader，bLoader，cLoader 的 pitch 的三个参数都打印了什么
+
+aLoader.js
+
+```js
+function aLoader(content, map, meta) {}
+
+aLoader.pitch = function (remainingRequest, precedingRequest, data) {
+  console.log(remainingRequest, 'remainingRequest'); // /Users/xuelin/workspace/wepack-loader-plugin/loaders/b-loader.js!/Users/xuelin/workspace/wepack-loader-plugin/loaders/c-loader.js!/Users/xuelin/workspace/wepack-loader-plugin/src/index.txt
+
+  console.log(precedingRequest, 'precedingRequest');
+
+  console.log(data, 'data'); // {}
+};
+
+module.exports = aLoader;
+```
+
+bLoader.js
+
+```js
+function bLoader(content, map, meta) {}
+
+bLoader.pitch = function (remainingRequest, precedingRequest, data) {
+  console.log(remainingRequest, 'remainingRequest'); // /Users/xuelin/workspace/wepack-loader-plugin/loaders/c-loader.js!/Users/xuelin/workspace/wepack-loader-plugin/src/index.txt
+
+  console.log(precedingRequest, 'precedingRequest'); // /Users/xuelin/workspace/wepack-loader-plugin/loaders/a-loader.js
+
+  console.log(data, 'data'); // {}
+};
+
+module.exports = bLoader;
+```
+
+cLoader.js
+
+```js
+function cLoader(content, map, meta) {}
+
+cLoader.pitch = function (remainingRequest, precedingRequest, data) {
+  console.log(remainingRequest, 'remainingRequest'); // Users/xuelin/workspace/wepack-loader-plugin/src/index.txt
+
+  console.log(precedingRequest, 'precedingRequest'); // /Users/xuelin/workspace/wepack-loader-plugin/loaders/a-loader.js!/Users/xuelin/workspace/wepack-loader-plugin/loaders/b-loader.js
+
+  console.log(data, 'data'); // {}
+};
+
+module.exports = cLoader;
+```
+
+其实我们可以看出各个 loader 里的三个参数对应的什么意思
+
+```bash
+remainingRequest: 当前loader后的剩余请求路径
+previousRequest: 当前loader前的请求路径
+data: 用于此loader的normal阶段进行数据通信的
+```
+
+看一下 data 怎么传递呢，我们看下 aLoader.js
+
+```js
+function aLoader(content, map, meta) {
+  console.log(this.data); // { xiaoming: '小明' }
+}
+
+aLoader.pitch = function (remainingRequest, precedingRequest, data) {
+  data.xiaoming = '小明';
+};
+
+module.exports = aLoader;
+```
+
+当一个 pitching 函数有返回值，此时，正常的 loader 执行顺序就会被打破。该返回值会直接传递给下一个要执行的 loader 的 normal 函数，并作为 loader 的参数传递过去。
+
+其实当某个 Pitching Loader 返回非 undefined 值时，就会实现熔断效果也叫熔断机制
+
+我们更新一下 bLoader.pitch 方法，让它返回 "bLoader Pitching 熔断内容" 字符串
+
+![](/images/webpack/image65.jpg)
+
+我们发现 aLoader 的 content 接受到 bLoader 的返回值，并且不会执行 cLoader 的 pitching 阶段跟 normal 阶段，也就是下面的执行顺序
+
+![](/images/webpack/image66.jpg)
+
+## 手写 Plugin
+
+一个最基础的 Plugin 的代码是这样的，从形态上看，插件通常是一个带有 apply 函数的类
 
 ```js
 class SomePlugin {
+  // 在构造函数中获取用户给该插件传入的配置
+  // constructor(options) {}
+
+  //Webpack 会调用 SomePlugin 实例的 apply 方法给插件实例传入 compiler 对象
   apply(compiler) {}
 }
+```
+
+apply 函数运行时会得到参数 compiler ，以此为起点可以调用 hook 对象注册各种钩子回调，例如： compiler.hooks.make.tapAsync ，这里面 make 是钩子名称，tapAsync 定义了钩子的调用方式，webpack 的插件架构基于这种模式构建而成，插件开发者可以使用这种模式在钩子回调中，插入特定代码。webpack 各种内置对象都带有 hooks 属性，比如 compilation 对象：
+
+```js
+class SomePlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap('SomePlugin', (compilation) => {
+      compilation.hooks.optimizeChunkAssets.tapAsync('SomePlugin', () => {});
+    });
+  }
+}
+```
+
+### Compiler 和 Compilation
+
+在开发 Plugin 时最常用的两个对象就是 Compiler 和 Compilation，它们是 Plugin 和 Webpack 之间的桥梁。 Compiler 和 Compilation 的含义如下：
+
+- Compiler 对象包含了 Webpack 环境所有的的配置信息，包含 options， loaders， plugins 这些信息，这个对象在 Webpack 启动时候被实例化，它是全局唯一的，可以简单地把它理解为 Webpack 实例；
+- Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。当 Webpack 以开发模式运行时，每当检测到一个文件变化，一次新的 Compilation 将被创建。Compilation 对象也提供了很多事件回调供插件做扩展。通过 Compilation 也能读取到 Compiler 对象。
+
+Compiler 和 Compilation 的区别在于：Compiler 代表了整个 Webpack 从启动到关闭的生命周期，而 Compilation 只是代表了一次新的编译。
+
+### 事件流
+
+Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。
+
+Webpack 通过 [Tapable](https://github.com/webpack/tapable)来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
+
+Webpack 的事件流机制应用了观察者模式，和 Node.js 中的 EventEmitter 非常相似。Compiler 和 Compilation 都继承自 Tapable，可以直接在 Compiler 和 Compilation 对象上广播和监听事件。
+
+```js
+// event-name 为事件名称，注意不要和现有的事件重名, params 为附带的参数
+compiler.apply('event-name', params);
+
+//监听名称为 event-name 的事件，当 event-name 事件发生时，函数就会被执行。同时函数中的 params 参数为事件时附带的参数。
+compiler.plugin('event-name', function (params) {});
+```
+
+同理， compilation.apply 和 compilation.plugin 使用方法和上面一致。
+
+如一个需求是需要把
+
+```bash
+@import "/static/css/vendor.wxss"; 改为：@import "/subPages/enjoy_given/static/css/vendor.wxss";
+
+```
+
+编写一个插件，实现这个需求
+
+```js
+class CssPathTransfor {
+  apply(compiler) {
+    // 在 emit 事件发生时，代表源文件的转换和组装已经完成，在这里可以读取到最终将输出的资源、代码块、模块及其依赖，并且可以修改输出资源的内容
+    compiler.plugin('emit', (compilation, callback) => {
+      // 遍历所有资源文件
+      for (var filePathName in compilation.assets) {
+        // 查看对应的文件是否符合指定目录下的文件
+        if (/static\/css\/pages/i.test(filePathName)) {
+          // 引入路径正则
+          const reg = /\/static\/css\/vendor\.wxss/i;
+          // 需要替换的最终字符串
+          const finalStr = '/subPages/enjoy_given/static/css/vendor.wxss';
+          // 获取文件内容
+          let content = compilation.assets[filePathName].source() || '';
+
+          content = content.replace(reg, finalStr);
+          // 重写指定输出模块内容
+          compilation.assets[filePathName] = {
+            source() {
+              return content;
+            },
+            size() {
+              return content.length;
+            },
+          };
+        }
+      }
+      // 如果忘记了调用 callback，Webpack 将一直卡在这里而不会往后执行。
+      callback();
+    });
+  }
+}
+module.exports = CssPathTransfor;
+```
+
+webpack.config.js 导入
+
+```js
+var baseWebpackConfig = require('./webpack.base.conf')
+var CssPathTransfor = require('../plugins/CssPathTransfor.js')
+
+var webpackConfig = merge(baseWebpackConfig, {
+  module: {...},
+  devtool: config.build.productionSourceMap ? '#source-map' : false,
+  output: {...},
+  plugins: [
+    ...,
+    // 配置插件
+    new CssPathTransfor(),
+  ]
+})
+
 ```
 
 ## Webpack 的 Tree Shaking 原理
@@ -1544,7 +1954,7 @@ Webpack 的热更新，在不刷新页面的前提下，将新代码替换掉旧
 
 HRM 的原理实际上是 webpack-dev-server（WDS）和浏览器之间维护了一个 websocket 服务。当本地资源发生变化后，webpack 会先将打包生成新的模块代码放入内存中，然后 WDS 向浏览器推送更新，并附带上构建时的 hash，让客户端和上一次资源进行对比.
 
-## 11. vite 比 webpack 快在哪里
+## vite 比 webpack 快在哪里
 
 ### 开发模式的差异
 

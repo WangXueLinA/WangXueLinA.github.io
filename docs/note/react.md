@@ -1,7 +1,7 @@
 ---
 toc: content
 title: React Class
-group: 框架
+group: React 全家桶
 ---
 
 # React
