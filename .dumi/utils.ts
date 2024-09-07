@@ -37,7 +37,10 @@ export const tools = {
       title: 'javaScript',
       href: 'https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/835c329fd9b7459e902c02410e07ec2f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ou95L2P5pif5pif55qE6KGj6aKG:q75.awebp?rk3s=f64ab15b&x-expires=1726240182&x-signature=zwY%2FxDJHMpSeDwlJgP73cq4U38U%3D',
     },
-    { title: 'es6', href },
+    {
+      title: 'es6',
+      href: 'https://img1.baidu.com/it/u=2607388102,48776156&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1725814800&t=48218fb8ddf1cd27ac561e3fb8f1d70c',
+    },
   ],
   React框架: [
     { title: 'react', href: 'https://cdn.docschina.org/home/logo/react.svg' },
@@ -51,7 +54,7 @@ export const tools = {
     },
     {
       title: 'reactRouter6',
-      href: 'https://cdn.docschina.org/home/logo/react.svg',
+      href: 'https://picx.zhimg.com/v2-1bc75256a283c4b688be3d3698b0a874_720w.jpg?source=172ae18b',
     },
   ],
   Vue框架: [
@@ -93,7 +96,10 @@ export const tools = {
   ],
   网络: [{ title: 'http', href }],
   其他: [
-    { title: 'git', href },
+    {
+      title: 'git',
+      href: 'https://img0.baidu.com/it/u=1063253150,2624926680&fm=253&app=138&size=w931&n=0&f=PNG&fmt=auto?sec=1725814800&t=4a6885028d04101cf5b3cbe97077a704',
+    },
     {
       title: 'typeScript',
       href: 'https://cdn.docschina.org/home/logo/typescript.png',

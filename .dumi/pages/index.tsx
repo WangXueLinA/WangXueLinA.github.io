@@ -1,7 +1,7 @@
 import { Card, Col, Row } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
+import { groupAndTransform, tools } from '../utils';
 import './index.less';
-import { groupAndTransform, tools } from './utils';
 
 // @ts-expect-error: Unreachable code errorß
 const files = require.context('../../docs/note', false, /\w.md$/);
@@ -11,8 +11,7 @@ const modules = files.keys().map((key: string) => {
   return name;
 });
 
-const finalResult = groupAndTransform(modules, 2);
-console.log(finalResult);
+groupAndTransform(modules, 2);
 
 export default () => {
   const location = useLocation();
