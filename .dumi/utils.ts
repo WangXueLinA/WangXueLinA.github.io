@@ -82,18 +82,23 @@ export const tools = {
       href: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*U3AfQq_cQMYAAAAAAAAAAAAADmJ7AQ/original',
     },
   ],
+  构建工具: [
+    {
+      title: 'webpack',
+      href: 'https://cdn.docschina.org/home/logo/webpack-offical.svg',
+    },
+    {
+      title: 'vite',
+      href: 'https://vitejs.dev/logo.svg',
+    },
+  ],
   状态管理: [
     { title: 'redux', href: 'https://cdn.docschina.org/home/logo/redux.svg' },
   ],
   Node: [
     { title: 'node', href: 'https://cdn.docschina.org/home/logo/node.svg' },
   ],
-  构建工具: [
-    {
-      title: 'webpack',
-      href: 'https://cdn.docschina.org/home/logo/webpack-offical.svg',
-    },
-  ],
+
   网络: [{ title: 'http', href }],
   其他: [
     {

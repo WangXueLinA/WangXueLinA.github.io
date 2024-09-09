@@ -1,7 +1,8 @@
 ---
 toc: content
-title: React Class
+title: React
 group: React 全家桶
+order: -3
 ---
 
 # React
@@ -245,60 +246,215 @@ React 事件机制总结如下：
 - React 通过队列的形式，从触发的组件向父组件回溯，然后调用他们 JSX 中定义的 callback
 - React 有一套自己的合成事件
 
-## 路由原理
+## 引入 css 的方式
 
-在 React Router 中，几个关键组件如`<Router>`、`<Link>`和`<NavLink>`共同协作来实现在单页面应用（SPA）中的路由导航和视图切换。
+组件式开发选择合适的 css 解决方案尤为重要
+通常会遵循以下规则：
 
-- `<Router>`
+- 可以编写局部 css，不会随意污染其他组件内的原生；
+- 可以编写动态的 css，可以获取当前组件的一些状态，根据状态的变化生成不同的 css 样式；
+- 支持所有的 css 特性：伪类、动画、媒体查询等；
+- 编写起来简洁方便、最好符合一贯的 css 风格特点
 
-在 React Router 中，`<Router>` 是整个路由系统的核心，它负责管理和监听浏览器的历史记录（history），并将当前 URL 与定义好的路由规则相匹配。通常，对于现代浏览器我们会使用
+而在 react 中，其引入 css 的方式有很多种，各有利弊
 
-1. `<HashRouter>`，它基于 URL 的哈希部分（#）来模拟路由状态，当 window.location.hash 发生变化时，会触发 window.onhashchange 事件，React-Router 可以监听此事件并据此切换不同的路由组件。
+常见的 CSS 引入方式有以下：
 
-```js
-window.onhashchange = () => {
-  console.log('监视到hash变化了');
+- 在组件内直接使用
+- 组件中引入 .css 文件
+- 组件中引入 .module.css 文件
+- CSS in JS
+
+### 在组件内直接使用
+
+直接在组件中书写 css 样式，通过 style 属性直接引入，如下：
+
+```ts
+import React, { Component } from "react";
+
+const div1 = {
+  width: "300px",
+  margin: "30px auto",
+  backgroundColor: "#44014C",  //驼峰法
+  minHeight: "200px",
+  boxSizing: "border-box"
 };
+
+class Test extends Component {
+  constructor(props, context) {
+    super(props);
+  }
+
+  render() {
+    return (
+     <div>
+       <div style={div1}>123</div>
+       <div style={{backgroundColor:"red"}}>
+     </div>
+    );
+  }
+}
+
+export default Test;
 ```
 
-2. `<BrowserRouter>`，它利用 HTML5 History API 来操作地址栏 URL，而无需刷新页面。通过 history.pushState()、history.replaceState() 方法可以直接修改浏览器的历史记录栈，并更新当前 URL，而不会导致页面刷新。同时，用户点击浏览器的前进/后退按钮或调用 history.go()、history.back()、history.forward() 时，会触发 window.onpopstate 事件，React-Router 通过监听这个事件来相应地切换路由。在 React-Router 中，需要对原生的 History API 进行封装或劫持，通过保存原生方法的引用，然后重写这些方法，在调用原生方法的同时执行额外的操作（例如触发路由更新等）。
+上面可以看到，css 属性需要转换成驼峰写法
 
-```js
-// 用户点击浏览器的前进/后退按钮或调用 history.go()、history.back()、history.forward() 时
-window.addEventListener('popstate', () => {
-  console.log('监视到popstate变化了');
-});
+这种方式优点：
+
+- 内联样式, 样式之间不会有冲突
+- 可以动态获取当前 state 中的状态
+
+缺点：
+
+写法上都需要使用驼峰标识
+
+- 某些样式没有提示
+- 大量的样式, 代码混乱
+- 某些样式无法编写(比如伪类/伪元素)
+
+### 组件中引入 css 文件
+
+将 css 单独写在一个 css 文件中，然后在组件中直接引入
+App.css 文件：
+
+```css
+.title {
+  color: red;
+  font-size: 20px;
+}
+
+.desc {
+  color: green;
+  text-decoration: underline;
+}
 ```
 
-```js
-// react-router类似劫持 pushState
-const rawPushState = window.history.pushState;
-window.history.pushState = (...args) => {
-  rawPushState.apply(window.history, args);
-  console.log('监视到pushState变化了');
-};
+组件中引入：
 
-// react-router类似劫持 replaceState
-const rawReplaceState = window.history.replaceState;
-window.history.replaceState = (...args) => {
-  rawReplaceState.apply(window.history, args);
-  console.log('监视到replaceState变化了');
-};
+```ts
+import React, { PureComponent } from 'react';
+import Home from './Home';
+import './App.css';
+
+export default class App extends PureComponent {
+  render() {
+    return (
+      <div className="app">
+        <h2 className="title">我是 App 的标题</h2>
+        <p className="desc">我是 App 中的一段文字描述</p>
+        <Home />
+      </div>
+    );
+  }
+}
 ```
 
-- `<Route>`
+这种方式存在不好的地方在于样式是全局生效，样式之间会互相影响
 
-`<Route>`组件是实际定义路由映射的地方，它接收 path 属性，用于匹配特定的 URL 路径，并且当路径匹配时，会渲染关联的 component 属性指定的 React 组件。多个`<Route>`可以嵌套组合以构建复杂的路由结构。
+### 组件中引入 .module.css 文件
 
-- `<Link>`
+将 css 文件作为一个模块引入，这个模块中的所有 css，只作用于当前组件。不会影响当前组件的后代组件
 
-`<Link>`组件是 React Router 提供的一个可点击的 UI 元素，它渲染成一个`<a>`标签，但内部处理了路由的逻辑。当用户点击这个链接时，React Router 会通过其内部使用的 history 库来更改当前 URL，而不是像传统的`<a>`标签那样直接发起 HTTP 请求。这样就能在不刷新页面的情况下切换到新的路由视图。
+这种方式是 webpack 特工的方案，只需要配置 webpack 配置文件中 modules:true 即可
 
-- `<NavLink>`
+```ts
+import React, { PureComponent } from 'react';
+import Home from './Home';
+import './App.module.css';
 
-`<NavLink>`继承自`<Link>`，增加了样式激活的功能。当它指向的路由与当前活跃路由匹配时，可以通过 activeClassName 或 activeStyle 属性添加特殊的 CSS 类名或内联样式，以便在视觉上提示用户当前所在的位置。
-总的来说，React Router 的工作流程是这样的：
+export default class App extends PureComponent {
+  render() {
+    return (
+      <div className="app">
+        <h2 className="title">我是 App 的标题</h2>
+        <p className="desc">我是 App 中的一段文字描述</p>
+        <Home />
+      </div>
+    );
+  }
+}
+```
 
-1. 用户通过点击带有`<Link>`或`<NavLink>`的链接，或者通过程序调用 history.push 或 history.replace 方法改变 URL。
-2. `<Router>`检测到 URL 变化后，将新 URL 与各个`<Route>`的 path 进行比较。
-3. 当找到匹配的`<Route>`时，渲染相应的组件，从而完成视图的切换。在整个过程中，React Router 确保了视图的切换是平滑的，符合 SPA 的应用体验。
+这种方式能够解决局部作用域问题，但也有一定的缺陷：
+
+- 引用的类名，不能使用连接符(.xxx-xx)，在 JavaScript 中是不识别的
+- 所有的 className 都必须使用 {style.className} 的形式来编写
+- 不方便动态来修改某些样式，依然需要使用内联样式的方式；
+
+### CSS in JS
+
+CSS-in-JS， 是指一种模式，其中 CSS 由 JavaScript 生成而不是在外部文件中定义
+此功能并不是 React 的一部分，而是由第三方库提供，例如：
+
+- styled-components
+- emotion
+- glamorous
+
+下面主要看看 styled-components 的基本使用，本质是通过函数的调用，最终创建出一个组件：
+
+- 这个组件会被自动添加上一个不重复的 class
+- styled-components 会给该 class 添加相关的样式
+
+基本使用如下：
+
+创建一个 style.js 文件用于存放样式组件：
+
+```js
+export const SelfLink = styled.div`
+  height: 50px;
+  border: 1px solid red;
+  color: yellow;
+`;
+
+export const SelfButton = styled.div`
+  height: 150px;
+  width: 150px;
+  color: ${(props) => props.color};
+  background-image: url(${(props) => props.src});
+  background-size: 150px 150px;
+`;
+```
+
+引入样式组件也很简单：
+
+```ts
+import React, { Component } from 'react';
+import { SelfLink, SelfButton } from './style';
+
+class Test extends Component {
+  constructor(props, context) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <SelfLink title="People's Republic of China">app.js</SelfLink>
+        <SelfButton color="palevioletred" style={{ color: 'pink' }} src={fist}>
+          SelfButton
+        </SelfButton>
+      </div>
+    );
+  }
+}
+
+export default Test;
+```
+
+### 区别
+
+通过上面四种样式的引入，可以看到：
+
+- 在组件内直接使用 css 该方式编写方便，容易能够根据状态修改样式属性，但是大量的演示编写容易导致代码混乱
+- 组件中引入 .css 文件符合我们日常的编写习惯，但是作用域是全局的，样式之间会层叠
+- 引入.module.css 文件能够解决局部作用域问题，但是不方便动态修改样式，需要使用内联的方式进行样式的编写
+- 通过 css in js 这种方法，可以满足大部分场景的应用，可以类似于预处理器一样样式嵌套、定义、修改状态等
+
+## Fiber 架构
+
+JavaScript 引擎和页面渲染引擎两个线程是互斥的，当其中一个线程执行时，另一个线程只能挂起等待
+如果 JavaScript 线程长时间地占用了主线程，那么渲染层面的更新就不得不长时间地等待，界面长时间不更新，会导致页面响应度变差，用户可能会感觉到卡顿。而这也正是 React 15 的 Stack Reconciler 所面临的问题，当 React 在渲染组件时，从开始到渲染完成整个过程是一气呵成的，无法中断。如果组件较大，那么 js 线程会一直执行，然后等到整棵 VDOM 树计算完成后，才会交给渲染的线程。这就会导致一些用户交互、动画等任务无法立即得到处理，导致卡顿的情况
+
+Fiber 把渲染更新过程拆分成多个子任务，每次只做一小部分，做完看是否还有剩余时间，如果有继续下一个任务；如果没有，挂起当前任务，将时间控制权交给主线程，等主线程不忙的时候在继续执行
+即可以中断与恢复，恢复后也可以复用之前的中间状态，并给不同的任务赋予不同的优先级，其中每个任务更新单元为 React Element 对应的 Fiber 节点。实现的上述方式的是 requestIdleCallback 方法 window.requestIdleCallback()方法将在浏览器的空闲时段内调用的函数排队。这使开发者能够在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应

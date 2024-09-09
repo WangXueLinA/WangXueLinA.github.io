@@ -51,6 +51,41 @@ root.render(
 );
 ```
 
+## 路由原理
+
+1. `<HashRouter>`，它基于 URL 的哈希部分（#）来模拟路由状态，当 window.location.hash 发生变化时，会触发 window.onhashchange 事件，React-Router 可以监听此事件并据此切换不同的路由组件。
+
+```js
+window.onhashchange = () => {
+  console.log('监视到hash变化了');
+};
+```
+
+2. `<BrowserRouter>`，它利用 HTML5 History API 来操作地址栏 URL，而无需刷新页面。通过 history.pushState()、history.replaceState() 方法可以直接修改浏览器的历史记录栈，并更新当前 URL，而不会导致页面刷新。同时，用户点击浏览器的前进/后退按钮或调用 history.go()、history.back()、history.forward() 时，会触发 window.onpopstate 事件，React-Router 通过监听这个事件来相应地切换路由。在 React-Router 中，需要对原生的 History API 进行封装或劫持，通过保存原生方法的引用，然后重写这些方法，在调用原生方法的同时执行额外的操作（例如触发路由更新等）。
+
+```js
+// 用户点击浏览器的前进/后退按钮或调用 history.go()、history.back()、history.forward() 时
+window.addEventListener('popstate', () => {
+  console.log('监视到popstate变化了');
+});
+```
+
+```js
+// react-router类似劫持 pushState
+const rawPushState = window.history.pushState;
+window.history.pushState = (...args) => {
+  rawPushState.apply(window.history, args);
+  console.log('监视到pushState变化了');
+};
+
+// react-router类似劫持 replaceState
+const rawReplaceState = window.history.replaceState;
+window.history.replaceState = (...args) => {
+  rawReplaceState.apply(window.history, args);
+  console.log('监视到replaceState变化了');
+};
+```
+
 ## NavLink
 
 它是一个导航链接组件，类似于 HTML 中的`<a>`标签。NavLink 组件使用 to 来指定需要跳转的链接
