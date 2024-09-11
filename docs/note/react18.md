@@ -333,7 +333,7 @@ useEffect 跟 useLayoutEffect 效果区别
 
 <!-- ### -->
 
-## useSyncExternalStore
+### useSyncExternalStore
 
 前面提到的几个新 API 都是通过并发更新的形式解决渲染阻塞的问题，但是并发同样会带来新的问题。
 

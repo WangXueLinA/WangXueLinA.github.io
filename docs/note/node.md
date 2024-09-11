@@ -135,3 +135,161 @@ yarn install // 安装项目的全部依赖
 在执行 npm install 的时候发生了什么？
 
 首先安装的依赖都会存放在根目录的 node_modules,默认采用扁平化的方式安装，并且排序规则.bin 第一个然后@系列，再然后按照首字母排序 abcd 等，并且使用的算法是广度优先遍历，在遍历依赖树时，npm 会首先处理项目根目录下的依赖，然后逐层处理每个依赖包的依赖，直到所有依赖都被处理完毕。在处理每个依赖时，npm 会检查该依赖的版本号是否符合依赖树中其他依赖的版本要求，如果不符合，则会尝试安装适合的版本
+
+## commonJS
+
+CommonJS：是 Node.js 使用的模块化规范。也就是说，Node.js 就是基于 CommonJS 这种模块化规范来编写的。
+
+CommonJS 规范规定：每个模块内部，module 变量代表当前模块。这个变量是一个对象，它的 exports 属性（即 module.exports）是对外的接口对象。加载某个模块，其实是加载该模块的 module.exports 对象。
+
+在 CommonJS 中，每个文件都可以当作一个模块：
+
+- 在服务器端：模块的加载是运行时同步加载的。
+- 在浏览器端: 模块需要提前编译打包处理。首先，既然同步的，很容易引起阻塞；其次，浏览器不认识 require 语法，因此，需要提前编译打包。
+
+### 模块的暴露和引入
+
+#### 方式一： exports
+
+exports 对象用来导出当前模块的公共方法或属性。别的模块通过 require 函数调用当前模块时，得到的就是当前模块的 exports 对象。
+
+```js
+// 相当于是：给 exports 对象添加属性
+const name = 'qianguyihao';
+
+const foo = function (value) {
+  return value * 2;
+};
+
+exports.name = name;
+exports.foo = foo;
+```
+
+#### 方式二： module.exports
+
+```js
+// 方式1
+module.exports = {
+  name: '我是 module1',
+  foo() {
+    console.log(this.name);
+  },
+};
+
+// 我们不能再继续写 module.exports = value2。因为重新赋值，会把 exports 对象 之前的赋值覆盖掉。
+
+// 方式2
+const age = 28;
+module.exports.age = age;
+```
+
+exports 和 module.exports 的区别
+最重要的区别：
+
+- 使用 exports 时，只能单个设置属性 exports.a = a;
+- 使用 module.exports 时，既单个设置属性 module.exports.a，也可以整个赋值 module.exports = obj。
+
+其他要点：
+
+- Node 中每个模块的最后，都会执行 return: module.exports。
+- Node 中每个模块都会把 module.exports 指向的对象赋值给一个变量 exports，也就是说 exports = module.exports。
+- module.exports = XXX，表示当前模块导出一个单一成员，结果就是 XXX。
+- 如果需要导出多个成员，则必须使用 exports.add = XXX; exports.foo = XXX。或者使用 module.exports.add = XXX; module.export.foo = XXX。
+
+### 引入模块的方式：require
+
+require 函数用来在一个模块中引入另外一个模块。传入模块名，返回模块导出对象。
+
+语法格式：
+
+```js
+// const module1 = require('模块名');
+// require的是文件路径。文件路径既可以用绝对路径，也可以用相对路径。后缀名.js可以省略。
+
+const module1 = require('./main.js');
+const module2 = require('./main');
+const module3 = require('Demo/src/main.js');
+```
+
+## 内置模块
+
+常见的内置模块包括：
+
+fs：文件系统模块
+path：路径模块
+OS：操作系统相关
+net：网络相关
+http.....
+
+### fs
+
+#### 异步读取文件 fs.readFile()
+
+语法
+
+```js
+fs.readFile(file[, options], callback(error, data))
+```
+
+promise 封装 fs.readFile()
+
+```js
+const fs = require('fs');
+
+function fsRead(path) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, { flag: 'r', encoding: 'utf-8' }, (err, data) => {
+      if (err) {
+        //失败执行的内容
+        reject(err);
+      } else {
+        //成功执行的内容
+        resolve(data);
+      }
+    });
+  });
+}
+
+var promise1 = fsRead('hello1.txt');
+promise1
+  .then((res1) => {
+    console.log(res1);
+    return fsRead('hello2.txt');
+  })
+  .then((res2) => {
+    console.log(res2);
+    return fsRead('hello3.txt');
+  })
+  .then((res3) => {
+    console.log(res);
+  });
+```
+
+async/await 封装 fs.readFile()
+
+```js
+var fs = require('fs');
+
+function fsRead(path) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, { flag: 'r', encoding: 'utf-8' }, (err, data) => {
+      if (err) {
+        //失败执行的内容
+        reject(err);
+      } else {
+        //成功执行的内容
+        resolve(data);
+      }
+    });
+  });
+}
+
+async function ReadList() {
+  var res1 = await fsRead('hello1.txt');
+  var res2 = await fsRead('hello2.txt');
+  var res3 = await fsRead('hello3.txt');
+}
+
+// 执行方法
+ReadList();
+```

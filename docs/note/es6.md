@@ -410,7 +410,7 @@ let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 - Array.from()
 - Array.of()
 
-### Array.from()
+### Array.from
 
 将两类对象转为真正的数组：类似数组的对象和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
 
@@ -431,7 +431,7 @@ Array.from([1, 2, 3], (x) => x * x);
 // [1, 4, 9]
 ```
 
-### Array.of()
+### Array.of
 
 用于将一组值，转换为数组
 
@@ -451,7 +451,7 @@ Array(3); // [, , ,]
 Array(3, 11, 8); // [3, 11, 8]
 ```
 
-### copyWithin()
+### copyWithin
 
 将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组
 
@@ -468,7 +468,7 @@ Array(3, 11, 8); // [3, 11, 8]
 // [4, 5, 3, 4, 5]
 ```
 
-### fill()
+### fill
 
 使用给定值，填充一个数组
 
@@ -488,317 +488,6 @@ new Array(3).fill(7);
 ```
 
 注意，如果填充的类型为对象，则是浅拷贝
-
-### 排序稳定性
-
-将 sort()默认设置为稳定的排序算法
-
-```js
-const arr = ['peach', 'straw', 'apple', 'spork'];
-
-const stableSorting = (s1, s2) => {
-  if (s1[0] < s2[0]) return -1;
-  return 1;
-};
-
-arr.sort(stableSorting);
-// ["apple", "peach", "straw", "spork"]
-```
-
-排序结果中，straw 在 spork 的前面，跟原始顺序一致
-
-## Decorator （装饰器）
-
-### 介绍
-
-Decorator，即装饰器，从名字上很容易让我们联想到装饰者模式
-
-简单来讲，装饰者模式就是一种在不改变原类和使用继承的情况下，动态地扩展对象功能的设计理论。
-
-ES6 中 Decorator 功能亦如此，其本质也不是什么高大上的结构，就是一个普通的函数，用于扩展类属性和类方法
-
-这里定义一个士兵，这时候他什么装备都没有
-
-```js
-class soldier {}
-```
-
-定义一个得到 AK 装备的函数，即装饰器
-
-```js
-function strong(target) {
-  target.AK = true;
-}
-```
-
-使用该装饰器对士兵进行增强
-
-```js
-@strong
-class soldier {}
-```
-
-这时候士兵就有武器了
-
-```js
-soldier.AK; // true
-```
-
-上述代码虽然简单，但也能够清晰看到了使用 Decorator 两大优点：
-
-- 代码可读性变强了，装饰器命名相当于一个注释
-- 在不改变原有代码情况下，对原来功能进行扩展
-
-### 用法
-
-Docorator 修饰对象为下面两种：
-
-- 类的装饰
-- 类属性的装饰
-
-#### 类的装饰
-
-当对类本身进行装饰的时候，能够接受一个参数，即类本身
-
-将装饰器行为进行分解，大家能够有个更深入的了解
-
-```js
-@decorator
-class A {}
-
-// 等同于
-class A {}
-A = decorator(A) || A;
-```
-
-下面@testable 就是一个装饰器，target 就是传入的类，即 MyTestableClass，实现了为类添加静态属性
-
-```js
-@testable
-class MyTestableClass {
-  // ...
-}
-
-function testable(target) {
-  target.isTestable = true;
-}
-
-MyTestableClass.isTestable; // true
-```
-
-如果想要传递参数，可以在装饰器外层再封装一层函数
-
-```js
-function testable(isTestable) {
-  return function (target) {
-    target.isTestable = isTestable;
-  };
-}
-
-@testable(true)
-class MyTestableClass {}
-MyTestableClass.isTestable; // true
-
-@testable(false)
-class MyClass {}
-MyClass.isTestable; // false
-```
-
-#### 类属性的装饰
-
-当对类属性进行装饰的时候，能够接受三个参数：
-
-- 类的原型对象
-- 需要装饰的属性名
-- 装饰属性名的描述对象
-
-首先定义一个 readonly 装饰器
-
-```js
-function readonly(target, name, descriptor) {
-  descriptor.writable = false; // 将可写属性设为false
-  return descriptor;
-}
-```
-
-使用 readonly 装饰类的 name 方法
-
-```js
-class Person {
-  @readonly
-  name() {
-    return `${this.first} ${this.last}`;
-  }
-}
-```
-
-相当于以下调用
-
-```js
-readonly(Person.prototype, 'name', descriptor);
-```
-
-如果一个方法有多个装饰器，就像洋葱一样，先从外到内进入，再由内到外执行
-
-```js
-function dec(id) {
-  console.log('evaluated', id);
-  return (target, property, descriptor) => console.log('executed', id);
-}
-
-class Example {
-  @dec(1)
-  @dec(2)
-  method() {}
-}
-// evaluated 1
-// evaluated 2
-// executed 2
-// executed 1
-```
-
-外层装饰器@dec(1)先进入，但是内层装饰器@dec(2)先执行
-
-### 注意
-
-装饰器不能用于修饰函数，因为函数存在变量声明情况
-
-```js
-var counter = 0;
-
-var add = function () {
-  counter++;
-};
-
-@add
-function foo() {
-}
-```
-
-编译阶段，变成下面
-
-```js
-var counter;
-var add;
-
-@add
-function foo() {
-}
-
-counter = 0;
-
-add = function () {
-  counter++;
-};
-```
-
-意图是执行后 counter 等于 1，但是实际上结果是 counter 等于 0
-
-### 使用场景
-
-基于 Decorator 强大的作用，我们能够完成各种场景的需求，下面简单列举几种：
-
-使用 react-redux 的时候，如果写成下面这种形式，既不雅观也很麻烦
-
-```js
-class MyReactComponent extends React.Component {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyReactComponent);
-```
-
-通过装饰器就变得简洁多了
-
-```js
-@connect(mapStateToProps, mapDispatchToProps)
-export default class MyReactComponent extends React.Component {}
-```
-
-将 mixins，也可以写成装饰器，让使用更为简洁了
-
-```js
-function mixins(...list) {
-  return function (target) {
-    Object.assign(target.prototype, ...list);
-  };
-}
-
-// 使用
-const Foo = {
-  foo() {
-    console.log('foo');
-  },
-};
-
-@mixins(Foo)
-class MyClass {}
-
-let obj = new MyClass();
-obj.foo(); // "foo"
-```
-
-下面再讲讲 core-decorators.js 几个常见的装饰器
-
-#### @antobind
-
-autobind 装饰器使得方法中的 this 对象，绑定原始对象
-
-```js
-import { autobind } from 'core-decorators';
-
-class Person {
-  @autobind
-  getPerson() {
-    return this;
-  }
-}
-
-let person = new Person();
-let getPerson = person.getPerson;
-
-getPerson() === person;
-// true
-```
-
-#### @readonly
-
-readonly 装饰器使得属性或方法不可写
-
-```js
-import { readonly } from 'core-decorators';
-
-class Meal {
-  @readonly
-  entree = 'steak';
-}
-
-var dinner = new Meal();
-dinner.entree = 'salmon';
-// Cannot assign to read only property 'entree' of [object Object]
-```
-
-#### @deprecate
-
-deprecate 或 deprecated 装饰器在控制台显示一条警告，表示该方法将废除
-
-```js
-import { deprecate } from 'core-decorators';
-
-class Person {
-  @deprecate
-  facepalm() {}
-
-  @deprecate('功能废除了')
-  facepalmHard() {}
-}
-
-let person = new Person();
-
-person.facepalm();
-// DEPRECATION Person#facepalm: This function will be removed in future versions.
-
-person.facepalmHard();
-// DEPRECATION Person#facepalmHard: 功能废除了
-```
 
 ## 对象新增的扩展
 
@@ -1351,307 +1040,6 @@ for (let [key, value] of iterEntries(myObj)) {
 // bar 7
 ```
 
-## Module
-
-模块，（Module），是能够单独命名并独立地完成一定功能的程序语句的**集合（即程序代码和数据结构的集合体）** 。
-
-两个基本的特征：外部特征和内部特征
-
-- 外部特征是指模块跟外部环境联系的接口（即其他模块或程序调用该模块的方式，包括有输入输出参数、引用的全局变量）和模块的功能
-- 内部特征是指模块的内部环境具有的特点（即该模块的局部数据和程序代码）
-
-### 为什么需要模块化
-
-- 代码抽象
-- 代码封装
-- 代码复用
-- 依赖管理
-
-如果没有模块化，我们代码会怎样？
-
-- 变量和方法不容易维护，容易污染全局作用域
-- 加载资源的方式通过 script 标签从上到下。
-- 依赖的环境主观逻辑偏重，代码较多就会比较复杂。
-- 大型项目资源难以维护，特别是多人合作的情况下，资源的引入会让人奔溃
-
-因此，需要一种将 JavaScript 程序模块化的机制，如
-
-- CommonJs (典型代表：node.js 早期)
-- AMD (典型代表：require.js)
-- CMD (典型代表：sea.js)
-
-### AMD
-
-Asynchronous ModuleDefinition（AMD），异步模块定义，采用异步方式加载模块。所有依赖模块的语句，都定义在一个回调函数中，等到模块加载完成之后，这个回调函数才会运行
-
-代表库为 require.js
-
-```js
-/** main.js 入口文件/主模块 **/
-// 首先用config()指定各模块路径和引用名
-require.config({
-  baseUrl: 'js/lib',
-  paths: {
-    jquery: 'jquery.min', //实际路径为js/lib/jquery.min.js
-    underscore: 'underscore.min',
-  },
-});
-// 执行基本操作
-require(['jquery', 'underscore'], function ($, _) {
-  // some code here
-});
-```
-
-### CommonJs
-
-CommonJS 是一套 Javascript 模块规范，用于服务端
-
-```js
-// a.js
-module.exports = { foo, bar };
-
-// b.js
-const { foo, bar } = require('./a.js');
-```
-
-其有如下特点：
-
-- 所有代码都运行在模块作用域，不会污染全局作用域
-- 模块是同步加载的，即只有加载完成，才能执行后面的操作
-- 模块在首次执行后就会缓存，再次加载只返回缓存结果，如果想要再次执行，可清除缓存
-- require 返回的值是被输出的值的拷贝，模块内部的变化也不会影响这个值
-
-既然存在了 AMD 以及 CommonJs 机制，ES6 的 Module 又有什么不一样？
-
-ES6 在语言标准的层面上，实现了 Module，即模块功能，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案
-
-CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性
-
-```js
-// CommonJS模块
-let { stat, exists, readfile } = require('fs');
-
-// 等同于
-let _fs = require('fs');
-let stat = _fs.stat;
-let exists = _fs.exists;
-let readfile = _fs.readfile;
-```
-
-ES6 设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
-
-```js
-// ES6模块
-import { stat, exists, readFile } from 'fs';
-```
-
-上述代码，只加载 3 个方法，其他方法不加载，即 ES6 可以在编译时就完成模块加载
-
-由于编译加载，使得静态分析成为可能。包括现在流行的 typeScript 也是依靠静态分析实现功能
-
-### 使用
-
-ES6 模块内部自动采用了严格模式，这里就不展开严格模式的限制，毕竟这是 ES5 之前就已经规定好
-
-模块功能主要由两个命令构成：
-
-- export：用于规定模块的对外接口
-- import：用于输入其他模块提供的功能
-
-#### export
-
-一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用 export 关键字输出该变量
-
-```js
-// profile.js
-export var firstName = 'Michael';
-export var lastName = 'Jackson';
-export var year = 1958;
-
-或;
-// 建议使用下面写法，这样能瞬间确定输出了哪些变量
-var firstName = 'Michael';
-var lastName = 'Jackson';
-var year = 1958;
-
-export { firstName, lastName, year };
-```
-
-输出函数或类
-
-```js
-export function multiply(x, y) {
-  return x * y;
-}
-```
-
-通过 as 可以进行输出变量的重命名
-
-```js
-function v1() { ... }
-function v2() { ... }
-
-export {
-  v1 as streamV1,
-  v2 as streamV2,
-  v2 as streamLatestVersion
-};
-```
-
-#### import
-
-使用 export 命令定义了模块的对外接口以后，其他 JS 文件就可以通过 import 命令加载这个模块
-
-```js
-// main.js
-import { firstName, lastName, year } from './profile.js';
-
-function setName(element) {
-  element.textContent = firstName + ' ' + lastName;
-}
-```
-
-同样如果想要输入变量起别名，通过 as 关键字
-
-```js
-import { lastName as surname } from './profile.js';
-```
-
-当加载整个模块的时候，需要用到星号\*
-
-```js
-// circle.js
-export function area(radius) {
-  return Math.PI * radius * radius;
-}
-
-export function circumference(radius) {
-  return 2 * Math.PI * radius;
-}
-
-// main.js
-import * as circle from './circle';
-console.log(circle); // {area:area,circumference:circumference}
-```
-
-输入的变量都是只读的，不允许修改，但是如果是对象，允许修改属性
-
-```js
-import { a } from './xxx.js';
-
-a.foo = 'hello'; // 合法操作
-a = {}; // Syntax Error : 'a' is read-only;
-```
-
-不过建议即使能修改，但我们不建议。因为修改之后，我们很难差错
-
-import 后面我们常接着 from 关键字，from 指定模块文件的位置，可以是相对路径，也可以是绝对路径
-
-```js
-import { a } from './a';
-```
-
-如果只有一个模块名，需要有配置文件，告诉引擎模块的位置
-
-```js
-import { myMethod } from 'util';
-```
-
-在编译阶段，import 会提升到整个模块的头部，首先执行
-
-```js
-foo();
-
-import { foo } from 'my_module';
-```
-
-多次重复执行同样的导入，只会执行一次
-
-```js
-import 'lodash';
-import 'lodash';
-```
-
-上面的情况，大家都能看到用户在导入模块的时候，需要知道加载的变量名和函数，否则无法加载
-
-如果不需要知道变量名或函数就完成加载，就要用到 export default 命令，为模块指定默认输出
-
-```js
-// export-default.js
-export default function () {
-  console.log('foo');
-}
-```
-
-加载该模块的时候，import 命令可以为该函数指定任意名字
-
-```js
-// import-default.js
-import customName from './export-default';
-customName(); // 'foo'
-```
-
-#### 动态加载
-
-允许您仅在需要时动态加载模块，而不必预先加载所有模块，这存在明显的性能优势
-
-这个新功能允许您将 import()作为函数调用，将其作为参数传递给模块的路径。 它返回一个 promise，它用一个模块对象来实现，让你可以访问该对象的导出
-
-```js
-import('/modules/myModule.mjs').then((module) => {
-  // Do something with the module.
-});
-```
-
-#### 复合写法
-
-如果在一个模块之中，先输入后输出同一个模块，import 语句可以与 export 语句写在一起
-
-```js
-export { foo, bar } from 'my_module';
-
-// 可以简单理解为
-import { foo, bar } from 'my_module';
-export { foo, bar };
-```
-
-同理能够搭配 as、\*搭配使用
-
-### 使用场景
-
-如今，ES6 模块化已经深入我们日常项目开发中，像 vue、react 项目搭建项目，组件化开发处处可见，其也是依赖模块化实现
-
-```js
-// vue组件
-<template>
-  <div class="App">
-      组件化开发 ---- 模块化
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
-react组件
-function App() {
-  return (
-    <div className="App">
-		组件化开发 ---- 模块化
-    </div>
-  );
-}
-
-export default App;
-```
-
-[  
-](https://es6.ruanyifeng.com/#docs/module)
-
 ## 对象新增的扩展
 
 ### 属性的简写
@@ -1784,7 +1172,7 @@ Object.setPrototypeOf(obj, proto); // 为obj设置原型对象
 obj.find(); // "hello"
 ```
 
-## #扩展运算符的应用
+### 扩展运算符的应用
 
 在解构赋值中，未被读取的可遍历的属性，分配到指定的对象上面
 
@@ -1831,7 +1219,7 @@ Reflect.ownKeys({ [Symbol()]: 0, b: 0, 10: 0, 2: 0, a: 0 });
 
 ## Object 新增方法
 
-### Object.assign()
+### Object.assign
 
 Object.assign()方法用于对象的合并，将源对象 source 的所有可枚举属性，复制到目标对象 target
 
@@ -1849,7 +1237,7 @@ target; // {a:1, b:2, c:3}
 
 注意：Object.assign()方法是浅拷贝，遇到同名属性会进行替换
 
-### Object.keys()
+### Object.keys
 
 返回自身的（不含继承的）所有可遍历（enumerable）属性的键名的数组
 
@@ -1859,7 +1247,7 @@ Object.keys(obj);
 // ["foo", "baz"]
 ```
 
-### Object.values()
+### Object.values
 
 返回自身的（不含继承的）所有可遍历（enumerable）属性的键对应值的数组
 
@@ -1869,7 +1257,7 @@ Object.values(obj);
 // ["bar", 42]
 ```
 
-### Object.entries()
+### Object.entries
 
 返回一个对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对的数组
 
@@ -1879,7 +1267,7 @@ Object.entries(obj);
 // [ ["foo", "bar"], ["baz", 42] ]
 ```
 
-### Object.fromEntries()
+### Object.fromEntries
 
 用于将一个键值对数组转为对象
 
@@ -1891,9 +1279,9 @@ Object.fromEntries([
 // { foo: "bar", baz: 42 }
 ```
 
-## js 中的错误（Error）和错误处理
+## 错误（Error）和错误处理
 
-错误的类型
+js 中常见的错误类型
 
 ### Error
 
@@ -2920,7 +2308,7 @@ handler 通常以函数作为属性的对象，各属性中的函数分别定义
 
 下面我们介绍 proxy 几种用法：
 
-### get()
+### get
 
 get 接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
 
@@ -2987,7 +2375,7 @@ proxy.foo;
 // TypeError: Invariant check failed
 ```
 
-### set()
+### set
 
 set 方法用来拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身
 
@@ -3055,7 +2443,7 @@ proxy.foo = 'bar';
 // TypeError: 'set' on proxy: trap returned falsish for property 'foo'
 ```
 
-### deleteProperty()
+### deleteProperty
 
 deleteProperty 方法用于拦截 delete 操作，如果这个方法抛出错误或者返回 false，当前属性就无法被 delete 命令删除
 
@@ -3166,6 +2554,597 @@ function set(target, key, value, receiver) {
 
 观察者函数都放进 Set 集合，当修改 obj 的值，在会 set 函数中拦截，自动执行 Set 所有的观察者
 
+## Module
+
+模块，（Module），是能够单独命名并独立地完成一定功能的程序语句的**集合（即程序代码和数据结构的集合体）** 。
+
+两个基本的特征：外部特征和内部特征
+
+- 外部特征是指模块跟外部环境联系的接口（即其他模块或程序调用该模块的方式，包括有输入输出参数、引用的全局变量）和模块的功能
+- 内部特征是指模块的内部环境具有的特点（即该模块的局部数据和程序代码）
+
+### 为什么需要模块化
+
+- 代码抽象
+- 代码封装
+- 代码复用
+- 依赖管理
+
+如果没有模块化，我们代码会怎样？
+
+- 变量和方法不容易维护，容易污染全局作用域
+- 加载资源的方式通过 script 标签从上到下。
+- 依赖的环境主观逻辑偏重，代码较多就会比较复杂。
+- 大型项目资源难以维护，特别是多人合作的情况下，资源的引入会让人奔溃
+
+因此，需要一种将 JavaScript 程序模块化的机制，如
+
+- CommonJs (典型代表：node.js 早期)
+- AMD (典型代表：require.js)
+- CMD (典型代表：sea.js)
+
+### AMD
+
+Asynchronous ModuleDefinition（AMD），异步模块定义，采用异步方式加载模块。所有依赖模块的语句，都定义在一个回调函数中，等到模块加载完成之后，这个回调函数才会运行
+
+代表库为 require.js
+
+```js
+/** main.js 入口文件/主模块 **/
+// 首先用config()指定各模块路径和引用名
+require.config({
+  baseUrl: 'js/lib',
+  paths: {
+    jquery: 'jquery.min', //实际路径为js/lib/jquery.min.js
+    underscore: 'underscore.min',
+  },
+});
+// 执行基本操作
+require(['jquery', 'underscore'], function ($, _) {
+  // some code here
+});
+```
+
+### CommonJs
+
+CommonJS 是一套 Javascript 模块规范，用于服务端
+
+```js
+// a.js
+module.exports = { foo, bar };
+
+// b.js
+const { foo, bar } = require('./a.js');
+```
+
+其有如下特点：
+
+- 所有代码都运行在模块作用域，不会污染全局作用域
+- 模块是同步加载的，即只有加载完成，才能执行后面的操作
+- 模块在首次执行后就会缓存，再次加载只返回缓存结果，如果想要再次执行，可清除缓存
+- require 返回的值是被输出的值的拷贝，模块内部的变化也不会影响这个值
+
+既然存在了 AMD 以及 CommonJs 机制，ES6 的 Module 又有什么不一样？
+
+ES6 在语言标准的层面上，实现了 Module，即模块功能，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案
+
+CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性
+
+```js
+// CommonJS模块
+let { stat, exists, readfile } = require('fs');
+
+// 等同于
+let _fs = require('fs');
+let stat = _fs.stat;
+let exists = _fs.exists;
+let readfile = _fs.readfile;
+```
+
+ES6 设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
+
+```js
+// ES6模块
+import { stat, exists, readFile } from 'fs';
+```
+
+上述代码，只加载 3 个方法，其他方法不加载，即 ES6 可以在编译时就完成模块加载
+
+由于编译加载，使得静态分析成为可能。包括现在流行的 typeScript 也是依靠静态分析实现功能
+
+### 使用
+
+ES6 模块内部自动采用了严格模式，这里就不展开严格模式的限制，毕竟这是 ES5 之前就已经规定好
+
+模块功能主要由两个命令构成：
+
+- export：用于规定模块的对外接口
+- import：用于输入其他模块提供的功能
+
+#### export
+
+一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用 export 关键字输出该变量
+
+```js
+// profile.js
+export var firstName = 'Michael';
+export var lastName = 'Jackson';
+export var year = 1958;
+
+或;
+// 建议使用下面写法，这样能瞬间确定输出了哪些变量
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export { firstName, lastName, year };
+```
+
+输出函数或类
+
+```js
+export function multiply(x, y) {
+  return x * y;
+}
+```
+
+通过 as 可以进行输出变量的重命名
+
+```js
+function v1() { ... }
+function v2() { ... }
+
+export {
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+};
+```
+
+#### import
+
+使用 export 命令定义了模块的对外接口以后，其他 JS 文件就可以通过 import 命令加载这个模块
+
+```js
+// main.js
+import { firstName, lastName, year } from './profile.js';
+
+function setName(element) {
+  element.textContent = firstName + ' ' + lastName;
+}
+```
+
+同样如果想要输入变量起别名，通过 as 关键字
+
+```js
+import { lastName as surname } from './profile.js';
+```
+
+当加载整个模块的时候，需要用到星号\*
+
+```js
+// circle.js
+export function area(radius) {
+  return Math.PI * radius * radius;
+}
+
+export function circumference(radius) {
+  return 2 * Math.PI * radius;
+}
+
+// main.js
+import * as circle from './circle';
+console.log(circle); // {area:area,circumference:circumference}
+```
+
+输入的变量都是只读的，不允许修改，但是如果是对象，允许修改属性
+
+```js
+import { a } from './xxx.js';
+
+a.foo = 'hello'; // 合法操作
+a = {}; // Syntax Error : 'a' is read-only;
+```
+
+不过建议即使能修改，但我们不建议。因为修改之后，我们很难差错
+
+import 后面我们常接着 from 关键字，from 指定模块文件的位置，可以是相对路径，也可以是绝对路径
+
+```js
+import { a } from './a';
+```
+
+如果只有一个模块名，需要有配置文件，告诉引擎模块的位置
+
+```js
+import { myMethod } from 'util';
+```
+
+在编译阶段，import 会提升到整个模块的头部，首先执行
+
+```js
+foo();
+
+import { foo } from 'my_module';
+```
+
+多次重复执行同样的导入，只会执行一次
+
+```js
+import 'lodash';
+import 'lodash';
+```
+
+上面的情况，大家都能看到用户在导入模块的时候，需要知道加载的变量名和函数，否则无法加载
+
+如果不需要知道变量名或函数就完成加载，就要用到 export default 命令，为模块指定默认输出
+
+```js
+// export-default.js
+export default function () {
+  console.log('foo');
+}
+```
+
+加载该模块的时候，import 命令可以为该函数指定任意名字
+
+```js
+// import-default.js
+import customName from './export-default';
+customName(); // 'foo'
+```
+
+#### 动态加载
+
+允许您仅在需要时动态加载模块，而不必预先加载所有模块，这存在明显的性能优势
+
+这个新功能允许您将 import()作为函数调用，将其作为参数传递给模块的路径。 它返回一个 promise，它用一个模块对象来实现，让你可以访问该对象的导出
+
+```js
+import('/modules/myModule.mjs').then((module) => {
+  // Do something with the module.
+});
+```
+
+#### 复合写法
+
+如果在一个模块之中，先输入后输出同一个模块，import 语句可以与 export 语句写在一起
+
+```js
+export { foo, bar } from 'my_module';
+
+// 可以简单理解为
+import { foo, bar } from 'my_module';
+export { foo, bar };
+```
+
+同理能够搭配 as、\*搭配使用
+
+### 使用场景
+
+如今，ES6 模块化已经深入我们日常项目开发中，像 vue、react 项目搭建项目，组件化开发处处可见，其也是依赖模块化实现
+
+```ts
+// vue组件
+<template>
+  <div class="App">
+      组件化开发 ---- 模块化
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  }
+}
+</script>
+// react组件
+function App() {
+  return (
+    <div className="App">
+		组件化开发 ---- 模块化
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Decorator （装饰器）
+
+### 介绍
+
+Decorator，即装饰器，从名字上很容易让我们联想到装饰者模式
+
+简单来讲，装饰者模式就是一种在不改变原类和使用继承的情况下，动态地扩展对象功能的设计理论。
+
+ES6 中 Decorator 功能亦如此，其本质也不是什么高大上的结构，就是一个普通的函数，用于扩展类属性和类方法
+
+这里定义一个士兵，这时候他什么装备都没有
+
+```js
+class soldier {}
+```
+
+定义一个得到 AK 装备的函数，即装饰器
+
+```js
+function strong(target) {
+  target.AK = true;
+}
+```
+
+使用该装饰器对士兵进行增强
+
+```js
+@strong
+class soldier {}
+```
+
+这时候士兵就有武器了
+
+```js
+soldier.AK; // true
+```
+
+上述代码虽然简单，但也能够清晰看到了使用 Decorator 两大优点：
+
+- 代码可读性变强了，装饰器命名相当于一个注释
+- 在不改变原有代码情况下，对原来功能进行扩展
+
+### 用法
+
+Docorator 修饰对象为下面两种：
+
+- 类的装饰
+- 类属性的装饰
+
+#### 类的装饰
+
+当对类本身进行装饰的时候，能够接受一个参数，即类本身
+
+将装饰器行为进行分解，大家能够有个更深入的了解
+
+```js
+@decorator
+class A {}
+
+// 等同于
+class A {}
+A = decorator(A) || A;
+```
+
+下面@testable 就是一个装饰器，target 就是传入的类，即 MyTestableClass，实现了为类添加静态属性
+
+```js
+@testable
+class MyTestableClass {
+  // ...
+}
+
+function testable(target) {
+  target.isTestable = true;
+}
+
+MyTestableClass.isTestable; // true
+```
+
+如果想要传递参数，可以在装饰器外层再封装一层函数
+
+```js
+function testable(isTestable) {
+  return function (target) {
+    target.isTestable = isTestable;
+  };
+}
+
+@testable(true)
+class MyTestableClass {}
+MyTestableClass.isTestable; // true
+
+@testable(false)
+class MyClass {}
+MyClass.isTestable; // false
+```
+
+#### 类属性的装饰
+
+当对类属性进行装饰的时候，能够接受三个参数：
+
+- 类的原型对象
+- 需要装饰的属性名
+- 装饰属性名的描述对象
+
+首先定义一个 readonly 装饰器
+
+```js
+function readonly(target, name, descriptor) {
+  descriptor.writable = false; // 将可写属性设为false
+  return descriptor;
+}
+```
+
+使用 readonly 装饰类的 name 方法
+
+```js
+class Person {
+  @readonly
+  name() {
+    return `${this.first} ${this.last}`;
+  }
+}
+```
+
+相当于以下调用
+
+```js
+readonly(Person.prototype, 'name', descriptor);
+```
+
+如果一个方法有多个装饰器，就像洋葱一样，先从外到内进入，再由内到外执行
+
+```js
+function dec(id) {
+  console.log('evaluated', id);
+  return (target, property, descriptor) => console.log('executed', id);
+}
+
+class Example {
+  @dec(1)
+  @dec(2)
+  method() {}
+}
+// evaluated 1
+// evaluated 2
+// executed 2
+// executed 1
+```
+
+外层装饰器@dec(1)先进入，但是内层装饰器@dec(2)先执行
+
+### 注意
+
+装饰器不能用于修饰函数，因为函数存在变量声明情况
+
+```js
+var counter = 0;
+
+var add = function () {
+  counter++;
+};
+
+@add
+function foo() {
+}
+```
+
+编译阶段，变成下面
+
+```js
+var counter;
+var add;
+
+@add
+function foo() {
+}
+
+counter = 0;
+
+add = function () {
+  counter++;
+};
+```
+
+意图是执行后 counter 等于 1，但是实际上结果是 counter 等于 0
+
+### 使用场景
+
+基于 Decorator 强大的作用，我们能够完成各种场景的需求，下面简单列举几种：
+
+使用 react-redux 的时候，如果写成下面这种形式，既不雅观也很麻烦
+
+```js
+class MyReactComponent extends React.Component {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyReactComponent);
+```
+
+通过装饰器就变得简洁多了
+
+```js
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MyReactComponent extends React.Component {}
+```
+
+将 mixins，也可以写成装饰器，让使用更为简洁了
+
+```js
+function mixins(...list) {
+  return function (target) {
+    Object.assign(target.prototype, ...list);
+  };
+}
+
+// 使用
+const Foo = {
+  foo() {
+    console.log('foo');
+  },
+};
+
+@mixins(Foo)
+class MyClass {}
+
+let obj = new MyClass();
+obj.foo(); // "foo"
+```
+
+下面再讲讲 core-decorators.js 几个常见的装饰器
+
+#### @antobind
+
+autobind 装饰器使得方法中的 this 对象，绑定原始对象
+
+```js
+import { autobind } from 'core-decorators';
+
+class Person {
+  @autobind
+  getPerson() {
+    return this;
+  }
+}
+
+let person = new Person();
+let getPerson = person.getPerson;
+
+getPerson() === person;
+// true
+```
+
+#### @readonly
+
+readonly 装饰器使得属性或方法不可写
+
+```js
+import { readonly } from 'core-decorators';
+
+class Meal {
+  @readonly
+  entree = 'steak';
+}
+
+var dinner = new Meal();
+dinner.entree = 'salmon';
+// Cannot assign to read only property 'entree' of [object Object]
+```
+
+#### @deprecate
+
+deprecate 或 deprecated 装饰器在控制台显示一条警告，表示该方法将废除
+
+```js
+import { deprecate } from 'core-decorators';
+
+class Person {
+  @deprecate
+  facepalm() {}
+
+  @deprecate('功能废除了')
+  facepalmHard() {}
+}
+
+let person = new Person();
+
+person.facepalm();
+// DEPRECATION Person#facepalm: This function will be removed in future versions.
+
+person.facepalmHard();
+// DEPRECATION Person#facepalmHard: 功能废除了
+```
+
 ## Set、Map
 
 ### Set
@@ -3178,7 +3157,7 @@ Set 本身是一个构造函数，用来生成 Set 数据结构
 const s = new Set();
 ```
 
-### add()
+#### add
 
 添加某个值，返回 Set 结构本身
 
@@ -3188,7 +3167,7 @@ const s = new Set();
 s.add(1).add(2).add(2); // 2只被添加了一次
 ```
 
-### delete()
+#### delete
 
 删除某个值，返回一个布尔值，表示删除是否成功
 
@@ -3196,7 +3175,7 @@ s.add(1).add(2).add(2); // 2只被添加了一次
 s.delete(1);
 ```
 
-### has()
+#### has
 
 返回一个布尔值，判断该值是否为 Set 的成员
 
@@ -3204,7 +3183,7 @@ s.delete(1);
 s.has(2);
 ```
 
-### clear()
+#### clear
 
 清除所有成员，没有返回值
 
@@ -3212,7 +3191,7 @@ s.has(2);
 s.clear();
 ```
 
-### 遍历
+#### 遍历
 
 Set 实例遍历的方法有如下：
 
@@ -3293,7 +3272,7 @@ let difference = new Set([...a].filter((x) => !b.has(x)));
 // Set {1}
 ```
 
-## Map
+### Map
 
 Map 类型是键值对的有序列表，而键和值都可以是任意类型
 
@@ -3303,7 +3282,7 @@ Map 本身是一个构造函数，用来生成 Map 数据结构
 const m = new Map();
 ```
 
-### size
+#### size
 
 size 属性返回 Map 结构的成员总数。
 
@@ -3315,7 +3294,7 @@ map.set('bar', false);
 map.size; // 2
 ```
 
-### set()
+#### set
 
 设置键名 key 对应的键值为 value，然后返回整个 Map 结构
 
@@ -3332,7 +3311,7 @@ m.set(undefined, 'nah'); // 键是 undefined
 m.set(1, 'a').set(2, 'b').set(3, 'c'); // 链式操作
 ```
 
-### get()
+#### get
 
 get 方法读取 key 对应的键值，如果找不到 key，返回 undefined
 
@@ -3347,7 +3326,7 @@ m.set(hello, 'Hello ES6!'); // 键是函数
 m.get(hello); // Hello ES6!
 ```
 
-### has()
+#### has
 
 has 方法返回一个布尔值，表示某个键是否在当前 Map 对象之中
 
@@ -3364,7 +3343,7 @@ m.has(262); // true
 m.has(undefined); // true
 ```
 
-### delete()
+#### delete
 
 delete 方法删除某个键，返回 true。如果删除失败，返回 false
 
@@ -3377,7 +3356,7 @@ m.delete(undefined);
 m.has(undefined); // false
 ```
 
-### clear()
+#### clear
 
 clear 方法清除所有成员，没有返回值
 
@@ -3391,7 +3370,7 @@ map.clear();
 map.size; // 0
 ```
 
-### 遍历
+#### 遍历
 
 Map 结构原生提供三个遍历器生成函数和一个遍历方法：
 
