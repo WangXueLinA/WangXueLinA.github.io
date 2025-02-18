@@ -403,7 +403,7 @@ const obj = { a: 1, b: 2 };
 let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 ```
 
-## 构造函数新增的方法
+## 数组新增的方法
 
 关于构造函数，数组新增的方法有如下：
 
@@ -470,6 +470,13 @@ Array(3, 11, 8); // [3, 11, 8]
 
 ### fill
 
+指定长度指定值
+
+```js
+const arr = new Array(5).fill(42); // 创建一个长度为 10 的数组，并填充所有元素为 42
+console.log(arr); // [42, 42, 42, 42, 42]
+```
+
 使用给定值，填充一个数组
 
 ```js
@@ -488,6 +495,49 @@ new Array(3).fill(7);
 ```
 
 注意，如果填充的类型为对象，则是浅拷贝
+
+### toReversed，toSorted，Spliced
+
+从 ES2022（ECMAScript 2022）开始，引入了一些新的数组实例方法，这些方法以 to 开头
+
+- toReversed()
+- toSorted()
+- toSpliced()
+
+这些方法的主要特点是它们都<span style='color:red'>不会修改原数组</span>，而是返回一个新的数组，这使得它们非常适合用于函数式编程
+
+#### toReversed
+
+toReversed() 方法用于返回一个新数组，该数组中的元素顺序与原数组相反。这个方法不会修改原数组
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const reversedNumbers = numbers.toReversed();
+console.log(reversedNumbers); // 输出: [5, 4, 3, 2, 1]
+console.log(numbers); // 输出: [1, 2, 3, 4, 5] （原数组未改变）
+```
+
+#### toSorted
+
+toSorted() 方法用于返回一个新数组，该数组中的元素按照指定的比较函数进行排序。如果不提供比较函数，默认按照字典顺序排序（即按照字符串的 Unicode 码点顺序排序）
+
+```js
+const numbers = [1, 3, 2, 5, 4];
+const sortedNumbers = numbers.toSorted();
+console.log(sortedNumbers); // 输出: [1, 2, 3, 4, 5]
+console.log(numbers); // 输出: [1, 3, 2, 5, 4] （原数组未改变）
+```
+
+#### toSpliced
+
+toSpliced() 方法用于返回一个新数组，该数组是在原数组的基础上进行了删除或替换操作的结果。这个方法不会修改原数组。
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const splicedNumbers = numbers.toSpliced(1, 2, 9, 10);
+console.log(splicedNumbers); // 输出: [1, 9, 10, 4, 5]
+console.log(numbers); // 输出: [1, 2, 3, 4, 5] （原数组未改变）
+```
 
 ## 对象新增的扩展
 

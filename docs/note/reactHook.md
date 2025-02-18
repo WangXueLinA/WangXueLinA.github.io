@@ -7,6 +7,14 @@ order: -2
 
 # React hook
 
+## Hooks 为什么要在顶层使用？
+
+hooks 的实现就是基于 fiber 的。每个组件都会生成一个 FiberNode（节点），组件内使用的 hook 会以链表的形式挂在 FiberNode 的 memoizedState 上面。各个 FiberNode 汇聚起来会变成一颗 Fiber 树，React 每次会以固定的顺序遍历这棵树，这样就把整个页面的 hook 都串联起来了。
+
+当 react 重新渲染时，会生成一个新的 fiber 树，而这里会根据之前已经生成的 FiberNode ，拿到之前的 hook ，再复制一份到新的 FiberNode 上，生成一个新的 hooks 链表。
+
+react 按顺序来区分不同的 hook，它默认你不会修改这个顺序。如果你没有在顶层使用 hook ，打乱了每次 hook 调用的顺序，就会导致 react 无法区分出对应的 hook
+
 ## hook 函数
 
 ### useState
@@ -323,7 +331,9 @@ useEffect(() => {
 ```
 
 3. **清理函数**： 如果 useEffect 中有创建订阅、定时器或其他需要手动清理的资源，务必返回一个清理函数，否则可能会导致内存泄漏。
-4. **使用 useLayoutEffect 而非 useEffect**： 在某些需要同步布局和 DOM 更新的场景（例如修改滚动位置或尺寸），应该使用 useLayoutEffect 而不是 useEffect，以确保 DOM 变化发生在浏览器下一帧绘制之前。
+4. **与 useLayoutEffect 区别**：
+   - useEffect(异步)：会在浏览器绘制完成后异步执行，不会阻塞页面渲染。因此，它适用于大多数情况下的副作用操作，比如数据获取、订阅事件、修改 DOM 等。由于是异步执行，可能会导致页面闪烁或者用户看到不一致的 UI。
+   - useLayoutEffect(同步)：在浏览器绘制之前同步执行，即会阻塞页面渲染。这使得它更适合处理需要立即更新 UI 的副作用操作，比如修改 DOM 样式、测量元素尺寸等。由于是同步执行，可以确保在页面渲染前完成副作用操作，避免了页面闪烁或不一致的 UI。
 
 ### useCallback
 

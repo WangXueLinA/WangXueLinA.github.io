@@ -293,3 +293,12 @@ async function ReadList() {
 // 执行方法
 ReadList();
 ```
+
+## Npm run 原理
+
+用 npm run vite 举例
+
+- 先从当前项目的 node_modules/.bin 去查找可执行命令 vite
+- 如果没找到就去全局的 node_modules 去找可执行命令 vite
+- 如果还没找到就去环境变量查找
+- 再找不到就进行报错
