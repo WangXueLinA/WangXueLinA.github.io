@@ -1,6 +1,6 @@
 ---
 toc: content
-title: Antv G6
+title: antv G6
 group: 可视化
 ---
 

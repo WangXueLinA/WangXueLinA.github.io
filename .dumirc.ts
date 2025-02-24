@@ -3,6 +3,11 @@ import fs from 'fs';
 import path from 'path';
 const resolve = (p: string) => path.resolve(__dirname, p);
 const list = fs.readdirSync(resolve('packages'));
+const listNote = fs.readdirSync(resolve('docs/note'));
+const noteChildren = listNote.map((str) => ({
+  title: str.replace(/\.md$/, ''),
+  link: `/note/${str.replace(/\.md$/, '')}`,
+}));
 const listDir = list.map((str) => `packages/${str}/src`);
 const alias = list.reduce((obj, key, index) => {
   return {
@@ -29,9 +34,15 @@ export default defineConfig({
     logo: '/logo.png',
     nav: [
       { title: '组件', link: '/components/aes-des-secret' },
-      { title: '笔记', link: '/note/react18' },
+      {
+        title: '笔记',
+        children: noteChildren,
+      },
       { title: '部署', link: '/deploy/web' },
       { title: '源码', link: '/source/call' },
+      { title: 'vue2', link: '/vue2' },
+      { title: 'vue3', link: '/vue3' },
+      { title: '技巧', link: '/other/vscode_github' },
     ],
     sidebar: {
       '/components': [
@@ -44,9 +55,9 @@ export default defineConfig({
       ],
     },
     alias,
-    // socialLinks: {
-    //   github: 'https://github.com/WangXueLinA?tab=repositories',
-    // },
+    socialLinks: {
+      github: 'https://github.com/WangXueLinA?tab=repositories',
+    },
   },
   lessLoader: {
     javascriptEnabled: true,

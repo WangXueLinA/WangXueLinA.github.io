@@ -1,6 +1,6 @@
 ---
 toc: content
-title: Graphin
+title: graphin
 group: 可视化
 ---
 

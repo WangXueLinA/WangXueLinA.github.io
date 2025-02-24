@@ -1,5 +1,6 @@
 {
   "name": "xuelin_dumi",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/WangXueLinA/dumi_document"
@@ -71,7 +72,7 @@
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-react-require": "^4.0.2",
     "cross-env": "^7.0.3",
-    "dumi": "^2.2.17",
+    "dumi": "^2.4.18",
     "ejs": "^3.1.6",
     "eslint": "^7.x",
     "father": "^4.1.0",
