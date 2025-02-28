@@ -1,9 +1,10 @@
 ---
 toc: content
-title: vuex
+title: Vuex
+group: Vue 全家桶
 ---
 
-# vuex
+# Vuex
 
 ## 官网
 

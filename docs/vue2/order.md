@@ -14,6 +14,21 @@ order: -99
 
 单向绑定：适合于展示数据和一些不需要用户交互修改的数据状态，数据只能从 data 流向页面
 
+v-bind 在布尔型这种场景下的行为略有不同：
+
+```html
+<button :disabled="isDisabled">Button</button>
+```
+
+当 isDisabled 为真值或一个空字符串 (即 `<button disabled="">`) 时，元素会包含这个 disabled attribute。而当其为其他假值时 attribute 将被忽略。
+
+| isDisabled 值  |    页面渲染结果     |
+| :------------: | :-----------------: |
+|      true      | `<button disabled>` |
+|     false      |     `<button>`      |
+| ""（空字符串） | `<button disabled>` |
+| null/undefined |     `<button>`      |
+
 ### 动态绑定 HTML 属性
 
 ```html
@@ -350,6 +365,10 @@ export default {
 };
 </script>
 ```
+
+### 原理
+
+v-model 本质上是语法糖，v-model 默认会解析成名为 value 的 prop 和名为 input 的事件。这种语法糖的方式是典型的双向绑定
 
 ## v-if
 

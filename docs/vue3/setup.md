@@ -1,6 +1,6 @@
 ---
 toc: content
-title: setup
+title: setup函数
 order: -99
 ---
 
@@ -49,9 +49,29 @@ export default {
 };
 ```
 
-参数：
+### 参数
 
-- props：父组件传递的响应式 props（不可解构，否则失去响应性）。
+setup 函数接收 两个参数：
+
+1. props: 组件接收的 props 对象（响应式）
+
+2. context: 上下文对象，包含以下属性：
+
+   1. attrs: 非 props 的属性（未在 props 中声明的属性）
+
+   2. slots: 插槽内容（等同于 this.$slots）
+
+   3. emit: 触发自定义事件的函数（等同于 this.$emit）
+
+#### props 参数
+
+接收父组件传递的 props 数据。
+
+响应式：当父组件传递的 props 变化时，props 会自动更新。
+
+使用场景：需要在子组件中处理父组件传递的数据。
+
+注意：不要直接解构 props，否则会失去响应性。若需解构，使用 toRefs。
 
 ```js
 // ❌ 错误：直接解构会失去响应性
@@ -62,12 +82,89 @@ const { title } = toRefs(props);
 console.log(title.value);
 ```
 
-- context：上下文对象，包含 attrs, slots, emit 等非响应式属性。
+#### context：上下文对象
 
-```js
-setup(props, { attrs, slots, emit }) {
-  emit('change', newValue); // 触发事件
-}
+包含 attrs、slots 和 emit，用于访问非 props 属性、插槽和触发事件。
+
+1. attrs： 包含父组件传递的非 props 属性（如 class、style 或未在 props 中声明的属性）
+
+使用场景：
+
+- 需要透传属性到子组件的根元素或其他元素。
+- 处理动态属性（如自定义 HTML 属性）。
+
+```html
+<!-- 父组件 -->
+<ChildComponent custom-attr="123" class="custom-class" />
+
+<!-- 子组件 -->
+<script>
+  export default {
+    setup(props, { attrs }) {
+      console.log(attrs.class); // 输出 "custom-class"
+      console.log(attrs.customAttr); // 输出 "123"
+      return {};
+    },
+  };
+</script>
+```
+
+2. slots：访问插槽内容（包括默认插槽和具名插槽）。
+
+使用场景
+
+- 需要动态渲染插槽内容。
+- 在逻辑中判断插槽是否存在。
+
+```html
+<!-- 父组件 -->
+<ChildComponent>
+  <template #header>标题</template>
+  默认内容
+</ChildComponent>
+
+<!-- 子组件 -->
+<template>
+  <div>
+    <slot name="header"></slot>
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  export default {
+    setup(props, { slots }) {
+      // 检查插槽是否存在
+      const hasHeader = !!slots.header;
+      // 渲染插槽内容
+      return { hasHeader };
+    },
+  };
+</script>
+```
+
+3. emit：触发自定义事件，通知父组件执行逻辑。
+
+使用场景
+
+- 子组件需要向父组件传递数据（如表单提交、按钮点击）。
+
+```vue
+<!-- 父组件 -->
+<ChildComponent @submit="handleSubmit" />
+
+<!-- 子组件 -->
+<script>
+export default {
+  setup(props, { emit }) {
+    const handleClick = () => {
+      // 触发 submit 事件，传递数据
+      emit('submit', { data: 'payload' });
+    };
+    return { handleClick };
+  },
+};
+</script>
 ```
 
 返回值：
@@ -193,4 +290,155 @@ setup() {
   fetchData().then(res => data.value = res);
   return { data };
 }
+```
+
+### `<script setup>`语法糖
+
+核心特点:
+
+- 自动暴露顶层绑定：所有顶层变量、函数、import 内容自动暴露给模板。
+
+```vue
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);
+</script>
+```
+
+支持顶层 await：自动将组件转为异步依赖（需配合 `<Suspense>`）。
+
+```vue
+<script setup>
+const data = await fetchData(); // 自动处理异步
+</script>
+```
+
+编译器宏：
+
+- defineProps / defineEmits：定义 props 和 emits，无需导入。
+
+```vue
+<!-- 使用 setup 函数 -->
+<script>
+export default {
+  props: ['message'],
+  emits: ['update'],
+  setup(props, { emit }) {
+    const handleClick = () => emit('update');
+    return { handleClick };
+  },
+};
+</script>
+
+<!-- 使用 <script setup> -->
+<script setup>
+const props = defineProps(['message']);
+const emit = defineEmits(['update']);
+const handleClick = () => emit('update');
+</script>
+```
+
+- defineExpose：显式暴露组件实例的属性和方法。
+
+```vue
+<!-- 使用 setup 函数 -->
+<script>
+export default {
+  setup(_, { expose }) {
+    const reset = () => {
+      /* ... */
+    };
+    expose({ reset });
+    return { reset };
+  },
+};
+</script>
+
+<!-- 使用 <script setup> -->
+<script setup>
+const reset = () => {
+  /* ... */
+};
+defineExpose({ reset });
+</script>
+```
+
+无法配置组件选项：如 name、inheritAttrs 等，需通过 `<script>` 块单独定义：
+
+```vue
+<script>
+export default { name: 'MyComponent' };
+</script>
+
+<script setup>
+// 逻辑代码
+</script>
+```
+
+### 对比写法
+
+原 setup 函数写法：
+
+```vue
+<template>
+  <div>
+    <p>{{ props.msg }}</p>
+    <button @click="handleEmit">触发事件</button>
+    <button @click="logAttrs">查看 attrs</button>
+    <slot name="custom-slot"></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['msg'], // 显式声明 props‌:ml-citation{ref="2" data="citationList"}
+  setup(props, context) {
+    // 接收 props + context 参数‌:ml-citation{ref="1" data="citationList"}
+    // context 包含四个属性：attrs/slots/emit/expose‌:ml-citation{ref="1,3" data="citationList"}
+    const { attrs, slots, emit, expose } = context;
+
+    const handleEmit = () => {
+      emit('custom-event', '参数'); // 通过 context.emit 触发事件‌:ml-citation{ref="2" data="citationList"}
+    };
+
+    const logAttrs = () => {
+      console.log('attrs:', attrs); // 访问未声明的 props 属性‌:ml-citation{ref="3" data="citationList"}
+    };
+
+    return { handleEmit, logAttrs }; // 必须手动返回模板所需方法‌:ml-citation{ref="2,5" data="citationList"}
+  },
+};
+</script>
+```
+
+`<script setup>` 语法糖写法
+
+```vue
+<template>
+  <div>
+    <p>{{ msg }}</p>
+    <button @click="handleEmit">触发事件</button>
+    <button @click="logAttrs">查看 attrs</button>
+    <slot name="custom-slot"></slot>
+  </div>
+</template>
+
+<script setup>
+// 通过编译器宏处理参数
+import { useAttrs, useSlots } from 'vue';
+
+const props = defineProps(['msg']); // 替代 setup 的 props 参数‌:ml-citation{ref="2,4" data="citationList"}
+const emit = defineEmits(['custom-event']); // 替代 context.emit‌:ml-citation{ref="2,3" data="citationList"}
+const attrs = useAttrs(); // 替代 context.attrs‌:ml-citation{ref="3" data="citationList"}
+const slots = useSlots(); // 替代 context.slots‌:ml-citation{ref="3" data="citationList"}
+
+const handleEmit = () => {
+  emit('custom-event', '参数'); // 直接使用 emit 函数‌:ml-citation{ref="2" data="citationList"}
+};
+
+const logAttrs = () => {
+  console.log('attrs:', attrs.value); // 通过响应式对象访问‌:ml-citation{ref="3" data="citationList"}
+};
+// 无需返回变量/方法（自动暴露顶层绑定）‌:ml-citation{ref="1,5" data="citationList"}
+</script>
 ```

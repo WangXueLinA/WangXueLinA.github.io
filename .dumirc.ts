@@ -55,9 +55,9 @@ export default defineConfig({
       ],
     },
     alias,
-    socialLinks: {
-      github: 'https://github.com/WangXueLinA?tab=repositories',
-    },
+    // socialLinks: {
+    //   github: 'https://github.com/WangXueLinA?tab=repositories',
+    // },
   },
   lessLoader: {
     javascriptEnabled: true,

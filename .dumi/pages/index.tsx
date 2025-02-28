@@ -1,17 +1,7 @@
 import { Card, Col, Row } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
-import { groupAndTransform, tools } from '../utils';
+import { tools } from '../utils';
 import './index.less';
-
-// @ts-expect-error: Unreachable code errorß
-const files = require.context('../../docs/note', false, /\w.md$/);
-
-const modules = files.keys().map((key: string) => {
-  const name = key.replace(/^\.\//, '').replace(/\.md$/, '');
-  return name;
-});
-
-groupAndTransform(modules, 2);
 
 export default () => {
   const location = useLocation();
@@ -29,16 +19,14 @@ export default () => {
         <>
           <div className="dumi-site-who-are">{key}</div>
           <ul className="dumi-site-who-are-using">
-            {tools?.[key]
-              ?.filter((item) => modules.includes(item.title))
-              ?.map(({ href, title }) => (
-                <li>
-                  <Link to={`${location.pathname}note/${title}`}>
-                    <img src={href} alt="Ant Design" />
-                    {title}
-                  </Link>
-                </li>
-              ))}
+            {tools[key]?.map(({ href, title, logoUrl }) => (
+              <li>
+                <Link to={`${location.pathname}${href}`}>
+                  <img src={logoUrl} alt="Ant Design" />
+                  {title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </>
       ))}

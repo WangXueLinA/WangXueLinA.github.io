@@ -63,23 +63,94 @@ MVVM 表示的是 Model-View-ViewModel
 
 ## Vue 和 React 对比
 
-这里就做几个简单的类比吧，当然没有好坏之分，只是使用场景不同
+### 核心设计理念
 
-### 相同点
+| 维度     | Vue                | React                               |
+| -------- | ------------------ | ----------------------------------- |
+| 哲学     | 渐进式框架         | 声明式组件化库                      |
+| 核心目标 | 低门槛、高集成     | 灵活性、自由组合                    |
+| 典型场景 | 快速开发中小型项目 | 复杂大型应用（如企业级/跨平台开发） |
+| 设计特点 | 官方提供完整技术栈 | 专注视图层，生态由社区驱动          |
 
-- 都有组件化思想
-- 都支持服务器端渲染
-- 都有 Virtual DOM（虚拟 dom）
-- 数据驱动视图
-- 都有支持 native 的方案：Vue 的 weex、React 的 React native
-- 都有自己的构建工具：Vue 的 vue-cli、React 的 Create React App
+### 语法与开发模式
 
-### 不同点
+Vue：
 
-- 数据流向的不同。react 从诞生开始就推崇单向数据流，而 Vue 是双向数据流
-- 数据变化的实现原理不同。react 使用的是不可变数据，而 Vue 使用的是可变的数据
-- 组件化通信的不同。react 中我们通过使用回调函数来进行通信的，而 Vue 中子组件向父组件传递消息有两种方式：事件和回调函数
-- diff 算法不同。react 主要使用 diff 队列保存需要更新哪些 DOM，得到 patch 树，再统一操作批量更新 DOM。Vue 使用双向指针，边对比，边更新 DOM
+- 基于 HTML 的模板语法（.vue 单文件组件）
+- 指令系统（v-if, v-for, v-model）
+- 支持 JSX 但非主流用法
+
+```js
+<template>
+  <button @click="count++">{{ count }}</button>
+</template>
+```
+
+React：
+
+- 强制使用 JSX（JavaScript + HTML 混合语法）
+- 完全 JavaScript 表达视图逻辑
+
+```js
+// React JSX
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount((c) => c + 1)}>{count}</button>;
+}
+```
+
+### 状态管理
+
+Vue：
+
+- 响应式数据（ref, reactive 自动追踪依赖）
+- 修改数据自动触发更新
+
+React：
+
+- 不可变状态（需通过 setState 或 useState 更新）
+- 依赖虚拟 DOM diff 算法
+
+### 响应式原理对比
+
+| 机制       | Vue (v3)                | React                       |
+| ---------- | ----------------------- | --------------------------- |
+| 实现方式   | Proxy 数据劫持          | 虚拟 DOM + 手动状态更新     |
+| 更新粒度   | 组件级/属性级细粒度更新 | 组件级重新渲染              |
+| 副作用管理 | watch/watchEffect       | useEffect                   |
+| 性能优化   | 自动依赖跟踪            | 需手动优化（React.memo 等） |
+
+### 生态系统对比
+
+| 领域     | Vue 生态               | React 生态                               |
+| -------- | ---------------------- | ---------------------------------------- |
+| 状态管理 | Vuex/Pinia             | Redux/MobX/Recoil                        |
+| 路由     | Vue Router             | React Router                             |
+| SSR      | Nuxt.js                | Next.js                                  |
+| UI 框架  | Element                | UI/Vuetify/Quasar Material UI/Ant Design |
+| 移动端   | Weex（不推荐）/Uni-app | React Native                             |
+
+### 性能表现
+
+| 场景     | Vue 优势                    | React 优势        |
+| -------- | --------------------------- | ----------------- |
+| 小型应用 | 更优（自动优化+轻量运行时） | 需手动优化        |
+| 复杂应用 | 依赖开发者优化能力          | 虚拟 DOM 优势明显 |
+| 更新机制 | 精准更新依赖组件            | 默认全组件树 diff |
+
+### 发展趋势
+
+Vue 3：
+
+- Composition API 强化逻辑复用
+- 更好的 TypeScript 支持
+- Vite 工具链革新开发体验
+
+React 18：
+
+- 并发渲染（Concurrent Mode）
+- 服务端组件（Server Components）
+- 自动化批处理更新
 
 ## 创建 Vue 实例
 
