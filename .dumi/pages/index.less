@@ -60,7 +60,7 @@
   }
 }
 
-[data-prefers-color='dark'] .dumi-site-who-are-using li {
+[data-prefers-color='dark'] .dumi-site-who-are-using a {
   border-color: #ffffff;
   background-color: transparent !important;
 }
@@ -83,28 +83,42 @@
     clear: both;
   }
 
-  li {
+  a {
     float: left;
     flex: 1;
     margin-left: 2%;
     margin-bottom: 16px;
     width: 18%;
+    display: flex;
+    justify-content: center;
     padding: 0 32px;
     box-sizing: border-box;
     border: 1px solid #e4e9ec;
     background-color: transparent;
     border-radius: 4px;
     transition: all 0.2s;
+    height: 76px;
+    color: #333;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
 
     @{dark-selector} & {
       border-color: lighten(#f7f9fb, 15%);
       background-color: lighten(#f7f9fb, 12%);
     }
 
+    // @media @mobile {
+    //   width: 48%;
+    //   padding: 0 12px;
+    //   flex: none;
+    // }
+
     @media @mobile {
-      width: 48%;
-      padding: 0 12px;
-      flex: none;
+      height: 64px;
+      font-size: 15px;
     }
 
     &:hover {
@@ -113,31 +127,41 @@
       background-color: #75e6f4 !important;
     }
 
-    > a {
-      display: flex;
-      height: 76px;
-      color: #333;
-      text-decoration: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
+    img {
+      margin-right: 12px;
+      max-width: 90%;
+      max-height: 42px;
 
       @media @mobile {
-        height: 64px;
-        font-size: 15px;
-      }
-
-      > img {
-        margin-right: 12px;
-        max-width: 90%;
-        max-height: 42px;
-
-        @media @mobile {
-          max-height: 36px;
-        }
+        max-height: 36px;
       }
     }
+
+    // > a {
+    //   display: flex;
+    //   height: 76px;
+    //   color: #333;
+    //   text-decoration: none;
+    //   align-items: center;
+    //   justify-content: center;
+    //   font-size: 18px;
+    //   font-weight: bold;
+
+    //   @media @mobile {
+    //     height: 64px;
+    //     font-size: 15px;
+    //   }
+
+    //   > img {
+    //     margin-right: 12px;
+    //     max-width: 90%;
+    //     max-height: 42px;
+
+    //     @media @mobile {
+    //       max-height: 36px;
+    //     }
+    //   }
+    // }
   }
 }
 
@@ -146,4 +170,8 @@
   font-size: large;
   font-weight: 500;
   color: rgb(49, 70, 89);
+}
+
+.ant-tabs-tab-btn {
+  font-size: 20px;
 }

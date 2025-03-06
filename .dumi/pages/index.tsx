@@ -1,10 +1,12 @@
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Row, Tabs } from 'antd';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { tools } from '../utils';
+import { toolsArr } from '../utils';
 import './index.less';
 
 export default () => {
   const location = useLocation();
+  const [activeKey, setActiveKey] = useState('框架');
   return (
     <>
       <div className="dumi-div-box">
@@ -15,21 +17,45 @@ export default () => {
           <span>前端学习笔记</span>
         </p>
       </div>
-      {Object.keys(tools).map((key) => (
-        <>
-          <div className="dumi-site-who-are">{key}</div>
-          <ul className="dumi-site-who-are-using">
-            {tools[key]?.map(({ href, title, logoUrl }) => (
-              <li>
-                <Link to={`${location.pathname}${href}`}>
-                  <img src={logoUrl} alt="Ant Design" />
-                  {title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      ))}
+      <Tabs
+        activeKey={activeKey}
+        onChange={(e) => setActiveKey(e)}
+        centered
+        items={Object.keys(toolsArr).map((item) => {
+          return {
+            label: item,
+            key: item,
+            children: Array.isArray(toolsArr[item]) ? (
+              <div className="dumi-site-who-are-using">
+                {toolsArr[item].map((key) => (
+                  <Link to={`${location.pathname}note/${key.title}`}>
+                    <img src={key.logoUrl} alt="Ant Design" />
+                    {key.title}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              Object.keys(toolsArr[item]).map((_item) => {
+                const someId = toolsArr[item][_item];
+                return (
+                  <>
+                    <div className="dumi-site-who-are">{_item}</div>
+                    <div className="dumi-site-who-are-using">
+                      {someId.map((key) => (
+                        <Link to={`${location.pathname}note/${key.title}`}>
+                          <img src={key.logoUrl} alt="Ant Design" />
+                          {key.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                );
+              })
+            ),
+          };
+        })}
+      />
+
       <Row gutter={16}>
         <Col span={8}>
           <Card title="vpn" bordered={false}>

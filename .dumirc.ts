@@ -40,9 +40,6 @@ export default defineConfig({
       },
       { title: '部署', link: '/deploy/web' },
       { title: '源码', link: '/source/call' },
-      { title: 'vue2', link: '/vue2' },
-      { title: 'vue3', link: '/vue3' },
-      { title: '技巧', link: '/other/vscode_github' },
     ],
     sidebar: {
       '/components': [
