@@ -13,9 +13,7 @@ export default () => {
         <h1 className="dumi-h1-title">
           <span>document</span>
         </h1>
-        <p className="dumi-p-title">
-          <span>前端学习笔记</span>
-        </p>
+        <p className="dumi-p-title">前端学习笔记</p>
       </div>
       <Tabs
         activeKey={activeKey}

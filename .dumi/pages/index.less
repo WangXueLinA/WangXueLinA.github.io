@@ -55,7 +55,7 @@
   }
 
   .dumi-h1-title {
-    font-size: 70px;
+    font-size: 60px;
     margin-top: 80px;
   }
 }
@@ -119,6 +119,8 @@
     @media @mobile {
       height: 64px;
       font-size: 15px;
+      width: 100%;
+      display: flex;
     }
 
     &:hover {
@@ -174,4 +176,14 @@
 
 .ant-tabs-tab-btn {
   font-size: 20px;
+}
+
+.ant-row {
+  @media @mobile {
+    width: 100%;
+    display: block;
+  }
+  .ant-col-8 {
+    max-width: 100%;
+  }
 }

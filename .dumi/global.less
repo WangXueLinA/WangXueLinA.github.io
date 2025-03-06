@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@mobile: ~'only screen and (max-width: 767px)';
 
 body {
   height: 100vh;
@@ -12,6 +13,9 @@ body {
 
   p {
     text-indent: 2em;
+    @media @mobile {
+      text-indent: 0;
+    }
 
     a {
       border-bottom: 1px solid #12c2e9;
