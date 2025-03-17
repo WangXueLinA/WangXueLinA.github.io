@@ -1,6 +1,7 @@
 ---
 toc: content
 title: setTimeout实现setInterval
+group: 源码
 ---
 
 # setTimeout 实现 setInterval

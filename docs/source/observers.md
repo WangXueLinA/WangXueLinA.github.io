@@ -1,6 +1,7 @@
 ---
 toc: content
 title: 观察者模式
+group: 源码
 ---
 
 # 观察者模式

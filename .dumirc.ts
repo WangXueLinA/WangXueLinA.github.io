@@ -2,13 +2,16 @@ import { defineConfig } from 'dumi';
 import fs from 'fs';
 import path from 'path';
 const resolve = (p: string) => path.resolve(__dirname, p);
-const list = fs.readdirSync(resolve('packages'));
+const list = fs
+  .readdirSync(resolve('packages'))
+  .filter((item) => !['.DS_Store'].includes(item));
 const listNote = fs.readdirSync(resolve('docs/note'));
 const noteChildren = listNote.map((str) => ({
   title: str.replace(/\.md$/, ''),
   link: `/note/${str.replace(/\.md$/, '')}`,
 }));
 const listDir = list.map((str) => `packages/${str}/src`);
+
 const alias = list.reduce((obj, key, index) => {
   return {
     ...obj,
@@ -39,7 +42,7 @@ export default defineConfig({
         children: noteChildren,
       },
       { title: '部署', link: '/deploy/web' },
-      { title: '源码', link: '/source/call' },
+      { title: '源码/工程化', link: '/source/call' },
     ],
     sidebar: {
       '/components': [

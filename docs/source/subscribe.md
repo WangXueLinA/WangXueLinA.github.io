@@ -1,6 +1,7 @@
 ---
 toc: content
 title: 订阅发布模式
+group: 源码
 ---
 
 # 订阅发布模式

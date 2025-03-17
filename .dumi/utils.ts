@@ -125,5 +125,9 @@ export const toolsArr = {
       title: 'typeScript',
       logoUrl: 'https://typescript.bootcss.com/images/typescript-icon.svg',
     },
+    {
+      title: 'uniApp',
+      logoUrl: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/uni.png',
+    },
   ],
 };

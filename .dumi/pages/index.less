@@ -27,6 +27,24 @@
     background: linear-gradient(30deg, #75e6f4 30%, #65a5ff);
     -webkit-background-clip: text;
     background-clip: text;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      left: 325px;
+      top: 30px;
+      margin: auto;
+      background-size: 70px 70px;
+      background-image: url('../../public/home.gif');
+
+      @media @mobile {
+        left: 0;
+        top: -40px;
+      }
+    }
   }
 }
 
@@ -48,6 +66,52 @@
   background-color: #d1c1c169;
 }
 
+// .ant-tabs-tab-active {
+//   color: #75e6f4 !important;
+// }
+
+// [data-prefers-color='dark']
+//   :where(.css-dev-only-do-not-override-19lec04).ant-tabs
+//   .ant-tabs-tab-btn {
+//   color: #8590a0 !important;
+// }
+
+.ant-notification-notice {
+  width: max-content;
+  height: calc(100vh - 140px);
+  overflow: scroll !important;
+  width: max-content !important;
+  background-image: url('../../public/bg.jpg');
+  background-size: cover; /* 自适应填充 */
+  background-position: center; /* 居中显示 */
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: overlay;
+
+  @media @mobile {
+    height: calc(100vh-140px);
+  }
+}
+
+[data-prefers-color='dark'] .ant-notification-notice {
+  // background: #000;
+  border: 1px solid #fff;
+  border-radius: 5px;
+
+  .ant-notification-notice-message,
+  .ant-notification-notice-close,
+  .ant-notification-notice-description {
+    color: #8590a0;
+  }
+}
+
+[data-prefers-color='dark'] .ant-float-btn-body {
+  background: #000;
+
+  .anticon-file-text {
+    color: #8590a0;
+  }
+}
+
 @media only screen and (max-width: 766px) {
   .dumi-div-box::before {
     // background: url('../../public/images/homeMove.jpg') no-repeat; /* 手机端背景图 */
@@ -55,7 +119,7 @@
   }
 
   .dumi-h1-title {
-    font-size: 60px;
+    font-size: 50px;
     margin-top: 80px;
   }
 }

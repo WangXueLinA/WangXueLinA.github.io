@@ -1,6 +1,7 @@
 ---
 toc: content
 title: 手写Promise
+group: 源码
 ---
 
 # Promise

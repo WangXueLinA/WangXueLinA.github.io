@@ -1,14 +1,36 @@
-import { Card, Col, Row, Tabs } from 'antd';
-import { useState } from 'react';
+import { Card, Col, FloatButton, Row, Tabs, notification } from 'antd';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import commits from '../git-commits.json';
 import { toolsArr } from '../utils';
 import './index.less';
 
 export default () => {
   const location = useLocation();
   const [activeKey, setActiveKey] = useState('框架');
+  const [api, contextHolder] = notification.useNotification({
+    top: 70,
+    duration: 4,
+  });
+
+  const openNotification = () => {
+    api.open({
+      message: '文档更新记录',
+      description: commits.map((item) => (
+        <p>
+          {item.date} ---{item.message}
+        </p>
+      )),
+    });
+  };
+
+  useEffect(() => {
+    openNotification();
+  }, []);
+
   return (
     <>
+      {contextHolder}
       <div className="dumi-div-box">
         <h1 className="dumi-h1-title">
           <span>document</span>
@@ -76,6 +98,8 @@ export default () => {
           </Card>
         </Col>
       </Row>
+
+      <FloatButton onClick={openNotification}></FloatButton>
     </>
   );
 };
