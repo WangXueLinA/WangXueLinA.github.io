@@ -12,30 +12,34 @@
 
 ```bash
 // 流程图解
-                     +---------------------+
-      | 用户  Ctrl（Windows）或 Cmd+contorl（Mac）并右键点击元素 |
-                     +---------------------+
+
+       用户  Ctrl（Windows）或 Cmd+contorl（Mac）并右键点击元素
+
                                 |
                                 v
-                     +---------------------+
-                     | 获取 DOM 元素 e.target |
-                     +---------------------+
+
+                      获取 DOM 元素 e.target
+
                                 |
                                 v
               遍历所有属性 Object.entries(e.target)
                                 |
                                 v
-              +---------------------------------+
-              | 检查属性值是否为 FiberNode 实例？ |
-              +---------------------------------+
+
+                检查属性值是否为 FiberNode 实例？
+
                 | 是                        | 否
                 v                           v
-      记录 Fiber 节点到 list         继续遍历下一个属性
+
+        记录 Fiber 节点到 list         继续遍历下一个属性
+
                 |
                 v
-     通过 _debugOwner 递归父节点
+
+      通过 _debugOwner 递归父节点
                 |
                 v
+
       弹窗显示源码位置或打印日志
 ```
 
