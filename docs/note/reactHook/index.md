@@ -704,7 +704,11 @@ function ParentComponent() {
 }
 ```
 
-CustomChild 组件通过 useImperativeHandle 向父组件暴露了 focus 方法。父组件通过 ref 即可调用这个方法，实现了对子组件内部细节的间接操作。注意，尽管这种方法提供了灵活性，但过度依赖这种方式通常被视为反模式，因为组件间强耦合可能影响代码的可维护性和可测试性。尽量遵循 React 的数据流向原则，通过 props 传递数据和回调函数，而非直接操纵子组件内部实现。
+CustomChild 组件通过 useImperativeHandle 向父组件暴露了 focus 方法。父组件通过 ref 即可调用这个方法，实现了对子组件内部细节的间接操作。
+
+<Alert message='尽管这种方法提供了灵活性，但过度依赖这种方式通常被视为反模式，因为组件间强耦合可能影响代码的可维护性和可测试性。'></Alert>
+
+尽量遵循 React 的数据流向原则，通过 props 传递数据和回调函数，而非直接操纵子组件内部实现。
 
 #### 使用场景
 
@@ -1190,6 +1194,31 @@ Suspense： Suspense 是一个 React 组件，用于包裹那些需要延迟加�
 1. **代码分割**：React.lazy 用于动态加载组件，结合 Webpack 或其他打包工具，能够实现将大应用拆分成小块，仅在需要时加载对应模块的代码，减少初始加载时的文件大小和网络传输量。
 2. **按需加载**：对于一些不常访问或仅在特定条件下才需要渲染的组件，可以使用 React.lazy 进行懒加载，这样在初次加载页面时，不会加载这些组件的代码。
 
+### createPortal
+
+createPortal 可以将子组件渲染到父组件 DOM 结构之外的机制，常用于解决布局和样式限制问题。用它把一个组件渲染到 DOM 的任意位置，而不是局限于父组件的 DOM 结构中。
+
+虽然 DOM 位置改变，但事件冒泡和组件生命周期仍按 React 组件树处理。
+
+```js
+import ReactDOM from 'react-dom';
+
+function Modal({ children }) {
+  return ReactDOM.createPortal(
+    <div className="modal">{children}</div>,
+    document.body,
+  );
+}
+```
+
+#### 使用场景
+
+1. 规避样式限制：解决父组件 overflow: hidden 或 z-index 导致子内容被遮挡的问题。
+
+2. 保持事件冒泡：事件仍按 React 组件树冒泡，父组件可捕获 Portal 内的事件。
+
+3. 适用场景：模态框、弹窗、全局通知等需要顶层显示的内容。
+
 ### Fragment
 
 在 React 中，Fragment（片段）是一种特殊的抽象类型，它允许你将多个子元素作为一个整体返回，而无需额外包裹它们在一个额外的 DOM 元素中。Fragment 在 React v16.2 及以上版本中被引入，其符号通常写作 `<></>` 或 `<React.Fragment>`。
@@ -1231,3 +1260,5 @@ const ListItems = () => (
 #### 使用场景
 
 1. **避免不必要的 DOM 层级**： 当一个组件需要返回多个相邻的 DOM 元素而不希望增加额外的 DOM 层级时，可以使用 Fragment 替代常规的 HTML 元素（如 <div>）来包裹这些子元素。例如，在构建列表或者表格的时候，不希望因为每一组子元素都添加一层无意义的 <div>
+
+<BackTop></BackTop>

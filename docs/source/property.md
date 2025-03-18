@@ -332,9 +332,103 @@ mini-css-extract-plugin 是 Webpack 中一个用于 将 CSS 代码从 JavaScript
 
 1. 分离 CSS 与 JavaScript
 
-- 默认情况下，Webpack 会将 CSS 通过 style-loader 内联到 JavaScript 中（运行时动态插入 <style> 标签）。
+- 正常 加载 HTML 时， 如果遇到一个 `<script>` 标签
+
+```html
+<html>
+  <body>
+    <div>我是DOM的一部分</div>
+    <!-- 这里遇到一个脚本！ -->
+    <script src="app.js"></script>
+    <div>另一部分DOM</div>
+  </body>
+</html>
+```
+
+浏览器的反应是：
+
+1. 立刻停止解析 HTML（停止构建 DOM），因为它不知道脚本里会不会修改 DOM，所以必须停下来等脚本执行完！
+
+2. 下载并执行 app.js，如果脚本里操作了 DOM（比如添加元素），浏览器需要知道结果。
+
+3. 脚本执行完后，继续解析剩下的 HTML。
+
+结果：这个脚本阻塞了 DOM 的构建，导致后面的 `<div>另一部分DOM</div>` 延迟渲染。
+
+当同时有 CSS 文件时……，假设代码是这样的：
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <!-- CSS文件 -->
+    <script src="app.js"></script>
+    <!-- JS文件 -->
+  </head>
+</html>
+```
+
+浏览器的工作顺序：
+
+1. 先下载 style.css，构建 CSSOM，因为 CSS 可能会影响页面样式，浏览器需要先处理。
+
+2. 然后下载并执行 app.js，但执行脚本前，浏览器会检查：如果脚本需要操作样式（比如获取元素宽度），必须等 CSSOM 构建完！所以这里 CSSOM 的构建会间接阻塞 JS 的执行。
+
+3. JS 执行完，才继续构建 DOM。
+
+结果：CSS 和 JS 都可能间接导致 DOM 构建被阻塞。
+
+解决方法：
+
+给 JS 加 async 或 defer
+
+async：让 JS 异步下载，下载时不阻塞 DOM，但下载完成后会立即执行（此时可能阻塞）。
+
+```html
+<script async src="app.js"></script>
+```
+
+适用场景：不依赖 DOM 或 CSSOM 的脚本（比如统计代码）。
+
+defer：让 JS 延迟到 DOM 构建完成后执行，完全不阻塞 DOM。
+
+```html
+<script defer src="app.js"></script>
+```
+
+适用场景：需要操作 DOM 的脚本（推荐！）。
+
+- 默认使用 style-loader 时，会通过 style-loader 将 CSS 代码打包到 JavaScript 文件中。当浏览器加载并执行这个 JS 文件时，style-loader 会动态创建 `<style>` 标签，并将 CSS 插入到页面头部（类似下面这样）：
+
+```javascript
+// 🔴 JS 文件内部，必须下载好js在插入css
+const style = document.createElement('style');
+style.innerHTML = 'body { color: red; }'; // 你的 CSS 内容
+document.head.appendChild(style);
+```
+
+<Alert>
+
+- 阻塞 JavaScript 执行：因为 CSS 代码被打包进了 JS 文件，浏览器必须先下载并执行整个 JS 文件，才能插入 CSS。
+- 延迟渲染：如果 JS 文件很大，用户会长时间看到「无样式」的页面。
+
+</Alert>
 
 - 使用 mini-css-extract-plugin 后，CSS 会被提取为独立的 .css 文件，通过 <link> 标签加载，避免阻塞 JavaScript 执行。
+
+```html
+<!-- 最终生成的 HTML -->
+<link href="styles.css" rel="stylesheet" />
+<script src="bundle.js"></script>
+```
+
+优势：
+
+- 并行加载：浏览器可以同时下载 CSS 和 JS 文件，无需等待 JS 执行完毕才获取样式。（下载不互相阻塞）。
+
+- 关键区别：插件提取的 CSS 不依赖 JS 的执行，CSSOM 构建可以独立进行（无需等待 JS 执行），JS 的执行不会被 CSS 文件阻塞（除非 JS 代码中显式依赖 CSSOM）。
+
+- 更早渲染：浏览器会在 CSS 下载完成后立即应用样式，减少无样式页面的时间。
 
 2. 优化缓存
 
@@ -427,3 +521,5 @@ module.exports = smp.wrap({
 运行 Webpack 构建后，终端会显示类似结果
 
 <ImagePreview src="/images/js/image19.jpg"></ImagePreview>
+
+<BackTop></BackTop>

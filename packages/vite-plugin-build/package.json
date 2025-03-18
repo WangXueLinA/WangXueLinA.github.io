@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "vite打包插件",
   "homepage": "https://github.com/WangXueLinA/dumi_document/tree/master/packages/vite-plugin-build",
-  "author": "xxx",
+  "author": "xuelin",
   "main": "./lib/cjs",
   "module": "./lib/esm",
   "files": [

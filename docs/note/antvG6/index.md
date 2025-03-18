@@ -10,7 +10,7 @@ AntV G6 是蚂蚁金服全新一代数据可视化解决方案，致力于提供
 
 G6 是一个纯 JS 库，不与任何框架耦合，也就是说可以在任何前端框架中使用，如 React、Vue、Angular 等
 
-官网：<https://g6.antv.antgroup.com/examples>
+> 官网：<https://g6.antv.antgroup.com/examples>
 
 ## 使用
 
@@ -421,7 +421,7 @@ V3.5 推出了全新的节点分组 Combo 机制，能够支持所有常用功�
 
 G6 的内置 Combo 包括 circle 和 rect 两种类型
 
-**⚠️ 注意:**   使用 Combo 时，必须在示例化图时配置  `groupByTypes`  设置为  `false`，图中元素的视觉层级才能合理。
+<Alert message='使用 Combo 时，必须在示例化图时配置  `groupByTypes`  设置为  `false`，图中元素的视觉层级才能合理。'></Alert>
 
 demo 演示： https://stackblitz.com/edit/stackblitz-starters-panqn8?file=src%2FApp.js
 
@@ -1216,3 +1216,5 @@ G6 v5 中 内置了亮色、暗色主题，也可自定义。
 
 1.  上手难度较高：G6 的学习曲线相对较陡峭，需要对图形语法和相关概念有一定的理解和掌握。
 1.  文档相对不完善：相比其他成熟的图表库，G6 目前的文档相对较简单，部分功能和使用方法的描述可能不够详尽，需要进行更深入的了解与实践。
+
+<BackTop></BackTop>

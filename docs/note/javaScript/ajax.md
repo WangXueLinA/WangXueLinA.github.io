@@ -73,11 +73,14 @@ xhr.open('POST', '/try/Ajax/demo_post2.php', true);
 xhr.send([body]);
 ```
 
-body: 在 XHR 请求中要发送的数据体，如果不传递数据则为 null
-如果使用 GET 请求发送数据的时候，需要注意如下：
+body: 在 XHR 请求中要发送的数据体，如果不传递数据则为 null，如果使用 GET 请求发送数据的时候：
+
+<Alert>
 
 - 将请求数据添加到 open()方法中的 url 地址中
 - 发送请求数据中的 send()方法中参数设置为 null
+
+</Alert>
 
 如 post 请求：
 
@@ -215,3 +218,15 @@ fetch('https://api.example.com/data')
 
 总结：
 尽管 Fetch 是原生的、标准的 API，提供了一些底层的灵活性，但 Axios 因其易用性、丰富的功能集（如拦截器、超时、自动转换）以及更好的跨环境兼容性，常被视为更友好、更高效的选项，特别是在需要快速开发和维护大型项目时。然而，如果项目对体积有严格要求，或者希望充分利用现代浏览器的最新特性，Fetch 也是一个值得考虑的选择。
+
+| 特性         | XHR                  | Fetch                           | Axios               |
+| ------------ | -------------------- | ------------------------------- | ------------------- |
+| 语法友好度   | 冗长，需手动处理回调 | 简洁，基于 Promise              | 简洁，基于 Promise  |
+| 错误处理     | 需手动检查状态码     | 需手动检查 response.ok          | 自动处理 HTTP 错误  |
+| 数据转换     | 需手动解析 JSON      | 需手动调用 response.json()      | 自动转换 JSON 数据  |
+| 取消请求     | 支持（abort()）      | 支持（AbortController）         | 支持（CancelToken） |
+| 拦截器       | 不支持               | 不支持                          | 支持                |
+| 浏览器兼容性 | 全支持（包括 IE）    | 不支持 IE 通过 XHR 支持全浏览器 |
+| 跨域 Cookie  | 需手动设置           | 需设置 credentials              | 默认发送            |
+
+<BackTop></BackTop>

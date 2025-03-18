@@ -9,13 +9,13 @@ Vue Router 是 Vue.js 的官方路由。它与 Vue.js 核心深度集成，允�
 
 ## 官网
 
-https://router.vuejs.org/zh/guide/
+> https://router.vuejs.org/zh/guide/
 
 ## 使用
 
 1. 安装 vue-router，命令
 
-vue2 对应的是`vue-router@3.x`， vue3 对应的是`vue-router@4.x` 注意版本
+<Alert message='vue2 对应的是`vue-router@3.x`， vue3 对应的是`vue-router@4.x`'></Alert>
 
 ```bash
 npm i vue-router@3.x
@@ -774,3 +774,5 @@ router.onError((error) => {
   }
 });
 ```
+
+<BackTop></BackTop>

@@ -21,7 +21,7 @@ title: 搭建业务组件库
 
 ## 初始化 dumi
 
-官网地址： https://d.umijs.org/
+> 官网地址： https://d.umijs.org/
 
 创建 myapp 目录
 
@@ -103,7 +103,7 @@ Lerna 期望你的包都放在 packages/ 目录下。每个子目录被视为一
 
 为了每个业务组件的代码风格以及文件结构类似，我们可以创建一个模版 template 组件，在执行自定义创建组件命令时，会基于 template 模版来进行创建
 
-vite 官网： https://vitejs.cn/
+> vite 官网： https://vitejs.cn/
 
 搭建 Vite 项目
 
@@ -221,3 +221,5 @@ npm adduser
 然后就可以在 npm 网中可以看到你的包发布成功了
 
 <ImagePreview src="/images/component/image10.jpg"></ImagePreview>
+
+<BackTop></BackTop>
