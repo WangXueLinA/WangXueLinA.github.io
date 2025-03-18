@@ -192,7 +192,7 @@ axios.get('/api/data');
 
 原理：服务器和服务器之间的通信不存在跨域，因此我们可以开一台中间服务器（nginx），后端无需改变。前端把请求发给 nginx , nginx 服务器把请求毫无变化地转发给后端的服务器，后端的服务器响应给 nginx 服务器，nginx 服务器加上响应头以后，再返回给前端。
 
-![](/images/js/image13.jpg)
+<ImagePreview src="/images/js/image13.jpg"></ImagePreview>
 
 ```bash
 server {

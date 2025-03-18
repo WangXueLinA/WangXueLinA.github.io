@@ -330,7 +330,7 @@ const composedFunc = (...args) => {
 
 这就是为什么在 funcs 中的函数都只是简单地传递 action 给 next 的情况下，composedFunc 会简单地接收 action 并直接返回，不做任何额外的处理的原因。 -->
 
-![](/images/redux/image3.jpg)
+<ImagePreview src="/images/redux/image3.jpg"></ImagePreview>
 
 为啥需要这样的设计模式
 
@@ -347,7 +347,7 @@ const composedFunc = (...args) => {
 
 所以洋葱模式的执行流程就是这样
 
-![](/images/redux/image2.png)
+<ImagePreview src="/images/redux/image2.png"></ImagePreview>
 
 然后我们可以再看一些平时用到的第三方中间件的简易源码展示
 
@@ -394,7 +394,7 @@ function thunkMiddleware({ dispatch, getState }) {
 大概的工作流程是这样的：
 用户触发一个动作或者组件中通过事件触发一个方法叫做 dispatch，传进一个 action（本质就是一个普通对象），这个 action 是由我们的 Action Creators 所生成的，action 到了 Store 中无法进行修改，我们必须放在 Reducers 中进行修改，Reducers 会记录你所有的状态，而 Reducers 在设计中有一个原则，请保证 Reducers 是纯函数设计（接受老状态，但是这个老状态得进行深复制一份，不能进行修改，而且得返回一个新的状态）新状态一返回，我们的 Store 更改了，内部会自动会触发订阅发布者模式的发布动作，这时候我们会通知我们组件中的监听器，订阅者，进行回调函数来实现我们的功能
 
-![](/images/redux/image1.png)
+<ImagePreview src="/images/redux/image1.png"></ImagePreview>
 
 ## React-redux
 

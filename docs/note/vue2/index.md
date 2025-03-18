@@ -30,7 +30,7 @@ MVVM 表示的是 Model-View-ViewModel
 - View 视图层：(模板代码)负责将数据模型转化为 UI 展示出来，可以简单的理解为 HTML 页面
 - ViewModel 视图模型层：(Vue 实例)用来连接 Model 和 View，是 Model 和 View 之间的通信桥梁
 
-![](/images/vue2/image1.jpg)
+<ImagePreview src="/images/vue2/image1.jpg"></ImagePreview>
 
 它的主要职责就是：
 

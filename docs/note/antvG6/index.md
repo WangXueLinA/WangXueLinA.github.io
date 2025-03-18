@@ -312,7 +312,7 @@ https://stackblitz.com/edit/stackblitz-starters-fjdt3b?file=src%2FApp.js
 
 节点的连接点 anchorPoint 指的是边连入节点的相对位置，即节点与其相关边的交点位置。
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d29288697ae47089c490ccb0a85b9f2~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1226&h=584&s=176288&e=png&b=fdfdfd)
+<ImagePreview src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d29288697ae47089c490ccb0a85b9f2~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1226&h=584&s=176288&e=png&b=fdfdfd"></ImagePreview>
 
 节点中有了 anchorPoints 之后，相关边可以分别选择连入起始点、结束点的哪一个 anchorPoint。
 

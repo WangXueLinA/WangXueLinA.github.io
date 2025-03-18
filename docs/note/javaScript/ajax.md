@@ -13,7 +13,7 @@ Ajax 的原理简单来说通过 XmlHttpRequest 对象来向服务器发异步�
 
 流程图如下
 
-![](/images/js/image10.jpg)
+<ImagePreview src="/images/js/image10.jpg"></ImagePreview>
 
 优点：
 
@@ -91,7 +91,7 @@ onreadystatechange 事件用于监听服务器端的通信状态，主要监听�
 
 关于 XMLHttpRequest.readyState 属性有五个状态，如下图显示
 
-![](/images/js/image11.jpg)
+<ImagePreview src="/images/js/image11.jpg"></ImagePreview>
 
 只要 readyState 属性值一变化，就会触发一次 readystatechange 事件
 

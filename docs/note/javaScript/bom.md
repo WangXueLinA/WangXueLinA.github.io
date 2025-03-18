@@ -102,7 +102,7 @@ navigator.cookieEnabled 返回指明浏览器中是否启用 cookie 的布尔值
 navigator.platform 返回运行浏览器的操作系统平台
 navigator.userAgent 返回由客户机发送服务器的 user-agent 头部的值
 
-![](/images/js/image8.jpg)
+<ImagePreview src="/images/js/image8.jpg"></ImagePreview>
 
 ### screen
 
@@ -113,7 +113,7 @@ navigator.userAgent 返回由客户机发送服务器的 user-agent 头部的值
 - screen.width
 - screen.height
 
-![](/images/js/image9.jpg)
+<ImagePreview src="/images/js/image9.jpg"></ImagePreview>
 
 ### history
 

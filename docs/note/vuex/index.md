@@ -34,7 +34,7 @@ https://vuex.vuejs.org/zh/guide/
 - 异步操作分离：异步逻辑封装在 Actions 中
 - 可追踪的状态变化：配合 Vue DevTools 实现时间旅行调试
 
-![](/images/vuex/image1.jpg)
+<ImagePreview src="/images/vuex/image1.jpg"></ImagePreview>
 
 ## 基本使用
 

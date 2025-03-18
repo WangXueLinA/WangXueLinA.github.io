@@ -4,7 +4,7 @@
 
 <!-- > 通用form组件 -->
 
-> ![avatar](./src/image12.jpg)
+<ImagePreview src="/images/react-form.jpg"></ImagePreview>
 
 ## 安装
 

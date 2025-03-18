@@ -46,7 +46,7 @@ ReactDOM.render：“遗留”模式运行的 root，其工作方式与 React 17
 
 ReactDOM.createRoot：这将创建一个在 React 18 中运行的 root，它添加了 React 18 的所有改进并允许使用并发功能。
 
-![](/images/react18/image1.png)
+<ImagePreview src="/images/react18/image1.png"></ImagePreview>
 
 ## 服务端渲染
 
@@ -90,7 +90,7 @@ react15 版本为了对比新老 dom，diff 算法底层架构中用的是堆栈
 
 在每个更新过程中不可中断同步更新，如 state1 开始触发更新，然后创建虚拟 dom 节点，然后基于虚拟 dom 对比完了，才开始创建真实 dom 渲染，不可能说打断虚拟 dom 这个过程的这一个情况的
 
-![](/images/react18/image2.png)
+<ImagePreview src="/images/react18/image2.png"></ImagePreview>
 
 ### React16
 
@@ -102,7 +102,7 @@ js 在执行单线程时候，最上面先执行我们的宏任务，然后再�
 
 所以它就把咋们的创建虚拟 dom，渲染分散成无数个分片任务，如果有高优先级任务，就先执行高优先级任务，如果没有，就执行咱们的分片任务
 
-![](/images/react18/image3.png)
+<ImagePreview src="/images/react18/image3.png"></ImagePreview>
 
 fiber 分两个阶段
 
@@ -110,7 +110,7 @@ fiber 分两个阶段
 
 提交阶段：不允许打断
 
-![](/images/react18/image4.png)
+<ImagePreview src="/images/react18/image4.png"></ImagePreview>
 
 所以为啥 react16 中删除了 componentWillMount，componentWillReceiveProps，componentWillUpdate 这几个生命周期，有几个新的生命周期的出现，因为有些老的生命周期可能会多次执行，低优先级任务被打断了，高优先级执行完之后重新再执行低优先级任务，可能这时候就会再走一次生命周期
 
@@ -124,7 +124,7 @@ fiber 分两个阶段
 
 ### React18
 
-![](/images/react18/image5.png)
+<ImagePreview src="/images/react18/image5.png"></ImagePreview>
 
 ## 自动批处理更新 State
 
@@ -258,15 +258,15 @@ useDebugValue 接受一个格式化函数作为可选的第二个参数。该函
 
 <https://codepen.io/wangxuelina/pen/xxazWoO>
 
-![](/images/react18/image6.png)
+<ImagePreview src="/images/react18/image6.png"></ImagePreview>
 
-![](/images/react18/image7.png)
+<ImagePreview src="/images/react18/image7.png"></ImagePreview>
 
 ### 应用场景
 
 <https://codepen.io/wangxuelina/pen/zYJaWaY>
 
-![](/images/react18/image8.gif)
+<ImagePreview src="/images/react18/image8.gif"></ImagePreview>
 
 ### 注意
 
@@ -302,7 +302,7 @@ useInsertionEffect 主要是解决 CSS-in-JS 库注入样式的性能问题
 
 #### 对比
 
-![](/images/react18/image9.png)
+<ImagePreview src="/images/react18/image9.png"></ImagePreview>
 
 组件挂载的一个流程，先给组件挂在上，state 发生改变的时候，用新的 state 去创建 React 元素，然后我们去构建 react 一个树，然后我就会根据上一次的树跟这一次的树进行比较，比较那些东西发生变化了，通过 diff 算法，找到不同的元素以后，然后就把这个修改提交个 dom，然后在触发我们的 dom 改变，改变后我们再绘制到屏幕上，然后我们才能再屏幕上能看到这个现显示
 
@@ -443,11 +443,11 @@ export default App;
 
 默认首次加载 js 会被合并，一旦组件变多了，就会非常的慢，第一次加载应该只加载我们看到的而不是所有
 
-![](/images/react18/image12.gif)
+<ImagePreview src="/images/react18/image12.gif"></ImagePreview>
 
 react17 最外层不写 fallback 报错
 
-![](/images/react18/image13.png)
+<ImagePreview src="/images/react18/image13.png"></ImagePreview>
 
 ## 严格模式
 
@@ -459,15 +459,15 @@ react17 最外层不写 fallback 报错
 
 react18 前会渲染两次，React 会在严格模式下执行两次渲染，以确保组件的渲染结果是一致的。这是一种开发模式下的优化，但是有点误导
 
-![](/images/react18/image10.png)
+<ImagePreview src="/images/react18/image10.png"></ImagePreview>
 
 react18 后也会渲染两次，不过有一次时置灰的状态，便于区分
 
-![](/images/react18/image11.png)
+<ImagePreview src="/images/react18/image11.png"></ImagePreview>
 
 ## React 空组件的返回值
 
-![](/images/react18/image14.png)
+<ImagePreview src="/images/react18/image14.png"></ImagePreview>
 
 ### 场景 Demo
 
@@ -481,7 +481,7 @@ react18 后也会渲染两次，不过有一次时置灰的状态，便于区分
 
 但是在实际开发中，更多的场景是，我们在 useEffect 里面发送了一个异步请求，在异步函数还没有被 resolve 或者被 reject 的时候，我们就卸载了组件。 在这种场景中，警告同样会触发。但是，在这种情况下，组件内部并没有内存泄漏，因为这个异步函数已经被垃圾回收了，此时，警告具有误导性。
 
-![](/images/react18/image15.png)
+<ImagePreview src="/images/react18/image15.png"></ImagePreview>
 
 ### 场景 demo
 

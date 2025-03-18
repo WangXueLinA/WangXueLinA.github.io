@@ -60,7 +60,7 @@ console.log(Object.keys(person));
 
 上面案例我们在控制台打印下
 
-![](/images/vue2/image5.jpg)
+<ImagePreview src="/images/vue2/image5.jpg"></ImagePreview>
 
 ### 配置可枚举
 
@@ -83,7 +83,7 @@ console.log(person);
 console.log(Object.keys(person));
 ```
 
-![](/images/vue2/image6.jpg)
+<ImagePreview src="/images/vue2/image6.jpg"></ImagePreview>
 
 ### get/set
 
@@ -186,21 +186,21 @@ console.log(obj2.x); // 400
 
 页面显示：
 
-![](/images/vue2/image7.jpg)
+<ImagePreview src="/images/vue2/image7.jpg"></ImagePreview>
 
 所以我们分析出来可能是 vm 对象（vue 对象）来代理 data 对象中属性的操作（读/写）
 
-![](/images/vue2/image8.jpg)
+<ImagePreview src="/images/vue2/image8.jpg"></ImagePreview>
 
 然后我们也可以观察到 data 中的 name 跟 age 在 vue 对象上都有各自的 getter 跟 setter 方法
 
-![](/images/vue2/image9.jpg)
+<ImagePreview src="/images/vue2/image9.jpg"></ImagePreview>
 
 我们翻看 vue 对象中还有`_data`属性，里面的属性值也都是我们自己定义的 data 一样，在`_data`对象里也都有 name 跟 age 各自的 getter 跟 setter 方法
 
 那是不是改了 vm 里的属性值的话，页面数据就会发生变化，同理，改了`_data`对象里的值，也会引起页面数据的变化
 
-![](/images/vue2/image10.jpg)
+<ImagePreview src="/images/vue2/image10.jpg"></ImagePreview>
 
 所以就验证出 vm 对象（vue 对象）是来代理 data 对象中属性的操作（读/写）
 
@@ -217,7 +217,7 @@ console.log(obj2.x); // 400
 
 vue 设置数据代理的原理，通过 object.defineProperty()把 data 对象中所有属性添加到 vm 上，为每一个添加到 vm 上的属性,都指定一个 getter/setter。在 getter/setter 内部去操作（读/写）data 中对应的属性
 
-![](/images/vue2/image11.jpg)
+<ImagePreview src="/images/vue2/image11.jpg"></ImagePreview>
 
 ## 响应式原理
 

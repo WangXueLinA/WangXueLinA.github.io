@@ -11,7 +11,7 @@ title: render函数
 
 Render 函数的工作原理是通过返回一个虚拟节点（VNode）来告诉 Vue 如何渲染界面。Vue 3 提供了 h 函数用于创建 VNode。
 
-![](/images/vue2/image4.png)
+<ImagePreview src="/images/vue2/image4.png"></ImagePreview>
 
 ## 对比模板语法
 

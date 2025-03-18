@@ -16,7 +16,7 @@ title: Webpack5
 
 - 1、引用脚步来存放每个功能，比如
 
-![](/images/webpack/image1.jpg)
+<ImagePreview src="/images/webpack/image1.jpg"></ImagePreview>
 
 根据我们 js 在浏览器上的加载特性，那么我们所有的 js 代码从上至下来加载的，因此我们的业务代码要是依赖上面的那些库，那么顺序不能颠倒，如果颠倒了，可能项目就崩溃了。
 
@@ -24,7 +24,7 @@ title: Webpack5
 
 - 2、使用一个包含所有项目代码的大型 js 文件
 
-![](/images/webpack/image2.jpg)
+<ImagePreview src="/images/webpack/image2.jpg"></ImagePreview>
 
 虽然这种方式解决了加载多个 js 顺序问题，可能会导致其他问题，比如，作用域问题，文件太大，可读性差，可维护性弱等问题
 
@@ -40,7 +40,7 @@ title: Webpack5
 
 早期其实是使用立即调用函数表达式 IIFE 来创建独立作用域
 
-![](/images/webpack/image33.jpg)
+<ImagePreview src="/images/webpack/image33.jpg"></ImagePreview>
 
 变量被单独定义在函数内部，不再被挂载至全局 window 下
 
@@ -189,13 +189,13 @@ export default minus;
 1. html 引入 less
    在 html 中引入 less 文件，在浏览器中没有生效，这是因为 less 对于浏览器来讲并不能进行识别，我们必须借助于工具将 less 转化为 css，这时候才能进行运行
 
-![](/images/webpack/image1.png)
+<ImagePreview src="/images/webpack/image1.png"></ImagePreview>
 
 2. import 导入
 
 在项目运用到的 js，为了方便操作 js，项目中可能会引入 jquery，下好包后通过 import 进行导入，这里做了一个小小的演示，通过点击好 h1 标签改变背景颜色。运行之后点击不生效，浏览器报了一个语法错误，是因为 ES6 的模块化语法 import 导入引起的，浏览器并不能识别 ES6 的语法
 
-![](/images/webpack/image2.png)
+<ImagePreview src="/images/webpack/image2.png"></ImagePreview>
 
 从上面的例子可以看出来，我们需要一个工具将 less -> css，ES6、ES7 -> js 才能让浏览器进行识别， 以前这些工具得进行分别维护，非常的麻烦，所以前端这时候提出一个概念叫构建工具，这个构建工具得作用是将这些每个工具，操作都包含起来，此时只关系总的工具就可以了
 
@@ -203,11 +203,11 @@ export default minus;
 
 在 react 跟 vue 开发的时，一个文件夹中可能引入很多依赖，比如下面的这些引入的很多依赖就会交给构建工具 webpack 来进行处理，那 webpack 怎么进行处理呢？
 
-![](/images/webpack/image3.png)
+<ImagePreview src="/images/webpack/image3.png"></ImagePreview>
 
 首先告诉 webpack 一个打包的起点，所谓的入口文件，webpack 会以这个入口文件作为起点开始打包，他会将每个依赖都给记录好，形成一个依赖关系树状结构图，就我们做上面的一个例子而言，入口文件为 index.js，引入 jq 跟 less 模块，通过 chunk 生成代码块进行分别打包，生成一个静态资源（bundle）文件
 
-![](/images/webpack/image4.png)
+<ImagePreview src="/images/webpack/image4.png"></ImagePreview>
 
 所以在 webpack 看来，前端的多有资源文件(js/json/css/img/less/...)都会作为模块处理，它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源（bundle）资源
 
@@ -221,7 +221,7 @@ export default minus;
 6. `npm init -y` 初始化 package 配置文件
 7. `npm install webpack webpack-cli --save-dev` 本地安装 webpack 及 webpack-cli
 
-![](/images/webpack/image35.jpg)
+<ImagePreview src="/images/webpack/image35.jpg"></ImagePreview>
 
 ## 五个核心概念
 
@@ -256,7 +256,7 @@ webpack 只能识别 js 文件跟 json 文件，其他的比如样式文件，�
 
 之后进行一个项目 pakeage.json 的详细配置，可以参考以下图片，主要的还是 name 名称，其他的都可以进行回车取默认值就可以，然后我们需要下载两个包，一个是 webpack ，一个是`webpack-cli`这个包是通过 webpack 的指令对 webpack 进行一些操作，可以执行 ` yarn add webpack webpack-cli -g`进行安装
 
-![](/images/webpack/image5.png)
+<ImagePreview src="/images/webpack/image5.png"></ImagePreview>
 
 ### js 文件
 
@@ -272,7 +272,7 @@ yarn webpack ./src/index.js -o ./build/built.js --mode=development
 
 打包后的文件
 
-![](/images/webpack/image6.png)
+<ImagePreview src="/images/webpack/image6.png"></ImagePreview>
 
 生产环境：
 
@@ -282,7 +282,7 @@ yarn webpack ./src/index.js -o ./build/built.js --mode=production
 
 打包后的文件
 
-![](/images/webpack/image7.png)
+<ImagePreview src="/images/webpack/image7.png"></ImagePreview>
 
 总上看来，生产环境跟开发环境能将 ES6 模块化编译成浏览器能识别的模块化，生产环境会压缩我们环境的代码
 
@@ -290,33 +290,33 @@ yarn webpack ./src/index.js -o ./build/built.js --mode=production
 
 一种是再打包问题夹新建个 html 文件，将打包后的文件引入，然后再浏览器中进行查看，如图下：
 
-![](/images/webpack/image8.png)
+<ImagePreview src="/images/webpack/image8.png"></ImagePreview>
 
 另一种是通过 node 环境中运行
 
-![](/images/webpack/image9.png)
+<ImagePreview src="/images/webpack/image9.png"></ImagePreview>
 
 ### json 文件
 
 接下来我们来验证下 json 文件是否支持 webpack，显然控制台输出成功，webpack 是支持 json 文件的
 
-![](/images/webpack/image10.png)
+<ImagePreview src="/images/webpack/image10.png"></ImagePreview>
 
 ### css 文件
 
 打包执行指令时，我们可以看出控制台包红错，css 文件显然是不支持的
 
-![](/images/webpack/image11.png)
+<ImagePreview src="/images/webpack/image11.png"></ImagePreview>
 
 ## 打包 html 资源
 
 打包 html 文件的时候，我的得下插件为`html-webpack-plugin`，这个包导入一个构造函数 HtmlWebpackPlugin，执行完指令后，在导出文件 build 文件下，我们就看到自动生成了一个名为 index.html 的空文件，自动引入打包输出的所有资源（js/css），这里值得注意的是，loader 仅是下载插件直接就可以配置就可以，而这个插件下载下来之后，必须引入，才进行使用。
 
-![](/images/webpack/image16.png)
+<ImagePreview src="/images/webpack/image16.png"></ImagePreview>
 
 有的场景就是想要输入跟入口文件中的 html 文件格式一样的，我们只需要在 HtmlWebpackPlugin 这个构造函数中传入参数 template，指定 template 参数的路径，这样就告诉 webpack 要以./src/index.html 为模板，复制这个 html 文件，然后自动引入打包输入所有资源（不需要自己引）
 
-![](/images/webpack/image17.png)
+<ImagePreview src="/images/webpack/image17.png"></ImagePreview>
 
 ## devServer
 
@@ -324,7 +324,7 @@ yarn webpack ./src/index.js -o ./build/built.js --mode=production
 
 这时候 webpack 提出了一个概念 devServer 自动化，让你自动去打包。特点：只会在内存中编译打包，不会有任何的输出到本地代码，所以之前我们在 build 包下输出的文件都不在输入这里，而是输出在内存中，想要启动 devServer，得下载`webpack-dev-server`这个包，`yarn webpack-dev-server`，此时你会发现光标一直在这停着，证明程序一直在这运行，他会一直监视源代码是否被更改，当你修改代码时并保存，程序会自动重新自动进行编译，然后他就会自动刷新浏览器渲染最新的变化
 
-![](/images/webpack/image21.png)
+<ImagePreview src="/images/webpack/image21.png"></ImagePreview>
 
 其实`webpack-dev-server`真正没有输出任何物理文件，他把输出打包以后得 bundle 文件放在内存中。
 
@@ -394,7 +394,7 @@ module: {
 }
 ```
 
-![](/images/webpack/image34.jpg)
+<ImagePreview src="/images/webpack/image34.jpg"></ImagePreview>
 
 ### source: 导出资源 源代码
 
@@ -436,34 +436,34 @@ module: {
 
 我们之前测试过，webpack 不能打包样式资源，这时候就需要 loader 来进行处理，而 loader 必须按照我们的配置文件去写，所以我们就得新建个 webpack.config.js 这个文件，所有的配置说明如下：
 
-![](/images/webpack/image12.png)
+<ImagePreview src="/images/webpack/image12.png"></ImagePreview>
 
 配置好之后，我们执行`yarn webpack`运行，编译出来的结果显然是打包成功了，不然控制台就是红色的错误效果
 
-![](/images/webpack/image13.png)
+<ImagePreview src="/images/webpack/image13.png"></ImagePreview>
 
 所以为了看效果，我们在 build 文件下新建个 index.html 文件，将打包好的 built.js 放进去，页面效果生效，并且我们浏览器再 head 标签中添加 style 样式标签，将我们之前写的样式都插入进来
-![](/images/webpack/image14.png)
+<ImagePreview src="/images/webpack/image14.png"></ImagePreview>
 
 ### less-loader
 
 loader 配置的时候值得注意的是，每次配置不同的文件，都得需要配置不同的 loader 来进行处理
 
-![](/images/webpack/image15.png)
+<ImagePreview src="/images/webpack/image15.png"></ImagePreview>
 
 经过这几个最基本的配置，你会发现输入文件 build 下 js，其他文件等文件都在一起，没有文件层次划分，我想 js 都放在 js 文件下，图片都放在 img 文件下，这样目录清楚，我们只需要在想要的 loader 下面规定一下`outputPath`属性即可，但是值得注意的是，css 文件夹因为`css-loader`的原因，会将 css 打包在 js 中，所以说样式并不会输出，css 只会跟 js 为一体的
 
-![](/images/webpack/image22.png)
+<ImagePreview src="/images/webpack/image22.png"></ImagePreview>
 
 ## 提取 css 文件
 
 我们需要从 js 中将 css 提取出来，我们需要下载一个插件叫做`mini-css-extract-plugin`，这时候虽然引入了 MiniCssExtractPlugin 这个构造函数，但是我们注意下，在 loader 中需要将`style-loader`关掉，我们不需要通过他来创建 style 标签了，我的需要增加的是`MiniCssExtractPlugin.loader`，执行指令后我们发现，所有的 css 打包后都默认放在 build 文件中的 main.css 中，在打包好的 index.html 文件中我们可以发现，main.css 文件是通过 link 标签来引入的，这样就规避了闪屏的问题
 
-![](/images/webpack/image23.png)
+<ImagePreview src="/images/webpack/image23.png"></ImagePreview>
 
 如果你需要文件路径保持一致的话，你可以自己进行手动重命名设置下就可以
 
-![](/images/webpack/image24.png)
+<ImagePreview src="/images/webpack/image24.png"></ImagePreview>
 
 自定义 filename 生成目录及文件名[contenthash].css
 
@@ -477,13 +477,13 @@ optimization: {
 }
 ```
 
-![](/images/webpack/image36.jpg)
+<ImagePreview src="/images/webpack/image36.jpg"></ImagePreview>
 
 ## css 兼容处理
 
 css 做兼容性处理需要一个库，叫 postcss，postcss 这个库要写在 webpack 中需要写`postcss-loader`，还得使用一个叫`postcss-preset-env`插件。这个插件能帮我们呢 postcss 能识别某些环境，他能找到 package.json 中 browserslist 里面的配置，通过配置加载指定的 css 兼容性样式，这时候我们就要手动向 package.json 文件中增加 browserslist，如图下，可以根据自己的需求进行添加。添加好了之后，虽然 mode 中我们设置模式为 development，但是我们想要 browserslist 生效的话，得设置 nodejs 环境变量，nodejs 默认环境为生产环境，我们想要设置开发环境，得进行配置`process.env.NODE_ENV = 'development'`，想要恢复生产环境注掉即可
 
-![](/images/webpack/image25.png)
+<ImagePreview src="/images/webpack/image25.png"></ImagePreview>
 
 ## babel-loader
 
@@ -497,15 +497,15 @@ css 做兼容性处理需要一个库，叫 postcss，postcss 这个库要写在
 
 配置完你会发现，你原来定义的 const 的，在打包文件中变成了 var
 
-![](/images/webpack/image28.png)
+<ImagePreview src="/images/webpack/image28.png"></ImagePreview>
 
 上面只是能转换写简单的基本语法，如 promise 等就转换不了，所以我们需要一个更强大的`@babel/polyfill`来进行处理全部的 js 兼容性问题，这个不需要下载包，直接在代码中进行 import 引入即可，打包完后，你会发现输出的 built.js 会有很多代码，比之前多多了，体积增加了很多，这是他对 js 所有有兼容性的都进行处理，所以他的弊端就是我只要解决部分的兼容性问题，但是将所有的兼容性代码全部引入，体积太大
 
-![](/images/webpack/image29.png)
+<ImagePreview src="/images/webpack/image29.png"></ImagePreview>
 
 所以最优的方法还是我需要做兼容性处理的就做，所有有个`core-js`这个库，可以解决这个问题，这个时候就不需要上面的方案，注掉即可，`core-js`这个配置如下，根据自己项目的需求，可以根据官网来记性配置，你可以通过控制台对比一下上次打包的体积大小来看，这次明显打包后的体积减少了很多
 
-![](/images/webpack/image30.png)
+<ImagePreview src="/images/webpack/image30.png"></ImagePreview>
 
 如需兼容 async/await 语法则还需要添加 regeneratorRuntime 模块，他是 webpack 打包生效的全局辅助函数
 
@@ -539,7 +539,7 @@ module: {
 
 这是说明下，html 文件是不需要做兼容性处理的，浏览器认识的就认识，不认识的就不认识，js 代码在生产环境中自动就会被压缩，所以我们只需要将`mode：'development'`即可，压缩 html 文件需要配置以下就可以
 
-![](/images/webpack/image31.png)
+<ImagePreview src="/images/webpack/image31.png"></ImagePreview>
 
 ## 性能优化配置
 
@@ -551,7 +551,7 @@ module: {
 
 代码分离是 webpack 的特性之一，能够把代码分离到不同的 bundle 中，然后我们把这些文件按需加载或者并行加载。代码分离可以用于获取更小的 bundle，以及控制资源加载的优先级
 
-![](/images/webpack/image37.jpg)
+<ImagePreview src="/images/webpack/image37.jpg"></ImagePreview>
 
 ### entry 配置
 
@@ -576,8 +576,8 @@ output:{
 
 执行`npx webpack`后相应包名分别打包且都被引入
 
-![](/images/webpack/image38.jpg)
-![](/images/webpack/image39.jpg)
+<ImagePreview src="/images/webpack/image38.jpg"></ImagePreview>
+<ImagePreview src="/images/webpack/image39.jpg"></ImagePreview>
 
 缺点：多入口文件会导致存在相同文件时，重复打包至各自模块。比如 index 跟 another-module 都共享 lodash 第三方库，他会分别打到各自的 chunk 里
 
@@ -607,7 +607,7 @@ module.exports = {
 
 打包后多出的 shared.budle.js 即为定义中的模块，此时 lodash 是共用的，做到了模块的去重和分离
 
-![](/images/webpack/image40.jpg)
+<ImagePreview src="/images/webpack/image40.jpg"></ImagePreview>
 
 #### SplitChunksPlugin
 
@@ -661,7 +661,7 @@ import './async-module.js';
 
 打包后我们的 lodash 被抽离到一个单独的模块中
 
-![](/images/webpack/image41.jpg)
+<ImagePreview src="/images/webpack/image41.jpg"></ImagePreview>
 
 ### 懒加载
 
@@ -687,7 +687,7 @@ button.addEventListener('click', () => {
 import(/* webpackChunkName:'math' */ './math.js');
 ```
 
-![](/images/webpack/image42.jpg)
+<ImagePreview src="/images/webpack/image42.jpg"></ImagePreview>
 
 ### 预获取/预加载模块
 
@@ -714,7 +714,7 @@ button.addEventListener('click', () => {
 document.body.appendChild(button);
 ```
 
-![](/images/webpack/image43.jpg)
+<ImagePreview src="/images/webpack/image43.jpg"></ImagePreview>
 
 我们会看出来在 head 标签里会多出来一个属性 rel 为 prefetch 的 link 标签，它的意义在于当我们的首页面的内容都加载完毕后，在网络空闲时再去加载我们打包好的 math.bundle.js 文件
 
@@ -739,7 +739,7 @@ module.exports = {
 
 打包后的文件名被添加上了随机字符串，并会在资源更新时自动改变
 
-![](/images/webpack/image44.jpg)
+<ImagePreview src="/images/webpack/image44.jpg"></ImagePreview>
 
 ### 缓存第三方库
 
@@ -785,7 +785,7 @@ output:{
 
 如果我们想要根据 cdn 的路径或者我们当前的服务器的某个路径来去修改我们的引入路径的前缀
 
-![](/images/webpack/image45.jpg)
+<ImagePreview src="/images/webpack/image45.jpg"></ImagePreview>
 
 ```js
 module.exports = {
@@ -796,7 +796,7 @@ module.exports = {
 }
 ```
 
-![](/images/webpack/image46.jpg)
+<ImagePreview src="/images/webpack/image46.jpg"></ImagePreview>
 
 ## source-map
 
@@ -830,13 +830,13 @@ module.exports = {
 
 默认不配置 devtool，会使用 eval 模式，会将模块代码包裹在 eval 函数中执行
 
-![](/images/webpack/image47.jpg)
+<ImagePreview src="/images/webpack/image47.jpg"></ImagePreview>
 
 ### source-map
 
 source-map 模式会生成一个 SourceMap 文件以外，还生成一个注释为 sourceMappingURL 的注释，这个注释会告诉浏览器，如果遇到错误，如何映射到源码上。
 
-![](/images/webpack/image48.jpg)
+<ImagePreview src="/images/webpack/image48.jpg"></ImagePreview>
 
 ### hidden-source-map
 
@@ -846,7 +846,7 @@ source-map 模式会生成一个 SourceMap 文件以外，还生成一个注释�
 
 inline-source-map 模式会生成一个 SourceMap 文件以外，还生成一个 dataurl 形式的注释为 sourceMappingURL 的注释，这个注释会告诉浏览器，如果遇到错误，如何映射到源码上。
 
-![](/images/webpack/image49.jpg)
+<ImagePreview src="/images/webpack/image49.jpg"></ImagePreview>
 
 ### eval-source-map
 
@@ -856,11 +856,11 @@ inline-source-map 模式会生成一个 SourceMap 文件以外，还生成一个
 
 这里有一个重要的属性就是 mappings，这个就是我们的源码跟我们打包代码的一个映射，这只会记录我们的行数，不会记录代码的行数，一般调试代码我们只需要记住我们的行数就行
 
-![](/images/webpack/image50.jpg)
+<ImagePreview src="/images/webpack/image50.jpg"></ImagePreview>
 
 如果这时候我们给 devtool 配置为 source-map，那么就会出现如下情况，这里就会多了一个`,4B`，其实这个就是记录我们的列数
 
-![](/images/webpack/image51.jpg)
+<ImagePreview src="/images/webpack/image51.jpg"></ImagePreview>
 
 ### cheap-module-source-map
 
@@ -908,11 +908,11 @@ module.exports = {
 
 其实我们打包出来的信息跟 cheap-source-map 差不多，但是在浏览器中 cheap-module-source-map 可以精准的定位到源码上
 
-![](/images/webpack/image52.jpg)
+<ImagePreview src="/images/webpack/image52.jpg"></ImagePreview>
 
 而 cheap-source-map 这时候就不能够精准定位到源码上
 
-![](/images/webpack/image53.jpg)
+<ImagePreview src="/images/webpack/image53.jpg"></ImagePreview>
 
 ## HMR（模块热替换）
 
@@ -931,7 +931,7 @@ module.exports = {
 };
 ```
 
-![](/images/webpack/image32.png)
+<ImagePreview src="/images/webpack/image32.png"></ImagePreview>
 
 html 默认不能使用 HMR 功能，所以解决的办法将 html 文件给引 entry 文件中，这时候 entry 文件写法改为一个数组的写法
 
@@ -952,7 +952,7 @@ module:{
 
 我们想要在打开浏览器中也要报错
 
-![](/images/webpack/image54.jpg)
+<ImagePreview src="/images/webpack/image54.jpg"></ImagePreview>
 
 我们只需要增加这样的配置
 
@@ -990,7 +990,7 @@ devServer: {
 - Assets
 - WebAssembly 模块
 
-![](/images/webpack/image56.jpg)
+<ImagePreview src="/images/webpack/image56.jpg"></ImagePreview>
 
 而我们早就发现——通过 loader 可以使 webpack 支持多种语言和预处理器语法编写的模块。loader 向 webpack 描述了如何处理非原生模块，并将相关依赖引入到你的 bundles 中。包括且不限于:
 
@@ -1017,7 +1017,7 @@ webpack 的执行会返回一个描述 webpack 打包编译整个流程的对象
 的————简单点讲，你可以理解为这个对象上的一个属性，我们称之为
 Resolvers。webpack 的 Resolvers 解析器的主体功能就是模块解析，它是基于 enhanced-resolve 这个包实现的。换句话讲，在 webpack 中，无论你使用怎样的模块引入语句，本质其实都是在调用这个包的 api 进行模块路径解析。
 
-![](/images/webpack/image55.jpg)
+<ImagePreview src="/images/webpack/image55.jpg"></ImagePreview>
 
 webpack 通过 Resolvers 实现了模块之间的依赖和引用。举个例子:
 
@@ -1358,7 +1358,7 @@ console.log(add(5, 6));
 
 现在运行 `npm run build` ，并查看输出的 bundle：
 
-![](/images/webpack/image57.png)
+<ImagePreview src="/images/webpack/image57.png"></ImagePreview>
 
 你会注意到虽然我们没有引用 `minus` ，但它仍然被包含在 bundle 中
 
@@ -1503,7 +1503,7 @@ loader 分类：同步 loader，异步 loader，Rawloader，Pitchingloader
 3. 创建 webpack.config.js 文件
 4. 创建如图下文件，打包`npm run build`后执行`node dist/bundle.js`打印文件内容
 
-![](/images/webpack/image58.jpg)
+<ImagePreview src="/images/webpack/image58.jpg"></ImagePreview>
 
 ### loader 上下文（this 上的属性跟方法）
 
@@ -1626,7 +1626,7 @@ module.exports = function (content) {
 5. 在 src 文件下创建 index.js 并引入 main.qianfeng 文件
 6. 执行打包并在 html 引入 bundle.js 文件在浏览器中查看
 
-![](/images/webpack/image61.jpg)
+<ImagePreview src="/images/webpack/image61.jpg"></ImagePreview>
 
 **异步 loader**
 
@@ -1667,11 +1667,11 @@ module.exports = function (content) {
 
 这是我们自己的 loader 去打印的图片的信息，我们发现是一堆乱码是处理不了的，并且复制的图片加载失败就是我们上面说的原因
 
-![](/images/webpack/image62.jpg)
+<ImagePreview src="/images/webpack/image62.jpg"></ImagePreview>
 
 当我们开启 raw-loader 的时候，可以正常打印出图片的信息并且图片加载成功
 
-![](/images/webpack/image63.jpg)
+<ImagePreview src="/images/webpack/image63.jpg"></ImagePreview>
 
 **Pitching loader**
 
@@ -1733,7 +1733,7 @@ aLoader Normal Loader
 
 Pitching Loader 的执行顺序是 从左到右，而 Normal Loader 的执行顺序是 从右到左。具体的执行过程如下图所示:
 
-![](/images/webpack/image64.jpg)
+<ImagePreview src="/images/webpack/image64.jpg"></ImagePreview>
 
 webpack 在解析完配置文件后，会将 loader 转化为内联格式，其实就是文件所在的路径进行加载，如`a-loader.js!b-loader.js!c-loader.js!index.txt`，我们分别看下 aLoader，bLoader，cLoader 的 pitch 的三个参数都打印了什么
 
@@ -1813,11 +1813,11 @@ module.exports = aLoader;
 
 我们更新一下 bLoader.pitch 方法，让它返回 "bLoader Pitching 熔断内容" 字符串
 
-![](/images/webpack/image65.jpg)
+<ImagePreview src="/images/webpack/image65.jpg"></ImagePreview>
 
 我们发现 aLoader 的 content 接受到 bLoader 的返回值，并且不会执行 cLoader 的 pitching 阶段跟 normal 阶段，也就是下面的执行顺序
 
-![](/images/webpack/image66.jpg)
+<ImagePreview src="/images/webpack/image66.jpg"></ImagePreview>
 
 ## 手写 Plugin
 

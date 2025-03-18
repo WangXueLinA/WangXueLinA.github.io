@@ -23,7 +23,7 @@ Vue 生命周期总共可以分为 8 个阶段：创建前后, 载入前后,更�
 | activated                            | 被缓存的组件激活时           | 恢复组件状态                  | 重新加载数据、恢复播放          | 仅限 `<keep-alive>` 组件          |
 | deactivated                          | 被缓存的组件停用时           | 暂停组件任务                  | 暂停视频播放、保存临时状态      | 仅限`<keep-alive>` 组件           |
 
-![](/images/vue2/image2.jpg)
+<ImagePreview src="/images/vue2/image2.jpg"></ImagePreview>
 
 ### beforeCreate -> created
 

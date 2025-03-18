@@ -94,7 +94,7 @@ Promise 构造函数接受一个函数作为参数，该函数的两个参数分
 
 认真阅读下图，我们能够轻松了解 promise 整个流程
 
-![](/images/es6/image1.png)
+<ImagePreview src="/images/es6/image1.png"></ImagePreview>
 
 ### 回调函数弊端
 

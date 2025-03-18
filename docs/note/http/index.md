@@ -30,23 +30,23 @@ title: Http
 
 ### **URL 解析与检查缓存：**
 
-![](/images/http/image4.jpg)
+<ImagePreview src="/images/http/image4.jpg"></ImagePreview>
 
 - 用户在浏览器地址栏输入 URL 后，浏览器首先解析该 URL，提取协议、域名、路径等信息。
 
-![](/images/http/image6.jpg)
+<ImagePreview src="/images/http/image6.jpg"></ImagePreview>
 
 - 浏览器检查本地缓存以及浏览器缓存中是否有该 URL 对应的页面资源。如果存在且未过期，浏览器可能直接使用缓存中的资源，跳过后续的网络请求步骤。
 
 ### **DNS 解析：**
 
-![](/images/http/image7.jpg)
+<ImagePreview src="/images/http/image7.jpg"></ImagePreview>
 
 如果缓存中没有所需资源或资源已过期，浏览器会通过 DNS（域名系统）将 URL 中的域名解析为服务器的 IP 地址。这一过程可能包括查询操作系统缓存、本地 DNS 缓存、路由器缓存以及向 DNS 服务器发送查询请求。
 
 ### **建立 TCP 连接：**
 
-![](/images/http/image5.jpg)
+<ImagePreview src="/images/http/image5.jpg"></ImagePreview>
 
 解析到 IP 地址后，浏览器使用 TCP 协议与服务器建立连接。这通常涉及 TCP 三次握手过程，以确保数据传输的可靠性和顺序。
 
@@ -54,19 +54,19 @@ title: Http
 
 建立连接后，浏览器向服务器发送 HTTP 或 HTTPS 请求。请求中包含 URL、请求方法（通常是 GET）、浏览器信息、接受的数据类型等头部信息。
 
-![](/images/http/image11.jpg)
+<ImagePreview src="/images/http/image11.jpg"></ImagePreview>
 
 ### **服务器处理请求：**
 
 服务器接收到请求后，根据请求内容处理请求。这可能涉及运行后端代码、查询数据库、生成动态内容等操作。
 
-![](/images/http/image10.jpg)
+<ImagePreview src="/images/http/image10.jpg"></ImagePreview>
 
 ### **服务器返回响应：**
 
 处理完成后，服务器将响应数据（包括状态码、响应头和响应体）发送回浏览器。响应体可能包含 HTML、CSS、JavaScript 文件以及图片等静态资源。
 
-![](/images/http/image12.jpg)
+<ImagePreview src="/images/http/image12.jpg"></ImagePreview>
 
 ### **渲染页面：**
 
@@ -74,7 +74,7 @@ title: Http
 - 浏览器计算渲染树的布局，确定每个节点的几何位置。
 - 最后进行绘制，将渲染树的各个节点绘制到屏幕上。
 
-![](/images/http/image8.jpg)
+<ImagePreview src="/images/http/image8.jpg"></ImagePreview>
 
 ### **加载额外资源：**
 
@@ -85,7 +85,7 @@ title: Http
 
 页面上的 JavaScript 会被下载并执行，可能用于实现交互功能、异步数据加载等。
 
-![](/images/http/image9.jpg)
+<ImagePreview src="/images/http/image9.jpg"></ImagePreview>
 
 ### **页面加载完成：**
 
@@ -217,7 +217,7 @@ TCP 的三次握手和四次挥手实质就是 TCP 通信的连接和断开。
 
 四次挥手：即终止 TCP 连接，就是指断开一个 TCP 连接时，需要客户端和服务端总共发送 4 个包以确认连接的断开。
 
-![](/images/http/image1.jpg)
+<ImagePreview src="/images/http/image1.jpg"></ImagePreview>
 
 ### 三次握手
 
@@ -231,7 +231,7 @@ TCP 的三次握手和四次挥手实质就是 TCP 通信的连接和断开。
 
 通过三次握手，就能确定双方的接收和发送能力是正常的。之后就可以正常通信了
 
-![](/images/http/image2.jpg)
+<ImagePreview src="/images/http/image2.jpg"></ImagePreview>
 
 详细说明：
 
@@ -263,7 +263,7 @@ TCP 的三次握手和四次挥手实质就是 TCP 通信的连接和断开。
 
 其中：FIN 标志位数置 1，表示断开 TCP 连接。
 
-![](/images/http/image3.jpg)
+<ImagePreview src="/images/http/image3.jpg"></ImagePreview>
 
 详细说明：​
 

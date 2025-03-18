@@ -112,7 +112,7 @@ app.use(pinia).mount('#app');
 
 数据都放在 store 里面。当然你也可以把它理解为一个公共组件，只不过该公共组件只存放数据，这些数据我们其它所有的组件都能够访问且可以修改。
 
-![](/images/vuex/image2.jpg)
+<ImagePreview src="/images/vuex/image2.jpg"></ImagePreview>
 
 它有三个概念，state、getters 和 actions，我们可以将它们等价于组件中的“数据”、“计算属性”和“方法”。
 

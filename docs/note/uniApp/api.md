@@ -744,7 +744,7 @@ setTimeout(function () {
 | confirm | Boolean | 为 true 时，表示用户点击了确定按钮                                                      |
 | cancel  | Boolean | 为 true 时，表示用户点击了取消（用于 Android 系统区分点击蒙层关闭还是点击取消按钮关闭） |
 
-![](/images/uniapp/image23.jpg)
+<ImagePreview src="/images/uniapp/image23.jpg"></ImagePreview>
 
 ### 6. uni.showActionSheet
 
@@ -758,7 +758,7 @@ setTimeout(function () {
 | :------- | :----- | :---------------------------------------- |
 | tapIndex | Number | 用户点击的按钮，从上到下的顺序，从 0 开始 |
 
-![](/images/uniapp/image24.jpg)
+<ImagePreview src="/images/uniapp/image24.jpg"></ImagePreview>
 
 ### 7. 下拉刷新
 
@@ -776,7 +776,7 @@ setTimeout(function () {
 }
 ```
 
-![](/images/uniapp/image24.jpg)
+<ImagePreview src="/images/uniapp/image24.jpg"></ImagePreview>
 
 **onPullDownRefresh**
 

@@ -11,7 +11,7 @@ HTTP 是无状态的协议（对于事务处理没有记忆能力，每次客户
 
 这就让我们保存用户的身份信息成了一个问题。比方说我这个浏览器登录成功之后，服务器要给我一个响应是吧？你登录成功了，那为了避免以后再请求的时候，我又不知道他是谁了。所以当我在响应的时候，我再给他响应了一个东西，这个东西能够代表他的身份。如果说我直接把他的身份信息，比方说用户的 ID 或者是用户的账号直接给他响应过去。
 
-![](/images/http/image13.jpg)
+<ImagePreview src="/images/http/image13.jpg"></ImagePreview>
 
 这样做肯定是不合适的，因为服务器那边是无法信任这个信息的。因为这个信息存在，客户端是极容易被伪造的。无论你是存在哪儿，存在 cookie 里面，cookie 可以改，存在 localStorage, localStorage 也可以返还，它都是可以更改的。
 
@@ -21,7 +21,7 @@ HTTP 是无状态的协议（对于事务处理没有记忆能力，每次客户
 
 Session（会话） 是服务器端用来跟踪用户状态的技术。由于 HTTP 协议是无状态的（每个请求独立），Session 通过在服务器存储用户数据（如登录状态、购物车信息），并为每个用户分配唯一标识符（Session ID），使得服务器能识别同一用户的多次请求。
 
-![](/images/other/image2.jpg)
+<ImagePreview src="/images/other/image2.jpg"></ImagePreview>
 
 典型的 session 登陆/验证流程：
 
@@ -32,7 +32,7 @@ Session（会话） 是服务器端用来跟踪用户状态的技术。由于 HT
 - 服务端查 sessionId 校验 session
 - 成功后正常做业务处理，返回结果
 
-![](/images/other/image4.jpg)
+<ImagePreview src="/images/other/image4.jpg"></ImagePreview>
 
 ### Cookie
 
@@ -263,7 +263,7 @@ app.listen(3000, () => console.log('服务监听在3000端口'));
 
 JWT 是一种开放标准，用于在网络应用间安全地传输信息。它以 JSON 对象的形式存储数据，并通过数字签名（如 HMAC 或 RSA）确保信息的完整性和可信性。JWT 通常用于身份认证和授权。
 
-![](/images/http/image14.jpg)
+<ImagePreview src="/images/http/image14.jpg"></ImagePreview>
 
 ### 格式
 
@@ -287,7 +287,7 @@ Payload -->  eyJzdWIiOiIxMjM0IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
 Signature  -->  SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```
 
-![](/images/http/image15.jpg)
+<ImagePreview src="/images/http/image15.jpg"></ImagePreview>
 
 客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。
 
@@ -297,7 +297,7 @@ Signature  -->  SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
 另一种做法是，跨域的时候，JWT 就放在 POST 请求的数据体里面。
 
-![](/images/other/image3.jpg)
+<ImagePreview src="/images/other/image3.jpg"></ImagePreview>
 
 ### 代码展示
 
@@ -552,7 +552,7 @@ Token 里可以塞自定义数据（比如用户角色、权限），用的时�
 
 ### session+cookie
 
-![](/images/http/image16.jpg)
+<ImagePreview src="/images/http/image16.jpg"></ImagePreview>
 
 首先用户要去认证中心登录，把账号密码传过去，传过去过后，认证中心会判断这个账号密码是否正确。如果说是正确， 它里边会有一个表格叫做 session 表格（可以想象成表格），里面记录的是键值对，这个表格里边每一个键，它是有生成的一个唯一 ID 的。它的值就是用户的身份信息。一旦用户登录成功了，他就会往这个表格里边记录一条，把这个用户的身份信息记录进去，这个身份信息里边也包含了用户的唯一 ID, 还有他的账号，他的名字等等等等。只要这个 session 表格里边有这条记录，就说明这个用户是登录成功的。反之，只要这个表格里边没有这条记录，说明这个用户是没有登录的，或者是登录已经过期了。因为这个表格，它每一条记录它有一个时效过了，这个时效它就可以干掉了。
 
@@ -564,7 +564,7 @@ Token 里可以塞自定义数据（比如用户角色、权限），用的时�
 
 ### jwt 的 token
 
-![](/images/http/image17.jpg)
+<ImagePreview src="/images/http/image17.jpg"></ImagePreview>
 
 token 模式下边认证中心的压力瞬间减小，基本上没啥压力。你玩你的，我玩我的。不过它的功能还是一样，就是我还是要承担那个用户登录的注册的一些功能。然后我们看一下这个 token 模式下它是如何来运作的。
 
@@ -578,7 +578,7 @@ token 模式下边认证中心的压力瞬间减小，基本上没啥压力。�
 
 ### 双 token 模式
 
-![](/images/http/image18.jpg)
+<ImagePreview src="/images/http/image18.jpg"></ImagePreview>
 
 基于上面的劣势，于是就搞出来这么一个综合的模式，就是双 token 模式，一个是普通的 token，一个是刷新 token，用户还是一样向认证中心去登录。登录完成之后，认证中心会给他颁发两个 token。一个是所有子系统都能够自己的认识的 token。另一个是只有认证中心才认识的 token，要刷新的，两个 token 都要存起来。
 

@@ -7,11 +7,11 @@ title: vue-devtools定位vue组件
 
 🔍 打开你自己（或者你同事）开发的页面，却短时间难以找到对应的源文件？
 
-![](/images/vue2/image12.jpg)
+<ImagePreview src="/images/vue2/image12.jpg"></ImagePreview>
 
 mac 电脑在 VSCode command + shift + p，Windows 则是 ctrl + shift + p。然后输入 shell，选择安装 code。
 
-![](/images/vue2/image13.jpg)
+<ImagePreview src="/images/vue2/image13.jpg"></ImagePreview>
 
 ## 原理
 

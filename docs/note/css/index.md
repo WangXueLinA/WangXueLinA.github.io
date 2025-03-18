@@ -238,7 +238,7 @@ demo: https://stackblitz.com/edit/stackblitz-starters-yhbsxu?file=index.html
 
 flex-grow 为 0 : https://stackblitz.com/edit/stackblitz-starters-syrbj2?file=index.html
 
-![](/images/css/image7.jpg)
+<ImagePreview src="/images/css/image7.jpg"></ImagePreview>
 
 父容器的主轴还有这么多剩余空间，子容器有什么办法将这些剩余空间瓜分来实现弹性的效果呢？
 
@@ -246,7 +246,7 @@ flex-grow 定义子容器的瓜分剩余空间的比例，默认为 0，即如�
 
 flex-grow 为 1 : https://stackblitz.com/edit/stackblitz-starters-zks1xd?file=index.html
 
-![](/images/css/image8.jpg)
+<ImagePreview src="/images/css/image8.jpg"></ImagePreview>
 
 计算方式如下：
 
@@ -278,11 +278,11 @@ A 的压缩率：300*1 / 1200 = 0.25
 A 的压缩值：150 \* 0.25 = 37.5
 A 的实际宽度：300 - 37.5 = 262.5
 
-![](/images/css/image10.jpg)
+<ImagePreview src="/images/css/image10.jpg"></ImagePreview>
 
 flex-shrink 为 0 时:
 
-![](/images/css/image9.jpg)
+<ImagePreview src="/images/css/image9.jpg"></ImagePreview>
 
 ### flex-basis
 
@@ -292,7 +292,7 @@ flex-basis: 0%意味着在分配额外空间之前，元素不占用任何固定
 
 flex-basis: https://stackblitz.com/edit/stackblitz-starters-d31xfm?file=index.html
 
-![](/images/css/image11.jpg)
+<ImagePreview src="/images/css/image11.jpg"></ImagePreview>
 
 可以看出几个属性的优先级关系：
 
@@ -435,29 +435,29 @@ BFC 是一个独立的渲染区域，内部元素的布局不会影响外部元�
 
 - 清除浮动：利用 BFC 可以自然地包含浮动元素，避免父容器高度塌陷。
 
-![](/images/css/image1.jpg)
+<ImagePreview src="/images/css/image1.jpg"></ImagePreview>
 
 解决方案： 为父容器创建 BFC
 
-![](/images/css/image2.jpg)
+<ImagePreview src="/images/css/image2.jpg"></ImagePreview>
 
 - 防止外边距折叠：当需要相邻元素的外边距保持独立时，可以将它们放在不同的 BFC 中。
 
-![](/images/css/image3.jpg)
+<ImagePreview src="/images/css/image3.jpg"></ImagePreview>
 
 解决方案： 可以将其中一个元素设置成 BFC 区域，使它两个独立的容器互不影响
 
-![](/images/css/image4.jpg)
+<ImagePreview src="/images/css/image4.jpg"></ImagePreview>
 
 还有一个解决方案就是给一个元素设置为`display: inline-block` ，无需像上面多套一层父元素
 
 - 防止浮动重叠：利用 BFC 区域不会与浮动容器发生重叠
 
-![](/images/css/image5.jpg)
+<ImagePreview src="/images/css/image5.jpg"></ImagePreview>
 
 解决方案：要自适应两栏效果，使右边盒子成为 BFC 区域
 
-![](/images/css/image6.jpg)
+<ImagePreview src="/images/css/image6.jpg"></ImagePreview>
 
 ### 注意事项
 

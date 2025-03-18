@@ -388,7 +388,7 @@ plugins: [
 
 打包结束后浏览器自动打开 127.0.0.1:8888 地址，可以看到各个模块的大小
 
-![](/images/js/image18.jpg)
+<ImagePreview src="/images/js/image18.jpg"></ImagePreview>
 
 - 构建速度：通过 speed-measure-webpack-plugin 对比启用前后的构建时间。
 
@@ -426,4 +426,4 @@ module.exports = smp.wrap({
 
 运行 Webpack 构建后，终端会显示类似结果
 
-![](/images/js/image19.jpg)
+<ImagePreview src="/images/js/image19.jpg"></ImagePreview>

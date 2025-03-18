@@ -20,7 +20,7 @@ Web Components 是一套由 W3C 制定的标准集合，旨在让开发者能够
 
 ### 自定义元素
 
-![](/images/webComponent/image1.png)
+<ImagePreview src="/images/webComponent/image1.png"></ImagePreview>
 
 demo: [自定义元素](https://stackblitz.com/edit/stackblitz-starters-xnvmfl?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
@@ -34,7 +34,7 @@ customElements.define ()方法的第一个参数是要创建的新元素的标�
 
 demo: [自定义元素事件响应](https://stackblitz.com/edit/stackblitz-starters-dhtqgz?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/gif1.gif)
+<ImagePreview src="/images/webComponent/gif1.gif"></ImagePreview>
 
 上面的这个例子中：
 
@@ -57,13 +57,13 @@ Shadow DOM 是 DOM nodes 的附属树。这种 Shadow DOM 子树可以与某宿�
 
 demo: [内部样式不影响外部元素](https://stackblitz.com/edit/stackblitz-starters-sjr7ur?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image2.png)
+<ImagePreview src="/images/webComponent/image2.png"></ImagePreview>
 
 可以看出我们在里面写的 div 样式并不会影响到外部，而且不仅仅是里面的样式影响不到外面，外面的样式也影响不到里面,不仅仅是样式，shadow 中的 div 不能被外面的全局的 js 所获取到，里面的也不能获取外面的
 
 demo: [外部样式不影响内部样式](https://stackblitz.com/edit/stackblitz-starters-zpriuk?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image3.png)
+<ImagePreview src="/images/webComponent/image3.png"></ImagePreview>
 
 #### JavaScript 隔离：
 
@@ -71,7 +71,7 @@ JavaScript 也无法直接访问到 Shadow DOM 内部的元素，除非通过 Sh
 
 demo: [javaScript 隔离](https://stackblitz.com/edit/stackblitz-starters-zlpf1q?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/gif4.gif)
+<ImagePreview src="/images/webComponent/gif4.gif"></ImagePreview>
 
 在上面的例子中，`JsIsolatedComponent` 是一个自定义元素，它拥有自己的 Shadow DOM。Shadow DOM 中的 JavaScript 能够监听并修改其内部元素的行为，而外部页面的 JavaScript 则不能直接访问或修改 Shadow DOM 内部的 DOM 结构和行为。这就体现了 Shadow DOM 带来的 JavaScript 隔离效果。
 
@@ -83,14 +83,14 @@ demo: [javaScript 隔离](https://stackblitz.com/edit/stackblitz-starters-zlpf1q
 
 demo:[template](https://stackblitz.com/edit/stackblitz-starters-6bk5rb?description=HTML/CSS/JS%20Starter&file=script.js,styles.css,index.html%3AL58-L58&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image7.png)
+<ImagePreview src="/images/webComponent/image7.png"></ImagePreview>
 
 - `<slot>`使用模版我们只能传递一些文本变量，这很有局限性，于是 Web Components 引入了`<slot>`（插槽）的概念来增加编码的灵活度。
   我们可以使用 slot 来实现基于模版的部分自定义内容（标签、样式）的渲染，slot 插槽需要在 Shadow DOM 里才能生效。
 
   demo:[slot](https://stackblitz.com/edit/stackblitz-starters-uktw6w?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image8.png)
+<ImagePreview src="/images/webComponent/image8.png"></ImagePreview>
 
 ## 生命周期
 
@@ -109,7 +109,7 @@ demo:[template](https://stackblitz.com/edit/stackblitz-starters-6bk5rb?descripti
 
 demo: [通过属性传递数据](https://stackblitz.com/edit/stackblitz-starters-eyfhw3?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image4.png)
+<ImagePreview src="/images/webComponent/image4.png"></ImagePreview>
 
 #### JSON.stringify 处理复杂类型数据
 
@@ -117,7 +117,7 @@ demo: [通过属性传递数据](https://stackblitz.com/edit/stackblitz-starters
 
 demo: [JSON.stringify 处理复杂类型数据](https://stackblitz.com/edit/stackblitz-starters-ruk89u?description=HTML/CSS/JS%20Starter&file=index.html%3AL15&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image5.png)
+<ImagePreview src="/images/webComponent/image5.png"></ImagePreview>
 
 ### 子传父
 
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 demo：[子传父](https://stackblitz.com/edit/stackblitz-starters-zmyzkf?description=HTML/CSS/JS%20Starter&file=child.js,index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/gif3.gif)
+<ImagePreview src="/images/webComponent/gif3.gif"></ImagePreview>
 
 ### 插槽通信
 
@@ -247,7 +247,7 @@ window.onload = () => {
 
 demo: [Api 方法暴露](https://stackblitz.com/edit/stackblitz-starters-pjepbx?description=HTML/CSS/JS%20Starter&file=index.html%3AL7-L7&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image9.jpg)
+<ImagePreview src="/images/webComponent/image9.jpg"></ImagePreview>
 
 ### 全局状态管理
 
@@ -273,7 +273,7 @@ CSS Variables（CSS 自定义属性）是一种可以在整个文档甚至跨多
 
 demo: [CSS 自定义属性](https://stackblitz.com/edit/stackblitz-starters-q3dpnh?description=HTML/CSS/JS%20Starter&file=index.html&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image6.png)
+<ImagePreview src="/images/webComponent/image6.png"></ImagePreview>
 
 ### CSS Shadow Parts
 
@@ -281,7 +281,7 @@ CSS Shadow Parts 是一项 Web Components 技术，它允许开发者指定 Shad
 
 demo: [CSS Shadow Parts](https://stackblitz.com/edit/stackblitz-starters-jaaxlq?description=HTML/CSS/JS%20Starter&file=index.html&file=child.js&terminalHeight=10&title=Static%20Starter)
 
-![](/images/webComponent/image10.jpg)
+<ImagePreview src="/images/webComponent/image10.jpg"></ImagePreview>
 
 在这个例子中，`custom-element` 的头部部分通过 `part="header"` 标记为可公开样式化。外部样式表中的 `custom-element::part(header)` 选择器就用来给这个头部添加额外的样式，比如改变字体颜色和添加底部边框。这样，即便是在 Shadow DOM 中的元素，也能通过 CSS Shadow Parts 接受外部样式的影响。
 
@@ -361,7 +361,7 @@ export default ReactWebComponentExample;
 
 demo: [react 中使用 web Component](https://stackblitz.com/edit/vitejs-vite-uc117z?file=index.html,src%2FApp.tsx&file=index.html&terminal=dev)
 
-![](/images/webComponent/gif2.gif)
+<ImagePreview src="/images/webComponent/gif2.gif"></ImagePreview>
 
 ## 第三方库
 

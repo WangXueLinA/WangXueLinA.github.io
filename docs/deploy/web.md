@@ -10,19 +10,19 @@ title: 云服务器搭建网站
 
 以阿里云为例
 
-![](/images/web/image1.jpg)
+<ImagePreview src="/images/web/image1.jpg"></ImagePreview>
 
 ## 重置服务器密码
 
-![](/images/web/image2.jpg)
+<ImagePreview src="/images/web/image2.jpg"></ImagePreview>
 
 ## 远程连接到轻量应用服务器
 
-![](/images/web/image3.jpg)
+<ImagePreview src="/images/web/image3.jpg"></ImagePreview>
 
 如下图代表连接成功
 
-![](/images/web/image4.jpg)
+<ImagePreview src="/images/web/image4.jpg"></ImagePreview>
 
 ## 查询宝塔面板登录地址、账号密码
 
@@ -34,17 +34,17 @@ bt default
 
 可以查询到当前宝塔面板的登录地址、账号和密码信息
 
-![](/images/web/image5.jpg)
+<ImagePreview src="/images/web/image5.jpg"></ImagePreview>
 
 ## 防火墙开通宝塔面板所需端口号
 
 点击实例 ID 进去
 
-![](/images/web/image6.jpg)
+<ImagePreview src="/images/web/image6.jpg"></ImagePreview>
 
 开通建站所需端口如下图
 
-![](/images/web/image7.jpg)
+<ImagePreview src="/images/web/image7.jpg"></ImagePreview>
 
 ## 登录到宝塔面板管理后台
 
@@ -52,24 +52,24 @@ bt default
 
 按图中的一键安装即可
 
-![](/images/web/image8.jpg)
+<ImagePreview src="/images/web/image8.jpg"></ImagePreview>
 
 ## 宝塔面板添加站点
 
 这里我没有买域名，所有我的域名直接就写成我网站的地址
 
-![](/images/web/image9.jpg)
+<ImagePreview src="/images/web/image9.jpg"></ImagePreview>
 
 在浏览器中输入 http://120.27.198.199/ 发现站点创建成功
 
-![](/images/web/image10.jpg)
+<ImagePreview src="/images/web/image10.jpg"></ImagePreview>
 
 ## 上传网站程序安装包到根目录
 
 将 http 文件夹中内容删除，上传自己 build 打包好的项目后放置在 http 文件夹内
 
-![](/images/web/image11.jpg)
+<ImagePreview src="/images/web/image11.jpg"></ImagePreview>
 
 用导入成功后，再次查看网站，此时已经成功
 
-![](/images/web/image12.jpg)
+<ImagePreview src="/images/web/image12.jpg"></ImagePreview>

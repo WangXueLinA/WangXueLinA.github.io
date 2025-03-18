@@ -89,7 +89,7 @@ root.render(
 
 然后我们增加样式的书写，如下界面
 
-![](/images/qiankun/image1.jpg)
+<ImagePreview src="/images/qiankun/image1.jpg"></ImagePreview>
 
 ## 创建子应用
 
@@ -283,7 +283,7 @@ module.exports = {
 
 至此 react 子应用搭建成功！
 
-![](/images/qiankun/image2.jpg)
+<ImagePreview src="/images/qiankun/image2.jpg"></ImagePreview>
 
 ### vue2 应用
 
@@ -361,7 +361,7 @@ module.exports = {
 
 至此 vue2 子应用搭建成功！
 
-![](/images/qiankun/image3.jpg)
+<ImagePreview src="/images/qiankun/image3.jpg"></ImagePreview>
 
 ### vue3 应用
 
@@ -437,11 +437,11 @@ module.exports = {
 
 至此 vue3 子应用搭建成功！
 
-![](/images/qiankun/image4.jpg)
+<ImagePreview src="/images/qiankun/image4.jpg"></ImagePreview>
 
 ## 手写微前端
 
-![](/images/qiankun/image5.jpg)
+<ImagePreview src="/images/qiankun/image5.jpg"></ImagePreview>
 
 [哔哩哔哩网课教程](https://www.bilibili.com/video/BV1H34y117fe/?spm_id_from=333.337.search-card.all.click&vd_source=659147a33d02976d4b12aa69a7733ee1)
 
@@ -500,18 +500,18 @@ const container = document.querySelector(currentApp.container);
 
 实则请求到下面的 html 文件
 
-![](/images/qiankun/image6.jpg)
+<ImagePreview src="/images/qiankun/image6.jpg"></ImagePreview>
 
 这时候就应该将这个 html 文件渲染到我们注册子应用的 container 容器里，然后我们`container.innerHTML = html`将 html 渲染到指定的容器内, 但是这样是无法显示的。
 
-![](/images/qiankun/image7.jpg)
+<ImagePreview src="/images/qiankun/image7.jpg"></ImagePreview>
 
 为什么 html 在节点里已经显示了，但是为啥没有渲染出来？
 
 1. 客户端渲染需要通过执行 javascript 代码来生成内容
 2. 浏览器出于安全考虑，innerHTML 中的 scrpit 标签不会被执行，所以需要手动执行，其实就是要拿到里面 script 标签的 src 指向的路径去执行 js，如`<script src="/js/chunk-vendors.js"></script>`,所以我们要拿到字符串`"/js/chunk-vendors.js"`，然后再拼凑出子应用的所有路径如`http://localhost:8080/js/chunk-vendors.js`，如图，我们看请求的网络加载也是这样的，请求到子应用的本机服务器，然后再进行加载里面的资源
 
-![](/images/qiankun/image8.jpg)
+<ImagePreview src="/images/qiankun/image8.jpg"></ImagePreview>
 
 3. 最后通过 eval 函数或者 new Function 函数执行，如
 
@@ -651,7 +651,7 @@ qiankun 框架为了实现 js 隔离，提供了三种不同场景使用的沙�
 
 优劣势：snapshotSandbox 会污染全局 window，但是可以支持不兼容 Proxy 的浏览器。
 
-![](/images/qiankun/image9.jpg)
+<ImagePreview src="/images/qiankun/image9.jpg"></ImagePreview>
 
 主要的方法 active 和 inactive， active 表示激活该沙箱，并将 window 上的变量记录在 snapshotWindow 上，对原始 window 上的变量进行 snapshot，并将 modifyMap 修改的值赋值到 window 变量上 。inactive 表示注销该沙箱，这时候要对比激活时快照和当前 window 上变量值的不一致，存储在 modifyMap 变量上，下一次该沙箱激活的时候重新赋值给 window 上。
 
@@ -717,7 +717,7 @@ const sandbox = new SnapshotSandbox();
 
 优劣势：不会污染全局 window，支持多个子应用同时加载。
 
-![](/images/qiankun/image10.jpg)
+<ImagePreview src="/images/qiankun/image10.jpg"></ImagePreview>
 
 主要的方法也是 active 和 inactive，Proxy 对 window 进行代理，get 访问的时候，先去 fakeWindow 中查找，没有的话才会从原始 rawWindow 上取值；set 只有在沙箱激活的时候才会进行赋值操作。
 

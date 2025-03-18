@@ -332,7 +332,7 @@ Vue 中使用组件的三大步骤
 - 一个重要的内置关系：`VueComponent.prototype.__proto__ === Vue.prototype`
 - 为什么要有这个关系：让组件实例对象（vc）可以访问到 Vue 原型上的属性、方法。
 
-![](/images/vue2/image3.jpg)
+<ImagePreview src="/images/vue2/image3.jpg"></ImagePreview>
 
 ### 单文件组件
 

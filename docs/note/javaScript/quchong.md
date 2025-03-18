@@ -21,7 +21,7 @@ console.log(setData);
 
 弊端： 无法去重引用类型的数据。比如对象数组。
 
-![](/images/js/image12.jpg)
+<ImagePreview src="/images/js/image12.jpg"></ImagePreview>
 
 ### 双重 for 循环去重(最古老的方法)
 

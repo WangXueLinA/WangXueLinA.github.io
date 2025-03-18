@@ -1,30 +1,30 @@
 [
   {
-    "hash": "5f12dac",
+    "hash": "1d54771",
+    "author": "wxl",
+    "date": "2025-03-18",
+    "message": "增加markdown图片点击放大功能"
+  },
+  {
+    "hash": "19b5bb6",
     "author": "wxl",
     "date": "2025-03-17",
     "message": "增加uni-app文档"
   },
   {
-    "hash": "a0f4c21",
+    "hash": "240076d",
     "author": "wxl",
     "date": "2025-03-17",
     "message": "增加登录鉴权文档"
   },
   {
-    "hash": "a640c16",
+    "hash": "f7ccc78",
     "author": "wxl",
     "date": "2025-03-13",
     "message": "feat: 增加组件说明"
   },
   {
-    "hash": "20cb9ee",
-    "author": "wxl",
-    "date": "2025-03-07",
-    "message": "feat:增加vue3-form组件"
-  },
-  {
-    "hash": "1831f63",
+    "hash": "b5cd9a1",
     "author": "wxl",
     "date": "2025-03-07",
     "message": "feat:增加vue3-form组件"

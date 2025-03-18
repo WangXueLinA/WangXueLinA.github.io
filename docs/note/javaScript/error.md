@@ -17,13 +17,13 @@ js 中常见的错误类型
 
 引用的变量不错在
 
-![](/images/js/image14.jpg)
+<ImagePreview src="/images/js/image14.jpg"></ImagePreview>
 
 ### TypeError
 
 数据类型不正确的错误
 
-![](/images/js/image15.jpg)
+<ImagePreview src="/images/js/image15.jpg"></ImagePreview>
 
 ### RangeError
 
@@ -31,13 +31,13 @@ js 中常见的错误类型
 
 意思就是递归函数有次数限制，超过调用的次数
 
-![](/images/js/image16.jpg)
+<ImagePreview src="/images/js/image16.jpg"></ImagePreview>
 
 ### SyntaxError
 
 语法错误
 
-![](/images/js/image17.jpg)
+<ImagePreview src="/images/js/image17.jpg"></ImagePreview>
 
 ### try catch
 

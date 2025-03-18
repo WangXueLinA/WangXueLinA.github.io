@@ -23,13 +23,13 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
 注册好后,扫码登陆平台,页面向下滚动,找到左边的开发,选择开发管理,右边页面选择开发设置,这里会有一个 AppID,作为绑定开发者工具用(注意不要暴露,使用在后文)
 
-![](/images/uniapp/image1.jpg)
+<ImagePreview src="/images/uniapp/image1.jpg"></ImagePreview>
 
 ## 新建项目
 
 打开 hbuilder 编辑器选择 文件 -> 新建 -> 项目
 
-![](/images/uniapp/image2.jpg)
+<ImagePreview src="/images/uniapp/image2.jpg"></ImagePreview>
 
 这里 uniapp 会提供很多初始化模板,可根据需求选择,此文以默认模板作为演示
 
@@ -39,40 +39,40 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 - 默认不启用 uniCloud 和 git
 - 点击创建
 
-![](/images/uniapp/image3.jpg)
+<ImagePreview src="/images/uniapp/image3.jpg"></ImagePreview>
 
 ### 试运行
 
 可能会出现没有配置微信开发工具情况,此时需要配置微信开发者工具路径
 
-![](/images/uniapp/image4.jpg)
+<ImagePreview src="/images/uniapp/image4.jpg"></ImagePreview>
 
 点击浏览 选择刚才安装微信开发者工具安装路径
 
-![](/images/uniapp/image5.jpg)
+<ImagePreview src="/images/uniapp/image5.jpg"></ImagePreview>
 
 ### 配置微信开发者工具
 
 设置 -> 安全设置 -> 开启服务端口
 
-![](/images/uniapp/image6.jpg)
-![](/images/uniapp/image7.jpg)
+<ImagePreview src="/images/uniapp/image6.jpg"></ImagePreview>
+<ImagePreview src="/images/uniapp/image7.jpg"></ImagePreview>
 
 ### 运行
 
 运行 -> 运行到小程序模拟器 -> 微信开发者工具
 
-![](/images/uniapp/image8.jpg)
+<ImagePreview src="/images/uniapp/image8.jpg"></ImagePreview>
 
 ### 运行成功
 
 微信开发者工具会自动弹出来,可能没登录需要扫码登录微信开发者工具
 
-![](/images/uniapp/image9.jpg)
+<ImagePreview src="/images/uniapp/image9.jpg"></ImagePreview>
 
 ## 项目结构
 
-![](/images/uniapp/image10.jpg)
+<ImagePreview src="/images/uniapp/image10.jpg"></ImagePreview>
 
 | 文件名        | 用途               |
 | ------------- | ------------------ |
@@ -88,7 +88,7 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
 此文主要用于开发微信小程序,其他的配置可以暂时不管,选择微信小程序配置
 
-![](/images/uniapp/image11.jpg)
+<ImagePreview src="/images/uniapp/image11.jpg"></ImagePreview>
 
 | 配置                    | 作用                                    |
 | ----------------------- | --------------------------------------- |
@@ -105,7 +105,7 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
 此代码为伪代码,只为示例作用，方便查看属性配置使用 无法运行,需要自行配置需要的属性
 
-![](/images/uniapp/image12.jpg)
+<ImagePreview src="/images/uniapp/image12.jpg"></ImagePreview>
 
 ### pages 配置
 
@@ -135,7 +135,7 @@ https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 - backgroundTextStyle 下拉 loading 的样式，仅支持 dark / light
 - backgroundColor 设置下拉 loading 的背景颜色
 
-![](/images/uniapp/image20.jpg)
+<ImagePreview src="/images/uniapp/image20.jpg"></ImagePreview>
 
 对应官方配置： https://uniapp.dcloud.net.cn/collocation/pages.html#globalstyle
 
@@ -145,7 +145,7 @@ onReachBottomDistance 这个配置适用于页面快到下面的时候，触发�
 
 记得跟上面的 pages 属性一一对应路径
 
-![](/images/uniapp/image21.jpg)
+<ImagePreview src="/images/uniapp/image21.jpg"></ImagePreview>
 
 对应官方文档：https://uniapp.dcloud.io/collocation/pages.html#tabbar
 
@@ -261,11 +261,11 @@ import { getUserInfo } from '../../api/user.js';
 
 以 uview2.0 为例，uniapp uView2.0 插件市场：https://ext.dcloud.net.cn/plugin?id=1593
 
-![](/images/uniapp/image13.jpg)
+<ImagePreview src="/images/uniapp/image13.jpg"></ImagePreview>
 
 此时 hbuilder 会弹框,选择项目点击确定
 
-![](/images/uniapp/image14.jpg)
+<ImagePreview src="/images/uniapp/image14.jpg"></ImagePreview>
 
 uview 基于 sass 所以先下载 sass
 
@@ -322,17 +322,17 @@ app.$mount();
 
 运行时勾选 运行是否压缩代码 这样会节约很大空间
 
-![](/images/uniapp/image18.jpg)
+<ImagePreview src="/images/uniapp/image18.jpg"></ImagePreview>
 
 ### 上传
 
 uniapp 编译后可以点击微信开发者工具的上传按钮
 
-![](/images/uniapp/image15.jpg)
+<ImagePreview src="/images/uniapp/image15.jpg"></ImagePreview>
 
 打开微信公众平台 选择版本管理 右侧可以看到开发版本 ,如只有一个版本会默认开发版本,如需要发布正式版本点击提交审核就可以,审核周期第一次稍微长一点，后续修改代码就很快
 
-![](/images/uniapp/image16.jpg)
+<ImagePreview src="/images/uniapp/image16.jpg"></ImagePreview>
 
 等待审核后就自动发布成功
 
@@ -342,7 +342,7 @@ uniapp 编译后可以点击微信开发者工具的上传按钮
 
 入口：开发管理->开发设置
 
-![](/images/uniapp/image17.jpg)
+<ImagePreview src="/images/uniapp/image17.jpg"></ImagePreview>
 
 所有相关请求都需要配置进去,包括使用的第三方接口如百度、阿里,否则正式服无法访问
 
@@ -356,7 +356,7 @@ uniapp 编译后可以点击微信开发者工具的上传按钮
 
 按照对应的文档申请所需权限,根据微信文档添加在项目配置内即可
 
-![](/images/uniapp/image19.jpg)
+<ImagePreview src="/images/uniapp/image19.jpg"></ImagePreview>
 
 ### 派发任务
 

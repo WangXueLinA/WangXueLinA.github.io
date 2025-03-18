@@ -47,7 +47,7 @@ const element = {
 React 是基于 vdom 的前端框架，组件 render 产生 vdom，然后渲染器把 vdom 渲染出来。
 state 更新的时候，组件会重新 render，产生新的 vdom，在浏览器平台下，为了减少 dom 的创建，React 会对两次的 render 结果做 diff，尽量复用 dom，提高性能。
 
-![](/images/react/image4.jpg)
+<ImagePreview src="/images/react/image4.jpg"></ImagePreview>
 
 一句话总结虚拟 DOM 就是一个用来描述真实 DOM 的 javaScript 对象
 
@@ -59,11 +59,11 @@ Diff 算法基本步骤
 
 - 树的遍历比较：从根节点开始，递归比较两棵树的节点，直到叶子节点。
 
-![](/images/react/image1.jpg)
+<ImagePreview src="/images/react/image1.jpg"></ImagePreview>
 
 只有删除、创建操作，没有移动操作
 
-![](/images/react/image2.jpg)
+<ImagePreview src="/images/react/image2.jpg"></ImagePreview>
 
 react 发现新树中，R 节点下没有了 A，那么直接删除 A，在 D 节点下创建 A 以及下属节点
 上述操作中，只有删除和创建操作
@@ -72,7 +72,7 @@ react 发现新树中，R 节点下没有了 A，那么直接删除 A，在 D �
 - 节点的属性比较：如果节点类型相同，对比它们的属性是否有变化，如有变化则更新属性。
 - 子节点的比较：递归地对子节点进行上述过程，同时利用“key”属性来优化列表的更新逻辑，确保元素的正确对应和移动。
 
-![](/images/react/image3.jpg)
+<ImagePreview src="/images/react/image3.jpg"></ImagePreview>
 
 通过 key 可以准确地发现新旧集合中的节点都是相同的节点，因此无需进行节点删除和创建，只需要将旧集合中节点的位置进行移动
 
@@ -84,7 +84,7 @@ Fiber 把渲染更新过程拆分成多个子任务，每次只做一小部分�
 
 React 16 以前递归对比虚拟 DOM 树的方案有一个明显的问题：阻塞主线程。旧的 React 架构中，Diff 算法和组件更新都是同步执行的。这意味着一旦更新开始，React 会一直占用主线程直到整个更新过程完成。在这期间，浏览器无法响应用户操作，导致界面卡顿，尤其是在执行大规模的 DOM 更新时。
 
-![](/images/react/image5.jpg)
+<ImagePreview src="/images/react/image5.jpg"></ImagePreview>
 
 React 16 为了优化性能，会先把虚拟 DOM 树转换成 Fiber，也就是从树转换成链表，再基于 Fiber 进行渲染。这个过程分成两个阶段：
 
@@ -97,13 +97,13 @@ Fiber 架构通过将渲染工作划分为小的、可管理的单元，使得 R
 
 第一次渲染不需要 Diff，直接将虚拟 Dom 转为 Fiber。
 
-![](/images/react/image7.jpg)
+<ImagePreview src="/images/react/image7.jpg"></ImagePreview>
 
 #### 更新 fiber
 
 再次渲染的时候，就需要更新 Fiber 了。这一步的关键是：**<span style='color: red'>尽可能复用</span>**，尽可能复用旧的 Fiber(这里举例的旧 fiber 是我们上图第一次创建的 fiber)，来生成本次的 Fiber。
 
-![](/images/react/image8.jpg)
+<ImagePreview src="/images/react/image8.jpg"></ImagePreview>
 
 具体的实现方法为两次遍历
 
@@ -232,7 +232,7 @@ React 事件：父元素事件监听！
 - 所以会先执行原生事件，然后处理 React 事件
 - 最后真正执行 document 上挂载的事件
 
-![](/images/react/image9.png)
+<ImagePreview src="/images/react/image9.png"></ImagePreview>
 
 所以想要阻止不同时间段的冒泡行为，对应使用不同的方法，对应如下：
 
@@ -251,11 +251,11 @@ React 事件机制总结如下：
 
 老生命周期
 
-![](/images/react/image10.jpg)
+<ImagePreview src="/images/react/image10.jpg"></ImagePreview>
 
 新生命周期
 
-![](/images/react/image11.jpg)
+<ImagePreview src="/images/react/image11.jpg"></ImagePreview>
 
 ## 引入 css 的方式
 

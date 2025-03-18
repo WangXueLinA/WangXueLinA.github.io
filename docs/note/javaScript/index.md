@@ -65,7 +65,7 @@ script 标签中如果没有 defer 或 async 属性，浏览器会立即加载�
 它不会等待后续加载的文档元素，读取到就会开始加载和执行，这样
 就阻塞了后续文档的加载
 
-![](/images/js/image1.png)
+<ImagePreview src="/images/js/image1.png"></ImagePreview>
 
 其中蓝色代表 js 脚本网络加载时间，红色代表 js 脚本执行时间，绿
 色代表 html 解析。

@@ -14,7 +14,7 @@ TypeScript 是 JavaScript 的类型的超集，支持 ES6 语法，支持面向�
 
 超集，不得不说另外一个概念，子集，怎么理解这两个呢，举个例子，如果一个集合 A 里面的的所有元素集合 B 里面都存在，那么我们可以理解集合 B 是集合 A 的超集，集合 A 为集合 B 的子集
 
-![](/images/ts/image.png)
+<ImagePreview src="/images/ts/image.png"></ImagePreview>
 
 其实是一种静态类型检查的语言，提供了类型注解，在代码编译阶段就可以检查出数据类型的错误
 
@@ -110,7 +110,7 @@ let tom: Person = {
 
 更多的区别如下图所示：
 
-![](/images/ts/image1.png)
+<ImagePreview src="/images/ts/image1.png"></ImagePreview>
 
 <!-- # 数据类型 -->
 
@@ -439,7 +439,7 @@ let score: unknown = 87.5;
 let num = Math.round(score); //error
 ```
 
-![](/images/ts/image2.png)
+<ImagePreview src="/images/ts/image2.png"></ImagePreview>
 
 那如何使 unknown 类型能正常使用呢
 让 TypeScript 编译器"看到"并且"相信"你的操作是合法安全的。
@@ -660,7 +660,7 @@ const getUserName = (user: User) => user.name
 
 这些属性并不一定全部实现，上述传入的对象必须拥有 name 和 age 属性，否则 TypeScript 在编译阶段会报错，如下图：
 
-![](/images/ts/image3.png)
+<ImagePreview src="/images/ts/image3.png"></ImagePreview>
 
 ### 可选属性
 
@@ -689,7 +689,7 @@ interface User {
 
 当我们修改属性的时候，就会出现警告，如下所示：
 
-![](/images/ts/image4.png)
+<ImagePreview src="/images/ts/image4.png"></ImagePreview>
 
 ### 函数
 
@@ -739,7 +739,7 @@ let user: User ={
 
 ### 继承
 
-![](/images/ts/image5.png)
+<ImagePreview src="/images/ts/image5.png"></ImagePreview>
 
 也可以继承多个，父类通过逗号隔开，如下：
 
@@ -860,21 +860,21 @@ class StringPrinter extends PrinterClass {
 
 只能够在该类的内部进行访问，实例对象并不能够访问
 
-![](/images/ts/image6.png)
+<ImagePreview src="/images/ts/image6.png"></ImagePreview>
 
 并且继承该类的子类并不能访问，如下图所示：
 
-![](/images/ts/image7.png)
+<ImagePreview src="/images/ts/image7.png"></ImagePreview>
 
 ### 受保护修饰符
 
 跟私有修饰符很相似，实例对象同样不能访问受保护的属性，如下：
 
-![](/images/ts/image8.png)
+<ImagePreview src="/images/ts/image8.png"></ImagePreview>
 
 有一点不同的是 protected 成员在子类中仍然可以访问
 
-![](/images/ts/image9.png)
+<ImagePreview src="/images/ts/image9.png"></ImagePreview>
 
 除了上述修饰符之外，还有只读**修饰符**
 
@@ -882,7 +882,7 @@ class StringPrinter extends PrinterClass {
 
 通过 readonly 关键字进行声明，只读属性必须在声明时或构造函数里被初始化，如下：
 
-![](/images/ts/image10.png)
+<ImagePreview src="/images/ts/image10.png"></ImagePreview>
 
 除了实例属性之外，同样存在静态属性
 
@@ -970,9 +970,9 @@ Props 的实例就是 defaultProps 的初始值，这就是 class 作为接口�
 
 泛型允许我们在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型在 Typescript 中，定义函数，接口或者类的时候，不预先定义好具体的类型，而在使用的时候在指定类型的一种特性
 
-![](/images/ts/image11.png)
+<ImagePreview src="/images/ts/image11.png"></ImagePreview>
 
-![](/images/ts/image12.png)
+<ImagePreview src="/images/ts/image12.png"></ImagePreview>
 
 假设我们用一个函数，它可接受一个 number 参数并返回一个 number 参数，如下写法：
 
@@ -1072,7 +1072,7 @@ class Stack<T> {
 
 如果上述只能传递 string 和 number 类型，这时候就可以使用 `<T extends xx>` 的方式猜实现**约束泛型**，如下所示：
 
-![](/images/ts/image13.png)
+<ImagePreview src="/images/ts/image13.png"></ImagePreview>
 
 除了上述的形式，泛型更高级的使用如下：
 
@@ -1094,7 +1094,7 @@ return obj[key] // ok
 
 使用如下图所示：
 
-![](/images/ts/image14.png)
+<ImagePreview src="/images/ts/image14.png"></ImagePreview>
 
 ### 多类型约束
 
@@ -1201,7 +1201,7 @@ function formatCommandline(command: string[] | string) {
 
 通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。类型断言好比其他语言里的类型转换，但是不进行特殊的数据检查和解构。它没有运行时的影响，只是在编译阶段起作用。
 
-![](/images/ts/image15.png)
+<ImagePreview src="/images/ts/image15.png"></ImagePreview>
 
 这时候我们就可以利用断言来明确指定的类型
 
@@ -1214,13 +1214,13 @@ const greaterThan2: number = arrayNumber.find(num => num > 2) as number;
 
 在上下文中当类型检查器无法断定类型时，一个新的后缀表达式操作符 ! 可以用于断言操作对象是非 null 和非 undefined 类型。具体而言，x! 将从 x 值域中排除 null 和 undefined 。
 
-![](/images/ts/image16.png)
+<ImagePreview src="/images/ts/image16.png"></ImagePreview>
 
 ### !（确定赋值断言）
 
 允许在实例属性和变量声明后面放置一个 ! 号，从而告诉 TypeScript 该属性会被明确地赋值。
 
-![](/images/ts/image17.png)
+<ImagePreview src="/images/ts/image17.png"></ImagePreview>
 
 这时候我们就可以用！来进行断言
 
@@ -1384,7 +1384,7 @@ in 用于取联合类型的值。主要用于数组和对象的构造。
 
 但切记不要用于 interface，否则会出错
 
-![](/images/ts/image18.png)
+<ImagePreview src="/images/ts/image18.png"></ImagePreview>
 
 通过 in 关键字做类型的映射，遍历已有接口的 key 或者是遍历联合类型，如下例子：
 
@@ -1528,7 +1528,7 @@ const user: Required<IUser> = {
 };
 ```
 
-![](/images/ts/image22.jpg)
+<ImagePreview src="/images/ts/image22.jpg"></ImagePreview>
 
 ### Partial（全转可选）
 
@@ -1553,7 +1553,7 @@ let userRd: Readonly<IUser> = { name: '12345' };
 userRd.name = 'xioahong'; // 报错
 ```
 
-![](/images/ts/image23.jpg)
+<ImagePreview src="/images/ts/image23.jpg"></ImagePreview>
 
 ### Record (key=>value)
 
@@ -1574,7 +1574,7 @@ Record<Keys, Type>;
 type Api = Record<'get' | 'post', { url: string, type: string }>;
 ```
 
-![](/images/ts/image24.jpg)
+<ImagePreview src="/images/ts/image24.jpg"></ImagePreview>
 
 ### inter (推导泛型参数)
 
@@ -1790,7 +1790,7 @@ xmz.say = function () {
 
 输出如下图所示：
 
-![](/images/ts/image20.png)
+<ImagePreview src="/images/ts/image20.png"></ImagePreview>
 
 ### 参数装饰
 
@@ -1818,7 +1818,7 @@ emp.greet('hello');
 
 输入如下图：
 
-![](/images/ts/image19.png)
+<ImagePreview src="/images/ts/image19.png"></ImagePreview>
 
 ### 访问器装饰
 
@@ -1915,7 +1915,7 @@ TypeScript 与 ECMAScript 2015 一样，任何包含顶级 import 或者 export 
 
 然后在另一个文件同样声明一个变量 a，这时候会出现错误信息
 
-![](/images/ts/image21.png)
+<ImagePreview src="/images/ts/image21.png"></ImagePreview>
 
 提示重复声明 a 变量，但是所处的空间是全局的
 

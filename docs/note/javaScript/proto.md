@@ -39,7 +39,7 @@ console.log(person2.name); // xuelin
 
 用一张图表示构造函数和实例原型之间的关系
 
-![](/images/js/image2.jpg)
+<ImagePreview src="/images/js/image2.jpg"></ImagePreview>
 
 ### \_\__proto_\_\_
 
@@ -53,7 +53,7 @@ console.log(person.__proto__ === Person.prototype); // true
 
 所以此时的关系图如图
 
-![](/images/js/image3.jpg)
+<ImagePreview src="/images/js/image3.jpg"></ImagePreview>
 
 ### constructor
 
@@ -66,7 +66,7 @@ console.log(Person === Person.prototype.constructor); // true
 
 所以此时的关系图如图
 
-![](/images/js/image4.jpg)
+<ImagePreview src="/images/js/image4.jpg"></ImagePreview>
 
 综上我们已经得出：
 
@@ -97,7 +97,7 @@ person.constructor === Person.prototype.constructor;
 
 所以此时的关系图如图
 
-![](/images/js/image7.jpg)
+<ImagePreview src="/images/js/image7.jpg"></ImagePreview>
 
 ### 实例与原型
 
@@ -133,7 +133,7 @@ console.log(obj.name); // xuelin
 
 其实原型对象就是通过 Object 构造函数生成的，结合之前所讲，实例的 **proto** 指向构造函数的 prototype ，所以我们的关系图：
 
-![](/images/js/image5.jpg)
+<ImagePreview src="/images/js/image5.jpg"></ImagePreview>
 
 ### 原型链
 
@@ -147,4 +147,4 @@ console.log(Object.prototype.__proto__ === null); // true
 
 所以查找属性的时候查到 Object.prototype 就可以停止查找了。
 
-![](/images/js/image6.jpg)
+<ImagePreview src="/images/js/image6.jpg"></ImagePreview>

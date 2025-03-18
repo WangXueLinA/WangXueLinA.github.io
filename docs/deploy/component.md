@@ -54,7 +54,7 @@ npx create-dumi
 
 显示如下图说明创建成功
 
-![](/images/component/image1.jpg)
+<ImagePreview src="/images/component/image1.jpg"></ImagePreview>
 
 ## 介绍 lerna
 
@@ -97,7 +97,7 @@ lerna init
 
 Lerna 期望你的包都放在 packages/ 目录下。每个子目录被视为一个独立的 NPM 包，拥有自己的 package.json 文件。
 
-![](/images/component/image2.jpg)
+<ImagePreview src="/images/component/image2.jpg"></ImagePreview>
 
 ## 初始化 vite
 
@@ -136,13 +136,13 @@ npm create vite@latest template
 
 此时我们看到我们的项目多出来 temmplate 文件夹，证明成功
 
-![](/images/component/image3.jpg)
+<ImagePreview src="/images/component/image3.jpg"></ImagePreview>
 
 ## template 模版配置
 
 为了执行自定义创建组件命令，我们可以在 template 文件夹中配置一些模版语法，执行命令时候，会根据配置的语法进行替换
 
-![](/images/component/image4.jpg)
+<ImagePreview src="/images/component/image4.jpg"></ImagePreview>
 
 ## 编写定制化 create 脚本
 
@@ -154,7 +154,7 @@ npm create vite@latest template
 
 说明模版组件生成成功
 
-![](/images/component/image5.jpg)
+<ImagePreview src="/images/component/image5.jpg"></ImagePreview>
 
 ## 注册 npm 账号
 
@@ -202,22 +202,22 @@ npm adduser
 
 这里会让你填写用户名等等，如果之前设置过即可跳过此步。这里的密码是隐藏的，你输入时候他就显示空白，你输入密码正确就行，然后回车
 
-![](/images/component/image6.jpg)
+<ImagePreview src="/images/component/image6.jpg"></ImagePreview>
 
 ## 添加 npm 中组织
 
 因为我们创建的组件是私有的，是带前缀`@`符的，所以需要先在 npm 中添加组织，否则会报错，或者添加不进去。这个`@`私包使您可以创建与其他用户或组织创建的包同名的包，而不会发生冲突。因为我们组件为`@xuelin`，所以我们需要在 npm 官网的组织中添加`xuelin`。
 
-![](/images/component/image7.jpg)
+<ImagePreview src="/images/component/image7.jpg"></ImagePreview>
 
-![](/images/component/image8.jpg)
+<ImagePreview src="/images/component/image8.jpg"></ImagePreview>
 
 ## 发布 npm 包
 
 执行你脚本的发布命令
 
-![](/images/component/image9.jpg)
+<ImagePreview src="/images/component/image9.jpg"></ImagePreview>
 
 然后就可以在 npm 网中可以看到你的包发布成功了
 
-![](/images/component/image10.jpg)
+<ImagePreview src="/images/component/image10.jpg"></ImagePreview>

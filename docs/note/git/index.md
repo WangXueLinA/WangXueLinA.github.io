@@ -4,7 +4,7 @@ title: Git
 
 # Git
 
-![](/images/git/image.png)
+<ImagePreview src="/images/git/image.png"></ImagePreview>
 
 ## git fetch
 
@@ -108,7 +108,7 @@ pop，drop 同理。
 
 以 GitHub 中的项目为例，找到项目复制出克隆地址
 
-![](/images/git/image18.jpg)
+<ImagePreview src="/images/git/image18.jpg"></ImagePreview>
 
 1. 在终端输入 `git clone https://xxx(复制的地址)`
 
@@ -116,19 +116,19 @@ pop，drop 同理。
 
 3. 创建本地仓库分支：`git checkout -b 分支名 `来进行修改代码，或者在 vscode 中来进行创建分支
 
-   ![](/images/git/image20.jpg)
+   <ImagePreview src="/images/git/image20.jpg"></ImagePreview>
 
 4. 修完完代码， `git add.` 提交暂存区，或者在 vscode 中来进行添加
 
-   ![](/images/git/image21.jpg)
+   <ImagePreview src="/images/git/image21.jpg"></ImagePreview>
 
 5. `git commit -m “注释” ` 将暂存区文件提交到版本库, 如果有 eslint 校验失败项目中又没有强制规定，可`git commit --no-verify -m "commit" ` 就可以跳过代码检查，可以在 vscode 中这样提交
 
-   ![](/images/git/image22.jpg)
+   <ImagePreview src="/images/git/image22.jpg"></ImagePreview>
 
 6. `git push` 提交代码
 
-   ![](/images/git/image19.jpg)
+   <ImagePreview src="/images/git/image19.jpg"></ImagePreview>
 
 7. 此时你可以看到控制台会有`git push --set-upstream origin xxx分支`意思是：当前分支没有与远程分支关联，导致了提交代码失败。
 8. 此时有两种关联方式
@@ -144,11 +144,11 @@ commit 合并流程：在本地提了好多 commit，最终合并成一个 commi
 
 `git log` 查看一下 commit
 
-![](/images/git/image23.jpg)
+<ImagePreview src="/images/git/image23.jpg"></ImagePreview>
 
 或者执行 `git log --oneline`查看简介版本
 
-![](/images/git/image24.jpg)
+<ImagePreview src="/images/git/image24.jpg"></ImagePreview>
 
 键盘 `q` 退出 `git log`
 
@@ -156,7 +156,7 @@ commit 合并流程：在本地提了好多 commit，最终合并成一个 commi
 
 要选择一个 commitID , 比如我想要合并最近的三条 commit 为一个 commit，那我就得复制第四条的 commit，那就是 aa96ade，执行`git rebase -i aa96ade`
 
-![](/images/git/image26.jpg)
+<ImagePreview src="/images/git/image26.jpg"></ImagePreview>
 
 按键盘 `i`进行编辑页面 ，将不要的 commit 用 `s`进行修改掉
 
@@ -164,15 +164,15 @@ commit 合并流程：在本地提了好多 commit，最终合并成一个 commi
 
 修改成如下所示: 意思就是把下面 2 个 commit 提交 和 第一个 commit 合并在一起
 
-![](/images/git/image25.jpg)
+<ImagePreview src="/images/git/image25.jpg"></ImagePreview>
 
 然后按 `esc` 退出，然后按`:wq` 回车进行保存，得到如下界面
 
-![](/images/git/image27.jpg)
+<ImagePreview src="/images/git/image27.jpg"></ImagePreview>
 
 按键盘 `i` 进行编辑页面，将不要的 commit 用`#`进行注释掉
 
-![](/images/git/image29.jpg)
+<ImagePreview src="/images/git/image29.jpg"></ImagePreview>
 
 然后 `esc`退出，然后按`:wq` 回车进行保存
 
@@ -180,7 +180,7 @@ commit 合并流程：在本地提了好多 commit，最终合并成一个 commi
 
 再次输入 `git log` 验证 commit 记录时候是我们想要的两条
 
-![](/images/git/image30.jpg)
+<ImagePreview src="/images/git/image30.jpg"></ImagePreview>
 
 ### 推入远程仓库
 
@@ -202,13 +202,13 @@ commit 合并流程：在本地提了好多 commit，最终合并成一个 commi
 
 ### 例子
 
-![](/images/git/image28.jpg)
+<ImagePreview src="/images/git/image28.jpg"></ImagePreview>
 
 ### 匹配规则
 
 可以看到我们排除掉的目录都是以置灰的状态展示
 
-![](/images/git/image31.jpg)
+<ImagePreview src="/images/git/image31.jpg"></ImagePreview>
 
 | 表达式        | 说明                                                                         |
 | ------------- | ---------------------------------------------------------------------------- |

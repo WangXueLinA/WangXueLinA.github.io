@@ -10,11 +10,11 @@ title: Vite
 
 传统的打包工具如 Webpack 通常会在启动开发服务器之前解析所有依赖并进行打包构建。这意味着 Dev Server 必须等待所有模块构建完成，即使在开发过程中只修改了一个子模块，整个 bundle 文件也会重新打包，导致启动时间随着项目规模增大而变长
 
-![](/images/vite/image1.jpg)
+<ImagePreview src="/images/vite/image1.jpg"></ImagePreview>
 
 Vite 充分利用了浏览器对 ESM 的原生支持。当代码执行到模块加载时，浏览器会动态地下载导入的模块，而不需要等待整个项目的构建完成。这种动态加载的方式实现了即时编译，使得灰色部分（即暂时未用到的路由）不会参与构建过程。因此，随着项目规模的增大和路由的增加，Vite 的构建速度不会受到影响。
 
-![](/images/vite/image2.jpg)
+<ImagePreview src="/images/vite/image2.jpg"></ImagePreview>
 
 它是基于浏览器的 type 为 module 的 script 可以直接下载 es module 模块实现的。
 
@@ -87,11 +87,11 @@ vite 会用 esbuild（底层是由 Go 语言编写的， 运行时、编译速�
 
 **Webpack 启动**
 
-![](/images/webpack/image59.jpg)
+<ImagePreview src="/images/webpack/image59.jpg"></ImagePreview>
 
 **Vite 启动**
 
-![](/images/webpack/image60.jpg)
+<ImagePreview src="/images/webpack/image60.jpg"></ImagePreview>
 
 ### 对 ES Modules 的支持
 
