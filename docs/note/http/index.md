@@ -28,7 +28,7 @@ title: Http
 
 从在浏览器地址栏输入 URL 到页面最终显示，整个过程大致可以分为以下几个步骤：
 
-### **URL 解析与检查缓存：**
+### URL 解析与检查缓存
 
 <ImagePreview src="/images/http/image4.jpg"></ImagePreview>
 
@@ -38,37 +38,37 @@ title: Http
 
 - 浏览器检查本地缓存以及浏览器缓存中是否有该 URL 对应的页面资源。如果存在且未过期，浏览器可能直接使用缓存中的资源，跳过后续的网络请求步骤。
 
-### **DNS 解析：**
+### DNS 解析
 
 <ImagePreview src="/images/http/image7.jpg"></ImagePreview>
 
 如果缓存中没有所需资源或资源已过期，浏览器会通过 DNS（域名系统）将 URL 中的域名解析为服务器的 IP 地址。这一过程可能包括查询操作系统缓存、本地 DNS 缓存、路由器缓存以及向 DNS 服务器发送查询请求。
 
-### **建立 TCP 连接：**
+### 建立 TCP 连接
 
 <ImagePreview src="/images/http/image5.jpg"></ImagePreview>
 
 解析到 IP 地址后，浏览器使用 TCP 协议与服务器建立连接。这通常涉及 TCP 三次握手过程，以确保数据传输的可靠性和顺序。
 
-### **发送 HTTP/HTTPS 请求：**
+### 发送 HTTP/HTTPS 请求
 
 建立连接后，浏览器向服务器发送 HTTP 或 HTTPS 请求。请求中包含 URL、请求方法（通常是 GET）、浏览器信息、接受的数据类型等头部信息。
 
 <ImagePreview src="/images/http/image11.jpg"></ImagePreview>
 
-### **服务器处理请求：**
+### 服务器处理请求
 
 服务器接收到请求后，根据请求内容处理请求。这可能涉及运行后端代码、查询数据库、生成动态内容等操作。
 
 <ImagePreview src="/images/http/image10.jpg"></ImagePreview>
 
-### **服务器返回响应：**
+### 服务器返回响应
 
 处理完成后，服务器将响应数据（包括状态码、响应头和响应体）发送回浏览器。响应体可能包含 HTML、CSS、JavaScript 文件以及图片等静态资源。
 
 <ImagePreview src="/images/http/image12.jpg"></ImagePreview>
 
-### **渲染页面：**
+### 渲染页面
 
 - 浏览器接收到响应后开始解析 HTML，构建 DOM（文档对象模型）树。同时，解析 CSS 构建 CSSOM（CSS 对象模型）树，并将两者合并生成渲染树。
 - 浏览器计算渲染树的布局，确定每个节点的几何位置。
@@ -76,18 +76,18 @@ title: Http
 
 <ImagePreview src="/images/http/image8.jpg"></ImagePreview>
 
-### **加载额外资源：**
+### 加载额外资源
 
 - 在解析 HTML 过程中，浏览器遇到如 JS、CSS、图片等外部资源链接时，会发送额外的 HTTP 请求获取这些资源。
 - JavaScript 可能会修改 DOM 和 CSSOM，导致重新布局和绘制，这一过程称为重绘或回流。
 
-### **执行 JavaScript：**
+### 执行 JavaScript
 
 页面上的 JavaScript 会被下载并执行，可能用于实现交互功能、异步数据加载等。
 
 <ImagePreview src="/images/http/image9.jpg"></ImagePreview>
 
-### **页面加载完成：**
+### 页面加载完成
 
 - 完成加载：当初始 HTML 文档及所有引用的资源（如图片、脚本）都已加载完毕，浏览器触发 DOMContentLoaded 事件（DOM 解析完成）和 load 事件（页面完全加载完成）。
 - 连接关闭：当浏览器不再需要与服务器通信时，TCP 连接通过“四次挥手”过程优雅关闭。
@@ -186,7 +186,7 @@ HTTPS：越来越多的 Web 技术和 API 要求或推荐使用 HTTPS，例如�
 特点：
 
 - 生命周期：数据仅在当前浏览器会话期间有效，标签页或窗口关闭后数据消失。
-- 容量限制：与 Session Storage 相似，提供较大存储空间，一般为 5MB 至 10MB。
+- 容量限制：与 localStorage 相似，提供较大存储空间，一般为 5MB 至 10MB。
 - 安全性：因为数据不与服务器交互，且不跨窗口共享，所以在一定程度上减少了数据泄露的风险。
 - 作用域：仅限于同一浏览器窗口或标签页，不同的窗口或标签页间不共享。
 

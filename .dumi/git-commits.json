@@ -1,6 +1,12 @@
 [
   {
-    "hash": "0c72023",
+    "hash": "7f151b2",
+    "author": "wxl",
+    "date": "2025-03-25",
+    "message": "项目部署到 GitHub Pages上"
+  },
+  {
+    "hash": "68a17ac",
     "author": "wxl",
     "date": "2025-03-19",
     "message": "增加markdown功能性组件"
@@ -292,11 +298,5 @@
     "author": "wxl",
     "date": "2024-06-24",
     "message": "chore(release): publish"
-  },
-  {
-    "hash": "09f3eb8",
-    "author": "wxl",
-    "date": "2024-06-24",
-    "message": "feat: 上传git"
   }
 ]

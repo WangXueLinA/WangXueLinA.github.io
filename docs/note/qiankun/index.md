@@ -902,4 +902,111 @@ const data = JSON.parse(localStorage.getItem('shared-data'));
 localStorage.setItem('shared-data', JSON.stringify({ key: 'new-value' }));
 ```
 
+## 生命周期
+
+### 全局生命周期钩子
+
+主应用可通过 registerMicroApps 的第二个参数或 addGlobalUncaughtErrorHandler 设置全局钩子
+
+- beforeLoad：子应用加载前触发（可用于权限校验）。
+- beforeMount：子应用挂载前触发。
+- afterMount：子应用挂载完成后触发。
+- beforeUnmount：子应用卸载前触发。
+- afterUnmount：子应用卸载后触发。
+- 错误监听：通过 addGlobalUncaughtErrorHandler 捕获全局异常。
+
+### 子应用生命周期
+
+#### bootstrap
+
+触发时机：子应用首次加载时执行一次，用于初始化全局资源（如第三方库、公共配置）。
+
+<Alert>
+
+- 避免在此阶段进行与 DOM 相关的操作。
+
+- 通常用于执行一次性的初始化任务。
+
+</Alert>
+
+```js
+export async function bootstrap(props) {
+  console.log('子应用启动', props);
+}
+```
+
+#### mount
+
+触发时机：子应用挂载到容器时触发，每次激活都会调用。
+
+核心任务：
+
+- 渲染子应用 UI（如调用 ReactDOM.render() 或 Vue.mount()）
+- 初始化事件监听、定时器等。
+- 接收主应用传递的 props（如全局状态、通信方法）。
+
+```js
+
+export async function mount(props) {
+  ReactDOM.render(<App />, props.container.querySelector('#root'));
+  props.onGlobalStateChange((state) => { ... });
+}
+```
+
+#### unmount
+
+触发时机：子应用卸载时触发（如路由切换、关闭子应用）。
+
+核心任务：
+
+- 销毁 UI 实例（如 ReactDOM.unmountComponentAtNode()）
+- 清理事件监听、定时器、全局状态等，避免内存泄漏。
+
+```js
+export async function unmount(props) {
+  ReactDOM.unmountComponentAtNode(props.container.querySelector('#root'));
+}
+```
+
+## 常见问题
+
+### qiankun 的拦截会导致 suspense 一直没收到返回信息
+
+#### 问题原因
+
+- Qiankun 的拦截机制
+
+Qiankun 会劫持 import() 等动态加载方法，以实现资源隔离和沙箱环境。这一过程可能修改或延迟模块加载，导致返回的 Promise 状态未按预期更新。
+
+- 执行时机冲突
+
+主应用初始化时，Qiankun 的拦截逻辑可能已介入。若此时直接使用 React.lazy(() => import(...))，动态加载的 Promise 可能在沙箱未完全就绪时被处理，导致 Suspense 无法感知到加载完成。
+
+#### 解决方案
+
+通过 将动态加载延迟到下一个事件循环，可绕过 Qiankun 的拦截时机，确保加载在沙箱就绪后执行：
+
+```javascript
+const LazyComponent = React.lazy(() =>
+  Promise.resolve().then(() => import('./component')),
+);
+```
+
+或使用 setTimeout：
+
+```javascript
+const LazyComponent = React.lazy(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(import('./component')), 0);
+    }),
+);
+```
+
+#### 原理分析
+
+- 延迟执行绕过拦截：Promise.resolve().then() 或 setTimeout 会将 import() 推入下一个事件循环。此时 Qiankun 的主应用初始化及拦截逻辑可能已完成，动态加载在正确的上下文中执行。
+
+- 沙箱环境就绪：延迟确保子应用沙箱已初始化，动态加载的资源能被正确隔离和处理，避免 Promise 卡死。
+
 <BackTop></BackTop>

@@ -36,7 +36,7 @@ export default defineConfig({
     footer: false,
     logo: '/logo.png',
     nav: [
-      { title: '组件', link: '/components/aes-des-secret' },
+      { title: '组件', link: '/components/react-dev-inspector' },
       {
         title: '笔记',
         children: noteChildren,
@@ -47,10 +47,30 @@ export default defineConfig({
     sidebar: {
       '/components': [
         {
-          children: list.map((item) => ({
-            title: `@xuelin/${item}`,
-            link: `/components/${item}`,
-          })),
+          title: 'react',
+          children: list
+            .filter((item) => item.includes('react'))
+            .map((item) => ({
+              title: `@xuelin/${item}`,
+              link: `/components/${item}`,
+            })),
+        },
+        {
+          title: 'vue',
+          children: list
+            .filter((item) => item.includes('vue'))
+            .map((item) => ({
+              title: `@xuelin/${item}`,
+              link: `/components/${item}`,
+            })),
+        },
+        {
+          children: list
+            .filter((item) => !item.includes('react') && !item.includes('vue'))
+            .map((item) => ({
+              title: `@xuelin/${item}`,
+              link: `/components/${item}`,
+            })),
         },
       ],
     },

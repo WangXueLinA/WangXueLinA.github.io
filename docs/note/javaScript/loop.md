@@ -101,7 +101,7 @@ Start → End → Promise 3 → Promise 4 → Timeout 1 → Promise 1 → Timeou
 
 1. js 遇到异步并不会一直等待返回结果，而是将这个事件挂起，继续执行执行栈中的任务，当一个异步事件返回结果后，js 将这个事件加入与当前执行栈不同的另外一个队列中，我们称为事件队列，被放入事件队列不会立刻执行回调，而是等待当前执行栈中的所有任务都执行完毕之后，主线程处于闲置状态时，主线程会查看事件队列中是否有任务，如果有，那么主线程会从中取出排在第一位的事件，并把事件对应的回调放在执行栈中，然后执行其中的同步代码，如此反复，就成了一个无限循环
 2. 宏任务：script(整体代码), setTimeout, setInterval, requestAnimationFrame, I/O, UI rendering
-3. 微任务：promise 的回调如 then 和 catch，process.nextTick, Object.observe, MutationObserver
+3. 微任务：promise 的回调如 then 和 catch，async/await，process.nextTick, Object.observe, MutationObserver
 4. 第一次事件循环中，JavaScript 引擎会把整个 script 代码当成一个宏任务执行，执行完成之后，再检测本次循环中是否寻在微任务，存在的话就依次从微任务的任务队列中读取执行完所有的微任务，再读取宏任务的任务队列中的任务执行，再执行所有的微任务，如此循环。JS 的执行顺序就是每次事件循环中的宏任务-微任务。
 
 <BackTop></BackTop>

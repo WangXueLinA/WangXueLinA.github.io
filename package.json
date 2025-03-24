@@ -3,7 +3,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/WangXueLinA/dumi_document"
+    "url": "https://github.com/WangXueLinA/WangXueLinA.github.io"
   },
   "workspaces": [
     "packages/*"
@@ -12,7 +12,7 @@
     "build": "node scripts/build.js",
     "build:watch": "father dev",
     "create": "node scripts/create.js",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d docs-dist -r https://github.com/WangXueLinA/WangXueLinA.github.io.git -b gh-pages",
     "docs:build": "dumi build",
     "doctor": "father doctor",
     "gitInfo": "node scripts/gitInfo.js",
@@ -59,7 +59,7 @@
     "react-router-dom": "^6.2.2",
     "react-viewer": "^3.2.2",
     "redux": "^4.0.5",
-    "vue": "^3.3.4",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.2.0",
     "whatwg-fetch": "^3.6.2"
   },
@@ -84,7 +84,7 @@
     "eslint": "^7.x",
     "father": "^4.1.0",
     "fs-extra": "^10.0.0",
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
     "glob": "^7.2.0",
     "husky": "^8.0.1",
     "inquirer": "^8.2.0",
