@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+/.svn
+/.idea
+*.log
+tests
+.cache
+lib
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production
+docs-dist
+.history
+.vscode

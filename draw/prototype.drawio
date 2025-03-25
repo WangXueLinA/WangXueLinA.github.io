@@ -1,0 +1,127 @@
+<mxfile host="app.diagrams.net" modified="2024-07-17T16:16:21.154Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="Xu1ACt4dCeUIsfl9x28D" version="24.6.4" type="device">
+  <diagram id="07fea595-8f29-1299-0266-81d95cde20df" name="Page-1">
+    <mxGraphModel dx="1661" dy="688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1390" pageHeight="980" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-287" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="805" y="290" as="sourcePoint" />
+            <mxPoint x="925" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-256" value="Person" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="685" y="250" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-257" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#133db9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="985" y="380" as="sourcePoint" />
+            <mxPoint x="985" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-258" value="Person.prototype" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="935" y="250" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-259" value="实例原型" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="950" y="310" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-260" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LRawqXGUnp7VEbSEM_Xv-261" target="LRawqXGUnp7VEbSEM_Xv-264">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="370" />
+              <mxPoint x="710" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-261" value="构造函数" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="695" y="310" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-262" value="prototype" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="825" y="230" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-263" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.875;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;curved=1;" edge="1" parent="1" source="LRawqXGUnp7VEbSEM_Xv-264" target="LRawqXGUnp7VEbSEM_Xv-259">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-264" value="person" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="670" y="420" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-265" value="实例对象" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="705" y="500" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-266" value="new" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="660" y="370" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-267" value="__proto__" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="825" y="414" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-268" value="constructor" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="820" y="295.37" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-270" value="Object" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="675" y="565.32" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-271" value="构造函数" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="695" y="625.32" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-272" value="实例原型" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="950" y="625.32" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-278" value="__proto__" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#1714d7;" vertex="1" parent="1">
+          <mxGeometry x="995" y="450" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-279" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#133db9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="984.6300000000001" y="650" as="sourcePoint" />
+            <mxPoint x="984.6300000000001" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-281" value="&lt;span style=&quot;color: rgb(23, 20, 215);&quot;&gt;__proto__&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="995" y="700" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-288" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="340" as="sourcePoint" />
+            <mxPoint x="750" y="420" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="370" />
+              <mxPoint x="750" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-290" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="805" y="260" as="sourcePoint" />
+            <mxPoint x="925" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-291" value="constructor" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="750" y="370" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-322" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="795" y="599.9999999999999" as="sourcePoint" />
+            <mxPoint x="915" y="599.9999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-323" value="prototype" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="815" y="539.9999999999999" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-324" value="constructor" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="815" y="608" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-325" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="795" y="579.9999999999999" as="sourcePoint" />
+            <mxPoint x="915" y="579.9999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-326" value="&lt;span style=&quot;font-family: -apple-system, system-ui, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Noto Sans&amp;quot;, Helvetica, Arial, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;; font-size: 14px;&quot;&gt;Object.prototype&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="927.5" y="565.3199999999999" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LRawqXGUnp7VEbSEM_Xv-327" value="&lt;span style=&quot;font-family: -apple-system, system-ui, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Noto Sans&amp;quot;, Helvetica, Arial, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;; font-size: 14px;&quot;&gt;null&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="927.5" y="804.68" width="115" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
