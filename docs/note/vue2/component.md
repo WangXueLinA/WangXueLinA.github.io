@@ -655,3 +655,4 @@ export default {
 | 典型应用 | Vue Router、Vuex、第三方库集成   | 表单验证、日志记录               | 按钮、表格、弹窗 |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

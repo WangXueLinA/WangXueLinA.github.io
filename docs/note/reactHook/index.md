@@ -4,6 +4,59 @@ title: React Hook
 
 # React hook
 
+## 为啥 react 提出 hook
+
+### 状态问题
+
+类组件通过 new 实例后，也就是继承了 React.Component，实例对象在组件生命周期内持续存在。
+
+状态通过 this.state 保存，更新时通过 this.setState 触发重新渲染，实例不变，状态得以保留。
+
+```js
+class Component extends React.Component {
+  state = {
+    count: 0,
+  };
+  increment = () =>
+    this.setState({
+      count: this.state.count + 1, // 在取this.state里值进行重新更新
+    });
+  render() {
+    return <button onClick={this.increment}>{this.state.count}</button>;
+  }
+}
+```
+
+函数组件每次渲染都是重新执行整个函数，而 React 团队希望函数组件也能拥有状态能力，但函数没有实例，因此必须设计一种机制，在多次渲染之间持久化状态。所以采用了链表的形式，开发不需要关心你的变量名，只认准挂接上的 hook 的顺序，React 按顺序创建 Hook 节点，形成链表。
+
+Hook 链表不是直接存储在组件中，而是挂载在 Fiber 节点（React 的虚拟 DOM 节点）的 memoizedState 属性上，每个函数组件对应的 Fiber 节点都会维护自己的 Hook 链表，每次渲染时，React 会根据 current Fiber 树克隆出 workInProgress Fiber 树，Hook 链表会被复用/重建
+
+每个 Hook 的 memoizedState 字段存储其状态值。后续更新渲染。React 会按顺序遍历链表，逐个取出对应 Hook 的状态例如：第一个 useState 对应链表第一个节点的 memoizedState，第二个 useEffect 对应第二个节点
+
+```js
+// 伪代码
+fiberNode: {
+  memoizedState: {
+    memoizedState: 0,          // 第一个 Hook（如 useState 的值）
+    next: {
+      memoizedState: {         // 第二个 Hook（如 useEffect 的 effect 对象）
+        create: () => { /* effect 函数 */ },
+        destroy: () => { /* 清理函数 */ },
+        deps: [0],            // 依赖数组
+        tag: 0x800,           // effect 类型标识（PassiveEffect）
+        // ...其他内部字段
+      },
+      next: {
+        memoizedState: { /* 第三个 Hook（如 useRef 的 ref 对象） */ },
+        next: null
+      }
+    },
+    // 其他 Fiber 字段...
+  },
+  // 其他 Fiber 节点字段（如 stateNode、tag、updateQueue 等）
+}
+```
+
 ## Hooks 为什么要在顶层使用？
 
 hooks 的实现就是基于 fiber 的。每个组件都会生成一个 FiberNode（节点），组件内使用的 hook 会以链表的形式挂在 FiberNode 的 memoizedState 上面。各个 FiberNode 汇聚起来会变成一颗 Fiber 树，React 每次会以固定的顺序遍历这棵树，这样就把整个页面的 hook 都串联起来了。
@@ -1262,3 +1315,4 @@ const ListItems = () => (
 1. **避免不必要的 DOM 层级**： 当一个组件需要返回多个相邻的 DOM 元素而不希望增加额外的 DOM 层级时，可以使用 Fragment 替代常规的 HTML 元素（如 <div>）来包裹这些子元素。例如，在构建列表或者表格的时候，不希望因为每一组子元素都添加一层无意义的 <div>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

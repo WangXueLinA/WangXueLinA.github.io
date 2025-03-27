@@ -394,3 +394,4 @@ wm.get(key);
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

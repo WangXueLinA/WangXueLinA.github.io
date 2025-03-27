@@ -223,3 +223,4 @@ node_modules/
 失败：如果脚本中某条命令出错（比如非零退出码），npm 会终止后续命令，并打印错误信息。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -120,3 +120,4 @@ ssh -T git@github.com
 <ImagePreview src="/images/git/image17.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

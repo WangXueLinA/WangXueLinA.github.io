@@ -51,3 +51,4 @@ if (window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

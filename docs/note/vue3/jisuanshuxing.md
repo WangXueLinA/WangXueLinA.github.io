@@ -852,3 +852,4 @@ data.value = 1;
 | sync       | 同步 响应变化    | 需要即时反馈的简单逻辑 | 避免在频繁变化的数据源使用 |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

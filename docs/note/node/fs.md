@@ -156,3 +156,4 @@ fs.mkdir('a/b/c', (err) => {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

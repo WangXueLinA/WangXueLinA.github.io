@@ -75,3 +75,4 @@ bt default
 <ImagePreview src="/images/web/image12.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

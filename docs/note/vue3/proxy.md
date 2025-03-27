@@ -301,3 +301,4 @@ user.value.address.city = '上海';
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

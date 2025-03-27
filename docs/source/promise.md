@@ -198,3 +198,4 @@ group: 源码
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

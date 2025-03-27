@@ -1010,3 +1010,4 @@ const LazyComponent = React.lazy(
 - 沙箱环境就绪：延迟确保子应用沙箱已初始化，动态加载的资源能被正确隔离和处理，避免 Promise 卡死。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

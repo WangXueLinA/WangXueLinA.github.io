@@ -425,3 +425,4 @@ props.bar // number | undefined
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

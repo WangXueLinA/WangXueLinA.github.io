@@ -114,3 +114,4 @@ for (let char of str) {
 2. for...of 循环用于遍历数组、字符串等可迭代对象。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -246,3 +246,4 @@ h(ChildComponent, {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

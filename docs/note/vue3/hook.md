@@ -119,3 +119,4 @@ export function useFormInput(initialValue) {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

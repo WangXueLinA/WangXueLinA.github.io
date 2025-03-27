@@ -368,3 +368,4 @@ uniapp 编译后可以点击微信开发者工具的上传按钮
 - 如 appId 没有自动匹配就手动传入
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

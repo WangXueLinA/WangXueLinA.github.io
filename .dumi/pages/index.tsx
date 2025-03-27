@@ -3,8 +3,9 @@ import { FloatButton, notification, Tabs, Timeline } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import commits from '../git-commits.json';
-import SideTab from '../SideTab';
+import SplashCursor from '../theme/builtins/SplashCursor';
 import { toolsArr } from '../utils';
+import SideTab from './component/SideTab';
 import './index.less';
 
 export default () => {
@@ -88,6 +89,7 @@ export default () => {
         onClick={openNotification}
         icon={<img src="/homeTip.gif" className="float-button-homeTip" />}
       ></FloatButton>
+      <SplashCursor />
     </>
   );
 };

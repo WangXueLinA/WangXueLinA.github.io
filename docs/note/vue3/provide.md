@@ -70,3 +70,4 @@ const { location, updateLocation } = inject('location');
 - 插件/组件库开发（提供全局配置或方法）。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

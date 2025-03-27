@@ -409,3 +409,4 @@ react-redux 是 Redux 库的官方 React 绑定库，它作为一个桥梁，使
 demo：https://stackblitz.com/edit/vitejs-vite-8ayfsz?file=src%2FApp.tsx
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

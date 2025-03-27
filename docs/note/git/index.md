@@ -242,3 +242,4 @@ git commit -m 'update .gitignore'
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -120,3 +120,4 @@ Webpack 是基于 Node.js 构建的，而 Vite 则是基于 esbuild 进行预构
 - webpack 支持的更广：由于 Vite 基于 ES Module，所以代码中不可以使用 CommonJs；webpack 更多的关注兼容性, 而 Vite 关注浏览器端的开发体验。Vite 目前生态还不如  Webpack。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

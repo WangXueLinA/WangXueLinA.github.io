@@ -55,3 +55,4 @@ document.head.appendChild(link);
 @import 规则：无法通过 JavaScript 直接操作，灵活性较低。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -1093,3 +1093,4 @@ export default {
 </Alert>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -171,3 +171,4 @@ console.log(\_.isPlainObject(plainObj)); // 输出 "true" （检测是否为简�
 例如: typeof 适合快速判断基础类型，instanceof 用于检测对象是否为某个构造函数的实例，而 Object.prototype.toString.call() 能够更加细致地区分不同类型的对象。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

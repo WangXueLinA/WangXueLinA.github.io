@@ -337,3 +337,4 @@ mode 有 14 种模式，其中 5 种是缩放模式，9 种是裁剪模式。
 | 缩放 | heightFix   | 高度不变，宽度自动变化，保持原图宽高比不变 **App 和 H5 平台 HBuilderX 2.9.3+ 支持、微信小程序需要基础库 2.10.3**           |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

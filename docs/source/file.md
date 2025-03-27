@@ -839,3 +839,4 @@ app.listen(3000, () => {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

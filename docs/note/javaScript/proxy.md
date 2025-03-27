@@ -325,3 +325,4 @@ function set(target, key, value, receiver) {
 观察者函数都放进 Set 集合，当修改 obj 的值，在会 set 函数中拦截，自动执行 Set 所有的观察者
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

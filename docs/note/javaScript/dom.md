@@ -250,3 +250,4 @@ input.value = '默认值'; // 设置输入框内容
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

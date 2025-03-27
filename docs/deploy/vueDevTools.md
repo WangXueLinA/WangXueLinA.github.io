@@ -18,3 +18,4 @@ mac 电脑在 VSCode command + shift + p，Windows 则是 ctrl + shift + p。然
 利用 nodejs 中的 child_process，执行了类似 code path/to/file 命令，于是对应编辑器就打开了相应的文件，
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

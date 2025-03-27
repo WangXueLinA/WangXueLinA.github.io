@@ -1188,3 +1188,4 @@ Vue.directive('tooltip', {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

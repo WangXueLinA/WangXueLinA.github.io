@@ -645,3 +645,4 @@ const focusCurrent = () => {
 | 代码可读性 | 变量名与模板字符串易混淆     | 键名一致，意图更清晰       |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

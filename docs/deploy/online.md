@@ -56,3 +56,5 @@ npm run deploy
 过个 2，3 分钟后就你可以访问了
 
 <ImagePreview src="/images/other/image8.jpg"></ImagePreview>
+<BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -532,3 +532,4 @@ const dynamicSlotName = computed(() => 'slot-' + props.type);
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -343,3 +343,4 @@ const attrs = useAttrs(); // 自动推断为 Record<string, any>
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

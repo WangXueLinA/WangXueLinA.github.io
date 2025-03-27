@@ -85,3 +85,4 @@ message 属性：错误的相关信息
 stack 属性：函数调用栈记录信息
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -388,3 +388,4 @@ demo: [react 中使用 web Component](https://stackblitz.com/edit/vitejs-vite-uc
 - 工具链支持：框架通常配有强大的构建工具、热重载、类型检查等工具链支持，而 Web Components 在开发过程中可能需要搭配其他工具才能获得类似的功能。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>
