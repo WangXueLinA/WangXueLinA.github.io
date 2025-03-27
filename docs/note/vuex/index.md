@@ -832,3 +832,4 @@ new Vue({
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

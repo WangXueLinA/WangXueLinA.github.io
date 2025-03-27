@@ -184,3 +184,4 @@ console.log(isProxy(readOnlyProxy)); // true
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -75,3 +75,4 @@ Vue 生命周期总共可以分为 8 个阶段：创建前后, 载入前后,更�
 - 并不能清除 DOM，仅仅销毁实例
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -199,3 +199,4 @@ Vue.filter('capitalize', function (value) {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

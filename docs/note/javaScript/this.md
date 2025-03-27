@@ -141,3 +141,4 @@ setTimeout(boundLog, 1000, 'Delayed message'); // 输出：User1: Delayed messag
 2. bind 并不执行函数，而是创建并返回一个新的函数，这个新函数保持了对其原函数的引用，并且具有预先设定好的 this 值。它可以用于事件处理函数、定时器回调等场合，确保在回调函数执行时 this 指向预期的对象。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

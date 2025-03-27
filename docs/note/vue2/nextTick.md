@@ -152,3 +152,4 @@ this.$nextTick(() => { ... });
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

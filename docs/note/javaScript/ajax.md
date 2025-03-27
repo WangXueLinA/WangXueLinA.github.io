@@ -230,3 +230,4 @@ fetch('https://api.example.com/data')
 | 跨域 Cookie  | 需手动设置           | 需设置 credentials              | 默认发送            |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

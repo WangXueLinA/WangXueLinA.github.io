@@ -754,3 +754,4 @@ isnumber(url(...)); // false
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

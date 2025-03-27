@@ -14,6 +14,16 @@ js，Es6，typescript
 http
 git 等
 
+## 文件一键部署 github pages
+
+```bash
+# 先打包好文件
+npm run docs:build
+
+# 在执行一键部署
+npm run deploy
+```
+
 ## 组件库创建
 
 ```bash
@@ -35,7 +45,6 @@ npm run build --scope @xuelin/tools #单独构建某一包，会先构建当前�
 
 npm run release # 发布包
 npm run release:package # 单独发布某些包 可选
-
 
 ```
 

@@ -299,3 +299,4 @@ person.facepalmHard();
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -147,3 +147,4 @@ order: -94
 替代方案：同上，使用 `v-slot`。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

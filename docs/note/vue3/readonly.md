@@ -113,3 +113,4 @@ export default {
 - 不可变性: readonly 和 shallowReadonly 并不会真正阻止对象的修改，它们只是提供了一种机制来提醒开发者不要修改只读属性。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

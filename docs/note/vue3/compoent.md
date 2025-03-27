@@ -339,3 +339,4 @@ Vue 3 对 `<Transition>`组件进行了优化，支持更灵活的动画控制�
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

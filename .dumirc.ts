@@ -41,8 +41,8 @@ export default defineConfig({
         title: '笔记',
         children: noteChildren,
       },
+      { title: '源码/交互', link: '/source/login' },
       { title: '部署', link: '/deploy/web' },
-      { title: '源码/工程化', link: '/source/call' },
     ],
     sidebar: {
       '/components': [

@@ -110,3 +110,4 @@ export default {
 3. toRefs 会丢失响应式对象的原型链：toRefs 返回的是一个普通对象，因此它会丢失原响应式对象的原型链方法。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

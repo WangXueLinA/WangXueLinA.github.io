@@ -27,3 +27,4 @@ order: -94
 | -             | onRenderTriggered | Vue3 新增：调试响应式数据触发组件重新渲染时的具体变化。                                  | 开发工具，用于定位性能问题或意外渲染。                            |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -8,7 +8,7 @@ title: qiankun
 
 > 官网： https://qiankun.umijs.org/zh/guide
 
-搭建 demo 使用：https://github.com/WangXueLinA/simple-qiankun
+> demo：https://github.com/WangXueLinA/simple-qiankun
 
 qiankun 的优势有哪些
 
@@ -1010,3 +1010,4 @@ const LazyComponent = React.lazy(
 - 沙箱环境就绪：延迟确保子应用沙箱已初始化，动态加载的资源能被正确隔离和处理，避免 Promise 卡死。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

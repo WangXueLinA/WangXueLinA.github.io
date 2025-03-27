@@ -150,3 +150,4 @@ console.log(Object.prototype.__proto__ === null); // true
 <ImagePreview src="/images/js/image6.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

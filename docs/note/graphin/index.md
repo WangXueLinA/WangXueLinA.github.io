@@ -95,3 +95,4 @@ Graphin 提供了 7 种分析组件：分别为右键菜单，提示框，小地
 demo 演示：https://stackblitz.com/edit/stackblitz-starters-kqwvei?file=src%2FApp.js
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -399,3 +399,4 @@ HTML5 引入的 window.postMessage 方法允许来自不同源的脚本采用异
 每种跨域解决方案都有其适用场景和局限性，开发者应根据实际需求选择最适合的方案。CORS 由于其灵活性和安全性，成为了现代 Web 开发中最常用的跨域解决方案。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

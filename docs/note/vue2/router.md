@@ -776,3 +776,4 @@ router.onError((error) => {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

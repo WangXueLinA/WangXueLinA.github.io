@@ -11,14 +11,12 @@ title: generator生成器
 
 Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同
 
-回顾下上文提到的解决异步的手段：
+提到的解决异步的手段：
 
 - 回调函数
 - promise
 
-那么，上文我们提到 promsie 已经是一种比较流行的解决异步方案，那么为什么还出现 Generator？甚至 async/await 呢？
-
-该问题我们留在后面再进行分析，下面先认识下 Generator
+promsie 已经是一种比较流行的解决异步方案，那么为什么还出现 Generator？甚至 async/await 呢？
 
 ### Generator 函数
 
@@ -149,3 +147,4 @@ for (let [key, value] of objectEntries(jane)) {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

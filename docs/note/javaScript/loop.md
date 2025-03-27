@@ -105,3 +105,4 @@ Start → End → Promise 3 → Promise 4 → Timeout 1 → Promise 1 → Timeou
 4. 第一次事件循环中，JavaScript 引擎会把整个 script 代码当成一个宏任务执行，执行完成之后，再检测本次循环中是否寻在微任务，存在的话就依次从微任务的任务队列中读取执行完所有的微任务，再读取宏任务的任务队列中的任务执行，再执行所有的微任务，如此循环。JS 的执行顺序就是每次事件循环中的宏任务-微任务。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

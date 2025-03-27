@@ -361,3 +361,4 @@ require.async('./asyncModule', function (asyncModule) {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -115,3 +115,4 @@ app.directive('demo', (el, binding) => {
 <Alert message="组件可能含有多个根节点。当应用到一个多根组件时，指令将会被忽略且抛出一个警告。和 attribute 不同，指令不能通过 v-bind='$attrs' 来传递给一个不同的元素。"></Alert>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

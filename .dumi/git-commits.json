@@ -1,6 +1,12 @@
 [
   {
-    "hash": "7f151b2",
+    "hash": "f899e49",
+    "author": "wxl",
+    "date": "2025-03-28",
+    "message": "增加鼠标滑动飞溅特效"
+  },
+  {
+    "hash": "1bd3199",
     "author": "wxl",
     "date": "2025-03-25",
     "message": "项目部署到 GitHub Pages上"
@@ -292,11 +298,5 @@
     "author": "wxl",
     "date": "2024-06-24",
     "message": "feat: package.json"
-  },
-  {
-    "hash": "733e82f",
-    "author": "wxl",
-    "date": "2024-06-24",
-    "message": "chore(release): publish"
   }
 ]

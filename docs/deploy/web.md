@@ -1,6 +1,6 @@
 ---
 toc: content
-order: -1
+order: -100
 title: 云服务器搭建网站
 ---
 
@@ -75,3 +75,4 @@ bt default
 <ImagePreview src="/images/web/image12.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -882,3 +882,4 @@ promise.then((value) => console.log(value));
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

@@ -444,3 +444,4 @@ const logAttrs = () => {
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

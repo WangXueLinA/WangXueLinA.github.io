@@ -452,3 +452,4 @@ beforeDestroy() {
 | 适用场景 |   依赖多数据计算   | 需参数/无缓存需求 |   监听变化执行副作用   |
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

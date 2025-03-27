@@ -138,6 +138,106 @@ React：
 | 复杂应用 | 依赖开发者优化能力          | 虚拟 DOM 优势明显 |
 | 更新机制 | 精准更新依赖组件            | 默认全组件树 diff |
 
+### diff 算法
+
+想象一下：你有一个玩具箱（DOM 树），里面堆满了玩具（节点）。现在你想按新顺序整理玩具，但不想全部重新摆一遍，而是尽量复用旧的玩具位置。Vue3 和 React 整理玩具的策略不同
+
+#### vue3
+
+先看头和尾：
+
+- 看一眼最前面的玩具，如果新旧顺序一样（比如都是乐高），直接跳过不管。
+- 再看最后面的玩具，如果一样（比如都是积木），也跳过。
+- 中间的玩具再仔细处理。
+
+贴标签找对应（key）：如果玩具上贴了唯一标签（比如“小明的乐高”），直接按标签快速找到新旧对应关系，复用旧位置。
+
+只移动必要的玩具：中间的玩具如果大部分顺序没变（比如“小车、恐龙、飞机”变成“恐龙、飞机、小车”），Vue3 会找到最长不用动的那部分（恐龙 → 飞机），只移动剩下的（小车）。
+
+结果：省时省力，动作最少。
+
+#### React
+
+按顺序一个个对比：
+
+- 不管头尾，直接从第一个玩具开始对比新旧顺序。
+- 如果发现第一个位置的新玩具（比如原本是乐高，现在变成积木），直接扔了旧的，放新的。
+
+依赖标签提示（key）：如果玩具贴了标签，React 能更快找到对应关系。
+
+但没标签的话，就按位置硬匹配，容易误判（比如把第二个玩具当成第一个）。
+
+可能多做无用功：如果中间插入一个新玩具（比如旧顺序是 A-B-C，新顺序是 A-D-B-C），React 会以为 B 变成了 D，C 变成了 B，导致删掉 B、C，创建 D、B、C。
+
+#### 为啥会采用这种不同的方式
+
+Vue 相信“大部分结构是固定的”，React 相信“结构可能是完全动态的”
+
+```js
+// Vue模板是声明式的，结构清晰固定
+<template>
+  <div>
+    <header>{{ title }}</header>
+    <ul>
+      <li v-for="item in list" :key="item.id">{{ item.text }}</li>
+    </ul>
+  </div>
+</template>
+```
+
+Vue 的模板在编译阶段就被分析完毕，框架知道哪里是静态内容（如`<header>`标签），哪里是动态内容（如 v-for 循环）。
+
+带来的优势：可以提前做优化（比如静态节点提升），运行时只需要关注变化的部分。
+
+```js
+function DynamicList({ items, layout }) {
+  return (
+    <div>
+      {layout === 'grid' ? (
+        <div className="grid">{items.map(renderItem)}</div>
+      ) : (
+        <ul className="list">{items.map(renderItem)}</ul>
+      )}
+    </div>
+  );
+}
+```
+
+JSX 本质是 JavaScript 的语法糖，可以随意嵌套逻辑（如三元表达式、map 循环）。React 可以随时根据数据变化生成完全不同的 DOM 结构。
+
+带来的灵活性：适合需要高度动态交互的场景（如拖拽生成界面、实时数据可视化），但需要开发者自己控制优化（如合理使用 key）。
+
+具体例子：列表渲染
+
+```js
+// vue 需要提前定义两种布局
+<template>
+  <div v-if="isHorizontal" class="horizontal-list">
+    <Item v-for="item in list" :key="item.id" />
+  </div>
+  <ul v-else class="vertical-list">
+    <Item v-for="item in list" :key="item.id" />
+  </ul>
+</template>
+
+
+// react
+function List({ items, isHorizontal }) {
+  // 可以动态选择容器标签
+  const Container = isHorizontal ? 'div' : 'ul';
+
+  return (
+    <Container className={isHorizontal ? 'horizontal' : 'vertical'}>
+      {items.map(item => (
+        <Item key={item.id} />
+      ))}
+    </Container>
+  );
+}
+```
+
+Vue 需要明确写出两种分支结构，React 却可以动态决定使用`<div>`还是`<ul>`作为容器，甚至容器类型可以是动态变量。
+
 ### 发展趋势
 
 Vue 3：
@@ -293,3 +393,4 @@ xxx 同样要写 js 表达式，且可以直接读取到 data 中的所有属性
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

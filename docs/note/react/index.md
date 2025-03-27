@@ -463,3 +463,4 @@ export default Test;
 - 通过 css in js 这种方法，可以满足大部分场景的应用，可以类似于预处理器一样样式嵌套、定义、修改状态等
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

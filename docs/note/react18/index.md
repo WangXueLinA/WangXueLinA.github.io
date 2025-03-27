@@ -488,3 +488,4 @@ react18 后也会渲染两次，不过有一次时置灰的状态，便于区分
 <https://codepen.io/wangxuelina/pen/vYzaozR>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

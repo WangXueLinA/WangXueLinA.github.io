@@ -64,3 +64,4 @@ BFC 是一个独立的渲染区域，内部元素的布局不会影响外部元�
 - BFC 是 CSS 视觉渲染的一部分，它的存在主要是为了解决布局中由于浮动等特性引起的问题，提高布局的灵活性和可预测性。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

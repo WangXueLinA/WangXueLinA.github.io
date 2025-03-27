@@ -1,6 +1,7 @@
 ---
 toc: content
-title: 部署到 GitHubPages上
+title: 项目部署到github pages上
+order: -97
 ---
 
 # 项目部署到 GitHub Pages 上
@@ -56,3 +57,5 @@ npm run deploy
 过个 2，3 分钟后就你可以访问了
 
 <ImagePreview src="/images/other/image8.jpg"></ImagePreview>
+<BackTop></BackTop>
+<SplashCursor></SplashCursor>

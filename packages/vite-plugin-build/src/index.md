@@ -8,9 +8,11 @@ group:
 
 <embed src="../README.md" ></embed>
 
-## DEMO
+<!-- ## DEMO
 
-<code src="./demo/index.tsx" ></code>
+<code src="./demo/index.tsx" ></code> -->
+
 <embed src="../CHANGELOG.md"></embed>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

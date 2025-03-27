@@ -20,3 +20,4 @@ GitHub 隐藏：VSCode 在线
 <ImagePreview src="/images/other/image1.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

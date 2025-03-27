@@ -12,7 +12,7 @@ const VideoPlayer: FC<{ src: string }> = ({ src }) => {
       width={'max-width'}
       style={{
         maxWidth: '100%',
-        marginBlockStart: 20,
+        marginBlock: 20,
       }}
     />
   );

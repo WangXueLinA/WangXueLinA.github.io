@@ -1,5 +1,6 @@
 ---
 toc: content
+order: -99
 title: 搭建业务组件库
 ---
 
@@ -223,3 +224,5 @@ npm adduser
 <ImagePreview src="/images/component/image10.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+
+<SplashCursor></SplashCursor>

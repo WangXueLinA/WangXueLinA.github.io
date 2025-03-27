@@ -1,6 +1,7 @@
 ---
 toc: content
-title: 项目上传Github
+order: -98
+title: 项目上传github上
 ---
 
 # 如何上传自己的项目到 GitHub 上
@@ -120,3 +121,4 @@ ssh -T git@github.com
 <ImagePreview src="/images/git/image17.jpg"></ImagePreview>
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

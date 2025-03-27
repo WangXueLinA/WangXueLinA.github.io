@@ -108,9 +108,10 @@ for (let char of str) {
 
 </Alert>
 
-## 总结：
+## 总结
 
 1. for...in 循环用于遍历对象的属性名，适用于处理对象结构（慎用原型链）。
 2. for...of 循环用于遍历数组、字符串等可迭代对象。
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>

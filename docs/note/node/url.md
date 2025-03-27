@@ -66,3 +66,4 @@ console.log(relativeUrl); // https://www.example.com/blog/2023/post.html
 ```
 
 <BackTop></BackTop>
+<SplashCursor></SplashCursor>
