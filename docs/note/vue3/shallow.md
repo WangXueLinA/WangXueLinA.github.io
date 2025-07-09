@@ -1,72 +1,10 @@
 ---
 toc: content
-title: shallowReactive/shallowRef
+title: shallowRef/shallowReactive
 order: -97
 ---
 
 # Vue3
-
-## shallowReactive
-
-shallowReactive 创建一个浅层响应式对象，只有对象的第一层属性是响应式的，嵌套的对象不会被递归地转换为响应式。
-
-### 基本语法
-
-```js
-import { shallowReactive } from 'vue';
-
-const state = shallowReactive({
-  count: 0,
-  nested: {
-    value: 1,
-  },
-});
-```
-
-### 使用场景
-
-- 当你只需要对象的第一层属性是响应式时。
-- 当你明确知道嵌套对象不需要响应式，或者嵌套对象的响应式处理会带来性能开销时。
-
-```vue
-<template>
-  <div>
-    <p>Count: {{ state.count }}</p>
-    <p>Nested Value: {{ state.nested.value }}</p>
-    <button @click="incrementCount">Increment Count</button>
-    <button @click="incrementNestedValue">Increment Nested Value</button>
-  </div>
-</template>
-
-<script>
-import { shallowReactive } from 'vue';
-
-export default {
-  setup() {
-    const state = shallowReactive({
-      count: 0,
-      nested: {
-        value: 1,
-      },
-    });
-
-    function incrementCount() {
-      state.count++; // 是响应式的，修改它会触发视图更新
-    }
-
-    function incrementNestedValue() {
-      state.nested.value++; // 不是响应式的，修改它不会触发视图更新
-    }
-
-    return {
-      state,
-      incrementCount,
-      incrementNestedValue,
-    };
-  },
-};
-</script>
-```
 
 ## shallowRef
 
@@ -130,12 +68,74 @@ export default {
 </script>
 ```
 
-## 注意事项
+### 注意事项
 
 1. 嵌套对象的响应式：shallowReactive 和 shallowRef 不会递归地将嵌套对象转换为响应式，因此如果你需要嵌套对象的响应式，应该使用 reactive 或 ref。
 2. 性能优化：在大型对象或嵌套层级较深的情况下，使用 shallowReactive 或 shallowRef 可以减少响应式系统的开销，因为它们不会递归地处理嵌套对象。
 3. 视图更新：由于嵌套对象不是响应式的，修改嵌套对象的属性不会触发视图更新。如果你需要视图更新，可以考虑手动触发更新或使用 reactive/ref。
 4. 类型安全：在使用 TypeScript 时，确保类型定义正确，以避免类型错误。
+
+## shallowReactive
+
+shallowReactive 创建一个浅层响应式对象，只有对象的第一层属性是响应式的，嵌套的对象不会被递归地转换为响应式。
+
+### 基本语法
+
+```js
+import { shallowReactive } from 'vue';
+
+const state = shallowReactive({
+  count: 0,
+  nested: {
+    value: 1,
+  },
+});
+```
+
+### 使用场景
+
+- 当你只需要对象的第一层属性是响应式时。
+- 当你明确知道嵌套对象不需要响应式，或者嵌套对象的响应式处理会带来性能开销时。
+
+```vue
+<template>
+  <div>
+    <p>Count: {{ state.count }}</p>
+    <p>Nested Value: {{ state.nested.value }}</p>
+    <button @click="incrementCount">Increment Count</button>
+    <button @click="incrementNestedValue">Increment Nested Value</button>
+  </div>
+</template>
+
+<script>
+import { shallowReactive } from 'vue';
+
+export default {
+  setup() {
+    const state = shallowReactive({
+      count: 0,
+      nested: {
+        value: 1,
+      },
+    });
+
+    function incrementCount() {
+      state.count++; // 是响应式的，修改它会触发视图更新
+    }
+
+    function incrementNestedValue() {
+      state.nested.value++; // 不是响应式的，修改它不会触发视图更新
+    }
+
+    return {
+      state,
+      incrementCount,
+      incrementNestedValue,
+    };
+  },
+};
+</script>
+```
 
 ## triggerRef
 

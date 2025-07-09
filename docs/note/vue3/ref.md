@@ -6,8 +6,6 @@ order: -98
 
 # Vue3
 
-vue3 中为什么引入 ref 函数，有什么用，如何使用以及使用场景，注意的点，详细举例简单的完整的 vue 代码说明下
-
 ## ref
 
 ref 是 Composition API 的核心响应式 API 之一，用于创建响应式数据。
@@ -102,7 +100,7 @@ const increment = () => {
 2. 组合式函数返回值：封装可复用的逻辑。
 
 ```vue
-<!-- 组合式函数文件：useFetch.js -->
+<!-- useFetch.js -->
 <script setup>
 import { ref } from 'vue';
 
@@ -337,6 +335,23 @@ console.log(count.value); // 1（原ref不再关联）
 const innerRef = ref(5);
 const obj = reactive({ a: { b: innerRef } });
 console.log(obj.a.b); // 5（自动解包）
+obj.a.b = 6;
+console.log(innerRef.value, 'innerRef'); // 6 相当于修改innerRef.value
+```
+
+5. 在内部不仅可以自动解包ref，还可以解包computed
+
+computed返回的也是一个ref，因此在reactive对象内部同样会自动解包
+
+```js
+import { reactive, computed } from 'vue'
+
+const state = reactive({
+  count: 10,
+  doubled: computed(() => state.count * 2) // 自动解包为计算结果
+})
+
+console.log(state.doubled) // 直接访问20（而非Ref对象）
 ```
 
 ## ref 对比 reactive
@@ -382,46 +397,65 @@ const myCustomRef = customRef((track, trigger) => {
 - 需要手动控制依赖追踪和触发更新：当你需要手动控制何时追踪依赖和何时触发更新时，customRef 是一个很好的选择。
 - 需要封装复杂的逻辑：当你需要封装一些复杂的逻辑，并且希望这些逻辑在 Vue 的响应式系统中正常工作，customRef 可以帮助你实现这一点。
 
-1. 自定义延迟更新的 ref：它在设置新值时会延迟 1 秒才更新视图。这在某些需要防抖的场景中非常有用。
+1. 搜索输入框的防抖处理：在搜索功能中，用户输入内容时可能会频繁触发搜索请求，导致不必要的网络开销和服务器压力。使用 debouncedRef 可以延迟触发搜索请求，只有在用户停止输入一段时间后才执行实际搜索。
+
+- 用户连续输入时，不会立即触发搜索请求。
+- 当用户停止输入 200ms 后，才会执行 fetchSearchResults。
+- 如果在 200ms 内继续输入，会重置计时器，避免不必要的请求。
 
 ```vue
 <template>
   <div>
-    <input v-model="text" placeholder="Type something..." />
-    <p>{{ delayedText }}</p>
+    <input v-model="searchQuery" placeholder="搜索...">
+    <div v-if="results.length">搜索结果: {{ results.length }} 条</div>
   </div>
 </template>
 
-<script>
-import { customRef } from 'vue';
+<script setup>
+import { ref, customRef } from 'vue'
 
-export default {
-  setup() {
-    // 创建一个自定义的 ref，延迟更新
-    const delayedText = customRef((track, trigger) => {
-      let timeout;
-      let value = '';
-
-      return {
-        get() {
-          track();
-          return value;
-        },
-        set(newValue) {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            value = newValue;
-            trigger();
-          }, 1000); // 延迟 1 秒更新
-        },
-      };
-    });
-
+// 防抖处理函数
+function debouncedRef(initialValue, delay = 200) {
+  let timeout
+  return customRef((track, trigger) => {
     return {
-      delayedText,
-    };
-  },
-};
+      get() {
+        track()
+        return initialValue
+      },
+      set(newValue) {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          initialValue = newValue
+          trigger()
+        }, delay)
+      }
+    }
+  })
+}
+
+// 创建防抖ref
+const searchQuery = debouncedRef('')
+const results = ref([])
+
+// 监听搜索词变化，触发搜索请求
+watch(searchQuery, async (newValue) => {
+  if (newValue.trim()) {
+    // 模拟API请求
+    results.value = await fetchSearchResults(newValue)
+  } else {
+    results.value = []
+  }
+})
+
+// 模拟搜索API
+function fetchSearchResults(query) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([/* 搜索结果 */])
+    }, 300)
+  })
+}
 </script>
 ```
 

@@ -292,7 +292,7 @@ setup() {
 }
 ```
 
-### `<script setup>`语法糖
+## `<script setup>`语法糖
 
 核心特点:
 
@@ -391,21 +391,26 @@ export default { name: 'MyComponent' };
 
 <script>
 export default {
-  props: ['msg'], // 显式声明 props‌:ml-citation{ref="2" data="citationList"}
+  props: ['msg'], // 显式声明 props
+
+  // 接收 props + context 参数
   setup(props, context) {
-    // 接收 props + context 参数‌:ml-citation{ref="1" data="citationList"}
-    // context 包含四个属性：attrs/slots/emit/expose‌:ml-citation{ref="1,3" data="citationList"}
+
+    // context 包含四个属性：attrs/slots/emit/expose‌
     const { attrs, slots, emit, expose } = context;
 
     const handleEmit = () => {
-      emit('custom-event', '参数'); // 通过 context.emit 触发事件‌:ml-citation{ref="2" data="citationList"}
+     // 通过 context.emit 触发事件
+      emit('custom-event', '参数');
     };
 
     const logAttrs = () => {
-      console.log('attrs:', attrs); // 访问未声明的 props 属性‌:ml-citation{ref="3" data="citationList"}
+      // 访问未声明的 props 属性
+      console.log('attrs:', attrs); 
     };
 
-    return { handleEmit, logAttrs }; // 必须手动返回模板所需方法‌:ml-citation{ref="2,5" data="citationList"}
+    // 必须手动返回模板所需方法
+    return { handleEmit, logAttrs }; 
   },
 };
 </script>
@@ -427,19 +432,19 @@ export default {
 // 通过编译器宏处理参数
 import { useAttrs, useSlots } from 'vue';
 
-const props = defineProps(['msg']); // 替代 setup 的 props 参数‌:ml-citation{ref="2,4" data="citationList"}
-const emit = defineEmits(['custom-event']); // 替代 context.emit‌:ml-citation{ref="2,3" data="citationList"}
-const attrs = useAttrs(); // 替代 context.attrs‌:ml-citation{ref="3" data="citationList"}
-const slots = useSlots(); // 替代 context.slots‌:ml-citation{ref="3" data="citationList"}
+const props = defineProps(['msg']); // 替代 setup 的 props 参数‌
+const emit = defineEmits(['custom-event']); // 替代 context.emit‌
+const attrs = useAttrs(); // 替代 context.attrs
+const slots = useSlots(); // 替代 context.slots
 
 const handleEmit = () => {
-  emit('custom-event', '参数'); // 直接使用 emit 函数‌:ml-citation{ref="2" data="citationList"}
+  emit('custom-event', '参数'); // 直接使用 emit 函数
 };
 
 const logAttrs = () => {
-  console.log('attrs:', attrs.value); // 通过响应式对象访问‌:ml-citation{ref="3" data="citationList"}
+  console.log('attrs:', attrs.value); // 通过响应式对象访问
 };
-// 无需返回变量/方法（自动暴露顶层绑定）‌:ml-citation{ref="1,5" data="citationList"}
+// 无需返回变量/方法（自动暴露顶层绑定
 </script>
 ```
 

@@ -4,6 +4,59 @@ title: React Hook
 
 # React hook
 
+## 虚拟 DOM 的意义
+
+虚拟 DOM 是 React 用于优化真实 DOM 操作的核心技术，尤其在函数组件（使用 Hooks 时）中，它通过以下方式提升性能：
+
+- 抽象表示真实 DOM
+
+虚拟 DOM 是一个轻量级的 JavaScript 对象，描述真实 DOM 的结构和属性。每次组件状态（如 useState）或属性变化时，React 会生成新的虚拟 DOM 树。
+
+- 高效的差异比较（Diffing）
+
+React 通过比较新旧虚拟 DOM 树的差异（称为 协调，Reconciliation），找到需要更新的最小部分。例如：
+
+```js
+// 更新前
+const oldVDOM = <div>Hello</div>;
+// 更新后
+const newVDOM = <div>World</div>;
+```
+
+React 只会更新文本内容（从 Hello 到 World），而非重建整个`<div>`。
+
+- 批量更新与减少直接 DOM 操作
+
+虚拟 DOM 允许 React 将多个状态变更合并为一次更新，减少直接操作真实 DOM 的次数，从而提升性能。
+
+- 与 Hooks 的关系
+
+Hooks（如 useState、useEffect）管理组件的状态和副作用，触发重新渲染。虚拟 DOM 机制确保即使频繁的状态变化也能高效更新 UI。
+
+## key 的作用与意义
+
+key 是 React 用于标识列表中元素的特殊属性，尤其在动态列表（如通过 map 生成的元素）中至关重要：
+
+- 唯一标识元素
+
+key 帮助 React 识别哪些元素被添加、删除或修改。例如：
+
+```js
+<ul>
+  {items.map((item) => (
+    <li key={item.id}>{item.text}</li>
+  ))}
+</ul>
+```
+
+每个`<li>`的 key 基于唯一 item.id，即使列表顺序变化，React 也能正确追踪元素。
+
+- 优化 Diff 算法
+
+无 key 的情况：React 默认按索引（index）比较元素。若列表中间插入元素，后续元素的索引都会变化，导致不必要的重建和渲染。
+
+有 key 的情况：React 通过 key 识别元素是否移动，仅调整位置或更新内容，避免不必要的销毁和重建。
+
 ## 为啥 react 提出 hook
 
 ### 状态问题
@@ -1312,7 +1365,7 @@ const ListItems = () => (
 
 #### 使用场景
 
-1. **避免不必要的 DOM 层级**： 当一个组件需要返回多个相邻的 DOM 元素而不希望增加额外的 DOM 层级时，可以使用 Fragment 替代常规的 HTML 元素（如 <div>）来包裹这些子元素。例如，在构建列表或者表格的时候，不希望因为每一组子元素都添加一层无意义的 <div>
+1. **避免不必要的 DOM 层级**： 当一个组件需要返回多个相邻的 DOM 元素而不希望增加额外的 DOM 层级时，可以使用 Fragment 替代常规的 HTML 元素（如 `<div>`）来包裹这些子元素。例如，在构建列表或者表格的时候，不希望因为每一组子元素都添加一层无意义的 `<div>`
 
 <BackTop></BackTop>
 <SplashCursor></SplashCursor>

@@ -326,7 +326,7 @@ HTML 需添加：
 <script src="https://cdn.example.com/jquery@3.6.0/jquery.min.js"></script>
 ```
 
-### 生成环境抽取 css
+### 生产环境抽取 css
 
 mini-css-extract-plugin 是 Webpack 中一个用于 将 CSS 代码从 JavaScript 中提取出来，生成独立 CSS 文件 的插件。它的核心目标是优化前端资源加载性能，尤其适用于生产环境。
 

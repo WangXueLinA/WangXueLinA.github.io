@@ -424,5 +424,63 @@ props.bar // number | undefined
 </script>
 ```
 
+## 数据同步/异步更新 ⚠️TODO；
+
+### 默认行为：异步批量更新
+
+Vue 会将多个数据变更合并成一个队列，在下一个事件循环中统一更新 DOM，以提高性能（减少重复渲染）。
+
+```js
+// Vue 组件方法中修改数据
+methods: {
+  updateData() {
+    this.count++; // 数据修改（异步队列中）
+    this.count++; // 再次修改（同一队列）
+    console.log(this.count); // 输出 2，但 DOM 未更新
+
+    this.$nextTick(() => {
+      console.log("DOM 已更新"); // 在此操作更新后的 DOM
+    });
+  }
+}
+
+```
+
+结果：两次数据修改会被合并，DOM 在 nextTick 后才会更新。
+
+### 特殊场景：同步更新
+
+#### 原生 DOM 事件中的同步更新
+
+```js
+// 通过原生 DOM 事件监听器修改数据
+mounted() {
+  const button = document.getElementById("myButton");
+  button.addEventListener("click", () => {
+    this.count++; // 同步更新
+    console.log("DOM 已更新"); // DOM 立即更新，可获取最新状态
+  });
+}
+```
+
+结果：数据修改后 DOM 立即更新，无需等待事件循环。
+
+#### 微任务中的同步更新（Vue 3 特有）
+
+```js
+// 在微任务（如 Promise）中修改数据（Vue 3）
+Promise.resolve().then(() => {
+  this.count++; // Vue 3 中可能触发同步更新
+});
+```
+
+注意：Vue 2 默认使用宏任务（如 setTimeout），而 Vue 3 改用微任务（Promise），因此部分微任务场景下 Vue 3 可能绕过队列直接更新。
+
+| 场景             | Vue 2                   | Vue 3                |
+| ---------------- | ----------------------- | -------------------- |
+| 默认更新队列     | 宏任务（如 setTimeout） | 微任务（如 Promise） |
+| 原生事件中的更新 | 同步更新                | 同步更新             |
+| 微任务中的更新   | 仍异步批量处理          | 可能同步更新         |
+
 <BackTop></BackTop>
 <SplashCursor></SplashCursor>

@@ -1,7 +1,7 @@
 ---
 toc: content
 title: computed/watch
-order: -98
+order: -97
 ---
 
 # Vue3
@@ -103,24 +103,6 @@ const alwaysSmall = computed((previous) => {
 
 ### 基础用法
 
-Vue2
-
-```js
-export default {
-  data() {
-    return { count: 0 };
-  },
-  watch: {
-    // 直接监听数据属性
-    count(newVal, oldVal) {
-      console.log(`计数器变化：${oldVal} → ${newVal}`);
-    },
-  },
-};
-```
-
-vue3
-
 ```js
 import { ref, watch } from 'vue';
 
@@ -154,6 +136,7 @@ watch(
 );
 
 // 多源监听能力, 支持数组形式监听多个源
+// 回调函数接受两个数组，分别对应来源数组中的新值和旧值
 watch([x, () => y.value], ([newX, newY], [oldX, oldY]) => {
   console.log(`X变化：${oldX}→${newX}，Y变化：${oldY}→${newY}`);
 });
@@ -179,6 +162,11 @@ watch(
   },
   { deep: true }, // 开启深度监听
 );
+
+// 侦听器会自动启用深层模式
+// watch(state, () => {
+//   /* 深层级变更状态所触发的回调 */
+// })
 </script>
 ```
 
@@ -231,19 +219,19 @@ Vue3 通过返回值停止， 完全终止整个监听行为，常用于组件�
 const stop = watch(source, callback);
 stop(); // 调用停止监听
 ```
+在3.5+版本中增加了暂停/恢复侦听器
 
-Vue2 通过 $watch 返回值停止
+```js
+const { stop, pause, resume } = watch(() => {})
 
-```javascript
+// 暂停侦听器
+pause()
 
-created() {
-  this.unwatch = this.$watch('source', callback)
-},
-methods: {
-  stop() {
-    this.unwatch() // 调用停止监听
-  }
-}
+// 稍后恢复
+resume()
+
+// 停止
+stop()
 ```
 
 ### 副作用清除
@@ -257,6 +245,24 @@ watch(id, (newId, oldId, onCleanup) => {
   // ...
   onCleanup(() => {
     // 清理逻辑
+  });
+});
+```
+
+3.5+ 中的副作用清理
+
+```js
+import { watch, onWatcherCleanup } from "vue";
+
+watch(flag, () => {
+  const timer = setInterval(() => {
+    // 做一些事情
+    console.log("do something");
+  }, 200);
+
+  onWatcherCleanup(() => {
+    console.log("清理定时器");
+    clearInterval(timer);
   });
 });
 ```
@@ -277,6 +283,7 @@ const user = reactive({
 });
 
 watch(
+  // 任何一个值变化都会进行触发
   () => `${user.firstName} ${user.lastName} (${user.age})`,
   (newFullInfo) => {
     console.log('用户信息更新:', newFullInfo);
@@ -302,24 +309,7 @@ watch(
   },
 );
 
-// 场景3：带条件的监听（依赖外部状态）
-const searchKeyword = ref('');
-const showAdvanced = ref(false);
-
-watch(
-  () => ({
-    keyword: searchKeyword.value,
-    isAdvanced: showAdvanced.value,
-  }),
-  ({ keyword, isAdvanced }) => {
-    if (isAdvanced && keyword.length > 3) {
-      console.log('触发高级搜索:', keyword);
-      // 这里可以执行搜索操作
-    }
-  },
-);
-
-// 场景4：监听数组的特定变化
+// 场景3：监听数组的特定变化
 const numbers = ref([1, 2, 3]);
 
 watch(
@@ -330,7 +320,7 @@ watch(
   { deep: true },
 );
 
-// 场景5：优化性能的监听方式（结合computed）
+// 场景4：优化性能的监听方式（结合computed）
 const complexData = reactive({
   a: 10,
   b: 20,
@@ -345,43 +335,8 @@ const optimizedComputed = computed(() => {
 watch(optimizedComputed, (newVal) => {
   console.log('优化后的计算结果:', newVal);
 });
-
-// 修改测试
-function triggerChanges() {
-  // 修改用户信息
-  user.lastName = '四';
-  user.age = 26;
-
-  // 修改嵌套对象
-  company.info.department.engineering.members++;
-
-  // 触发搜索条件
-  searchKeyword.value = 'vue3';
-  showAdvanced.value = true;
-
-  // 修改数组
-  numbers.value.push(4);
-
-  // 修改优化数据
-  complexData.a = 20;
-}
 </script>
 
-<template>
-  <button @click="triggerChanges">触发所有修改</button>
-</template>
-```
-
-Vue2 需要借助计算属性
-
-```javascript
-
-computed: {
-  total() { return this.x + this.y }
-},
-watch: {
-  total(newVal) { /*...*/ }
-}
 ```
 
 ### 注意事项
@@ -413,6 +368,20 @@ watch(
 | watch(obj.count, ...)       | ❌ 失效 | 永远不会触发         | 错误写法               |
 | watch(() => obj.count, ...) | ✅ 有效 | 属性值变化时触发     | 监听 reactive 对象属性 |
 | watch(obj, ...)             | ✅ 有效 | 对象任意属性变化触发 | 监听整个对象           |
+
+2. 避免在回调中修改依赖
+
+不要在 watch 回调中直接修改被监听的数据源，可能导致无限循环。
+
+```js
+// 危险！可能导致无限循环
+watch(
+  () => state.count,
+  (newCount) => {
+    state.count = newCount + 1; // 不要这样做
+  }
+);
+```
 
 ## watchEffect
 
@@ -466,6 +435,21 @@ stop();
 onUnmounted(stop);
 ```
 
+3.5+新增的暂停/恢复侦听器：
+
+```js
+const { stop, pause, resume } = watchEffect(() => {})
+
+// 暂停侦听器
+pause()
+
+// 稍后恢复
+resume()
+
+// 停止
+stop()
+```
+
 ### 副作用清除
 
 清理上一次副作用产生的临时资源，常用于清除定时器、取消未完成的异步操作
@@ -482,11 +466,25 @@ watchEffect((onCleanup) => {
 });
 ```
 
+3.5+ 中的副作用清理
+
+```js
+import { onWatcherCleanup } from 'vue'
+
+watchEffect(async () => {
+  const { response, cancel } = doAsyncWork(newId)
+  // 如果 `id` 变化，则调用 `cancel`，
+  // 如果之前的请求未完成，则取消该请求
+  onWatcherCleanup(cancel)
+  data.value = await response
+})
+```
+
 ### 使用场景
 
 1. 自动请求数据
 
-```javascript
+```js
 const userId = ref(1);
 const userData = ref(null);
 
@@ -558,23 +556,7 @@ watchEffect(() => {
 });
 ```
 
-3. 引用类型处理
-
-```javascript
-const list = ref([1, 2, 3]);
-
-watchEffect(() => {
-  // 不会检测数组内容变化！
-  console.log('数组长度:', list.value.length);
-});
-
-// ✅ 正确方式：使用深拷贝触发追踪
-watchEffect(() => {
-  console.log('数组内容:', [...list.value]);
-});
-```
-
-4. 异步操作处理
+3. 异步操作处理
 
 ```javascript
 watchEffect(async () => {
@@ -851,5 +833,20 @@ data.value = 1;
 | post       | 组件 更新后 执行 | DOM 操作/布局计算      | 使用 watchPostEffect 简化  |
 | sync       | 同步 响应变化    | 需要即时反馈的简单逻辑 | 避免在频繁变化的数据源使用 |
 
+
+## onWatcherCleanup
+
+vue3.5+新增，注册一个清理函数，在当前侦听器即将重新运行时执行。只能在 watchEffect 作用函数或 watch 回调函数的同步执行期间调用 (即不能在异步函数的 await 语句之后调用)。
+
+```js
+import { watch, onWatcherCleanup } from 'vue'
+
+watch(id, (newId) => {
+  const { response, cancel } = doAsyncWork(newId)
+  // 如果 `id` 变化，则调用 `cancel`，
+  // 如果之前的请求未完成，则取消该请求
+  onWatcherCleanup(cancel)
+})
+```
 <BackTop></BackTop>
 <SplashCursor></SplashCursor>

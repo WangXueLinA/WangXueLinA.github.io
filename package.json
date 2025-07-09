@@ -1,9 +1,16 @@
 {
   "name": "xuelin_dumi",
   "private": true,
+  "keywords": [
+    "vue3",
+    "dumi",
+    "react",
+    "封装组件",
+    "前端技术文档"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/WangXueLinA/WangXueLinA.github.io"
+    "url": "https://github.com/WangXueLinA/WangXueLinA.github.io/document"
   },
   "workspaces": [
     "packages/*"

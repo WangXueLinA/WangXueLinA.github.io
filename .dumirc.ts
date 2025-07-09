@@ -20,6 +20,7 @@ const alias = list.reduce((obj, key, index) => {
 }, {});
 
 export default defineConfig({
+  base: '/document/',
   outputPath: 'docs-dist',
   plugins: [path.resolve(__dirname, './.dumi/modifyRoutes.ts')],
   resolve: {
@@ -27,9 +28,6 @@ export default defineConfig({
     atomDirs: [{ type: 'components', dir: '/packages' }],
   },
   favicons: ['/favicon.png'],
-  history: {
-    type: 'hash',
-  },
   monorepoRedirect: {},
   extraBabelPlugins: [['import', { libraryName: 'wxl', style: true }]],
   themeConfig: {
@@ -43,6 +41,19 @@ export default defineConfig({
       },
       { title: '源码/交互', link: '/source/login' },
       { title: '部署', link: '/deploy/web' },
+      {
+        title: 'vue3二次封装',
+        children: [
+          {
+            title: 'antd-vue',
+            link: 'https://wangxuelina.github.io/general_antd_component/',
+          },
+          {
+            title: 'element-ui',
+            link: 'https://wangxuelina.github.io/general_antd_component/',
+          },
+        ],
+      },
     ],
     sidebar: {
       '/components': [
