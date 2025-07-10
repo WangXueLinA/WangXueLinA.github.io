@@ -786,7 +786,7 @@ const p = Promise.all([p1, p2, p3]);
 实例 p 的状态由 p1、p2、p3 决定，分为两种：
 
 - 只有 p1、p2、p3 的状态都变成 fulfilled，p 的状态才会变成 fulfilled，此时 p1、p2、p3 的返回值组成一个数组，传递给 p 的回调函数
-- 只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数
+- 只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数，其他未完成的 Promise 会被忽略。如果 p2 是失败，直接抛出第一个错误 "失败"（p2 失败），不会等待 p3 完成。
 
 <Alert message="如果作为参数的 Promise 实例，自己定义了 catch 方法，那么它一旦被 rejected，并不会触发 Promise.all()的 catch 方法"></Alert>
 

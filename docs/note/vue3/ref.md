@@ -6,8 +6,6 @@ order: -98
 
 # Vue3
 
-vue3 中为什么引入 ref 函数，有什么用，如何使用以及使用场景，注意的点，详细举例简单的完整的 vue 代码说明下
-
 ## ref
 
 ref 是 Composition API 的核心响应式 API 之一，用于创建响应式数据。
