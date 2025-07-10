@@ -1,7 +1,7 @@
 ---
 toc: content
 title: props/emit
-order: -99
+order: -98
 ---
 
 # Vue3
