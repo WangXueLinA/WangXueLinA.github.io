@@ -624,6 +624,12 @@ export default defineComponent({
 
 ## defineProps
 
+defineProps的主要功能是定义和校验父组件传递给子组件的属性
+
+1. 类型自动推导：在使用 TypeScript 时，无需额外配置，就能自动推导出属性类型。
+2. 运行时校验：和 Vue2 的 props 选项一样，它也能进行运行时校验。
+3. 只能在`<script setup>`中使用：这是它的使用场景限制。
+
 ```vue
 <script setup lang="ts">
 interface Props {
@@ -636,6 +642,12 @@ const props = defineProps<Props>(['message']);
 ```
 
 ## defineEmits
+
+defineEmits用于定义子组件可以触发的事件，父组件可以监听这些事件。
+
+1. 类型安全：能确保触发的事件名称和参数类型都是正确的。
+2. 运行时校验：可对触发事件的参数进行校验。
+3. 自动导入：无需手动导入，可直接在组件内使用。
 
 ```vue
 <script setup lang="ts">
@@ -681,6 +693,144 @@ const props = withDefaults(defineProps<Props>(), {
 2. TypeScript 类型安全
 
 确保默认值与 TypeScript 类型定义一致，避免类型错误。
+
+## mergeProps
+
+### 作用
+
+mergeProps的核心作用是将多个 props 对象合并为一个新对象，主要用于组合式 API 和高阶组件（HOC）中。
+
+
+1. 保留所有属性：合并后的对象包含所有原始 props 中的属性。
+2. 事件处理器合并：同名事件处理器（如onClick）会被合并为一个数组，按顺序执行。
+3. 非事件属性覆盖：同名的非事件属性（如class、style）后出现的会覆盖先出现的。
+
+```js
+import { mergeProps } from 'vue'
+
+const one = {
+  class: 'foo',
+  onClick: handlerA
+}
+
+const two = {
+  class: { bar: true },
+  onClick: handlerB
+}
+
+const merged = mergeProps(one, two)
+/**
+ {
+   class: 'foo bar',
+   onClick: [handlerA, handlerB]
+ }
+ */
+```
+
+在 Vue2 和 Vue3 中，经常需要将父组件的 props 透传到子组件，典型写法是
+
+```js
+<template>
+  <ChildComponent v-bind="{...$attrs, ...localProps}" />
+</template>
+```
+
+这种写法存在以下问题：
+
+1. 事件覆盖：如果 $attrs 和 localProps 中有同名事件（如 onClick），后出现的会覆盖先出现的。
+2. 非事件属性覆盖：class、style 等属性也会被简单覆盖，而非合并。
+3. 类型安全缺失：TypeScript 无法正确推导合并后的类型。
+
+
+mergeProps 解决了上述问题
+```js
+<template>
+  <ChildComponent v-bind="mergedProps" />
+</template>
+
+<script setup>
+import { mergeProps, defineProps } from 'vue';
+
+const props = defineProps({
+  size: String,
+  disabled: Boolean
+});
+
+const mergedProps = mergeProps(
+  props,
+  { 
+    // 内部默认 props
+    size: 'medium',
+    // 内部事件处理器
+    onClick: () => console.log('Clicked') 
+  }
+);
+</script>
+```
+
+1. 事件合并：同名事件处理器会被合并为数组，按顺序执行。
+2. 属性智能合并：class 和 style 会被正确合并（如果需要）。
+3. 类型安全：配合 TypeScript 提供完整的类型推导。
+
+
+### 使用场景
+
+1. 高阶组件：在封装组件时，需要将外部传入的 props 与内部默认 props 合并
+
+```js
+<template>
+  <div class="wrapper">
+    <!-- 将合并后的props传递给子组件 -->
+    <ChildComponent v-bind="mergedProps" />
+  </div>
+</template>
+
+<script setup>
+import { mergeProps, defineComponent } from 'vue';
+
+const ChildComponent = defineComponent({
+  props: {
+    message: String,
+    size: String
+  },
+  // ...
+});
+
+const props = defineProps({
+  // 高阶组件自身的props
+  wrapperClass: String
+});
+
+const mergedProps = mergeProps(
+  // 内部默认props
+  { message: 'Default' },
+  // 透传的外部props
+  toRefs(props)
+);
+</script>
+```
+
+2. 组合多个组件的 props: 需要将多个来源的 props 合并
+
+```js
+<script setup>
+import { mergeProps, reactive } from 'vue';
+
+// 从不同来源获取props
+const formProps = reactive({
+  disabled: false,
+  readonly: false
+});
+
+const buttonProps = reactive({
+  size: 'medium',
+  type: 'primary'
+});
+
+// 合并props
+const merged = mergeProps(formProps, buttonProps);
+</script>
+```
 
 <BackTop></BackTop>
 <SplashCursor></SplashCursor>
