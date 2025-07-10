@@ -13826,7 +13826,7 @@ export default defineComponent({
     props.message; // \u7C7B\u578B\uFF1Astring | undefined
   },
 });
-`,paraId:74,tocIndex:17},{value:`<script setup lang="ts">
+`,paraId:74,tocIndex:17},{value:"defineProps\u7684\u4E3B\u8981\u529F\u80FD\u662F\u5B9A\u4E49\u548C\u6821\u9A8C\u7236\u7EC4\u4EF6\u4F20\u9012\u7ED9\u5B50\u7EC4\u4EF6\u7684\u5C5E\u6027",paraId:75,tocIndex:18},{value:"\u7C7B\u578B\u81EA\u52A8\u63A8\u5BFC\uFF1A\u5728\u4F7F\u7528 TypeScript \u65F6\uFF0C\u65E0\u9700\u989D\u5916\u914D\u7F6E\uFF0C\u5C31\u80FD\u81EA\u52A8\u63A8\u5BFC\u51FA\u5C5E\u6027\u7C7B\u578B\u3002",paraId:76,tocIndex:18},{value:"\u8FD0\u884C\u65F6\u6821\u9A8C\uFF1A\u548C Vue2 \u7684 props \u9009\u9879\u4E00\u6837\uFF0C\u5B83\u4E5F\u80FD\u8FDB\u884C\u8FD0\u884C\u65F6\u6821\u9A8C\u3002",paraId:76,tocIndex:18},{value:"\u53EA\u80FD\u5728",paraId:76,tocIndex:18},{value:"<script setup>",paraId:76,tocIndex:18},{value:"\u4E2D\u4F7F\u7528\uFF1A\u8FD9\u662F\u5B83\u7684\u4F7F\u7528\u573A\u666F\u9650\u5236\u3002",paraId:76,tocIndex:18},{value:`<script setup lang="ts">
 interface Props {
   message: string;
   count?: number;
@@ -13834,7 +13834,7 @@ interface Props {
 
 const props = defineProps<Props>(['message']);
 <\/script>
-`,paraId:75,tocIndex:18},{value:`<script setup lang="ts">
+`,paraId:77,tocIndex:18},{value:"defineEmits\u7528\u4E8E\u5B9A\u4E49\u5B50\u7EC4\u4EF6\u53EF\u4EE5\u89E6\u53D1\u7684\u4E8B\u4EF6\uFF0C\u7236\u7EC4\u4EF6\u53EF\u4EE5\u76D1\u542C\u8FD9\u4E9B\u4E8B\u4EF6\u3002",paraId:78,tocIndex:19},{value:"\u7C7B\u578B\u5B89\u5168\uFF1A\u80FD\u786E\u4FDD\u89E6\u53D1\u7684\u4E8B\u4EF6\u540D\u79F0\u548C\u53C2\u6570\u7C7B\u578B\u90FD\u662F\u6B63\u786E\u7684\u3002",paraId:79,tocIndex:19},{value:"\u8FD0\u884C\u65F6\u6821\u9A8C\uFF1A\u53EF\u5BF9\u89E6\u53D1\u4E8B\u4EF6\u7684\u53C2\u6570\u8FDB\u884C\u6821\u9A8C\u3002",paraId:79,tocIndex:19},{value:"\u81EA\u52A8\u5BFC\u5165\uFF1A\u65E0\u9700\u624B\u52A8\u5BFC\u5165\uFF0C\u53EF\u76F4\u63A5\u5728\u7EC4\u4EF6\u5185\u4F7F\u7528\u3002",paraId:79,tocIndex:19},{value:`<script setup lang="ts">
 interface Emits {
   (e: 'submit', payload: string): void;
   (e: 'cancel'): void;
@@ -13842,7 +13842,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>(['submit', 'cancel']);
 <\/script>
-`,paraId:76,tocIndex:19},{value:"\u4E3B\u8981\u7528\u4E8E\u4E3A\u7EC4\u4EF6\u7684 props \u63D0\u4F9B\u7C7B\u578B\u5B89\u5168\u7684\u9ED8\u8BA4\u503C\uFF0C\u5C24\u5176\u662F\u5728\u4F7F\u7528 ",paraId:77,tocIndex:20},{value:"<script setup>",paraId:77,tocIndex:20},{value:" \u8BED\u6CD5\u7ED3\u5408 TypeScript \u65F6\u3002",paraId:77,tocIndex:20},{value:`<script setup lang="ts">
+`,paraId:80,tocIndex:19},{value:"\u4E3B\u8981\u7528\u4E8E\u4E3A\u7EC4\u4EF6\u7684 props \u63D0\u4F9B\u7C7B\u578B\u5B89\u5168\u7684\u9ED8\u8BA4\u503C\uFF0C\u5C24\u5176\u662F\u5728\u4F7F\u7528 ",paraId:81,tocIndex:20},{value:"<script setup>",paraId:81,tocIndex:20},{value:" \u8BED\u6CD5\u7ED3\u5408 TypeScript \u65F6\u3002",paraId:81,tocIndex:20},{value:`<script setup lang="ts">
 import { withDefaults } from 'vue';
 
 // \u5B9A\u4E49 Props \u7C7B\u578B
@@ -13859,7 +13859,98 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 });
 <\/script>
-`,paraId:78,tocIndex:20},{value:"\u4F7F\u7528\u573A\u666F",paraId:79,tocIndex:20},{value:"\u53EF\u9009 Props \u9700\u8981\u9ED8\u8BA4\u503C",paraId:80,tocIndex:20},{value:"\u5F53\u7236\u7EC4\u4EF6\u6CA1\u6709\u4F20\u9012\u67D0\u4E2A prop \u65F6\uFF0C\u4F7F\u7528 withDefaults \u63D0\u4F9B\u7684\u9ED8\u8BA4\u503C\u3002",paraId:81,tocIndex:20},{value:"TypeScript \u7C7B\u578B\u5B89\u5168",paraId:82,tocIndex:20},{value:"\u786E\u4FDD\u9ED8\u8BA4\u503C\u4E0E TypeScript \u7C7B\u578B\u5B9A\u4E49\u4E00\u81F4\uFF0C\u907F\u514D\u7C7B\u578B\u9519\u8BEF\u3002",paraId:83,tocIndex:20}]},23906:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(86496);const a=[{value:"provide \u548C inject \u7528\u4E8E\u5B9E\u73B0\u8DE8\u5C42\u7EA7\u7EC4\u4EF6\u901A\u4FE1\uFF0C\u5C24\u5176\u9002\u7528\u4E8E\u7956\u5148\u7EC4\u4EF6\u5411\u540E\u4EE3\u7EC4\u4EF6\u4F20\u9012\u6570\u636E\u7684\u573A\u666F\u3002",paraId:0,tocIndex:1},{value:"provide\uFF1A\u5728\u7956\u5148\u7EC4\u4EF6\u4E2D\u63D0\u4F9B\u6570\u636E\uFF0C\u53EF\u4F20\u9012\u54CD\u5E94\u5F0F\u6570\u636E\u3002",paraId:1,tocIndex:2},{value:"inject\uFF1A\u5728\u540E\u4EE3\u7EC4\u4EF6\u4E2D\u6CE8\u5165\u6570\u636E\uFF0C\u652F\u6301\u8BBE\u7F6E\u9ED8\u8BA4\u503C\u3002",paraId:1,tocIndex:2},{value:`<!-- \u7956\u5148\u7EC4\u4EF6 -->
+`,paraId:82,tocIndex:20},{value:"\u4F7F\u7528\u573A\u666F",paraId:83,tocIndex:20},{value:"\u53EF\u9009 Props \u9700\u8981\u9ED8\u8BA4\u503C",paraId:84,tocIndex:20},{value:"\u5F53\u7236\u7EC4\u4EF6\u6CA1\u6709\u4F20\u9012\u67D0\u4E2A prop \u65F6\uFF0C\u4F7F\u7528 withDefaults \u63D0\u4F9B\u7684\u9ED8\u8BA4\u503C\u3002",paraId:85,tocIndex:20},{value:"TypeScript \u7C7B\u578B\u5B89\u5168",paraId:86,tocIndex:20},{value:"\u786E\u4FDD\u9ED8\u8BA4\u503C\u4E0E TypeScript \u7C7B\u578B\u5B9A\u4E49\u4E00\u81F4\uFF0C\u907F\u514D\u7C7B\u578B\u9519\u8BEF\u3002",paraId:87,tocIndex:20},{value:"mergeProps\u7684\u6838\u5FC3\u4F5C\u7528\u662F\u5C06\u591A\u4E2A props \u5BF9\u8C61\u5408\u5E76\u4E3A\u4E00\u4E2A\u65B0\u5BF9\u8C61\uFF0C\u4E3B\u8981\u7528\u4E8E\u7EC4\u5408\u5F0F API \u548C\u9AD8\u9636\u7EC4\u4EF6\uFF08HOC\uFF09\u4E2D\u3002",paraId:88,tocIndex:22},{value:"\u4FDD\u7559\u6240\u6709\u5C5E\u6027\uFF1A\u5408\u5E76\u540E\u7684\u5BF9\u8C61\u5305\u542B\u6240\u6709\u539F\u59CB props \u4E2D\u7684\u5C5E\u6027\u3002",paraId:89,tocIndex:22},{value:"\u4E8B\u4EF6\u5904\u7406\u5668\u5408\u5E76\uFF1A\u540C\u540D\u4E8B\u4EF6\u5904\u7406\u5668\uFF08\u5982onClick\uFF09\u4F1A\u88AB\u5408\u5E76\u4E3A\u4E00\u4E2A\u6570\u7EC4\uFF0C\u6309\u987A\u5E8F\u6267\u884C\u3002",paraId:89,tocIndex:22},{value:"\u975E\u4E8B\u4EF6\u5C5E\u6027\u8986\u76D6\uFF1A\u540C\u540D\u7684\u975E\u4E8B\u4EF6\u5C5E\u6027\uFF08\u5982class\u3001style\uFF09\u540E\u51FA\u73B0\u7684\u4F1A\u8986\u76D6\u5148\u51FA\u73B0\u7684\u3002",paraId:89,tocIndex:22},{value:`import { mergeProps } from 'vue'
+
+const one = {
+  class: 'foo',
+  onClick: handlerA
+}
+
+const two = {
+  class: { bar: true },
+  onClick: handlerB
+}
+
+const merged = mergeProps(one, two)
+/**
+ {
+   class: 'foo bar',
+   onClick: [handlerA, handlerB]
+ }
+ */
+`,paraId:90,tocIndex:22},{value:"\u5728 Vue2 \u548C Vue3 \u4E2D\uFF0C\u7ECF\u5E38\u9700\u8981\u5C06\u7236\u7EC4\u4EF6\u7684 props \u900F\u4F20\u5230\u5B50\u7EC4\u4EF6\uFF0C\u5178\u578B\u5199\u6CD5\u662F",paraId:91,tocIndex:22},{value:`<template>
+  <ChildComponent v-bind="{...$attrs, ...localProps}" />
+</template>
+`,paraId:92,tocIndex:22},{value:"\u8FD9\u79CD\u5199\u6CD5\u5B58\u5728\u4EE5\u4E0B\u95EE\u9898\uFF1A",paraId:93,tocIndex:22},{value:"\u4E8B\u4EF6\u8986\u76D6\uFF1A\u5982\u679C $attrs \u548C localProps \u4E2D\u6709\u540C\u540D\u4E8B\u4EF6\uFF08\u5982 onClick\uFF09\uFF0C\u540E\u51FA\u73B0\u7684\u4F1A\u8986\u76D6\u5148\u51FA\u73B0\u7684\u3002",paraId:94,tocIndex:22},{value:"\u975E\u4E8B\u4EF6\u5C5E\u6027\u8986\u76D6\uFF1Aclass\u3001style \u7B49\u5C5E\u6027\u4E5F\u4F1A\u88AB\u7B80\u5355\u8986\u76D6\uFF0C\u800C\u975E\u5408\u5E76\u3002",paraId:94,tocIndex:22},{value:"\u7C7B\u578B\u5B89\u5168\u7F3A\u5931\uFF1ATypeScript \u65E0\u6CD5\u6B63\u786E\u63A8\u5BFC\u5408\u5E76\u540E\u7684\u7C7B\u578B\u3002",paraId:94,tocIndex:22},{value:"mergeProps \u89E3\u51B3\u4E86\u4E0A\u8FF0\u95EE\u9898",paraId:95,tocIndex:22},{value:`<template>
+  <ChildComponent v-bind="mergedProps" />
+</template>
+
+<script setup>
+import { mergeProps, defineProps } from 'vue';
+
+const props = defineProps({
+  size: String,
+  disabled: Boolean
+});
+
+const mergedProps = mergeProps(
+  props,
+  { 
+    // \u5185\u90E8\u9ED8\u8BA4 props
+    size: 'medium',
+    // \u5185\u90E8\u4E8B\u4EF6\u5904\u7406\u5668
+    onClick: () => console.log('Clicked') 
+  }
+);
+<\/script>
+`,paraId:96,tocIndex:22},{value:"\u4E8B\u4EF6\u5408\u5E76\uFF1A\u540C\u540D\u4E8B\u4EF6\u5904\u7406\u5668\u4F1A\u88AB\u5408\u5E76\u4E3A\u6570\u7EC4\uFF0C\u6309\u987A\u5E8F\u6267\u884C\u3002",paraId:97,tocIndex:22},{value:"\u5C5E\u6027\u667A\u80FD\u5408\u5E76\uFF1Aclass \u548C style \u4F1A\u88AB\u6B63\u786E\u5408\u5E76\uFF08\u5982\u679C\u9700\u8981\uFF09\u3002",paraId:97,tocIndex:22},{value:"\u7C7B\u578B\u5B89\u5168\uFF1A\u914D\u5408 TypeScript \u63D0\u4F9B\u5B8C\u6574\u7684\u7C7B\u578B\u63A8\u5BFC\u3002",paraId:97,tocIndex:22},{value:"\u9AD8\u9636\u7EC4\u4EF6\uFF1A\u5728\u5C01\u88C5\u7EC4\u4EF6\u65F6\uFF0C\u9700\u8981\u5C06\u5916\u90E8\u4F20\u5165\u7684 props \u4E0E\u5185\u90E8\u9ED8\u8BA4 props \u5408\u5E76",paraId:98,tocIndex:23},{value:`<template>
+  <div class="wrapper">
+    <!-- \u5C06\u5408\u5E76\u540E\u7684props\u4F20\u9012\u7ED9\u5B50\u7EC4\u4EF6 -->
+    <ChildComponent v-bind="mergedProps" />
+  </div>
+</template>
+
+<script setup>
+import { mergeProps, defineComponent } from 'vue';
+
+const ChildComponent = defineComponent({
+  props: {
+    message: String,
+    size: String
+  },
+  // ...
+});
+
+const props = defineProps({
+  // \u9AD8\u9636\u7EC4\u4EF6\u81EA\u8EAB\u7684props
+  wrapperClass: String
+});
+
+const mergedProps = mergeProps(
+  // \u5185\u90E8\u9ED8\u8BA4props
+  { message: 'Default' },
+  // \u900F\u4F20\u7684\u5916\u90E8props
+  toRefs(props)
+);
+<\/script>
+`,paraId:99,tocIndex:23},{value:"\u7EC4\u5408\u591A\u4E2A\u7EC4\u4EF6\u7684 props: \u9700\u8981\u5C06\u591A\u4E2A\u6765\u6E90\u7684 props \u5408\u5E76",paraId:100,tocIndex:23},{value:`<script setup>
+import { mergeProps, reactive } from 'vue';
+
+// \u4ECE\u4E0D\u540C\u6765\u6E90\u83B7\u53D6props
+const formProps = reactive({
+  disabled: false,
+  readonly: false
+});
+
+const buttonProps = reactive({
+  size: 'medium',
+  type: 'primary'
+});
+
+// \u5408\u5E76props
+const merged = mergeProps(formProps, buttonProps);
+<\/script>
+`,paraId:101,tocIndex:23}]},23906:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(86496);const a=[{value:"provide \u548C inject \u7528\u4E8E\u5B9E\u73B0\u8DE8\u5C42\u7EA7\u7EC4\u4EF6\u901A\u4FE1\uFF0C\u5C24\u5176\u9002\u7528\u4E8E\u7956\u5148\u7EC4\u4EF6\u5411\u540E\u4EE3\u7EC4\u4EF6\u4F20\u9012\u6570\u636E\u7684\u573A\u666F\u3002",paraId:0,tocIndex:1},{value:"provide\uFF1A\u5728\u7956\u5148\u7EC4\u4EF6\u4E2D\u63D0\u4F9B\u6570\u636E\uFF0C\u53EF\u4F20\u9012\u54CD\u5E94\u5F0F\u6570\u636E\u3002",paraId:1,tocIndex:2},{value:"inject\uFF1A\u5728\u540E\u4EE3\u7EC4\u4EF6\u4E2D\u6CE8\u5165\u6570\u636E\uFF0C\u652F\u6301\u8BBE\u7F6E\u9ED8\u8BA4\u503C\u3002",paraId:1,tocIndex:2},{value:`<!-- \u7956\u5148\u7EC4\u4EF6 -->
 <script setup>
 import { provide, ref } from 'vue';
 const message = ref('Hello Vue3!');
@@ -14123,82 +14214,97 @@ user.value.address.city = '\u4E0A\u6D77';
   2. \u8BFB\u53D6\u5C5E\u6027\uFF1Aaddress\uFF08\u8FD4\u56DE\u4EE3\u7406\u5BF9\u8C61\uFF09
   3. \u8BBE\u7F6E\u5C5E\u6027\uFF1Acity \u2192 '\u4E0A\u6D77'
 */
-`,paraId:19,tocIndex:9}]},3016:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(61549);const a=[{value:"toRaw \u7528\u4E8E\u83B7\u53D6 Vue \u54CD\u5E94\u5F0F\u5BF9\u8C61\u7684\u539F\u59CB\u5BF9\u8C61\u3002Vue 3 \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4F1A\u4E3A\u5BF9\u8C61\u521B\u5EFA\u4E00\u4E2A\u4EE3\u7406\uFF08Proxy\uFF09\uFF0CtoRaw \u53EF\u4EE5\u8FD4\u56DE\u8FD9\u4E2A\u4EE3\u7406\u80CC\u540E\u7684\u539F\u59CB\u5BF9\u8C61",paraId:0,tocIndex:1},{value:`import { toRaw } from 'vue';
+`,paraId:19,tocIndex:9}]},3016:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(61549);const a=[{value:"toRaw \u7528\u4E8E\u83B7\u53D6 Vue \u54CD\u5E94\u5F0F\u5BF9\u8C61\u7684\u539F\u59CB\u5BF9\u8C61\u3002Vue 3 \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4F1A\u4E3A\u5BF9\u8C61\u521B\u5EFA\u4E00\u4E2A\u4EE3\u7406\uFF08Proxy\uFF09\uFF0CtoRaw \u53EF\u4EE5\u8FD4\u56DE\u8FD9\u4E2A\u4EE3\u7406\u80CC\u540E\u7684\u539F\u59CB\u5BF9\u8C61",paraId:0,tocIndex:1},{value:"\u83B7\u53D6 reactive \u5BF9\u8C61\u7684\u539F\u59CB\u6570\u636E",paraId:1,tocIndex:2},{value:`import { reactive, toRaw } from 'vue'
 
-const rawObject = toRaw(proxyObject);
-`,paraId:1,tocIndex:2},{value:"\u5F53\u4F60\u9700\u8981\u76F4\u63A5\u64CD\u4F5C\u539F\u59CB\u5BF9\u8C61\uFF0C\u800C\u4E0D\u5E0C\u671B\u89E6\u53D1 Vue \u7684\u54CD\u5E94\u5F0F\u66F4\u65B0\u65F6\u3002",paraId:2,tocIndex:3},{value:"\u5728\u67D0\u4E9B\u6027\u80FD\u654F\u611F\u7684\u573A\u666F\u4E0B\uFF0C\u76F4\u63A5\u64CD\u4F5C\u539F\u59CB\u5BF9\u8C61\u53EF\u80FD\u6BD4\u64CD\u4F5C\u54CD\u5E94\u5F0F\u5BF9\u8C61\u66F4\u9AD8\u6548\u3002",paraId:2,tocIndex:3},{value:`<template>
-  <div>
-    <p>Count: {{ count }}</p>
-    <button @click="increment">Increment</button>
-    <button @click="incrementRaw">Increment Raw</button>
-  </div>
-</template>
+const original = { count: 0 }
+const proxy = reactive(original)
 
-<script>
-import { reactive, toRaw } from 'vue';
+console.log(toRaw(proxy) === original) // true
+`,paraId:2,tocIndex:2},{value:"\u83B7\u53D6 ref \u5BF9\u8C61\u7684\u539F\u59CB\u503C",paraId:3,tocIndex:2},{value:`import { ref, toRaw } from 'vue'
 
-export default {
-  setup() {
-    const state = reactive({
-      count: 0,
-    });
+const original = { count: 0 }
+const myRef = ref(original)
 
-    const increment = () => {
-      state.count++; // \u54CD\u5E94\u5F0F\u5BF9\u8C61 state \u66F4\u65B0 count\uFF0C\u89E6\u53D1 Vue \u54CD\u5E94\u5F0F\u66F4\u65B0
-    };
+console.log(toRaw(myRef.value)) // \u4F9D\u7136\u9700\u8981.value\u53D6\u503C
+console.log(toRaw(myRef.value) === original) // true
+`,paraId:4,tocIndex:2},{value:"\u83B7\u53D6 computed \u5BF9\u8C61\u7684\u539F\u59CB\u503C",paraId:5,tocIndex:2},{value:`import { computed, toRaw } from 'vue'
 
-    const incrementRaw = () => {
-      // \u83B7\u53D6 state \u7684\u539F\u59CB\u5BF9\u8C61 \u5E76\u76F4\u63A5\u4FEE\u6539\u5B83 \u4E0D\u4F1A\u89E6\u53D1 Vue \u54CD\u5E94\u5F0F\u66F4\u65B0\uFF0C\u56E0\u6B64\u754C\u9762\u4E0D\u4F1A\u81EA\u52A8\u5237\u65B0\u3002
-      const rawState = toRaw(state);
-      rawState.count++;
-      console.log('Raw State:', rawState);
-    };
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
 
-    return {
-      count: state.count,
-      increment,
-      incrementRaw,
-    };
+console.log(toRaw(doubled.value)) // \u76F4\u63A5\u83B7\u53D6\u8BA1\u7B97\u7ED3\u679C\u7684\u539F\u59CB\u503C
+`,paraId:6,tocIndex:2},{value:"\u907F\u514D\u89E6\u53D1\u54CD\u5E94\u5F0F\u66F4\u65B0: \u5F53\u4F60\u9700\u8981\u5BF9\u6570\u636E\u8FDB\u884C\u590D\u6742\u64CD\u4F5C\u4F46\u4E0D\u5E0C\u671B\u89E6\u53D1\u7EC4\u4EF6\u91CD\u65B0\u6E32\u67D3\u65F6",paraId:7,tocIndex:3},{value:`const state = reactive({ items: [1, 2, 3] })
+
+// \u76F4\u63A5\u64CD\u4F5C\u539F\u59CB\u6570\u636E\uFF0C\u4E0D\u89E6\u53D1\u66F4\u65B0
+toRaw(state.items).push(4)
+`,paraId:8,tocIndex:3},{value:"\u907F\u514D\u63D0\u4EA4\u54CD\u5E94\u5F0F\u4EE3\u7406\u5BF9\u8C61: \u5F53\u4F60\u9700\u8981\u5C06\u54CD\u5E94\u5F0F\u6570\u636E\u4F5C\u4E3A\u53C2\u6570\u4F20\u9012\u7ED9 API \u65F6\uFF0C\u76F4\u63A5\u63D0\u4EA4\u53EF\u80FD\u4F1A\u5305\u542B Vue \u7684\u5185\u90E8\u4EE3\u7406\u5C5E\u6027\uFF0C\u5BFC\u81F4\u6570\u636E\u5197\u4F59\u6216\u683C\u5F0F\u4E0D\u7B26\u5408\u9884\u671F\u3002",paraId:9,tocIndex:3},{value:`import { reactive, toRaw, ref } from 'vue'
+import axios from 'axios'
+
+const formData = reactive({
+  name: 'John',
+  age: 30
+})
+
+// \u274C \u9519\u8BEF\uFF1A\u76F4\u63A5\u63D0\u4EA4\u54CD\u5E94\u5F0F\u5BF9\u8C61\u53EF\u80FD\u5305\u542BVue\u5185\u90E8\u5C5E\u6027
+axios.post('/api/user', formData)
+
+// \u2705 \u6B63\u786E\uFF1A\u63D0\u4EA4\u539F\u59CB\u6570\u636E
+axios.post('/api/user', toRaw(formData))
+`,paraId:10,tocIndex:3},{value:"\u6DF1\u5C42\u89E3\u5305\u539F\u59CB\u5BF9\u8C61",paraId:11,tocIndex:3},{value:"toRaw\u66F4\u9002\u7528reactive\u5305\u88F9\u7684\u4E00\u5C42\u7684\u54CD\u5E94\u5F0F\u6570\u636E\uFF0C\u901A\u8FC7toRaw\u76F4\u63A5\u5C31\u8F6C\u5316\u4E3A\u539F\u59CB\u5BF9\u8C61\uFF0C\u5BF9\u4E8Eref\u8FD8\u6709\u591A\u5C42\u5D4C\u5957\u7684\u54CD\u5E94\u5F0F\u5C31\u6709\u70B9\u9E21\u808B\uFF0Cref\u9700\u8981\u8FDB\u884C\u89E3\u5305\uFF0C\u6DF1\u5C42\u8FD8\u9700\u8981\u8FDB\u884C\u8F6C\u6362\uFF0C\u53EF\u4EE5\u5199\u4E00\u4E2A\u6DF1\u5C42\u5904\u7406\u54CD\u5E94\u5F0F\u5BF9\u8C61\u548C\u89E3\u5305 ref \u7684 deepToRaw \u51FD\u6570",paraId:12,tocIndex:3},{value:`function deepToRaw(value) {
+  // \u5904\u7406 ref \u5BF9\u8C61\uFF0C\u9012\u5F52\u89E3\u5305
+  if (isRef(value)) {
+    return deepToRaw(value.value);
+  }
+
+  // \u5904\u7406\u666E\u901A\u5BF9\u8C61\u548C\u6570\u7EC4
+  if (typeof value === 'object' && value !== null) {
+    // \u83B7\u53D6\u539F\u59CB\u5BF9\u8C61\uFF08\u5982\u679C\u662F\u54CD\u5E94\u5F0F\u7684\uFF09
+    const rawValue = toRaw(value);
+    
+    // \u9012\u5F52\u5904\u7406\u6570\u7EC4\u5143\u7D20
+    if (Array.isArray(rawValue)) {
+      return rawValue.map(item => deepToRaw(item));
+    }
+    
+    // \u9012\u5F52\u5904\u7406\u5BF9\u8C61\u5C5E\u6027
+    const result = {};
+    for (const key in rawValue) {
+      if (Object.prototype.hasOwnProperty.call(rawValue, key)) {
+        result[key] = deepToRaw(rawValue[key]);
+      }
+    }
+    return result;
+  }
+
+  // \u539F\u59CB\u503C\u76F4\u63A5\u8FD4\u56DE
+  return value;
+}
+
+const original = reactive({
+  level1: {
+    level2: ref('deep')
   },
-};
-<\/script>
-`,paraId:3,tocIndex:3},{value:"markRaw \u7528\u4E8E\u6807\u8BB0\u4E00\u4E2A\u5BF9\u8C61\uFF0C\u4F7F\u5176\u4E0D\u4F1A\u88AB Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u8F6C\u6362\u4E3A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u3002\u5373\u4F7F\u8FD9\u4E2A\u5BF9\u8C61\u88AB\u4F20\u9012\u7ED9 reactive \u6216 ref\uFF0C\u5B83\u4E5F\u4E0D\u4F1A\u53D8\u6210\u54CD\u5E94\u5F0F\u7684\u3002",paraId:4,tocIndex:4},{value:`import { markRaw } from 'vue';
+  a: ref([1,3]),
+  b: reactive({
+    c: 1
+  })
+});
+const rawData = deepToRaw(original);
+// {
+//   level1: { level2: "deep" },
+//   a: [1, 3],
+//   b: { c: 1 }
+// }
+`,paraId:13,tocIndex:3},{value:"markRaw \u7528\u4E8E\u6807\u8BB0\u4E00\u4E2A\u5BF9\u8C61\uFF0C\u4F7F\u5176\u4E0D\u4F1A\u88AB Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u8F6C\u6362\u4E3A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u3002\u5373\u4F7F\u8FD9\u4E2A\u5BF9\u8C61\u88AB\u4F20\u9012\u7ED9 reactive \u6216 ref\uFF0C\u5B83\u4E5F\u4E0D\u4F1A\u53D8\u6210\u54CD\u5E94\u5F0F\u7684\u3002",paraId:14,tocIndex:4},{value:`import { reactive, markRaw } from 'vue'
 
-const nonReactiveObject = markRaw(rawObject);
-`,paraId:5,tocIndex:5},{value:"\u5F53\u4F60\u6709\u4E00\u4E2A\u5BF9\u8C61\uFF0C\u4F60\u660E\u786E\u4E0D\u5E0C\u671B\u5B83\u88AB Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4EE3\u7406\u65F6\u3002",paraId:6,tocIndex:6},{value:"\u5F53\u4F60\u9700\u8981\u5C06\u4E00\u4E2A\u5927\u578B\u5BF9\u8C61\u6216\u7B2C\u4E09\u65B9\u5E93\u7684\u5BF9\u8C61\u4F20\u9012\u7ED9 Vue\uFF0C\u4F46\u4E0D\u5E0C\u671B Vue \u5BF9\u5176\u8FDB\u884C\u54CD\u5E94\u5F0F\u5904\u7406\u65F6\u3002",paraId:6,tocIndex:6},{value:`<template>
-  <div>
-    <p>User: {{ user.name }}</p>
-    <button @click="updateUser">Update User</button>
-  </div>
-</template>
+const myChart = markRaw(new EChartsInstance()) // \u4E0D\u9700\u8981\u88AB\u8FFD\u8E2A
 
-<script>
-import { reactive, markRaw } from 'vue';
+const state = reactive({
+  count: 0,
+  chart: myChart
+})
 
-export default {
-  setup() {
-    const rawUser = {
-      name: 'John Doe',
-    };
-
-    const state = reactive({
-      user: markRaw(rawUser),
-    });
-
-    const updateUser = () => {
-      // \u76F4\u63A5\u4FEE\u6539\u539F\u59CB\u5BF9\u8C61  markRaw \u6807\u8BB0\u4E86 rawUser \u4E0D\u662F\u54CD\u5E94\u5F0F\u7684\uFF0C\u754C\u9762\u4E0D\u4F1A\u81EA\u52A8\u66F4\u65B0\u3002
-      rawUser.name = 'Jane Doe';
-      console.log('Updated User:', rawUser);
-    };
-
-    return {
-      user: state.user,
-      updateUser,
-    };
-  },
-};
-<\/script>
-`,paraId:7,tocIndex:6},{value:"toRaw \u7684\u4F7F\u7528\u573A\u666F\u6709\u9650\uFF1A",paraId:8,tocIndex:7},{value:"toRaw \u4E3B\u8981\u7528\u4E8E\u8C03\u8BD5\u6216\u6027\u80FD\u4F18\u5316\u573A\u666F\u3002\u5728\u5927\u591A\u6570\u60C5\u51B5\u4E0B\uFF0C\u4F60\u5E94\u8BE5\u76F4\u63A5\u64CD\u4F5C\u54CD\u5E94\u5F0F\u5BF9\u8C61\uFF0C\u800C\u4E0D\u662F\u7ED5\u8FC7 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u3002",paraId:9,tocIndex:7},{value:"markRaw \u7684\u5BF9\u8C61\u4E0D\u4F1A\u88AB\u4EE3\u7406\uFF1A",paraId:10,tocIndex:7},{value:"\u4E00\u65E6\u4E00\u4E2A\u5BF9\u8C61\u88AB markRaw \u6807\u8BB0\uFF0C\u5B83\u5C06\u6C38\u8FDC\u4E0D\u4F1A\u88AB Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4EE3\u7406\u3002\u8FD9\u610F\u5473\u7740\u5373\u4F7F\u4F60\u5C06\u8FD9\u4E2A\u5BF9\u8C61\u4F20\u9012\u7ED9 reactive \u6216 ref\uFF0C\u5B83\u4E5F\u4E0D\u4F1A\u53D8\u6210\u54CD\u5E94\u5F0F\u7684\u3002",paraId:11,tocIndex:7},{value:"\u6027\u80FD\u8003\u8651\uFF1A",paraId:12,tocIndex:7},{value:"\u4F7F\u7528 toRaw \u548C markRaw \u53EF\u4EE5\u63D0\u9AD8\u6027\u80FD\uFF0C\u7279\u522B\u662F\u5728\u5904\u7406\u5927\u578B\u5BF9\u8C61\u6216\u9891\u7E41\u64CD\u4F5C\u5BF9\u8C61\u65F6\u3002\u4F46\u8FC7\u5EA6\u4F7F\u7528\u53EF\u80FD\u4F1A\u5BFC\u81F4\u4EE3\u7801\u96BE\u4EE5\u7EF4\u62A4\uFF0C\u56E0\u4E3A\u4F60\u7ED5\u8FC7\u4E86 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u3002",paraId:13,tocIndex:7},{value:"\u54CD\u5E94\u5F0F\u4E22\u5931\uFF1A",paraId:14,tocIndex:7},{value:"\u5982\u679C\u4F60\u4E0D\u5C0F\u5FC3\u5C06\u4E00\u4E2A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u4F20\u9012\u7ED9 markRaw\uFF0C\u90A3\u4E48\u5B83\u7684\u54CD\u5E94\u5F0F\u7279\u6027\u5C06\u4F1A\u4E22\u5931\u3002\u8FD9\u53EF\u80FD\u4F1A\u5BFC\u81F4\u4E00\u4E9B\u96BE\u4EE5\u8C03\u8BD5\u7684\u95EE\u9898\u3002",paraId:15,tocIndex:7}]},20557:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(76244);const a=[{value:"readonly \u4F1A\u9012\u5F52\u5730\u5C06\u5BF9\u8C61\u7684\u6240\u6709\u5D4C\u5957\u5C5E\u6027\u90FD\u53D8\u4E3A\u53EA\u8BFB\uFF0C\u4EFB\u4F55\u5C1D\u8BD5\u4FEE\u6539\u53EA\u8BFB\u5C5E\u6027\u7684\u64CD\u4F5C\u90FD\u4F1A\u5728\u5F00\u53D1\u6A21\u5F0F\u4E0B\u89E6\u53D1\u8B66\u544A\u3002",paraId:0,tocIndex:1},{value:`import { readonly } from 'vue';
+`,paraId:15,tocIndex:5},{value:"\u5982\u679C\u4F60\u628A\u4E00\u4E2A \u7B2C\u4E09\u65B9\u5E93\u5BF9\u8C61\uFF08\u6BD4\u5982 ECharts\u3001Mapbox\u3001Three.js \u5B9E\u4F8B\u7B49\uFF09\u4EA4\u7ED9 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u53BB\u8FFD\u8E2A\uFF0C\u4F1A\u5BFC\u81F4\uFF1A",paraId:16,tocIndex:5},{value:"\u4E0D\u5FC5\u8981\u7684\u6027\u80FD\u5F00\u9500",paraId:17,tocIndex:5},{value:"\u67D0\u4E9B\u5E93\u5BF9\u8C61\u5185\u90E8\u662F\u975E\u54CD\u5E94\u5F0F\u53CB\u597D\u7684\uFF08\u542B\u95ED\u5305\u3001DOM \u5F15\u7528\u7B49\uFF09\uFF0C\u4F1A\u62A5\u9519\u6216\u5F02\u5E38",paraId:17,tocIndex:5},{value:"\u6240\u4EE5\u7528 markRaw() \u6807\u8BB0\u540E\uFF0CVue \u5C31 \u4E0D\u518D\u8BD5\u56FE\u5C06\u5B83\u8F6C\u6362\u4E3A\u54CD\u5E94\u5F0F\u5BF9\u8C61\uFF0C\u4F60\u53EF\u4EE5\u6B63\u5E38\u4F7F\u7528\u5B83\u800C\u4E0D\u5F15\u53D1\u526F\u4F5C\u7528\u3002",paraId:18,tocIndex:5},{value:"\u573A\u666F",paraId:19,tocIndex:6},{value:"\u793A\u4F8B",paraId:19,tocIndex:6},{value:"\u56FE\u8868\u5E93\u5B9E\u4F8B",paraId:19,tocIndex:6},{value:"ECharts\u3001Highcharts\u3001Chart.js, \u5982\uFF1A",paraId:19,tocIndex:6},{value:"markRaw(new EChartsInstance())",paraId:19,tocIndex:6},{value:"\u5730\u56FE\u5E93\u5BF9\u8C61",paraId:19,tocIndex:6},{value:"Leaflet\u3001Mapbox\u3001Cesium",paraId:19,tocIndex:6},{value:"3D \u6E32\u67D3\u5BF9\u8C61",paraId:19,tocIndex:6},{value:"Three.js\u3001Babylon.js",paraId:19,tocIndex:6},{value:"\u5927\u578B\u6570\u636E\u7F13\u5B58\u5BF9\u8C61",paraId:19,tocIndex:6},{value:"\u4E0D\u9700\u8981 UI \u54CD\u5E94\u7684\u5927\u5BF9\u8C61\u7F13\u5B58, \u5982\uFF1A",paraId:19,tocIndex:6},{value:"markRaw({ items: new Array(1000).fill({ name: 'item' }) })",paraId:19,tocIndex:6},{value:"DOM \u5143\u7D20",paraId:19,tocIndex:6},{value:"markRaw(document.createElement('div'))",paraId:19,tocIndex:6},{value:"markRaw \u7684\u5BF9\u8C61\u4E0D\u4F1A\u88AB\u4EE3\u7406\uFF1A",paraId:20,tocIndex:7},{value:"\u4E00\u65E6\u4E00\u4E2A\u5BF9\u8C61\u88AB markRaw \u6807\u8BB0\uFF0C\u5B83\u5C06\u6C38\u8FDC\u4E0D\u4F1A\u88AB Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4EE3\u7406\u3002\u8FD9\u610F\u5473\u7740\u5373\u4F7F\u4F60\u5C06\u8FD9\u4E2A\u5BF9\u8C61\u4F20\u9012\u7ED9 reactive \u6216 ref\uFF0C\u5B83\u4E5F\u4E0D\u4F1A\u53D8\u6210\u54CD\u5E94\u5F0F\u7684\u3002",paraId:21,tocIndex:7},{value:"\u6027\u80FD\u8003\u8651\uFF1A",paraId:22,tocIndex:7},{value:"markRaw \u53EF\u4EE5\u63D0\u9AD8\u6027\u80FD\uFF0C\u7279\u522B\u662F\u5728\u5904\u7406\u5927\u578B\u5BF9\u8C61\u6216\u9891\u7E41\u64CD\u4F5C\u5BF9\u8C61\u65F6\u3002\u4F46\u8FC7\u5EA6\u4F7F\u7528\u53EF\u80FD\u4F1A\u5BFC\u81F4\u4EE3\u7801\u96BE\u4EE5\u7EF4\u62A4\uFF0C\u56E0\u4E3A\u4F60\u7ED5\u8FC7\u4E86 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u3002",paraId:23,tocIndex:7},{value:"\u54CD\u5E94\u5F0F\u4E22\u5931\uFF1A",paraId:24,tocIndex:7},{value:"\u5982\u679C\u4F60\u4E0D\u5C0F\u5FC3\u5C06\u4E00\u4E2A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u4F20\u9012\u7ED9 markRaw\uFF0C\u90A3\u4E48\u5B83\u7684\u54CD\u5E94\u5F0F\u7279\u6027\u5C06\u4F1A\u4E22\u5931\u3002\u8FD9\u53EF\u80FD\u4F1A\u5BFC\u81F4\u4E00\u4E9B\u96BE\u4EE5\u8C03\u8BD5\u7684\u95EE\u9898\u3002",paraId:25,tocIndex:7}]},20557:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(76244);const a=[{value:"readonly \u4F1A\u9012\u5F52\u5730\u5C06\u5BF9\u8C61\u7684\u6240\u6709\u5D4C\u5957\u5C5E\u6027\u90FD\u53D8\u4E3A\u53EA\u8BFB\uFF0C\u4EFB\u4F55\u5C1D\u8BD5\u4FEE\u6539\u53EA\u8BFB\u5C5E\u6027\u7684\u64CD\u4F5C\u90FD\u4F1A\u5728\u5F00\u53D1\u6A21\u5F0F\u4E0B\u89E6\u53D1\u8B66\u544A\u3002",paraId:0,tocIndex:1},{value:`import { readonly } from 'vue';
 
 const original = { count: 0, nested: { value: 1 } };
 const readOnlyObj = readonly(original);
@@ -14315,7 +14421,7 @@ const increment = () => {
 <template>
   <button @click="increment">\u70B9\u51FB\u8BA1\u6570\uFF1A{{ count }}</button>
 </template>
-`,paraId:12,tocIndex:4},{value:"\u7EC4\u5408\u5F0F\u51FD\u6570\u8FD4\u56DE\u503C\uFF1A\u5C01\u88C5\u53EF\u590D\u7528\u7684\u903B\u8F91\u3002",paraId:13,tocIndex:4},{value:`<!-- \u7EC4\u5408\u5F0F\u51FD\u6570\u6587\u4EF6\uFF1AuseFetch.js -->
+`,paraId:12,tocIndex:4},{value:"\u7EC4\u5408\u5F0F\u51FD\u6570\u8FD4\u56DE\u503C\uFF1A\u5C01\u88C5\u53EF\u590D\u7528\u7684\u903B\u8F91\u3002",paraId:13,tocIndex:4},{value:`<!-- useFetch.js -->
 <script setup>
 import { ref } from 'vue';
 
@@ -14474,7 +14580,17 @@ console.log(count.value); // 1\uFF08\u539Fref\u4E0D\u518D\u5173\u8054\uFF09
 `,paraId:37,tocIndex:10},{value:"\u6DF1\u5C42\u5D4C\u5957\u89E3\u5305\uFF1A\u5373\u4F7F ref \u5D4C\u5957\u5728\u6DF1\u5C42\u5BF9\u8C61\u4E2D\uFF0C\u4ECD\u4F1A\u81EA\u52A8\u89E3\u5305\u3002",paraId:38,tocIndex:10},{value:`const innerRef = ref(5);
 const obj = reactive({ a: { b: innerRef } });
 console.log(obj.a.b); // 5\uFF08\u81EA\u52A8\u89E3\u5305\uFF09
-`,paraId:39,tocIndex:10},{value:"\u7279\u6027",paraId:40,tocIndex:11},{value:"reactive",paraId:40,tocIndex:11},{value:"ref",paraId:40,tocIndex:11},{value:"\u6570\u636E\u7C7B\u578B",paraId:40,tocIndex:11},{value:"\u53EA\u63A5\u53D7\u5BF9\u8C61/\u6570\u7EC4",paraId:40,tocIndex:11},{value:"\u63A5\u53D7\u4EFB\u4F55\u7C7B\u578B\uFF08\u539F\u59CB\u503C\u3001\u5BF9\u8C61\u3001\u51FD\u6570\uFF09",paraId:40,tocIndex:11},{value:"\u8BBF\u95EE\u65B9\u5F0F",paraId:40,tocIndex:11},{value:"\u76F4\u63A5\u8BBF\u95EE\u5C5E\u6027\uFF08obj.key\uFF09",paraId:40,tocIndex:11},{value:"\u901A\u8FC7 .value \u8BBF\u95EE\uFF08ref.value\uFF09",paraId:40,tocIndex:11},{value:"\u6A21\u677F\u4E2D\u4F7F\u7528",paraId:40,tocIndex:11},{value:"\u76F4\u63A5\u4F7F\u7528",paraId:40,tocIndex:11},{value:"\u81EA\u52A8\u89E3\u5305\uFF08\u6A21\u677F\u4E2D\u65E0\u9700 .value\uFF09",paraId:40,tocIndex:11},{value:"\u6DF1\u5C42\u54CD\u5E94\u6027",paraId:40,tocIndex:11},{value:"\u9ED8\u8BA4\u652F\u6301",paraId:40,tocIndex:11},{value:"\u9700\u8981\u5305\u88F9\u5BF9\u8C61\uFF08\u5185\u90E8\u8C03\u7528 reactive\uFF09",paraId:40,tocIndex:11},{value:"\u9002\u7528\u573A\u666F",paraId:40,tocIndex:11},{value:"\u590D\u6742\u5BF9\u8C61/\u5D4C\u5957\u6570\u636E",paraId:40,tocIndex:11},{value:"\u7B80\u5355\u503C\u3001\u9700\u8981\u7075\u6D3B\u6027\u7684\u573A\u666F",paraId:40,tocIndex:11},{value:"customRef \u662F Vue 3 \u4E2D\u7684\u4E00\u4E2A\u51FD\u6570\uFF0C\u7528\u4E8E\u521B\u5EFA\u4E00\u4E2A\u81EA\u5B9A\u4E49\u7684 ref",paraId:41,tocIndex:12},{value:`import { customRef } from 'vue';
+obj.a.b = 6;
+console.log(innerRef.value, 'innerRef'); // 6 \u76F8\u5F53\u4E8E\u4FEE\u6539innerRef.value
+`,paraId:39,tocIndex:10},{value:"\u5728\u5185\u90E8\u4E0D\u4EC5\u53EF\u4EE5\u81EA\u52A8\u89E3\u5305ref\uFF0C\u8FD8\u53EF\u4EE5\u89E3\u5305computed",paraId:40,tocIndex:10},{value:"computed\u8FD4\u56DE\u7684\u4E5F\u662F\u4E00\u4E2Aref\uFF0C\u56E0\u6B64\u5728reactive\u5BF9\u8C61\u5185\u90E8\u540C\u6837\u4F1A\u81EA\u52A8\u89E3\u5305",paraId:41,tocIndex:10},{value:`import { reactive, computed } from 'vue'
+
+const state = reactive({
+  count: 10,
+  doubled: computed(() => state.count * 2) // \u81EA\u52A8\u89E3\u5305\u4E3A\u8BA1\u7B97\u7ED3\u679C
+})
+
+console.log(state.doubled) // \u76F4\u63A5\u8BBF\u95EE20\uFF08\u800C\u975ERef\u5BF9\u8C61\uFF09
+`,paraId:42,tocIndex:10},{value:"\u7279\u6027",paraId:43,tocIndex:11},{value:"reactive",paraId:43,tocIndex:11},{value:"ref",paraId:43,tocIndex:11},{value:"\u6570\u636E\u7C7B\u578B",paraId:43,tocIndex:11},{value:"\u53EA\u63A5\u53D7\u5BF9\u8C61/\u6570\u7EC4",paraId:43,tocIndex:11},{value:"\u63A5\u53D7\u4EFB\u4F55\u7C7B\u578B\uFF08\u539F\u59CB\u503C\u3001\u5BF9\u8C61\u3001\u51FD\u6570\uFF09",paraId:43,tocIndex:11},{value:"\u8BBF\u95EE\u65B9\u5F0F",paraId:43,tocIndex:11},{value:"\u76F4\u63A5\u8BBF\u95EE\u5C5E\u6027\uFF08obj.key\uFF09",paraId:43,tocIndex:11},{value:"\u901A\u8FC7 .value \u8BBF\u95EE\uFF08ref.value\uFF09",paraId:43,tocIndex:11},{value:"\u6A21\u677F\u4E2D\u4F7F\u7528",paraId:43,tocIndex:11},{value:"\u76F4\u63A5\u4F7F\u7528",paraId:43,tocIndex:11},{value:"\u81EA\u52A8\u89E3\u5305\uFF08\u6A21\u677F\u4E2D\u65E0\u9700 .value\uFF09",paraId:43,tocIndex:11},{value:"\u6DF1\u5C42\u54CD\u5E94\u6027",paraId:43,tocIndex:11},{value:"\u9ED8\u8BA4\u652F\u6301",paraId:43,tocIndex:11},{value:"\u9700\u8981\u5305\u88F9\u5BF9\u8C61\uFF08\u5185\u90E8\u8C03\u7528 reactive\uFF09",paraId:43,tocIndex:11},{value:"\u9002\u7528\u573A\u666F",paraId:43,tocIndex:11},{value:"\u590D\u6742\u5BF9\u8C61/\u5D4C\u5957\u6570\u636E",paraId:43,tocIndex:11},{value:"\u7B80\u5355\u503C\u3001\u9700\u8981\u7075\u6D3B\u6027\u7684\u573A\u666F",paraId:43,tocIndex:11},{value:"customRef \u662F Vue 3 \u4E2D\u7684\u4E00\u4E2A\u51FD\u6570\uFF0C\u7528\u4E8E\u521B\u5EFA\u4E00\u4E2A\u81EA\u5B9A\u4E49\u7684 ref",paraId:44,tocIndex:12},{value:`import { customRef } from 'vue';
 
 const myCustomRef = customRef((track, trigger) => {
   return {
@@ -14492,45 +14608,60 @@ const myCustomRef = customRef((track, trigger) => {
     },
   };
 });
-`,paraId:42,tocIndex:13},{value:"\u9700\u8981\u81EA\u5B9A\u4E49 getter \u548C setter \u7684\u903B\u8F91\uFF1A\u5F53\u4F60\u9700\u8981\u5728\u83B7\u53D6\u6216\u8BBE\u7F6E\u503C\u65F6\u6267\u884C\u4E00\u4E9B\u81EA\u5B9A\u4E49\u903B\u8F91\u65F6\uFF0C\u53EF\u4EE5\u4F7F\u7528 customRef\u3002",paraId:43,tocIndex:14},{value:"\u9700\u8981\u624B\u52A8\u63A7\u5236\u4F9D\u8D56\u8FFD\u8E2A\u548C\u89E6\u53D1\u66F4\u65B0\uFF1A\u5F53\u4F60\u9700\u8981\u624B\u52A8\u63A7\u5236\u4F55\u65F6\u8FFD\u8E2A\u4F9D\u8D56\u548C\u4F55\u65F6\u89E6\u53D1\u66F4\u65B0\u65F6\uFF0CcustomRef \u662F\u4E00\u4E2A\u5F88\u597D\u7684\u9009\u62E9\u3002",paraId:43,tocIndex:14},{value:"\u9700\u8981\u5C01\u88C5\u590D\u6742\u7684\u903B\u8F91\uFF1A\u5F53\u4F60\u9700\u8981\u5C01\u88C5\u4E00\u4E9B\u590D\u6742\u7684\u903B\u8F91\uFF0C\u5E76\u4E14\u5E0C\u671B\u8FD9\u4E9B\u903B\u8F91\u5728 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4E2D\u6B63\u5E38\u5DE5\u4F5C\uFF0CcustomRef \u53EF\u4EE5\u5E2E\u52A9\u4F60\u5B9E\u73B0\u8FD9\u4E00\u70B9\u3002",paraId:43,tocIndex:14},{value:"\u81EA\u5B9A\u4E49\u5EF6\u8FDF\u66F4\u65B0\u7684 ref\uFF1A\u5B83\u5728\u8BBE\u7F6E\u65B0\u503C\u65F6\u4F1A\u5EF6\u8FDF 1 \u79D2\u624D\u66F4\u65B0\u89C6\u56FE\u3002\u8FD9\u5728\u67D0\u4E9B\u9700\u8981\u9632\u6296\u7684\u573A\u666F\u4E2D\u975E\u5E38\u6709\u7528\u3002",paraId:44,tocIndex:14},{value:`<template>
+`,paraId:45,tocIndex:13},{value:"\u9700\u8981\u81EA\u5B9A\u4E49 getter \u548C setter \u7684\u903B\u8F91\uFF1A\u5F53\u4F60\u9700\u8981\u5728\u83B7\u53D6\u6216\u8BBE\u7F6E\u503C\u65F6\u6267\u884C\u4E00\u4E9B\u81EA\u5B9A\u4E49\u903B\u8F91\u65F6\uFF0C\u53EF\u4EE5\u4F7F\u7528 customRef\u3002",paraId:46,tocIndex:14},{value:"\u9700\u8981\u624B\u52A8\u63A7\u5236\u4F9D\u8D56\u8FFD\u8E2A\u548C\u89E6\u53D1\u66F4\u65B0\uFF1A\u5F53\u4F60\u9700\u8981\u624B\u52A8\u63A7\u5236\u4F55\u65F6\u8FFD\u8E2A\u4F9D\u8D56\u548C\u4F55\u65F6\u89E6\u53D1\u66F4\u65B0\u65F6\uFF0CcustomRef \u662F\u4E00\u4E2A\u5F88\u597D\u7684\u9009\u62E9\u3002",paraId:46,tocIndex:14},{value:"\u9700\u8981\u5C01\u88C5\u590D\u6742\u7684\u903B\u8F91\uFF1A\u5F53\u4F60\u9700\u8981\u5C01\u88C5\u4E00\u4E9B\u590D\u6742\u7684\u903B\u8F91\uFF0C\u5E76\u4E14\u5E0C\u671B\u8FD9\u4E9B\u903B\u8F91\u5728 Vue \u7684\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u4E2D\u6B63\u5E38\u5DE5\u4F5C\uFF0CcustomRef \u53EF\u4EE5\u5E2E\u52A9\u4F60\u5B9E\u73B0\u8FD9\u4E00\u70B9\u3002",paraId:46,tocIndex:14},{value:"\u641C\u7D22\u8F93\u5165\u6846\u7684\u9632\u6296\u5904\u7406\uFF1A\u5728\u641C\u7D22\u529F\u80FD\u4E2D\uFF0C\u7528\u6237\u8F93\u5165\u5185\u5BB9\u65F6\u53EF\u80FD\u4F1A\u9891\u7E41\u89E6\u53D1\u641C\u7D22\u8BF7\u6C42\uFF0C\u5BFC\u81F4\u4E0D\u5FC5\u8981\u7684\u7F51\u7EDC\u5F00\u9500\u548C\u670D\u52A1\u5668\u538B\u529B\u3002\u4F7F\u7528 debouncedRef \u53EF\u4EE5\u5EF6\u8FDF\u89E6\u53D1\u641C\u7D22\u8BF7\u6C42\uFF0C\u53EA\u6709\u5728\u7528\u6237\u505C\u6B62\u8F93\u5165\u4E00\u6BB5\u65F6\u95F4\u540E\u624D\u6267\u884C\u5B9E\u9645\u641C\u7D22\u3002",paraId:47,tocIndex:14},{value:"\u7528\u6237\u8FDE\u7EED\u8F93\u5165\u65F6\uFF0C\u4E0D\u4F1A\u7ACB\u5373\u89E6\u53D1\u641C\u7D22\u8BF7\u6C42\u3002",paraId:48,tocIndex:14},{value:"\u5F53\u7528\u6237\u505C\u6B62\u8F93\u5165 200ms \u540E\uFF0C\u624D\u4F1A\u6267\u884C fetchSearchResults\u3002",paraId:48,tocIndex:14},{value:"\u5982\u679C\u5728 200ms \u5185\u7EE7\u7EED\u8F93\u5165\uFF0C\u4F1A\u91CD\u7F6E\u8BA1\u65F6\u5668\uFF0C\u907F\u514D\u4E0D\u5FC5\u8981\u7684\u8BF7\u6C42\u3002",paraId:48,tocIndex:14},{value:`<template>
   <div>
-    <input v-model="text" placeholder="Type something..." />
-    <p>{{ delayedText }}</p>
+    <input v-model="searchQuery" placeholder="\u641C\u7D22...">
+    <div v-if="results.length">\u641C\u7D22\u7ED3\u679C: {{ results.length }} \u6761</div>
   </div>
 </template>
 
-<script>
-import { customRef } from 'vue';
+<script setup>
+import { ref, customRef } from 'vue'
 
-export default {
-  setup() {
-    // \u521B\u5EFA\u4E00\u4E2A\u81EA\u5B9A\u4E49\u7684 ref\uFF0C\u5EF6\u8FDF\u66F4\u65B0
-    const delayedText = customRef((track, trigger) => {
-      let timeout;
-      let value = '';
-
-      return {
-        get() {
-          track();
-          return value;
-        },
-        set(newValue) {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            value = newValue;
-            trigger();
-          }, 1000); // \u5EF6\u8FDF 1 \u79D2\u66F4\u65B0
-        },
-      };
-    });
-
+// \u9632\u6296\u5904\u7406\u51FD\u6570
+function debouncedRef(initialValue, delay = 200) {
+  let timeout
+  return customRef((track, trigger) => {
     return {
-      delayedText,
-    };
-  },
-};
+      get() {
+        track()
+        return initialValue
+      },
+      set(newValue) {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          initialValue = newValue
+          trigger()
+        }, delay)
+      }
+    }
+  })
+}
+
+// \u521B\u5EFA\u9632\u6296ref
+const searchQuery = debouncedRef('')
+const results = ref([])
+
+// \u76D1\u542C\u641C\u7D22\u8BCD\u53D8\u5316\uFF0C\u89E6\u53D1\u641C\u7D22\u8BF7\u6C42
+watch(searchQuery, async (newValue) => {
+  if (newValue.trim()) {
+    // \u6A21\u62DFAPI\u8BF7\u6C42
+    results.value = await fetchSearchResults(newValue)
+  } else {
+    results.value = []
+  }
+})
+
+// \u6A21\u62DF\u641C\u7D22API
+function fetchSearchResults(query) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([/* \u641C\u7D22\u7ED3\u679C */])
+    }, 300)
+  })
+}
 <\/script>
-`,paraId:45,tocIndex:14},{value:"\u81EA\u5B9A\u4E49\u683C\u5F0F\u5316\u7684 ref\uFF1A\u5B83\u5728\u83B7\u53D6\u503C\u65F6\u4F1A\u81EA\u52A8\u5C06\u6570\u5B57\u683C\u5F0F\u5316\u4E3A\u5343\u4F4D\u5206\u9694\u7B26\u7684\u5F62\u5F0F\uFF08\u5982 1,000,000\uFF09\uFF0C\u800C\u5728\u8BBE\u7F6E\u503C\u65F6\u4F1A\u81EA\u52A8\u53BB\u9664\u8FD9\u4E9B\u5206\u9694\u7B26\u3002",paraId:46,tocIndex:14},{value:`<template>
+`,paraId:49,tocIndex:14},{value:"\u81EA\u5B9A\u4E49\u683C\u5F0F\u5316\u7684 ref\uFF1A\u5B83\u5728\u83B7\u53D6\u503C\u65F6\u4F1A\u81EA\u52A8\u5C06\u6570\u5B57\u683C\u5F0F\u5316\u4E3A\u5343\u4F4D\u5206\u9694\u7B26\u7684\u5F62\u5F0F\uFF08\u5982 1,000,000\uFF09\uFF0C\u800C\u5728\u8BBE\u7F6E\u503C\u65F6\u4F1A\u81EA\u52A8\u53BB\u9664\u8FD9\u4E9B\u5206\u9694\u7B26\u3002",paraId:50,tocIndex:14},{value:`<template>
   <div>
     <input v-model="formattedNumber" placeholder="Enter a number" />
     <p>Formatted Number: {{ formattedNumber }}</p>
@@ -14564,7 +14695,7 @@ export default {
   },
 };
 <\/script>
-`,paraId:47,tocIndex:14},{value:"\u81EA\u5B9A\u4E49\u5F02\u6B65\u83B7\u53D6\u6570\u636E\u7684 ref\uFF1A \u5F53\u70B9\u51FB\u6309\u94AE\u65F6\uFF0C\u4F1A\u89E6\u53D1 fetchData \u51FD\u6570\uFF0C\u8BE5\u51FD\u6570\u4F1A\u4ECE API \u83B7\u53D6\u6570\u636E\u5E76\u66F4\u65B0 data \u7684\u503C\u3002",paraId:48,tocIndex:14},{value:`<template>
+`,paraId:51,tocIndex:14},{value:"\u81EA\u5B9A\u4E49\u5F02\u6B65\u83B7\u53D6\u6570\u636E\u7684 ref\uFF1A \u5F53\u70B9\u51FB\u6309\u94AE\u65F6\uFF0C\u4F1A\u89E6\u53D1 fetchData \u51FD\u6570\uFF0C\u8BE5\u51FD\u6570\u4F1A\u4ECE API \u83B7\u53D6\u6570\u636E\u5E76\u66F4\u65B0 data \u7684\u503C\u3002",paraId:52,tocIndex:14},{value:`<template>
   <div>
     <p>Data: {{ data }}</p>
     <button @click="fetchData">Fetch Data</button>
@@ -14607,7 +14738,7 @@ export default {
   },
 };
 <\/script>
-`,paraId:49,tocIndex:14},{value:"\u624B\u52A8\u8C03\u7528 track \u548C trigger\uFF1A\u5728 customRef \u4E2D\uFF0C\u4F60\u9700\u8981\u624B\u52A8\u8C03\u7528 track \u548C trigger \u6765\u8FFD\u8E2A\u4F9D\u8D56\u548C\u89E6\u53D1\u66F4\u65B0\u3002\u5982\u679C\u5FD8\u8BB0\u8C03\u7528\u8FD9\u4E9B\u51FD\u6570\uFF0C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u65E0\u6CD5\u6B63\u5E38\u5DE5\u4F5C\u3002",paraId:50,tocIndex:15},{value:"\u907F\u514D\u65E0\u9650\u5FAA\u73AF\uFF1A\u5728 set \u65B9\u6CD5\u4E2D\uFF0C\u5982\u679C\u4F60\u4E0D\u5C0F\u5FC3\u89E6\u53D1\u4E86 trigger\uFF0C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF\u3002\u56E0\u6B64\uFF0C\u5728\u66F4\u65B0\u503C\u65F6\u9700\u8981\u5C0F\u5FC3\u3002",paraId:50,tocIndex:15},{value:"\u6027\u80FD\u95EE\u9898\uFF1A\u7531\u4E8E customRef \u5141\u8BB8\u4F60\u81EA\u5B9A\u4E49\u903B\u8F91\uFF0C\u5982\u679C\u903B\u8F91\u8FC7\u4E8E\u590D\u6742\uFF0C\u53EF\u80FD\u4F1A\u5F71\u54CD\u6027\u80FD\u3002\u56E0\u6B64\uFF0C\u5728\u4F7F\u7528\u65F6\u8981\u786E\u4FDD\u903B\u8F91\u5C3D\u53EF\u80FD\u7B80\u6D01\u3002",paraId:50,tocIndex:15},{value:"Vue 3.5 \u65B0\u589E\u7684 useTemplateRef() \u662F\u4E00\u4E2A\u7528\u4E8E\u4F18\u5316\u6A21\u677F\u5F15\u7528\uFF08Template Refs\uFF09\u7684 API\uFF0C\u65E8\u5728\u89E3\u51B3\u4F20\u7EDF ref \u5728 DOM \u64CD\u4F5C\u548C\u7EC4\u4EF6\u5F15\u7528\u4E2D\u7684\u4E00\u4E9B\u75DB\u70B9\u3002",paraId:51,tocIndex:16},{value:'\u53C2\u6570\uFF1A\u5B57\u7B26\u4E32\u952E\uFF08\u5982 "inputRef"\uFF09\uFF0C\u9700\u4E0E\u6A21\u677F\u4E2D\u7684 ref \u5C5E\u6027\u503C\u5B8C\u5168\u5339\u914D\u3002',paraId:52,tocIndex:17},{value:"\u8FD4\u56DE\u503C\uFF1A\u901A\u8FC7 inputEl.value \u8BBF\u95EE DOM \u5143\u7D20\u6216\u5B50\u7EC4\u4EF6\u5B9E\u4F8B\u3002",paraId:53,tocIndex:17},{value:`<script setup>
+`,paraId:53,tocIndex:14},{value:"\u624B\u52A8\u8C03\u7528 track \u548C trigger\uFF1A\u5728 customRef \u4E2D\uFF0C\u4F60\u9700\u8981\u624B\u52A8\u8C03\u7528 track \u548C trigger \u6765\u8FFD\u8E2A\u4F9D\u8D56\u548C\u89E6\u53D1\u66F4\u65B0\u3002\u5982\u679C\u5FD8\u8BB0\u8C03\u7528\u8FD9\u4E9B\u51FD\u6570\uFF0C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u54CD\u5E94\u5F0F\u7CFB\u7EDF\u65E0\u6CD5\u6B63\u5E38\u5DE5\u4F5C\u3002",paraId:54,tocIndex:15},{value:"\u907F\u514D\u65E0\u9650\u5FAA\u73AF\uFF1A\u5728 set \u65B9\u6CD5\u4E2D\uFF0C\u5982\u679C\u4F60\u4E0D\u5C0F\u5FC3\u89E6\u53D1\u4E86 trigger\uFF0C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF\u3002\u56E0\u6B64\uFF0C\u5728\u66F4\u65B0\u503C\u65F6\u9700\u8981\u5C0F\u5FC3\u3002",paraId:54,tocIndex:15},{value:"\u6027\u80FD\u95EE\u9898\uFF1A\u7531\u4E8E customRef \u5141\u8BB8\u4F60\u81EA\u5B9A\u4E49\u903B\u8F91\uFF0C\u5982\u679C\u903B\u8F91\u8FC7\u4E8E\u590D\u6742\uFF0C\u53EF\u80FD\u4F1A\u5F71\u54CD\u6027\u80FD\u3002\u56E0\u6B64\uFF0C\u5728\u4F7F\u7528\u65F6\u8981\u786E\u4FDD\u903B\u8F91\u5C3D\u53EF\u80FD\u7B80\u6D01\u3002",paraId:54,tocIndex:15},{value:"Vue 3.5 \u65B0\u589E\u7684 useTemplateRef() \u662F\u4E00\u4E2A\u7528\u4E8E\u4F18\u5316\u6A21\u677F\u5F15\u7528\uFF08Template Refs\uFF09\u7684 API\uFF0C\u65E8\u5728\u89E3\u51B3\u4F20\u7EDF ref \u5728 DOM \u64CD\u4F5C\u548C\u7EC4\u4EF6\u5F15\u7528\u4E2D\u7684\u4E00\u4E9B\u75DB\u70B9\u3002",paraId:55,tocIndex:16},{value:'\u53C2\u6570\uFF1A\u5B57\u7B26\u4E32\u952E\uFF08\u5982 "inputRef"\uFF09\uFF0C\u9700\u4E0E\u6A21\u677F\u4E2D\u7684 ref \u5C5E\u6027\u503C\u5B8C\u5168\u5339\u914D\u3002',paraId:56,tocIndex:17},{value:"\u8FD4\u56DE\u503C\uFF1A\u901A\u8FC7 inputEl.value \u8BBF\u95EE DOM \u5143\u7D20\u6216\u5B50\u7EC4\u4EF6\u5B9E\u4F8B\u3002",paraId:57,tocIndex:17},{value:`<script setup>
 import { useTemplateRef, onMounted } from 'vue';
 
 const inputRef = useTemplateRef('input');
@@ -14620,7 +14751,7 @@ onMounted(() => {
 <template>
   <input ref="input" />
 </template>
-`,paraId:54,tocIndex:17},{value:"\u5728 3.5 \u4E4B\u524D\u7684\u7248\u672C\u5C1A\u672A\u5F15\u5165 useTemplateRef()\uFF0C\u6211\u4EEC\u9700\u8981\u58F0\u660E\u4E00\u4E2A\u4E0E\u6A21\u677F\u91CC ref attribute \u5339\u914D\u7684\u5F15\u7528\uFF1A",paraId:55,tocIndex:17},{value:`<script setup>
+`,paraId:58,tocIndex:17},{value:"\u5728 3.5 \u4E4B\u524D\u7684\u7248\u672C\u5C1A\u672A\u5F15\u5165 useTemplateRef()\uFF0C\u6211\u4EEC\u9700\u8981\u58F0\u660E\u4E00\u4E2A\u4E0E\u6A21\u677F\u91CC ref attribute \u5339\u914D\u7684\u5F15\u7528\uFF1A",paraId:59,tocIndex:17},{value:`<script setup>
 import { ref, onMounted } from 'vue';
 
 // \u58F0\u660E\u4E00\u4E2A ref \u6765\u5B58\u653E\u8BE5\u5143\u7D20\u7684\u5F15\u7528
@@ -14635,7 +14766,7 @@ onMounted(() => {
 <template>
   <input ref="input" />
 </template>
-`,paraId:56,tocIndex:17},{value:"\u5982\u679C\u4E0D\u4F7F\u7528 ",paraId:57,tocIndex:17},{value:"<script setup>",paraId:57,tocIndex:17},{value:"\uFF0C\u9700\u786E\u4FDD\u4ECE setup() \u8FD4\u56DE ref\uFF1A",paraId:57,tocIndex:17},{value:`export default {
+`,paraId:60,tocIndex:17},{value:"\u5982\u679C\u4E0D\u4F7F\u7528 ",paraId:61,tocIndex:17},{value:"<script setup>",paraId:61,tocIndex:17},{value:"\uFF0C\u9700\u786E\u4FDD\u4ECE setup() \u8FD4\u56DE ref\uFF1A",paraId:61,tocIndex:17},{value:`export default {
   setup() {
     const input = ref(null);
     // ...
@@ -14644,13 +14775,13 @@ onMounted(() => {
     };
   },
 };
-`,paraId:58,tocIndex:17},{value:"\u7B80\u5316 Hooks \u5C01\u88C5",paraId:59,tocIndex:18},{value:"\u5728\u81EA\u5B9A\u4E49 Hooks \u4E2D\uFF0C\u65E0\u9700\u5BFC\u51FA ref \u53D8\u91CF\uFF0C\u907F\u514D\u7EC4\u4EF6\u4E2D\u663E\u5F0F\u5F15\u5165\u672A\u4F7F\u7528\u7684\u53D8\u91CF\uFF1A",paraId:60,tocIndex:18},{value:`// Hooks \u6587\u4EF6
+`,paraId:62,tocIndex:17},{value:"\u7B80\u5316 Hooks \u5C01\u88C5",paraId:63,tocIndex:18},{value:"\u5728\u81EA\u5B9A\u4E49 Hooks \u4E2D\uFF0C\u65E0\u9700\u5BFC\u51FA ref \u53D8\u91CF\uFF0C\u907F\u514D\u7EC4\u4EF6\u4E2D\u663E\u5F0F\u5F15\u5165\u672A\u4F7F\u7528\u7684\u53D8\u91CF\uFF1A",paraId:64,tocIndex:18},{value:`// Hooks \u6587\u4EF6
 export function useInput(key) {
   const inputEl = useTemplateRef(key);
   const setValue = () => inputEl.value?.focus();
   return { setValue }; // \u4EC5\u66B4\u9732\u65B9\u6CD5\uFF0C\u9690\u85CF ref \u53D8\u91CF
 }
-`,paraId:61,tocIndex:18},{value:"\u52A8\u6001\u7ED1\u5B9A\uFF1A\u652F\u6301\u52A8\u6001\u5207\u6362 ref \u7ED1\u5B9A\u7684\u76EE\u6807",paraId:62,tocIndex:18},{value:`<template>
+`,paraId:65,tocIndex:18},{value:"\u52A8\u6001\u7ED1\u5B9A\uFF1A\u652F\u6301\u52A8\u6001\u5207\u6362 ref \u7ED1\u5B9A\u7684\u76EE\u6807",paraId:66,tocIndex:18},{value:`<template>
   <div>
     <!-- \u4E24\u4E2A\u8F93\u5165\u6846\u59CB\u7EC8\u663E\u793A -->
     <input :ref="key1" placeholder="\u8F93\u5165\u6846A" />
@@ -14687,7 +14818,7 @@ const focusCurrent = () => {
   targetEl?.focus();
 };
 <\/script>
-`,paraId:63,tocIndex:18},{value:"\u7279\u6027",paraId:64,tocIndex:19},{value:"\u4F20\u7EDF ref",paraId:64,tocIndex:19},{value:"useTemplateRef()",paraId:64,tocIndex:19},{value:"\u7ED1\u5B9A\u65B9\u5F0F",paraId:64,tocIndex:19},{value:"\u9690\u5F0F\u901A\u8FC7\u53D8\u91CF\u540D\u5339\u914D\u5B57\u7B26\u4E32 ref",paraId:64,tocIndex:19},{value:"\u663E\u5F0F\u901A\u8FC7\u5B57\u7B26\u4E32\u952E\u5339\u914D",paraId:64,tocIndex:19},{value:"Hooks \u5C01\u88C5",paraId:64,tocIndex:19},{value:"\u9700\u5BFC\u51FA ref \u53D8\u91CF",paraId:64,tocIndex:19},{value:"\u53EF\u9690\u85CF ref\uFF0C\u4EC5\u66B4\u9732\u903B\u8F91\u65B9\u6CD5",paraId:64,tocIndex:19},{value:"\u52A8\u6001\u5207\u6362",paraId:64,tocIndex:19},{value:"\u9700\u624B\u52A8\u7BA1\u7406\u591A\u4E2A ref",paraId:64,tocIndex:19},{value:"\u901A\u8FC7\u52A8\u6001\u952E\u540D\u7B80\u5316\u5207\u6362\u903B\u8F91",paraId:64,tocIndex:19},{value:"\u4EE3\u7801\u53EF\u8BFB\u6027",paraId:64,tocIndex:19},{value:"\u53D8\u91CF\u540D\u4E0E\u6A21\u677F\u5B57\u7B26\u4E32\u6613\u6DF7\u6DC6",paraId:64,tocIndex:19},{value:"\u952E\u540D\u4E00\u81F4\uFF0C\u610F\u56FE\u66F4\u6E05\u6670",paraId:64,tocIndex:19}]},3091:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(69240);const a=[{value:"\u5728 Vue 3 \u4E2D\uFF0CRender \u51FD\u6570\u662F\u4E00\u79CD\u63D0\u4F9B\u4E86\u66F4\u5927\u7075\u6D3B\u6027\u7684\u9AD8\u7EA7\u529F\u80FD\u3002\u867D\u7136 Vue \u7684\u6A21\u677F\u7CFB\u7EDF\u5DF2\u7ECF\u8DB3\u591F\u5F3A\u5927\uFF0C\u4F46\u5728\u67D0\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u76F4\u63A5\u4F7F\u7528 JavaScript \u7F16\u5199\u6E32\u67D3\u903B\u8F91\u4F1A\u66F4\u52A0\u65B9\u4FBF\u3002",paraId:0,tocIndex:1},{value:"Render \u51FD\u6570\u7684\u5DE5\u4F5C\u539F\u7406\u662F\u901A\u8FC7\u8FD4\u56DE\u4E00\u4E2A\u865A\u62DF\u8282\u70B9\uFF08VNode\uFF09\u6765\u544A\u8BC9 Vue \u5982\u4F55\u6E32\u67D3\u754C\u9762\u3002Vue 3 \u63D0\u4F9B\u4E86 h \u51FD\u6570\u7528\u4E8E\u521B\u5EFA VNode\u3002",paraId:1,tocIndex:1},{value:"\u95EE\u9898\u7C7B\u578B",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u8BED\u6CD5\u5C40\u9650",paraId:2,tocIndex:2},{value:"Render \u51FD\u6570\u89E3\u51B3\u65B9\u6848",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u7ED3\u6784\u751F\u6210",paraId:2,tocIndex:2},{value:"v-if/v-for",paraId:2,tocIndex:2},{value:"\u7EC4\u5408\u590D\u6742\u5EA6\u6307\u6570\u7EA7\u589E\u957F \u76F4\u63A5\u4F7F\u7528 JavaScript \u903B\u8F91\u63A7\u5236\u7ED3\u6784",paraId:2,tocIndex:2},{value:"\u6027\u80FD\u654F\u611F\u573A\u666F",paraId:2,tocIndex:2},{value:"diff \u7B97\u6CD5\u65E0\u6CD5\u7CBE\u7EC6\u4F18\u5316",paraId:2,tocIndex:2},{value:"\u624B\u52A8\u63A7\u5236 VNode \u751F\u6210\u4E0E\u590D\u7528",paraId:2,tocIndex:2},{value:"\u590D\u6742\u7EC4\u4EF6\u6A21\u5F0F",paraId:2,tocIndex:2},{value:"\u9700\u8981\u591A\u5C42\u7EC4\u4EF6\u5D4C\u5957",paraId:2,tocIndex:2},{value:"\u9AD8\u9636\u51FD\u6570\u7EC4\u5408\u5F0F\u5F00\u53D1",paraId:2,tocIndex:2},{value:"\u975E DOM \u73AF\u5883\u6E32\u67D3",paraId:2,tocIndex:2},{value:"\u5B8C\u5168\u65E0\u6CD5\u5B9E\u73B0",paraId:2,tocIndex:2},{value:"\u5BF9\u63A5\u4EFB\u610F\u6E32\u67D3\u76EE\u6807",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u6A21\u677F\u9700\u6C42",paraId:2,tocIndex:2},{value:"\u9700\u8981\u9884\u7F16\u8BD1",paraId:2,tocIndex:2},{value:"\u8FD0\u884C\u65F6\u52A8\u6001\u751F\u6210",paraId:2,tocIndex:2},{value:"\u8DE8\u6839\u8282\u70B9\u5E03\u5C40",paraId:2,tocIndex:2},{value:"\u9700\u8981\u989D\u5916\u5305\u88F9\u5143\u7D20",paraId:2,tocIndex:2},{value:"Fragment \u76F4\u63A5\u8FD4\u56DE\u6570\u7EC4",paraId:2,tocIndex:2},{value:"\u7C7B\u578B\u5B89\u5168\u8981\u6C42",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u7C7B\u578B\u63A8\u5BFC\u6709\u9650",paraId:2,tocIndex:2},{value:"\u5B8C\u7F8E\u914D\u5408 TypeScript \u7C7B\u578B\u7CFB\u7EDF",paraId:2,tocIndex:2},{value:`<script>
+`,paraId:67,tocIndex:18},{value:"\u7279\u6027",paraId:68,tocIndex:19},{value:"\u4F20\u7EDF ref",paraId:68,tocIndex:19},{value:"useTemplateRef()",paraId:68,tocIndex:19},{value:"\u7ED1\u5B9A\u65B9\u5F0F",paraId:68,tocIndex:19},{value:"\u9690\u5F0F\u901A\u8FC7\u53D8\u91CF\u540D\u5339\u914D\u5B57\u7B26\u4E32 ref",paraId:68,tocIndex:19},{value:"\u663E\u5F0F\u901A\u8FC7\u5B57\u7B26\u4E32\u952E\u5339\u914D",paraId:68,tocIndex:19},{value:"Hooks \u5C01\u88C5",paraId:68,tocIndex:19},{value:"\u9700\u5BFC\u51FA ref \u53D8\u91CF",paraId:68,tocIndex:19},{value:"\u53EF\u9690\u85CF ref\uFF0C\u4EC5\u66B4\u9732\u903B\u8F91\u65B9\u6CD5",paraId:68,tocIndex:19},{value:"\u52A8\u6001\u5207\u6362",paraId:68,tocIndex:19},{value:"\u9700\u624B\u52A8\u7BA1\u7406\u591A\u4E2A ref",paraId:68,tocIndex:19},{value:"\u901A\u8FC7\u52A8\u6001\u952E\u540D\u7B80\u5316\u5207\u6362\u903B\u8F91",paraId:68,tocIndex:19},{value:"\u4EE3\u7801\u53EF\u8BFB\u6027",paraId:68,tocIndex:19},{value:"\u53D8\u91CF\u540D\u4E0E\u6A21\u677F\u5B57\u7B26\u4E32\u6613\u6DF7\u6DC6",paraId:68,tocIndex:19},{value:"\u952E\u540D\u4E00\u81F4\uFF0C\u610F\u56FE\u66F4\u6E05\u6670",paraId:68,tocIndex:19}]},3091:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(69240);const a=[{value:"\u5728 Vue 3 \u4E2D\uFF0CRender \u51FD\u6570\u662F\u4E00\u79CD\u63D0\u4F9B\u4E86\u66F4\u5927\u7075\u6D3B\u6027\u7684\u9AD8\u7EA7\u529F\u80FD\u3002\u867D\u7136 Vue \u7684\u6A21\u677F\u7CFB\u7EDF\u5DF2\u7ECF\u8DB3\u591F\u5F3A\u5927\uFF0C\u4F46\u5728\u67D0\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u76F4\u63A5\u4F7F\u7528 JavaScript \u7F16\u5199\u6E32\u67D3\u903B\u8F91\u4F1A\u66F4\u52A0\u65B9\u4FBF\u3002",paraId:0,tocIndex:1},{value:"Render \u51FD\u6570\u7684\u5DE5\u4F5C\u539F\u7406\u662F\u901A\u8FC7\u8FD4\u56DE\u4E00\u4E2A\u865A\u62DF\u8282\u70B9\uFF08VNode\uFF09\u6765\u544A\u8BC9 Vue \u5982\u4F55\u6E32\u67D3\u754C\u9762\u3002Vue 3 \u63D0\u4F9B\u4E86 h \u51FD\u6570\u7528\u4E8E\u521B\u5EFA VNode\u3002",paraId:1,tocIndex:1},{value:"\u95EE\u9898\u7C7B\u578B",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u8BED\u6CD5\u5C40\u9650",paraId:2,tocIndex:2},{value:"Render \u51FD\u6570\u89E3\u51B3\u65B9\u6848",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u7ED3\u6784\u751F\u6210",paraId:2,tocIndex:2},{value:"v-if/v-for",paraId:2,tocIndex:2},{value:"\u7EC4\u5408\u590D\u6742\u5EA6\u6307\u6570\u7EA7\u589E\u957F \u76F4\u63A5\u4F7F\u7528 JavaScript \u903B\u8F91\u63A7\u5236\u7ED3\u6784",paraId:2,tocIndex:2},{value:"\u6027\u80FD\u654F\u611F\u573A\u666F",paraId:2,tocIndex:2},{value:"diff \u7B97\u6CD5\u65E0\u6CD5\u7CBE\u7EC6\u4F18\u5316",paraId:2,tocIndex:2},{value:"\u624B\u52A8\u63A7\u5236 VNode \u751F\u6210\u4E0E\u590D\u7528",paraId:2,tocIndex:2},{value:"\u590D\u6742\u7EC4\u4EF6\u6A21\u5F0F",paraId:2,tocIndex:2},{value:"\u9700\u8981\u591A\u5C42\u7EC4\u4EF6\u5D4C\u5957",paraId:2,tocIndex:2},{value:"\u9AD8\u9636\u51FD\u6570\u7EC4\u5408\u5F0F\u5F00\u53D1",paraId:2,tocIndex:2},{value:"\u975E DOM \u73AF\u5883\u6E32\u67D3",paraId:2,tocIndex:2},{value:"\u5B8C\u5168\u65E0\u6CD5\u5B9E\u73B0",paraId:2,tocIndex:2},{value:"\u5BF9\u63A5\u4EFB\u610F\u6E32\u67D3\u76EE\u6807",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u6A21\u677F\u9700\u6C42",paraId:2,tocIndex:2},{value:"\u9700\u8981\u9884\u7F16\u8BD1",paraId:2,tocIndex:2},{value:"\u8FD0\u884C\u65F6\u52A8\u6001\u751F\u6210",paraId:2,tocIndex:2},{value:"\u8DE8\u6839\u8282\u70B9\u5E03\u5C40",paraId:2,tocIndex:2},{value:"\u9700\u8981\u989D\u5916\u5305\u88F9\u5143\u7D20",paraId:2,tocIndex:2},{value:"Fragment \u76F4\u63A5\u8FD4\u56DE\u6570\u7EC4",paraId:2,tocIndex:2},{value:"\u7C7B\u578B\u5B89\u5168\u8981\u6C42",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u7C7B\u578B\u63A8\u5BFC\u6709\u9650",paraId:2,tocIndex:2},{value:"\u5B8C\u7F8E\u914D\u5408 TypeScript \u7C7B\u578B\u7CFB\u7EDF",paraId:2,tocIndex:2},{value:`<script>
 import { h } from 'vue';
 
 export default {
@@ -15045,21 +15176,26 @@ export default { name: 'MyComponent' };
 
 <script>
 export default {
-  props: ['msg'], // \u663E\u5F0F\u58F0\u660E props\u200C:ml-citation{ref="2" data="citationList"}
+  props: ['msg'], // \u663E\u5F0F\u58F0\u660E props
+
+  // \u63A5\u6536 props + context \u53C2\u6570
   setup(props, context) {
-    // \u63A5\u6536 props + context \u53C2\u6570\u200C:ml-citation{ref="1" data="citationList"}
-    // context \u5305\u542B\u56DB\u4E2A\u5C5E\u6027\uFF1Aattrs/slots/emit/expose\u200C:ml-citation{ref="1,3" data="citationList"}
+
+    // context \u5305\u542B\u56DB\u4E2A\u5C5E\u6027\uFF1Aattrs/slots/emit/expose\u200C
     const { attrs, slots, emit, expose } = context;
 
     const handleEmit = () => {
-      emit('custom-event', '\u53C2\u6570'); // \u901A\u8FC7 context.emit \u89E6\u53D1\u4E8B\u4EF6\u200C:ml-citation{ref="2" data="citationList"}
+     // \u901A\u8FC7 context.emit \u89E6\u53D1\u4E8B\u4EF6
+      emit('custom-event', '\u53C2\u6570');
     };
 
     const logAttrs = () => {
-      console.log('attrs:', attrs); // \u8BBF\u95EE\u672A\u58F0\u660E\u7684 props \u5C5E\u6027\u200C:ml-citation{ref="3" data="citationList"}
+      // \u8BBF\u95EE\u672A\u58F0\u660E\u7684 props \u5C5E\u6027
+      console.log('attrs:', attrs); 
     };
 
-    return { handleEmit, logAttrs }; // \u5FC5\u987B\u624B\u52A8\u8FD4\u56DE\u6A21\u677F\u6240\u9700\u65B9\u6CD5\u200C:ml-citation{ref="2,5" data="citationList"}
+    // \u5FC5\u987B\u624B\u52A8\u8FD4\u56DE\u6A21\u677F\u6240\u9700\u65B9\u6CD5
+    return { handleEmit, logAttrs }; 
   },
 };
 <\/script>
@@ -15076,19 +15212,19 @@ export default {
 // \u901A\u8FC7\u7F16\u8BD1\u5668\u5B8F\u5904\u7406\u53C2\u6570
 import { useAttrs, useSlots } from 'vue';
 
-const props = defineProps(['msg']); // \u66FF\u4EE3 setup \u7684 props \u53C2\u6570\u200C:ml-citation{ref="2,4" data="citationList"}
-const emit = defineEmits(['custom-event']); // \u66FF\u4EE3 context.emit\u200C:ml-citation{ref="2,3" data="citationList"}
-const attrs = useAttrs(); // \u66FF\u4EE3 context.attrs\u200C:ml-citation{ref="3" data="citationList"}
-const slots = useSlots(); // \u66FF\u4EE3 context.slots\u200C:ml-citation{ref="3" data="citationList"}
+const props = defineProps(['msg']); // \u66FF\u4EE3 setup \u7684 props \u53C2\u6570\u200C
+const emit = defineEmits(['custom-event']); // \u66FF\u4EE3 context.emit\u200C
+const attrs = useAttrs(); // \u66FF\u4EE3 context.attrs
+const slots = useSlots(); // \u66FF\u4EE3 context.slots
 
 const handleEmit = () => {
-  emit('custom-event', '\u53C2\u6570'); // \u76F4\u63A5\u4F7F\u7528 emit \u51FD\u6570\u200C:ml-citation{ref="2" data="citationList"}
+  emit('custom-event', '\u53C2\u6570'); // \u76F4\u63A5\u4F7F\u7528 emit \u51FD\u6570
 };
 
 const logAttrs = () => {
-  console.log('attrs:', attrs.value); // \u901A\u8FC7\u54CD\u5E94\u5F0F\u5BF9\u8C61\u8BBF\u95EE\u200C:ml-citation{ref="3" data="citationList"}
+  console.log('attrs:', attrs.value); // \u901A\u8FC7\u54CD\u5E94\u5F0F\u5BF9\u8C61\u8BBF\u95EE
 };
-// \u65E0\u9700\u8FD4\u56DE\u53D8\u91CF/\u65B9\u6CD5\uFF08\u81EA\u52A8\u66B4\u9732\u9876\u5C42\u7ED1\u5B9A\uFF09\u200C:ml-citation{ref="1,5" data="citationList"}
+// \u65E0\u9700\u8FD4\u56DE\u53D8\u91CF/\u65B9\u6CD5\uFF08\u81EA\u52A8\u66B4\u9732\u9876\u5C42\u7ED1\u5B9A
 <\/script>
 `,paraId:71,tocIndex:10}]},36323:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(37875);const a=[{value:"shallowRef \u521B\u5EFA\u4E00\u4E2A\u6D45\u5C42\u54CD\u5E94\u5F0F\u5F15\u7528\uFF0C\u53EA\u6709 .value \u5C5E\u6027\u662F\u54CD\u5E94\u5F0F\u7684\uFF0C\u5D4C\u5957\u7684\u5BF9\u8C61\u4E0D\u4F1A\u88AB\u9012\u5F52\u5730\u8F6C\u6362\u4E3A\u54CD\u5E94\u5F0F\u3002",paraId:0,tocIndex:1},{value:`import { shallowRef } from 'vue';
 
