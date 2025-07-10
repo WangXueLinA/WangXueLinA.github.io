@@ -292,7 +292,7 @@ setup() {
 }
 ```
 
-### `<script setup>`语法糖
+## `<script setup>`语法糖
 
 核心特点:
 
