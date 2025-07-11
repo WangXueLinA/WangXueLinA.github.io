@@ -1,11 +1,11 @@
 ---
 toc: content
-title: render函数
+title: h函数
 ---
 
 # Vue3
 
-## render
+## h函数
 
 在 Vue 3 中，Render 函数是一种提供了更大灵活性的高级功能。虽然 Vue 的模板系统已经足够强大，但在某些情况下，直接使用 JavaScript 编写渲染逻辑会更加方便。
 
@@ -27,20 +27,109 @@ Render 函数的工作原理是通过返回一个虚拟节点（VNode）来告�
 
 ### 基本语法
 
-```vue
-<script>
-import { h } from 'vue';
+```js
+h(
+  type,      // 必需，元素类型、组件或异步组件
+  props,     // 可选，传递给组件/元素的属性
+  children   // 可选，子节点或者插槽
+)
+```
+type 参数可以为：
 
-export default {
+1. HTML 标签名（字符串）：如 'div'、'span'、'button' 等。
+2. 组件对象：可以是导入的组件或局部注册的组件。
+
+```js
+// 创建一个div元素
+h('div');
+
+// 创建一个自定义组件
+import MyComponent from './MyComponent.vue';
+h(MyComponent);
+```
+
+props 参数可以为：
+
+1. class、style：元素的类名和样式。
+2. id、name：元素的 ID 和名称。
+3. onXXX：事件监听器（如 onClick、onChange）。
+4. 组件的 props（如 msg、count）。
+
+```js
+// 为div设置属性和事件
+h('div', {
+  class: 'container',
+  style: { color: 'red' },
+  onClick: () => console.log('Clicked'),
+  id: 'main'
+});
+
+// 传递props给组件
+h(MyComponent, {
+  msg: 'Hello',
+  count: 10
+});
+```
+
+children 参数可以为：
+
+1. 字符串：文本内容。
+2. 数组：多个子节点，每个子节点可以是 h() 调用或其他类型。
+3. 函数：用于作用域插槽（Scoped Slots）。
+
+```js
+// 文本子节点
+h('div', {}, 'Hello World');
+
+// 多个子节点
+h('div', {}, [
+  h('h1', 'Title'),
+  h('p', 'Content'),
+  'Additional text'
+]);
+
+// 嵌套结构
+h('div', {}, [
+  h('ul', {}, [
+    h('li', 'Item 1'),
+    h('li', 'Item 2')
+  ])
+]);
+
+// 组件子节点
+h(ParentComponent, {}, [
+  h(ChildComponent)
+]);
+```
+
+如果不需要传递 props，可以直接省略第二个参数
+
+```js
+// 省略props，直接传递children
+h('div', 'Hello');
+h('div', [h('span', 'Child')]);
+```
+
+与 JSX 的关系
+
+Vue 3 支持 JSX 语法，它是 h() 函数的语法糖，使代码更接近 HTML：
+
+```js
+// JSX写法
+const App = {
   setup() {
-    return () =>
-      h('div', { class: 'demo', onClick: () => console.log('clicked') }, [
-        h('h1', '标题'),
-        h('button', { type: 'button' }, '点击我'),
-      ]);
-  },
+    return () => (
+      <MyComponent title="Welcome">
+        <p>Content</p>
+      </MyComponent>
+    );
+  }
 };
-</script>
+
+// 等价于h()写法
+h(MyComponent, { title: 'Welcome' }, [
+  h('p', 'Content')
+]);
 ```
 
 ### 使用场景
@@ -125,58 +214,6 @@ const AdminButton = withAuth({
 });
 ```
 
-4. 性能关键路径：大数据量列表、虚拟滚动
-
-```js
-// 高效虚拟滚动列表
-export default {
-  setup() {
-    const items = ref(/* 10000条数据 */);
-    const visibleRange = ref([0, 50]);
-
-    return () =>
-      h(
-        'div',
-        { class: 'virtual-scroll' },
-        items.value.slice(...visibleRange.value).map((item) =>
-          h(
-            'div',
-            {
-              key: item.id,
-              class: 'row',
-              style: { height: `${item.height}px` },
-            },
-            item.content,
-          ),
-        ),
-      );
-  },
-};
-```
-
-5. 与 JavaScript 生态深度集成： 集成第三方渲染器（如 Canvas）
-
-```js
-// 对接 Canvas 渲染
-export default {
-  setup() {
-    const canvasRef = ref(null);
-
-    onMounted(() => {
-      const ctx = canvasRef.value.getContext('2d');
-      // 绘制逻辑...
-    });
-
-    return () =>
-      h('canvas', {
-        ref: canvasRef,
-        width: 800,
-        height: 600,
-      });
-  },
-};
-```
-
 ### 最佳实践
 
 1. 优先使用模板：95%场景推荐使用模板语法
@@ -243,6 +280,115 @@ h(ChildComponent, {
   title: props.title,
   'onUpdate:title': (val) => emit('update:title', val),
 });
+```
+
+## resolveComponent
+
+在 Vue 3 中，resolveComponent 是一个用于动态解析组件引用的 API，主要在编写渲染函数（而非模板）时使用。它的核心作用是将组件名称解析为实际的组件对象，以便在 h() 函数中使用。
+
+### 使用场景
+
+1. 在渲染函数中动态使用组件
+
+当你使用渲染函数而非模板时，无法直接通过名称引用组件，需要先解析组件。
+
+```js
+import { h, resolveComponent } from 'vue';
+
+export default {
+  setup() {
+    // 解析组件
+    const MyButton = resolveComponent('MyButton');
+    
+    return () => h(MyButton, { type: 'primary' });
+  }
+};
+```
+
+2. 条件渲染不同组件
+
+根据条件动态选择渲染不同的组件。
+
+```js
+import { h, resolveComponent, ref } from 'vue';
+
+export default {
+  setup() {
+    const useFancyButton = ref(true);
+    
+    return () => {
+      // 根据条件解析不同组件
+      const Button = resolveComponent(
+        useFancyButton.value ? 'FancyButton' : 'PlainButton'
+      );
+      
+      return h(Button, { label: 'Click me' });
+    };
+  }
+};
+```
+
+3. 实现高阶组件 (HOC)
+
+在高阶组件中动态包装其他组件。
+
+```js
+import { h, resolveComponent } from 'vue';
+
+export function withLogging(WrappedComponentName) {
+  return {
+    setup(props, { attrs, slots, emit }) {
+      // 解析被包装的组件
+      const WrappedComponent = resolveComponent(WrappedComponentName);
+      
+      // 添加日志功能
+      const enhancedEmit = (event, ...args) => {
+        console.log(`Emitted event: ${event}`, args);
+        emit(event, ...args);
+      };
+      
+      return () => h(
+        WrappedComponent, 
+        { ...props, ...attrs, on: enhancedEmit }, 
+        slots
+      );
+    }
+  };
+}
+
+// 使用高阶组件
+const LoggedButton = withLogging('MyButton');
+```
+
+4. 动态组件系统
+
+构建一个根据配置动态渲染不同组件的系统。
+
+```js
+import { h, resolveComponent, defineComponent } from 'vue';
+
+export const ComponentRenderer = defineComponent({
+  props: {
+    componentName: String,
+    propsData: Object
+  },
+  setup(props) {
+    return () => {
+      if (!props.componentName) return null;
+      
+      // 解析组件
+      const Component = resolveComponent(props.componentName);
+      
+      return h(Component, props.propsData);
+    };
+  }
+});
+
+// 使用方式
+<ComponentRenderer 
+  :component-name="currentComponent" 
+  :props-data="componentProps" 
+/>
 ```
 
 <BackTop></BackTop>
