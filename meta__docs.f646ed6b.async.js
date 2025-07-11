@@ -12625,25 +12625,14 @@ const alwaysSmall = computed((previous) => {
   return previous;
 });
 <\/script>
-`,paraId:10,tocIndex:5},{value:"\u8BA1\u7B97\u5C5E\u6027\u5141\u8BB8\u6211\u4EEC\u58F0\u660E\u6027\u5730\u8BA1\u7B97\u884D\u751F\u503C\u3002\u7136\u800C\u5728\u6709\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u6211\u4EEC\u9700\u8981\u5728\u72B6\u6001\u53D8\u5316\u65F6\u6267\u884C\u4E00\u4E9B\u201C\u526F\u4F5C\u7528\u201D\uFF1A\u4F8B\u5982\u66F4\u6539 DOM\uFF0C\u6216\u662F\u6839\u636E\u5F02\u6B65\u64CD\u4F5C\u7684\u7ED3\u679C\u53BB\u4FEE\u6539\u53E6\u4E00\u5904\u7684\u72B6\u6001\u3002",paraId:11,tocIndex:6},{value:"Vue2",paraId:12,tocIndex:7},{value:`export default {
-  data() {
-    return { count: 0 };
-  },
-  watch: {
-    // \u76F4\u63A5\u76D1\u542C\u6570\u636E\u5C5E\u6027
-    count(newVal, oldVal) {
-      console.log(\`\u8BA1\u6570\u5668\u53D8\u5316\uFF1A\${oldVal} \u2192 \${newVal}\`);
-    },
-  },
-};
-`,paraId:13,tocIndex:7},{value:"vue3",paraId:14,tocIndex:7},{value:`import { ref, watch } from 'vue';
+`,paraId:10,tocIndex:5},{value:"\u8BA1\u7B97\u5C5E\u6027\u5141\u8BB8\u6211\u4EEC\u58F0\u660E\u6027\u5730\u8BA1\u7B97\u884D\u751F\u503C\u3002\u7136\u800C\u5728\u6709\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u6211\u4EEC\u9700\u8981\u5728\u72B6\u6001\u53D8\u5316\u65F6\u6267\u884C\u4E00\u4E9B\u201C\u526F\u4F5C\u7528\u201D\uFF1A\u4F8B\u5982\u66F4\u6539 DOM\uFF0C\u6216\u662F\u6839\u636E\u5F02\u6B65\u64CD\u4F5C\u7684\u7ED3\u679C\u53BB\u4FEE\u6539\u53E6\u4E00\u5904\u7684\u72B6\u6001\u3002",paraId:11,tocIndex:6},{value:`import { ref, watch } from 'vue';
 
 const count = ref(0);
 // \u663E\u5F0F\u5BFC\u5165\u5E76\u4F7F\u7528 watch
 watch(count, (newVal, oldVal) => {
   console.log(\`\u8BA1\u6570\u5668\u53D8\u5316\uFF1A\${oldVal} \u2192 \${newVal}\`);
 });
-`,paraId:15,tocIndex:7},{value:"watch \u7684\u7B2C\u4E00\u4E2A\u53C2\u6570\u53EF\u4EE5\u662F\u4E0D\u540C\u5F62\u5F0F\u7684\u201C\u6570\u636E\u6E90\u201D\uFF1A\u5B83\u53EF\u4EE5\u662F\u4E00\u4E2A ref (\u5305\u62EC\u8BA1\u7B97\u5C5E\u6027)\u3001\u4E00\u4E2A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u3001\u4E00\u4E2A getter \u51FD\u6570\u3001\u6216\u591A\u4E2A\u6570\u636E\u6E90\u7EC4\u6210\u7684\u6570\u7EC4",paraId:16,tocIndex:8},{value:`<script setup>
+`,paraId:12,tocIndex:7},{value:"watch \u7684\u7B2C\u4E00\u4E2A\u53C2\u6570\u53EF\u4EE5\u662F\u4E0D\u540C\u5F62\u5F0F\u7684\u201C\u6570\u636E\u6E90\u201D\uFF1A\u5B83\u53EF\u4EE5\u662F\u4E00\u4E2A ref (\u5305\u62EC\u8BA1\u7B97\u5C5E\u6027)\u3001\u4E00\u4E2A\u54CD\u5E94\u5F0F\u5BF9\u8C61\u3001\u4E00\u4E2A getter \u51FD\u6570\u3001\u6216\u591A\u4E2A\u6570\u636E\u6E90\u7EC4\u6210\u7684\u6570\u7EC4",paraId:13,tocIndex:8},{value:`<script setup>
 const x = ref(0);
 const y = ref(0);
 
@@ -12661,11 +12650,12 @@ watch(
 );
 
 // \u591A\u6E90\u76D1\u542C\u80FD\u529B, \u652F\u6301\u6570\u7EC4\u5F62\u5F0F\u76D1\u542C\u591A\u4E2A\u6E90
+// \u56DE\u8C03\u51FD\u6570\u63A5\u53D7\u4E24\u4E2A\u6570\u7EC4\uFF0C\u5206\u522B\u5BF9\u5E94\u6765\u6E90\u6570\u7EC4\u4E2D\u7684\u65B0\u503C\u548C\u65E7\u503C
 watch([x, () => y.value], ([newX, newY], [oldX, oldY]) => {
   console.log(\`X\u53D8\u5316\uFF1A\${oldX}\u2192\${newX}\uFF0CY\u53D8\u5316\uFF1A\${oldY}\u2192\${newY}\`);
 });
 <\/script>
-`,paraId:17,tocIndex:8},{value:`<script setup>
+`,paraId:14,tocIndex:8},{value:`<script setup>
 const state = reactive({
   user: {
     name: 'Alice',
@@ -12681,39 +12671,58 @@ watch(
   },
   { deep: true }, // \u5F00\u542F\u6DF1\u5EA6\u76D1\u542C
 );
+
+// \u4FA6\u542C\u5668\u4F1A\u81EA\u52A8\u542F\u7528\u6DF1\u5C42\u6A21\u5F0F
+// watch(state, () => {
+//   /* \u6DF1\u5C42\u7EA7\u53D8\u66F4\u72B6\u6001\u6240\u89E6\u53D1\u7684\u56DE\u8C03 */
+// })
 <\/script>
-`,paraId:18,tocIndex:9},{value:"\u5F53\u76D1\u542C\u5BF9\u8C61\u7C7B\u578B\u7684\u5C5E\u6027\u65F6\uFF0C\u9700\u8981\u6DFB\u52A0 deep: true \u624D\u80FD\u76D1\u542C\u5230\u5D4C\u5957\u5C5E\u6027\u7684\u53D8\u5316",paraId:19},{value:"\u5982\u679C\u4E0D\u9700\u8981\u6DF1\u5EA6\u76D1\u542C\uFF0C\u53EF\u4EE5\u7701\u7565 deep \u9009\u9879",paraId:19},{value:"\u76F4\u63A5\u76D1\u542C\u6574\u4E2A reactive \u5BF9\u8C61\u65F6(\u5982 state)\uFF0Cvue3 \u4F1A\u9ED8\u8BA4\u542F\u7528\u6DF1\u5EA6\u76D1\u542C\uFF08\u9ED8\u8BA4 deep: true\uFF0C\u4F46\u4F1A\u4EA7\u751F\u6027\u80FD\u5F00\u9500\uFF09",paraId:19},{value:"\u5728 Vue 3.5+ \u4E2D\uFF0Cdeep \u9009\u9879\u8FD8\u53EF\u4EE5\u662F\u4E00\u4E2A\u6570\u5B57\uFF0C\u8868\u793A\u6700\u5927\u904D\u5386\u6DF1\u5EA6\u2014\u2014\u5373 Vue \u5E94\u8BE5\u904D\u5386\u5BF9\u8C61\u5D4C\u5957\u5C5E\u6027\u7684\u7EA7\u6570\u3002",paraId:19},{value:"watch \u9ED8\u8BA4\u662F\u61D2\u6267\u884C\u7684\uFF1A\u4EC5\u5F53\u6570\u636E\u6E90\u53D8\u5316\u65F6\uFF0C\u624D\u4F1A\u6267\u884C\u56DE\u8C03\u3002\u4F46\u5728\u67D0\u4E9B\u573A\u666F\u4E2D\uFF0C\u6211\u4EEC\u5E0C\u671B\u5728\u521B\u5EFA\u4FA6\u542C\u5668\u65F6\uFF0C\u7ACB\u5373\u6267\u884C\u4E00\u904D\u56DE\u8C03\u3002\u4E3E\u4F8B\u6765\u8BF4\uFF0C\u6211\u4EEC\u60F3\u8BF7\u6C42\u4E00\u4E9B\u521D\u59CB\u6570\u636E\uFF0C\u7136\u540E\u5728\u76F8\u5173\u72B6\u6001\u66F4\u6539\u65F6\u91CD\u65B0\u8BF7\u6C42\u6570\u636E\u3002",paraId:20,tocIndex:10},{value:"\u6211\u4EEC\u53EF\u4EE5\u901A\u8FC7\u4F20\u5165 immediate: true \u9009\u9879\u6765\u5F3A\u5236\u4FA6\u542C\u5668\u7684\u56DE\u8C03\u7ACB\u5373\u6267\u884C",paraId:21,tocIndex:10},{value:`watch(
+`,paraId:15,tocIndex:9},{value:"\u5F53\u76D1\u542C\u5BF9\u8C61\u7C7B\u578B\u7684\u5C5E\u6027\u65F6\uFF0C\u9700\u8981\u6DFB\u52A0 deep: true \u624D\u80FD\u76D1\u542C\u5230\u5D4C\u5957\u5C5E\u6027\u7684\u53D8\u5316",paraId:16},{value:"\u5982\u679C\u4E0D\u9700\u8981\u6DF1\u5EA6\u76D1\u542C\uFF0C\u53EF\u4EE5\u7701\u7565 deep \u9009\u9879",paraId:16},{value:"\u76F4\u63A5\u76D1\u542C\u6574\u4E2A reactive \u5BF9\u8C61\u65F6(\u5982 state)\uFF0Cvue3 \u4F1A\u9ED8\u8BA4\u542F\u7528\u6DF1\u5EA6\u76D1\u542C\uFF08\u9ED8\u8BA4 deep: true\uFF0C\u4F46\u4F1A\u4EA7\u751F\u6027\u80FD\u5F00\u9500\uFF09",paraId:16},{value:"\u5728 Vue 3.5+ \u4E2D\uFF0Cdeep \u9009\u9879\u8FD8\u53EF\u4EE5\u662F\u4E00\u4E2A\u6570\u5B57\uFF0C\u8868\u793A\u6700\u5927\u904D\u5386\u6DF1\u5EA6\u2014\u2014\u5373 Vue \u5E94\u8BE5\u904D\u5386\u5BF9\u8C61\u5D4C\u5957\u5C5E\u6027\u7684\u7EA7\u6570\u3002",paraId:16},{value:"watch \u9ED8\u8BA4\u662F\u61D2\u6267\u884C\u7684\uFF1A\u4EC5\u5F53\u6570\u636E\u6E90\u53D8\u5316\u65F6\uFF0C\u624D\u4F1A\u6267\u884C\u56DE\u8C03\u3002\u4F46\u5728\u67D0\u4E9B\u573A\u666F\u4E2D\uFF0C\u6211\u4EEC\u5E0C\u671B\u5728\u521B\u5EFA\u4FA6\u542C\u5668\u65F6\uFF0C\u7ACB\u5373\u6267\u884C\u4E00\u904D\u56DE\u8C03\u3002\u4E3E\u4F8B\u6765\u8BF4\uFF0C\u6211\u4EEC\u60F3\u8BF7\u6C42\u4E00\u4E9B\u521D\u59CB\u6570\u636E\uFF0C\u7136\u540E\u5728\u76F8\u5173\u72B6\u6001\u66F4\u6539\u65F6\u91CD\u65B0\u8BF7\u6C42\u6570\u636E\u3002",paraId:17,tocIndex:10},{value:"\u6211\u4EEC\u53EF\u4EE5\u901A\u8FC7\u4F20\u5165 immediate: true \u9009\u9879\u6765\u5F3A\u5236\u4FA6\u542C\u5668\u7684\u56DE\u8C03\u7ACB\u5373\u6267\u884C",paraId:18,tocIndex:10},{value:`watch(
   source,
   (newValue, oldValue) => {
     // \u7ACB\u5373\u6267\u884C\uFF0C\u4E14\u5F53 \`source\` \u6539\u53D8\u65F6\u518D\u6B21\u6267\u884C
   },
   { immediate: true },
 );
-`,paraId:22,tocIndex:10},{value:"\u4EC5\u652F\u6301 3.4 \u53CA\u4EE5\u4E0A\u7248\u672C",paraId:23,tocIndex:11},{value:"\u6BCF\u5F53\u88AB\u4FA6\u542C\u6E90\u53D1\u751F\u53D8\u5316\u65F6\uFF0C\u4FA6\u542C\u5668\u7684\u56DE\u8C03\u5C31\u4F1A\u6267\u884C\u3002\u5982\u679C\u5E0C\u671B\u56DE\u8C03\u53EA\u5728\u6E90\u53D8\u5316\u65F6\u89E6\u53D1\u4E00\u6B21\uFF0C\u8BF7\u4F7F\u7528 once: true \u9009\u9879\u3002",paraId:24,tocIndex:11},{value:`watch(
+`,paraId:19,tocIndex:10},{value:"\u4EC5\u652F\u6301 3.4 \u53CA\u4EE5\u4E0A\u7248\u672C",paraId:20,tocIndex:11},{value:"\u6BCF\u5F53\u88AB\u4FA6\u542C\u6E90\u53D1\u751F\u53D8\u5316\u65F6\uFF0C\u4FA6\u542C\u5668\u7684\u56DE\u8C03\u5C31\u4F1A\u6267\u884C\u3002\u5982\u679C\u5E0C\u671B\u56DE\u8C03\u53EA\u5728\u6E90\u53D8\u5316\u65F6\u89E6\u53D1\u4E00\u6B21\uFF0C\u8BF7\u4F7F\u7528 once: true \u9009\u9879\u3002",paraId:21,tocIndex:11},{value:`watch(
   source,
   (newValue, oldValue) => {
     // \u5F53 \`source\` \u53D8\u5316\u65F6\uFF0C\u4EC5\u89E6\u53D1\u4E00\u6B21
   },
   { once: true },
 );
-`,paraId:25,tocIndex:11},{value:"Vue3 \u901A\u8FC7\u8FD4\u56DE\u503C\u505C\u6B62\uFF0C \u5B8C\u5168\u7EC8\u6B62\u6574\u4E2A\u76D1\u542C\u884C\u4E3A\uFF0C\u5E38\u7528\u4E8E\u7EC4\u4EF6\u5378\u8F7D\u3001\u624B\u52A8\u5173\u95ED\u76D1\u542C\u65F6",paraId:26,tocIndex:12},{value:`const stop = watch(source, callback);
+`,paraId:22,tocIndex:11},{value:"Vue3 \u901A\u8FC7\u8FD4\u56DE\u503C\u505C\u6B62\uFF0C \u5B8C\u5168\u7EC8\u6B62\u6574\u4E2A\u76D1\u542C\u884C\u4E3A\uFF0C\u5E38\u7528\u4E8E\u7EC4\u4EF6\u5378\u8F7D\u3001\u624B\u52A8\u5173\u95ED\u76D1\u542C\u65F6",paraId:23,tocIndex:12},{value:`const stop = watch(source, callback);
 stop(); // \u8C03\u7528\u505C\u6B62\u76D1\u542C
-`,paraId:27,tocIndex:12},{value:"Vue2 \u901A\u8FC7 $watch \u8FD4\u56DE\u503C\u505C\u6B62",paraId:28,tocIndex:12},{value:`
-created() {
-  this.unwatch = this.$watch('source', callback)
-},
-methods: {
-  stop() {
-    this.unwatch() // \u8C03\u7528\u505C\u6B62\u76D1\u542C
-  }
-}
-`,paraId:29,tocIndex:12},{value:"\u6E05\u7406\u4E0A\u4E00\u6B21\u76D1\u542C\u56DE\u8C03\u4EA7\u751F\u7684\u526F\u4F5C\u7528, \u5E38\u7528\u4E8E\u53D6\u6D88\u672A\u5B8C\u6210\u7684\u8BF7\u6C42\u3001\u6E05\u9664\u5B9A\u65F6\u5668\u7B49\u4E34\u65F6\u8D44\u6E90",paraId:30,tocIndex:13},{value:"onCleanup \u51FD\u6570\u8FD8\u4F5C\u4E3A\u7B2C\u4E09\u4E2A\u53C2\u6570\u4F20\u9012\u7ED9\u4FA6\u542C\u5668\u56DE\u8C03",paraId:31,tocIndex:13},{value:`watch(id, (newId, oldId, onCleanup) => {
+`,paraId:24,tocIndex:12},{value:"\u57283.5+\u7248\u672C\u4E2D\u589E\u52A0\u4E86\u6682\u505C/\u6062\u590D\u4FA6\u542C\u5668",paraId:25,tocIndex:12},{value:`const { stop, pause, resume } = watch(() => {})
+
+// \u6682\u505C\u4FA6\u542C\u5668
+pause()
+
+// \u7A0D\u540E\u6062\u590D
+resume()
+
+// \u505C\u6B62
+stop()
+`,paraId:26,tocIndex:12},{value:"\u6E05\u7406\u4E0A\u4E00\u6B21\u76D1\u542C\u56DE\u8C03\u4EA7\u751F\u7684\u526F\u4F5C\u7528, \u5E38\u7528\u4E8E\u53D6\u6D88\u672A\u5B8C\u6210\u7684\u8BF7\u6C42\u3001\u6E05\u9664\u5B9A\u65F6\u5668\u7B49\u4E34\u65F6\u8D44\u6E90",paraId:27,tocIndex:13},{value:"onCleanup \u51FD\u6570\u8FD8\u4F5C\u4E3A\u7B2C\u4E09\u4E2A\u53C2\u6570\u4F20\u9012\u7ED9\u4FA6\u542C\u5668\u56DE\u8C03",paraId:28,tocIndex:13},{value:`watch(id, (newId, oldId, onCleanup) => {
   // ...
   onCleanup(() => {
     // \u6E05\u7406\u903B\u8F91
   });
 });
-`,paraId:32,tocIndex:13},{value:"Vue3 \u652F\u6301\u76F4\u63A5\u76D1\u542C getter \u51FD\u6570",paraId:33,tocIndex:14},{value:`<script setup>
+`,paraId:29,tocIndex:13},{value:"3.5+ \u4E2D\u7684\u526F\u4F5C\u7528\u6E05\u7406",paraId:30,tocIndex:13},{value:`import { watch, onWatcherCleanup } from "vue";
+
+watch(flag, () => {
+  const timer = setInterval(() => {
+    // \u505A\u4E00\u4E9B\u4E8B\u60C5
+    console.log("do something");
+  }, 200);
+
+  onWatcherCleanup(() => {
+    console.log("\u6E05\u7406\u5B9A\u65F6\u5668");
+    clearInterval(timer);
+  });
+});
+`,paraId:31,tocIndex:13},{value:"Vue3 \u652F\u6301\u76F4\u63A5\u76D1\u542C getter \u51FD\u6570",paraId:32,tocIndex:14},{value:`<script setup>
 import { ref, reactive, watch, computed } from 'vue';
 
 // \u573A\u666F1\uFF1A\u76D1\u542C\u591A\u4E2A\u54CD\u5E94\u5F0F\u503C\u7684\u7EC4\u5408
@@ -12724,6 +12733,7 @@ const user = reactive({
 });
 
 watch(
+  // \u4EFB\u4F55\u4E00\u4E2A\u503C\u53D8\u5316\u90FD\u4F1A\u8FDB\u884C\u89E6\u53D1
   () => \`\${user.firstName} \${user.lastName} (\${user.age})\`,
   (newFullInfo) => {
     console.log('\u7528\u6237\u4FE1\u606F\u66F4\u65B0:', newFullInfo);
@@ -12749,24 +12759,7 @@ watch(
   },
 );
 
-// \u573A\u666F3\uFF1A\u5E26\u6761\u4EF6\u7684\u76D1\u542C\uFF08\u4F9D\u8D56\u5916\u90E8\u72B6\u6001\uFF09
-const searchKeyword = ref('');
-const showAdvanced = ref(false);
-
-watch(
-  () => ({
-    keyword: searchKeyword.value,
-    isAdvanced: showAdvanced.value,
-  }),
-  ({ keyword, isAdvanced }) => {
-    if (isAdvanced && keyword.length > 3) {
-      console.log('\u89E6\u53D1\u9AD8\u7EA7\u641C\u7D22:', keyword);
-      // \u8FD9\u91CC\u53EF\u4EE5\u6267\u884C\u641C\u7D22\u64CD\u4F5C
-    }
-  },
-);
-
-// \u573A\u666F4\uFF1A\u76D1\u542C\u6570\u7EC4\u7684\u7279\u5B9A\u53D8\u5316
+// \u573A\u666F3\uFF1A\u76D1\u542C\u6570\u7EC4\u7684\u7279\u5B9A\u53D8\u5316
 const numbers = ref([1, 2, 3]);
 
 watch(
@@ -12777,7 +12770,7 @@ watch(
   { deep: true },
 );
 
-// \u573A\u666F5\uFF1A\u4F18\u5316\u6027\u80FD\u7684\u76D1\u542C\u65B9\u5F0F\uFF08\u7ED3\u5408computed\uFF09
+// \u573A\u666F4\uFF1A\u4F18\u5316\u6027\u80FD\u7684\u76D1\u542C\u65B9\u5F0F\uFF08\u7ED3\u5408computed\uFF09
 const complexData = reactive({
   a: 10,
   b: 20,
@@ -12792,39 +12785,9 @@ const optimizedComputed = computed(() => {
 watch(optimizedComputed, (newVal) => {
   console.log('\u4F18\u5316\u540E\u7684\u8BA1\u7B97\u7ED3\u679C:', newVal);
 });
-
-// \u4FEE\u6539\u6D4B\u8BD5
-function triggerChanges() {
-  // \u4FEE\u6539\u7528\u6237\u4FE1\u606F
-  user.lastName = '\u56DB';
-  user.age = 26;
-
-  // \u4FEE\u6539\u5D4C\u5957\u5BF9\u8C61
-  company.info.department.engineering.members++;
-
-  // \u89E6\u53D1\u641C\u7D22\u6761\u4EF6
-  searchKeyword.value = 'vue3';
-  showAdvanced.value = true;
-
-  // \u4FEE\u6539\u6570\u7EC4
-  numbers.value.push(4);
-
-  // \u4FEE\u6539\u4F18\u5316\u6570\u636E
-  complexData.a = 20;
-}
 <\/script>
 
-<template>
-  <button @click="triggerChanges">\u89E6\u53D1\u6240\u6709\u4FEE\u6539</button>
-</template>
-`,paraId:34,tocIndex:14},{value:"Vue2 \u9700\u8981\u501F\u52A9\u8BA1\u7B97\u5C5E\u6027",paraId:35,tocIndex:14},{value:`
-computed: {
-  total() { return this.x + this.y }
-},
-watch: {
-  total(newVal) { /*...*/ }
-}
-`,paraId:36,tocIndex:14},{value:"\u76F4\u63A5\u76D1\u542C reactive \u5BF9\u8C61\u7684\u5C5E\u6027\u503C",paraId:37,tocIndex:15},{value:`const obj = reactive({ count: 0 });
+`,paraId:33,tocIndex:14},{value:"\u76F4\u63A5\u76D1\u542C reactive \u5BF9\u8C61\u7684\u5C5E\u6027\u503C",paraId:34,tocIndex:15},{value:`const obj = reactive({ count: 0 });
 
 // \u274C \u9519\u8BEF\uFF0C\u76F4\u63A5\u76D1\u542C\u5C5E\u6027\u503C\u4F1A\u5931\u53BB\u54CD\u5E94\u6027
 // obj.count \u662F\u4E00\u4E2A\u57FA\u7840\u7C7B\u578B\u7684\u503C\uFF08number \u7C7B\u578B\uFF09\uFF0C\u4E0D\u662F\u54CD\u5E94\u5F0F\u5F15\u7528
@@ -12841,7 +12804,14 @@ watch(
     console.log(\`Count \u53D8\u5316: \${oldVal} \u2192 \${newVal}\`);
   },
 );
-`,paraId:38,tocIndex:15},{value:"\u5199\u6CD5",paraId:39,tocIndex:15},{value:"\u54CD\u5E94\u6027",paraId:39,tocIndex:15},{value:"\u89E6\u53D1\u6761\u4EF6",paraId:39,tocIndex:15},{value:"\u9002\u7528\u573A\u666F",paraId:39,tocIndex:15},{value:"watch(obj.count, ...)",paraId:39,tocIndex:15},{value:"\u274C \u5931\u6548",paraId:39,tocIndex:15},{value:"\u6C38\u8FDC\u4E0D\u4F1A\u89E6\u53D1",paraId:39,tocIndex:15},{value:"\u9519\u8BEF\u5199\u6CD5",paraId:39,tocIndex:15},{value:"watch(() => obj.count, ...)",paraId:39,tocIndex:15},{value:"\u2705 \u6709\u6548",paraId:39,tocIndex:15},{value:"\u5C5E\u6027\u503C\u53D8\u5316\u65F6\u89E6\u53D1",paraId:39,tocIndex:15},{value:"\u76D1\u542C reactive \u5BF9\u8C61\u5C5E\u6027",paraId:39,tocIndex:15},{value:"watch(obj, ...)",paraId:39,tocIndex:15},{value:"\u2705 \u6709\u6548",paraId:39,tocIndex:15},{value:"\u5BF9\u8C61\u4EFB\u610F\u5C5E\u6027\u53D8\u5316\u89E6\u53D1",paraId:39,tocIndex:15},{value:"\u76D1\u542C\u6574\u4E2A\u5BF9\u8C61",paraId:39,tocIndex:15},{value:"\u7ACB\u5373\u8FD0\u884C\u4E00\u4E2A\u51FD\u6570\uFF0C\u4F1A\u5728\u526F\u4F5C\u7528\u53D1\u751F\u671F\u95F4\u8FFD\u8E2A\u4F9D\u8D56\u3002\u5B83\u4F1A\u5728\u540C\u6B65\u6267\u884C\u8FC7\u7A0B\u4E2D\uFF0C\u81EA\u52A8\u8FFD\u8E2A\u6240\u6709\u80FD\u8BBF\u95EE\u5230\u7684\u54CD\u5E94\u5F0F\u5C5E\u6027\u3002\u8FD9\u66F4\u65B9\u4FBF\uFF0C\u800C\u4E14\u4EE3\u7801\u5F80\u5F80\u66F4\u7B80\u6D01\uFF0C\u4F46\u6709\u65F6\u5176\u54CD\u5E94\u6027\u4F9D\u8D56\u5173\u7CFB\u4F1A\u4E0D\u90A3\u4E48\u660E\u786E\u3002",paraId:40,tocIndex:16},{value:"\u57FA\u672C\u8BED\u6CD5",paraId:41,tocIndex:17},{value:`import { watchEffect, ref } from 'vue';
+`,paraId:35,tocIndex:15},{value:"\u5199\u6CD5",paraId:36,tocIndex:15},{value:"\u54CD\u5E94\u6027",paraId:36,tocIndex:15},{value:"\u89E6\u53D1\u6761\u4EF6",paraId:36,tocIndex:15},{value:"\u9002\u7528\u573A\u666F",paraId:36,tocIndex:15},{value:"watch(obj.count, ...)",paraId:36,tocIndex:15},{value:"\u274C \u5931\u6548",paraId:36,tocIndex:15},{value:"\u6C38\u8FDC\u4E0D\u4F1A\u89E6\u53D1",paraId:36,tocIndex:15},{value:"\u9519\u8BEF\u5199\u6CD5",paraId:36,tocIndex:15},{value:"watch(() => obj.count, ...)",paraId:36,tocIndex:15},{value:"\u2705 \u6709\u6548",paraId:36,tocIndex:15},{value:"\u5C5E\u6027\u503C\u53D8\u5316\u65F6\u89E6\u53D1",paraId:36,tocIndex:15},{value:"\u76D1\u542C reactive \u5BF9\u8C61\u5C5E\u6027",paraId:36,tocIndex:15},{value:"watch(obj, ...)",paraId:36,tocIndex:15},{value:"\u2705 \u6709\u6548",paraId:36,tocIndex:15},{value:"\u5BF9\u8C61\u4EFB\u610F\u5C5E\u6027\u53D8\u5316\u89E6\u53D1",paraId:36,tocIndex:15},{value:"\u76D1\u542C\u6574\u4E2A\u5BF9\u8C61",paraId:36,tocIndex:15},{value:"\u907F\u514D\u5728\u56DE\u8C03\u4E2D\u4FEE\u6539\u4F9D\u8D56",paraId:37,tocIndex:15},{value:"\u4E0D\u8981\u5728 watch \u56DE\u8C03\u4E2D\u76F4\u63A5\u4FEE\u6539\u88AB\u76D1\u542C\u7684\u6570\u636E\u6E90\uFF0C\u53EF\u80FD\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF\u3002",paraId:38,tocIndex:15},{value:`// \u5371\u9669\uFF01\u53EF\u80FD\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF
+watch(
+  () => state.count,
+  (newCount) => {
+    state.count = newCount + 1; // \u4E0D\u8981\u8FD9\u6837\u505A
+  }
+);
+`,paraId:39,tocIndex:15},{value:"\u7ACB\u5373\u8FD0\u884C\u4E00\u4E2A\u51FD\u6570\uFF0C\u4F1A\u5728\u526F\u4F5C\u7528\u53D1\u751F\u671F\u95F4\u8FFD\u8E2A\u4F9D\u8D56\u3002\u5B83\u4F1A\u5728\u540C\u6B65\u6267\u884C\u8FC7\u7A0B\u4E2D\uFF0C\u81EA\u52A8\u8FFD\u8E2A\u6240\u6709\u80FD\u8BBF\u95EE\u5230\u7684\u54CD\u5E94\u5F0F\u5C5E\u6027\u3002\u8FD9\u66F4\u65B9\u4FBF\uFF0C\u800C\u4E14\u4EE3\u7801\u5F80\u5F80\u66F4\u7B80\u6D01\uFF0C\u4F46\u6709\u65F6\u5176\u54CD\u5E94\u6027\u4F9D\u8D56\u5173\u7CFB\u4F1A\u4E0D\u90A3\u4E48\u660E\u786E\u3002",paraId:40,tocIndex:16},{value:"\u57FA\u672C\u8BED\u6CD5",paraId:41,tocIndex:17},{value:`import { watchEffect, ref } from 'vue';
 
 const count = ref(0);
 
@@ -12870,14 +12840,33 @@ stop();
 
 // \u81EA\u52A8\u505C\u6B62\uFF08\u63A8\u8350\uFF09
 onUnmounted(stop);
-`,paraId:46,tocIndex:18},{value:"\u6E05\u7406\u4E0A\u4E00\u6B21\u526F\u4F5C\u7528\u4EA7\u751F\u7684\u4E34\u65F6\u8D44\u6E90\uFF0C\u5E38\u7528\u4E8E\u6E05\u9664\u5B9A\u65F6\u5668\u3001\u53D6\u6D88\u672A\u5B8C\u6210\u7684\u5F02\u6B65\u64CD\u4F5C",paraId:47,tocIndex:19},{value:"watchEffect \u4F5C\u7528\u51FD\u6570\u7684\u7B2C\u4E00\u4E2A\u53C2\u6570",paraId:48,tocIndex:19},{value:`// \u6E05\u7406\u5B9A\u65F6\u5668
+`,paraId:46,tocIndex:18},{value:"3.5+\u65B0\u589E\u7684\u6682\u505C/\u6062\u590D\u4FA6\u542C\u5668\uFF1A",paraId:47,tocIndex:18},{value:`const { stop, pause, resume } = watchEffect(() => {})
+
+// \u6682\u505C\u4FA6\u542C\u5668
+pause()
+
+// \u7A0D\u540E\u6062\u590D
+resume()
+
+// \u505C\u6B62
+stop()
+`,paraId:48,tocIndex:18},{value:"\u6E05\u7406\u4E0A\u4E00\u6B21\u526F\u4F5C\u7528\u4EA7\u751F\u7684\u4E34\u65F6\u8D44\u6E90\uFF0C\u5E38\u7528\u4E8E\u6E05\u9664\u5B9A\u65F6\u5668\u3001\u53D6\u6D88\u672A\u5B8C\u6210\u7684\u5F02\u6B65\u64CD\u4F5C",paraId:49,tocIndex:19},{value:"watchEffect \u4F5C\u7528\u51FD\u6570\u7684\u7B2C\u4E00\u4E2A\u53C2\u6570",paraId:50,tocIndex:19},{value:`// \u6E05\u7406\u5B9A\u65F6\u5668
 watchEffect((onCleanup) => {
   const timer = setInterval(() => {
     /*...*/
   }, 1000);
   onCleanup(() => clearInterval(timer));
 });
-`,paraId:49,tocIndex:19},{value:"\u81EA\u52A8\u8BF7\u6C42\u6570\u636E",paraId:50,tocIndex:20},{value:`const userId = ref(1);
+`,paraId:51,tocIndex:19},{value:"3.5+ \u4E2D\u7684\u526F\u4F5C\u7528\u6E05\u7406",paraId:52,tocIndex:19},{value:`import { onWatcherCleanup } from 'vue'
+
+watchEffect(async () => {
+  const { response, cancel } = doAsyncWork(newId)
+  // \u5982\u679C \`id\` \u53D8\u5316\uFF0C\u5219\u8C03\u7528 \`cancel\`\uFF0C
+  // \u5982\u679C\u4E4B\u524D\u7684\u8BF7\u6C42\u672A\u5B8C\u6210\uFF0C\u5219\u53D6\u6D88\u8BE5\u8BF7\u6C42
+  onWatcherCleanup(cancel)
+  data.value = await response
+})
+`,paraId:53,tocIndex:19},{value:"\u81EA\u52A8\u8BF7\u6C42\u6570\u636E",paraId:54,tocIndex:20},{value:`const userId = ref(1);
 const userData = ref(null);
 
 watchEffect(async () => {
@@ -12885,7 +12874,7 @@ watchEffect(async () => {
   const response = await fetch(\`/api/users/\${userId.value}\`);
   userData.value = await response.json();
 });
-`,paraId:51,tocIndex:20},{value:"DOM \u64CD\u4F5C",paraId:52,tocIndex:20},{value:`import { ref, watchEffect } from 'vue';
+`,paraId:55,tocIndex:20},{value:"DOM \u64CD\u4F5C",paraId:56,tocIndex:20},{value:`import { ref, watchEffect } from 'vue';
 
 const elementRef = ref(null);
 
@@ -12895,7 +12884,7 @@ watchEffect(() => {
     elementRef.value.style.backgroundColor = 'lightblue';
   }
 });
-`,paraId:53,tocIndex:20},{value:"\u7EC4\u5408\u591A\u4E2A\u4F9D\u8D56",paraId:54,tocIndex:20},{value:`const searchTerm = ref('');
+`,paraId:57,tocIndex:20},{value:"\u7EC4\u5408\u591A\u4E2A\u4F9D\u8D56",paraId:58,tocIndex:20},{value:`const searchTerm = ref('');
 const filterType = ref('name');
 const pageSize = ref(10);
 
@@ -12908,11 +12897,11 @@ watchEffect(() => {
   });
   console.log('\u8BF7\u6C42\u53C2\u6570:', params.toString());
 });
-`,paraId:55,tocIndex:20},{value:"\u521D\u59CB\u7ACB\u5373\u6267\u884C",paraId:56,tocIndex:21},{value:`// \u4F1A\u7ACB\u5373\u6267\u884C\u4E00\u6B21
+`,paraId:59,tocIndex:20},{value:"\u521D\u59CB\u7ACB\u5373\u6267\u884C",paraId:60,tocIndex:21},{value:`// \u4F1A\u7ACB\u5373\u6267\u884C\u4E00\u6B21
 watchEffect(() => {
   console.log('\u7ACB\u5373\u6267\u884C:', count.value); // \u521D\u59CB\u503C\u4F1A\u88AB\u6253\u5370
 });
-`,paraId:57,tocIndex:21},{value:"\u907F\u514D\u65E0\u9650\u5FAA\u73AF",paraId:58,tocIndex:21},{value:`// \u274C \u5371\u9669\u793A\u4F8B\uFF1A\u4F1A\u521B\u5EFA\u65E0\u9650\u5FAA\u73AF
+`,paraId:61,tocIndex:21},{value:"\u907F\u514D\u65E0\u9650\u5FAA\u73AF",paraId:62,tocIndex:21},{value:`// \u274C \u5371\u9669\u793A\u4F8B\uFF1A\u4F1A\u521B\u5EFA\u65E0\u9650\u5FAA\u73AF
 const counter = ref(0);
 watchEffect(() => {
   counter.value++; // \u4FEE\u6539\u4F9D\u8D56\u9879\u4F1A\u89E6\u53D1\u91CD\u65B0\u6267\u884C
@@ -12924,18 +12913,7 @@ watchEffect(() => {
     counter.value++;
   }
 });
-`,paraId:59,tocIndex:21},{value:"\u5F15\u7528\u7C7B\u578B\u5904\u7406",paraId:60,tocIndex:21},{value:`const list = ref([1, 2, 3]);
-
-watchEffect(() => {
-  // \u4E0D\u4F1A\u68C0\u6D4B\u6570\u7EC4\u5185\u5BB9\u53D8\u5316\uFF01
-  console.log('\u6570\u7EC4\u957F\u5EA6:', list.value.length);
-});
-
-// \u2705 \u6B63\u786E\u65B9\u5F0F\uFF1A\u4F7F\u7528\u6DF1\u62F7\u8D1D\u89E6\u53D1\u8FFD\u8E2A
-watchEffect(() => {
-  console.log('\u6570\u7EC4\u5185\u5BB9:', [...list.value]);
-});
-`,paraId:61,tocIndex:21},{value:"\u5F02\u6B65\u64CD\u4F5C\u5904\u7406",paraId:62,tocIndex:21},{value:`watchEffect(async () => {
+`,paraId:63,tocIndex:21},{value:"\u5F02\u6B65\u64CD\u4F5C\u5904\u7406",paraId:64,tocIndex:21},{value:`watchEffect(async () => {
   // \u274C \u9519\u8BEF\u793A\u4F8B\uFF1A\u65E0\u6CD5\u6B63\u786E\u6E05\u7406\u5F02\u6B65\u526F\u4F5C\u7528
   const data = await fetchData();
   // ...
@@ -12955,7 +12933,7 @@ watchEffect((onCleanup) => {
     isCanceled = true;
   });
 });
-`,paraId:63,tocIndex:21},{value:"\u4F9D\u8D56\u6536\u96C6\u65B9\u5F0F\u5BF9\u6BD4",paraId:64,tocIndex:22},{value:`// watch \u9700\u8981\u663E\u5F0F\u58F0\u660E\u4F9D\u8D56
+`,paraId:65,tocIndex:21},{value:"\u4F9D\u8D56\u6536\u96C6\u65B9\u5F0F\u5BF9\u6BD4",paraId:66,tocIndex:22},{value:`// watch \u9700\u8981\u663E\u5F0F\u58F0\u660E\u4F9D\u8D56
 watch([count, searchTerm], ([newCount, newTerm]) => {
   /* ... */
 });
@@ -12964,7 +12942,7 @@ watch([count, searchTerm], ([newCount, newTerm]) => {
 watchEffect(() => {
   console.log(count.value, searchTerm.value);
 });
-`,paraId:65,tocIndex:22},{value:"\u56DE\u8C03\u53C2\u6570\u5DEE\u5F02",paraId:66,tocIndex:22},{value:`// watch \u53EF\u83B7\u5F97\u65B0\u65E7\u503C
+`,paraId:67,tocIndex:22},{value:"\u56DE\u8C03\u53C2\u6570\u5DEE\u5F02",paraId:68,tocIndex:22},{value:`// watch \u53EF\u83B7\u5F97\u65B0\u65E7\u503C
 watch(count, (newVal, oldVal) => {
   /* ... */
 });
@@ -12973,18 +12951,18 @@ watch(count, (newVal, oldVal) => {
 watchEffect(() => {
   console.log('\u5F53\u524D\u503C:', count.value);
 });
-`,paraId:67,tocIndex:22},{value:"\u7ACB\u5373\u6267\u884C\u884C\u4E3A",paraId:68,tocIndex:22},{value:`// watch \u9ED8\u8BA4\u4E0D\u7ACB\u5373\u6267\u884C
+`,paraId:69,tocIndex:22},{value:"\u7ACB\u5373\u6267\u884C\u884C\u4E3A",paraId:70,tocIndex:22},{value:`// watch \u9ED8\u8BA4\u4E0D\u7ACB\u5373\u6267\u884C
 watch(count, () => {});
 
 // watchEffect \u9ED8\u8BA4\u7ACB\u5373\u6267\u884C
 watchEffect(() => {});
-`,paraId:69,tocIndex:22},{value:"\u505C\u6B62\u76D1\u542C\u65B9\u5F0F",paraId:70,tocIndex:22},{value:`// \u4E24\u8005\u505C\u6B62\u65B9\u5F0F\u76F8\u540C
+`,paraId:71,tocIndex:22},{value:"\u505C\u6B62\u76D1\u542C\u65B9\u5F0F",paraId:72,tocIndex:22},{value:`// \u4E24\u8005\u505C\u6B62\u65B9\u5F0F\u76F8\u540C
 const stopWatch = watch(...)
 stopWatch()
 
 const stopEffect = watchEffect(...)
 stopEffect()
-`,paraId:71,tocIndex:22},{value:"\u6E05\u7406\u526F\u4F5C\u7528",paraId:72,tocIndex:22},{value:`watch(id, (newId, oldId, onCleanup) => {
+`,paraId:73,tocIndex:22},{value:"\u6E05\u7406\u526F\u4F5C\u7528",paraId:74,tocIndex:22},{value:`watch(id, (newId, oldId, onCleanup) => {
   // ...
   onCleanup(() => {
     // \u6E05\u7406\u903B\u8F91
@@ -12997,7 +12975,7 @@ watchEffect((onCleanup) => {
     // \u6E05\u7406\u903B\u8F91
   });
 });
-`,paraId:73,tocIndex:22},{value:"Vue 3.5+ \u4E2D\u652F\u6301\u4F7F\u7528 onWatcherCleanup() API \u6765\u6CE8\u518C\u4E00\u4E2A\u6E05\u7406\u51FD\u6570\uFF0C\u5F53\u4FA6\u542C\u5668\u5931\u6548\u5E76\u51C6\u5907\u91CD\u65B0\u8FD0\u884C\u65F6\u4F1A\u88AB\u8C03\u7528\uFF0C\u5E76\u4E14\u5FC5\u987B\u5728 watchEffect \u6548\u679C\u51FD\u6570\u6216 watch \u56DE\u8C03\u51FD\u6570\u7684\u540C\u6B65\u6267\u884C\u671F\u95F4\u8C03\u7528\uFF1A\u4F60\u4E0D\u80FD\u5728\u5F02\u6B65\u51FD\u6570\u7684 await \u8BED\u53E5\u4E4B\u540E\u8C03\u7528\u5B83\u3002",paraId:74,tocIndex:22},{value:`import { watch, onWatcherCleanup } from 'vue';
+`,paraId:75,tocIndex:22},{value:"Vue 3.5+ \u4E2D\u652F\u6301\u4F7F\u7528 onWatcherCleanup() API \u6765\u6CE8\u518C\u4E00\u4E2A\u6E05\u7406\u51FD\u6570\uFF0C\u5F53\u4FA6\u542C\u5668\u5931\u6548\u5E76\u51C6\u5907\u91CD\u65B0\u8FD0\u884C\u65F6\u4F1A\u88AB\u8C03\u7528\uFF0C\u5E76\u4E14\u5FC5\u987B\u5728 watchEffect \u6548\u679C\u51FD\u6570\u6216 watch \u56DE\u8C03\u51FD\u6570\u7684\u540C\u6B65\u6267\u884C\u671F\u95F4\u8C03\u7528\uFF1A\u4F60\u4E0D\u80FD\u5728\u5F02\u6B65\u51FD\u6570\u7684 await \u8BED\u53E5\u4E4B\u540E\u8C03\u7528\u5B83\u3002",paraId:76,tocIndex:22},{value:`import { watch, onWatcherCleanup } from 'vue';
 
 watch(id, (newId) => {
   const controller = new AbortController();
@@ -13011,7 +12989,7 @@ watch(id, (newId) => {
     controller.abort();
   });
 });
-`,paraId:75,tocIndex:22},{value:"\u573A\u666F",paraId:76,tocIndex:22},{value:"watch \u9002\u7528\u6027",paraId:76,tocIndex:22},{value:"watchEffect \u9002\u7528\u6027",paraId:76,tocIndex:22},{value:"\u9700\u8981\u65B0\u65E7\u503C\u5BF9\u6BD4",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u274C",paraId:76,tocIndex:22},{value:"\u60F0\u6027\u6267\u884C\uFF08\u9996\u6B21\u4E0D\u6267\u884C\uFF09",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u274C",paraId:76,tocIndex:22},{value:"\u81EA\u52A8\u4F9D\u8D56\u6536\u96C6",paraId:76,tocIndex:22},{value:"\u274C",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u7EC4\u5408\u591A\u4E2A\u4F9D\u8D56",paraId:76,tocIndex:22},{value:"\u274C",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u6E05\u7406\u526F\u4F5C\u7528",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u2705",paraId:76,tocIndex:22},{value:"\u4F7F\u7528 watch \u5F53\uFF1A",paraId:77,tocIndex:23},{value:"\u9700\u8981\u6BD4\u8F83\u65B0\u65E7\u503C",paraId:78,tocIndex:23},{value:"\u9700\u8981\u60F0\u6027\u6267\u884C",paraId:78,tocIndex:23},{value:"\u4F9D\u8D56\u9879\u660E\u786E\u4E14\u56FA\u5B9A",paraId:78,tocIndex:23},{value:"\u4F7F\u7528 watchEffect \u5F53\uFF1A",paraId:79,tocIndex:23},{value:"\u4F9D\u8D56\u9879\u52A8\u6001\u53D8\u5316",paraId:80,tocIndex:23},{value:"\u9700\u8981\u7ACB\u5373\u6267\u884C",paraId:80,tocIndex:23},{value:"\u5904\u7406\u526F\u4F5C\u7528\u903B\u8F91",paraId:80,tocIndex:23},{value:"\u6838\u5FC3\u7528\u9014\uFF1A\u5728 Vue \u5B8C\u6210 DOM \u66F4\u65B0\u540E\u89E6\u53D1\uFF0C\u9700\u8981\u8BBF\u95EE\u66F4\u65B0\u540E\u7684 DOM \u6216\u786E\u4FDD\u526F\u4F5C\u7528\u5728\u6E32\u67D3\u540E\u6267\u884C",paraId:81,tocIndex:24},{value:`import { watchPostEffect } from 'vue';
+`,paraId:77,tocIndex:22},{value:"\u573A\u666F",paraId:78,tocIndex:22},{value:"watch \u9002\u7528\u6027",paraId:78,tocIndex:22},{value:"watchEffect \u9002\u7528\u6027",paraId:78,tocIndex:22},{value:"\u9700\u8981\u65B0\u65E7\u503C\u5BF9\u6BD4",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u274C",paraId:78,tocIndex:22},{value:"\u60F0\u6027\u6267\u884C\uFF08\u9996\u6B21\u4E0D\u6267\u884C\uFF09",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u274C",paraId:78,tocIndex:22},{value:"\u81EA\u52A8\u4F9D\u8D56\u6536\u96C6",paraId:78,tocIndex:22},{value:"\u274C",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u7EC4\u5408\u591A\u4E2A\u4F9D\u8D56",paraId:78,tocIndex:22},{value:"\u274C",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u6E05\u7406\u526F\u4F5C\u7528",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u2705",paraId:78,tocIndex:22},{value:"\u4F7F\u7528 watch \u5F53\uFF1A",paraId:79,tocIndex:23},{value:"\u9700\u8981\u6BD4\u8F83\u65B0\u65E7\u503C",paraId:80,tocIndex:23},{value:"\u9700\u8981\u60F0\u6027\u6267\u884C",paraId:80,tocIndex:23},{value:"\u4F9D\u8D56\u9879\u660E\u786E\u4E14\u56FA\u5B9A",paraId:80,tocIndex:23},{value:"\u4F7F\u7528 watchEffect \u5F53\uFF1A",paraId:81,tocIndex:23},{value:"\u4F9D\u8D56\u9879\u52A8\u6001\u53D8\u5316",paraId:82,tocIndex:23},{value:"\u9700\u8981\u7ACB\u5373\u6267\u884C",paraId:82,tocIndex:23},{value:"\u5904\u7406\u526F\u4F5C\u7528\u903B\u8F91",paraId:82,tocIndex:23},{value:"\u6838\u5FC3\u7528\u9014\uFF1A\u5728 Vue \u5B8C\u6210 DOM \u66F4\u65B0\u540E\u89E6\u53D1\uFF0C\u9700\u8981\u8BBF\u95EE\u66F4\u65B0\u540E\u7684 DOM \u6216\u786E\u4FDD\u526F\u4F5C\u7528\u5728\u6E32\u67D3\u540E\u6267\u884C",paraId:83,tocIndex:24},{value:`import { watchPostEffect } from 'vue';
 
 watchEffect(callback, {
   flush: 'post',
@@ -13026,7 +13004,7 @@ watchPostEffect(() => {
 watch(source, callback, {
   flush: 'post',
 });
-`,paraId:82,tocIndex:25},{value:"\u5728\u6570\u636E\u53D8\u5316\u540E\u9700\u8981\u64CD\u4F5C\u66F4\u65B0\u540E\u7684 DOM \u5143\u7D20",paraId:83,tocIndex:26},{value:`<template>
+`,paraId:84,tocIndex:25},{value:"\u5728\u6570\u636E\u53D8\u5316\u540E\u9700\u8981\u64CD\u4F5C\u66F4\u65B0\u540E\u7684 DOM \u5143\u7D20",paraId:85,tocIndex:26},{value:`<template>
   <div>
     <p ref="msgElement">{{ message }}</p>
     <button @click="message += '!'">\u6DFB\u52A0\u611F\u53F9\u53F7</button>
@@ -13046,7 +13024,7 @@ watchPostEffect(() => {
   }
 });
 <\/script>
-`,paraId:84,tocIndex:26},{value:"\u73B0\u8C61\u5BF9\u6BD4\uFF1A",paraId:85,tocIndex:26},{value:"\u274C \u9ED8\u8BA4 flush: 'pre' \u65F6\uFF0C\u83B7\u53D6\u7684\u662F\u66F4\u65B0\u524D\u7684 DOM \u5C3A\u5BF8",paraId:86,tocIndex:26},{value:"\u2705 \u4F7F\u7528 flush: 'post' \u65F6\uFF0C\u80FD\u83B7\u53D6\u66F4\u65B0\u540E\u7684\u6B63\u786E\u5C3A\u5BF8",paraId:86,tocIndex:26},{value:"\u6838\u5FC3\u7528\u9014\uFF1A\u54CD\u5E94\u5F0F\u6570\u636E\u53D8\u5316\u65F6\uFF0C \u540C\u6B65\u7ACB\u5373\u89E6\u53D1\uFF0C \u9700\u8981\u5373\u65F6\u53CD\u9988\u7684\u7B80\u5355\u72B6\u6001\u540C\u6B65",paraId:87,tocIndex:27},{value:`import { watchSyncEffect } from 'vue';
+`,paraId:86,tocIndex:26},{value:"\u73B0\u8C61\u5BF9\u6BD4\uFF1A",paraId:87,tocIndex:26},{value:"\u274C \u9ED8\u8BA4 flush: 'pre' \u65F6\uFF0C\u83B7\u53D6\u7684\u662F\u66F4\u65B0\u524D\u7684 DOM \u5C3A\u5BF8",paraId:88,tocIndex:26},{value:"\u2705 \u4F7F\u7528 flush: 'post' \u65F6\uFF0C\u80FD\u83B7\u53D6\u66F4\u65B0\u540E\u7684\u6B63\u786E\u5C3A\u5BF8",paraId:88,tocIndex:26},{value:"\u6838\u5FC3\u7528\u9014\uFF1A\u54CD\u5E94\u5F0F\u6570\u636E\u53D8\u5316\u65F6\uFF0C \u540C\u6B65\u7ACB\u5373\u89E6\u53D1\uFF0C \u9700\u8981\u5373\u65F6\u53CD\u9988\u7684\u7B80\u5355\u72B6\u6001\u540C\u6B65",paraId:89,tocIndex:27},{value:`import { watchSyncEffect } from 'vue';
 
 watchEffect(callback, {
   flush: 'sync',
@@ -13061,7 +13039,7 @@ watchSyncEffect(() => {
 watch(source, callback, {
   flush: 'sync',
 });
-`,paraId:88,tocIndex:28},{value:"\u9700\u8981\u7ACB\u5373\u54CD\u5E94\u6570\u636E\u53D8\u5316\uFF08\u5982\u8868\u5355\u5B9E\u65F6\u9A8C\u8BC1\uFF09",paraId:89,tocIndex:29},{value:`<template>
+`,paraId:90,tocIndex:28},{value:"\u9700\u8981\u7ACB\u5373\u54CD\u5E94\u6570\u636E\u53D8\u5316\uFF08\u5982\u8868\u5355\u5B9E\u65F6\u9A8C\u8BC1\uFF09",paraId:91,tocIndex:29},{value:`<template>
   <input v-model="inputText" />
   <p class="error" v-if="error">{{ error }}</p>
 </template>
@@ -13077,7 +13055,7 @@ watchSyncEffect(() => {
   error.value = inputText.value.includes('@') ? '' : '\u5FC5\u987B\u5305\u542B @ \u7B26\u53F7';
 });
 <\/script>
-`,paraId:90,tocIndex:29},{value:"\u7279\u70B9\uFF1A",paraId:91,tocIndex:29},{value:"\u8F93\u5165\u65F6\u4F1A \u5B9E\u65F6\u540C\u6B65\u66F4\u65B0 \u9519\u8BEF\u63D0\u793A",paraId:92,tocIndex:29},{value:"\u4F46\u5982\u679C\u9A8C\u8BC1\u903B\u8F91\u590D\u6742\uFF0C\u9891\u7E41\u89E6\u53D1\u53EF\u80FD\u5F71\u54CD\u6027\u80FD",paraId:92,tocIndex:29},{value:`const data = ref(0);
+`,paraId:92,tocIndex:29},{value:"\u7279\u70B9\uFF1A",paraId:93,tocIndex:29},{value:"\u8F93\u5165\u65F6\u4F1A \u5B9E\u65F6\u540C\u6B65\u66F4\u65B0 \u9519\u8BEF\u63D0\u793A",paraId:94,tocIndex:29},{value:"\u4F46\u5982\u679C\u9A8C\u8BC1\u903B\u8F91\u590D\u6742\uFF0C\u9891\u7E41\u89E6\u53D1\u53EF\u80FD\u5F71\u54CD\u6027\u80FD",paraId:94,tocIndex:29},{value:`const data = ref(0);
 
 watchSyncEffect(() => {
   console.log('Sync \u89E6\u53D1:', data.value);
@@ -13098,7 +13076,15 @@ data.value = 1;
 2. \u9ED8\u8BA4\u6A21\u5F0F\u89E6\u53D1: 1
 3. Post \u89E6\u53D1: 1
 */
-`,paraId:93,tocIndex:30},{value:"\u9009\u9879",paraId:94,tocIndex:30},{value:"\u89E6\u53D1\u65F6\u673A",paraId:94,tocIndex:30},{value:"\u5178\u578B\u573A\u666F",paraId:94,tocIndex:30},{value:"\u6CE8\u610F\u4E8B\u9879",paraId:94,tocIndex:30},{value:"pre (\u9ED8\u8BA4)",paraId:94,tocIndex:30},{value:"\u7EC4\u4EF6 \u66F4\u65B0\u524D \u6267\u884C",paraId:94,tocIndex:30},{value:"\u5927\u591A\u6570\u5E38\u89C4\u573A\u666F",paraId:94,tocIndex:30},{value:"\u65E0\u6CD5\u8BBF\u95EE\u66F4\u65B0\u540E\u7684 DOM",paraId:94,tocIndex:30},{value:"post",paraId:94,tocIndex:30},{value:"\u7EC4\u4EF6 \u66F4\u65B0\u540E \u6267\u884C",paraId:94,tocIndex:30},{value:"DOM \u64CD\u4F5C/\u5E03\u5C40\u8BA1\u7B97",paraId:94,tocIndex:30},{value:"\u4F7F\u7528 watchPostEffect \u7B80\u5316",paraId:94,tocIndex:30},{value:"sync",paraId:94,tocIndex:30},{value:"\u540C\u6B65 \u54CD\u5E94\u53D8\u5316",paraId:94,tocIndex:30},{value:"\u9700\u8981\u5373\u65F6\u53CD\u9988\u7684\u7B80\u5355\u903B\u8F91",paraId:94,tocIndex:30},{value:"\u907F\u514D\u5728\u9891\u7E41\u53D8\u5316\u7684\u6570\u636E\u6E90\u4F7F\u7528",paraId:94,tocIndex:30}]},35150:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(98874);const a=[{value:"Vue2 \u94A9\u5B50",paraId:0},{value:"Vue3 \u5BF9\u5E94\u94A9\u5B50",paraId:0},{value:"\u4F7F\u7528\u573A\u666F",paraId:0},{value:"\u6CE8\u610F\u4E8B\u9879",paraId:0},{value:"beforeCreate",paraId:0},{value:"setup()",paraId:0},{value:"\u7EC4\u4EF6\u521D\u59CB\u5316\u524D\uFF0C\u65E0\u6CD5\u8BBF\u95EE data \u548C methods\u3002\u521D\u59CB\u5316\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u8BA1\u7B97\u5C5E\u6027\u7B49",paraId:0},{value:"Vue3 \u4E2D\u6B64\u9636\u6BB5\u88AB setup() \u66FF\u4EE3\uFF0C\u76F4\u63A5\u4F7F\u7528 setup()\uFF0C\u4E14\u65E0\u6CD5\u4F7F\u7528 this\u3002",paraId:0},{value:"created",paraId:0},{value:"setup()",paraId:0},{value:"\u7EC4\u4EF6\u5B9E\u4F8B\u521B\u5EFA\u540E\uFF0C\u53EF\u8BBF\u95EE data \u548C methods\uFF0C\u4F46\u672A\u6302\u8F7D DOM\u3002\u521D\u59CB\u5316\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u8BA1\u7B97\u5C5E\u6027\u7B49",paraId:0},{value:"Vue3 \u4E2D\u5C06\u521D\u59CB\u5316\u903B\u8F91\u653E\u5728 setup() \u4E2D\uFF0C\u5F02\u6B65\u8BF7\u6C42\u53EF\u5728\u6B64\u9636\u6BB5\u53D1\u8D77\u3002",paraId:0},{value:"beforeMount",paraId:0},{value:"onBeforeMount",paraId:0},{value:"\u7EC4\u4EF6\u6302\u8F7D\u5230 DOM \u524D\uFF0C\u6700\u540E\u4E00\u6B21\u64CD\u4F5C\u6570\u636E\u7684\u673A\u4F1A\u3002",paraId:0},{value:"Vue3 \u9700\u663E\u5F0F\u5BFC\u5165 onBeforeMount \u5E76\u5728 setup() \u4E2D\u4F7F\u7528\u3002",paraId:0},{value:"mounted",paraId:0},{value:"onMounted",paraId:0},{value:"\u7EC4\u4EF6\u6302\u8F7D\u540E\uFF0C\u53EF\u64CD\u4F5C DOM \u6216\u53D1\u8D77\u4F9D\u8D56 DOM \u7684\u8BF7\u6C42\uFF08\u5982\u56FE\u8868\u521D\u59CB\u5316\uFF09\u3002",paraId:0},{value:"\u907F\u514D\u5728\u6B64\u9636\u6BB5\u4FEE\u6539\u54CD\u5E94\u5F0F\u6570\u636E\uFF0C\u53EF\u80FD\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF\u3002",paraId:0},{value:"beforeUpdate",paraId:0},{value:"onBeforeUpdate",paraId:0},{value:"\u6570\u636E\u53D8\u5316\u540E\u3001DOM \u66F4\u65B0\u524D\uFF0C\u7528\u4E8E\u83B7\u53D6\u66F4\u65B0\u524D\u7684\u72B6\u6001\u3002",paraId:0},{value:"\u907F\u514D\u5728\u6B64\u9636\u6BB5\u4FEE\u6539\u6570\u636E\uFF0C\u53EF\u80FD\u5F15\u53D1\u989D\u5916\u6E32\u67D3\u3002",paraId:0},{value:"updated",paraId:0},{value:"onUpdated",paraId:0},{value:"\u6570\u636E\u53D8\u5316\u5BFC\u81F4 DOM \u66F4\u65B0\u540E\uFF0C\u53EF\u6267\u884C\u4F9D\u8D56\u65B0 DOM \u7684\u64CD\u4F5C\u3002",paraId:0},{value:"\u8C28\u614E\u4F7F\u7528\uFF0C\u9891\u7E41\u6570\u636E\u53D8\u5316\u53EF\u80FD\u5BFC\u81F4\u6027\u80FD\u95EE\u9898\u3002",paraId:0},{value:"beforeDestroy",paraId:0},{value:"onBeforeUnmount",paraId:0},{value:"\u7EC4\u4EF6\u9500\u6BC1\u524D\uFF0C\u7528\u4E8E\u6E05\u7406\u5B9A\u65F6\u5668\u3001\u53D6\u6D88\u4E8B\u4EF6\u76D1\u542C\u7B49\u8D44\u6E90\u91CA\u653E\u64CD\u4F5C\u3002",paraId:0},{value:"Vue3 \u4E2D\u540D\u79F0\u6539\u4E3A onBeforeUnmount\uFF0C\u9700\u6CE8\u610F\u547D\u540D\u53D8\u5316\u3002",paraId:0},{value:"destroyed",paraId:0},{value:"onUnmounted",paraId:0},{value:"\u7EC4\u4EF6\u9500\u6BC1\u540E\uFF0C\u7528\u4E8E\u6700\u7EC8\u6E05\u7406\u5DE5\u4F5C\u3002",paraId:0},{value:"Vue3 \u4E2D\u540D\u79F0\u6539\u4E3A onUnmounted\uFF0C\u4E0E\u5378\u8F7D\u76F8\u5173\u7684\u903B\u8F91\u5E94\u5728\u6B64\u5B8C\u6210\u3002",paraId:0},{value:"activated",paraId:0},{value:"onActivated",paraId:0},{value:"\u88AB ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u7F13\u5B58\u7684\u7EC4\u4EF6\u6FC0\u6D3B\u65F6\u8C03\u7528\u3002",paraId:0},{value:"\u9700\u914D\u5408 ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u4F7F\u7528\uFF0C\u7528\u4E8E\u6062\u590D\u7EC4\u4EF6\u72B6\u6001\u3002",paraId:0},{value:"deactivated",paraId:0},{value:"onDeactivated",paraId:0},{value:"\u88AB ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u7F13\u5B58\u7684\u7EC4\u4EF6\u5931\u6D3B\u65F6\u8C03\u7528\u3002",paraId:0},{value:"\u7528\u4E8E\u4FDD\u5B58\u7EC4\u4EF6\u72B6\u6001\u6216\u6682\u505C\u540E\u53F0\u4EFB\u52A1\u3002",paraId:0},{value:"errorCaptured",paraId:0},{value:"onErrorCaptured",paraId:0},{value:"\u6355\u83B7\u5B50\u7EC4\u4EF6\u4F20\u9012\u7684\u9519\u8BEF\u65F6\u8C03\u7528\uFF0C\u53EF\u7528\u4E8E\u9519\u8BEF\u4E0A\u62A5\u3002",paraId:0},{value:"Vue3 \u4E2D\u9700\u663E\u5F0F\u5BFC\u5165\uFF0C\u53EF\u8FD4\u56DE false \u963B\u6B62\u9519\u8BEF\u7EE7\u7EED\u4F20\u64AD\u3002",paraId:0},{value:"-",paraId:0},{value:"onRenderTracked",paraId:0},{value:"Vue3 \u65B0\u589E\uFF1A\u8C03\u8BD5\u6E32\u67D3\u4F9D\u8D56\u7684\u54CD\u5E94\u5F0F\u6570\u636E\u53D8\u5316\u3002",paraId:0},{value:"\u4EC5\u5728\u5F00\u53D1\u6A21\u5F0F\u4E0B\u6709\u6548\uFF0C\u7528\u4E8E\u8FFD\u8E2A\u6E32\u67D3\u8FC7\u7A0B\u4E2D\u7684\u4F9D\u8D56\u6536\u96C6\u3002",paraId:0},{value:"-",paraId:0},{value:"onRenderTriggered",paraId:0},{value:"Vue3 \u65B0\u589E\uFF1A\u8C03\u8BD5\u54CD\u5E94\u5F0F\u6570\u636E\u89E6\u53D1\u7EC4\u4EF6\u91CD\u65B0\u6E32\u67D3\u65F6\u7684\u5177\u4F53\u53D8\u5316\u3002",paraId:0},{value:"\u5F00\u53D1\u5DE5\u5177\uFF0C\u7528\u4E8E\u5B9A\u4F4D\u6027\u80FD\u95EE\u9898\u6216\u610F\u5916\u6E32\u67D3\u3002",paraId:0}]},91995:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(13643);const a=[{value:"\u5728 vue3 \u4E2D\u9690\u5F0F\u7EA6\u5B9A\uFF1A",paraId:0,tocIndex:2},{value:"modelValue",paraId:1,tocIndex:2},{value:" \u548C ",paraId:1,tocIndex:2},{value:"update:modelValue",paraId:1,tocIndex:2},{value:" \u662F Vue 3 \u4E3A v-model \u8BBE\u8BA1\u7684\u4FDD\u7559\u540D\u79F0",paraId:1,tocIndex:2},{value:"\u53EA\u8981\u7236\u7EC4\u4EF6\u4F7F\u7528 v-model\uFF0CVue \u4F1A\u81EA\u52A8\u5904\u7406\u8FD9\u4E24\u4E2A\u540D\u79F0\u7684\u5173\u8054",paraId:1,tocIndex:2},{value:"\u8FD9\u79CD\u673A\u5236\u8BA9 v-model \u7684\u4F7F\u7528\u66F4\u7B80\u6D01\uFF0C\u5F00\u53D1\u8005\u53EA\u9700\u9075\u5B88\u547D\u540D\u7EA6\u5B9A\uFF0C\u65E0\u9700\u624B\u52A8\u5B9A\u4E49\u7236-\u5B50\u4E4B\u95F4\u7684\u534F\u8BAE",paraId:1,tocIndex:2},{value:`<!--\u7236\u7EC4\u4EF6 (Parent.vue)-->
+`,paraId:95,tocIndex:30},{value:"\u9009\u9879",paraId:96,tocIndex:30},{value:"\u89E6\u53D1\u65F6\u673A",paraId:96,tocIndex:30},{value:"\u5178\u578B\u573A\u666F",paraId:96,tocIndex:30},{value:"\u6CE8\u610F\u4E8B\u9879",paraId:96,tocIndex:30},{value:"pre (\u9ED8\u8BA4)",paraId:96,tocIndex:30},{value:"\u7EC4\u4EF6 \u66F4\u65B0\u524D \u6267\u884C",paraId:96,tocIndex:30},{value:"\u5927\u591A\u6570\u5E38\u89C4\u573A\u666F",paraId:96,tocIndex:30},{value:"\u65E0\u6CD5\u8BBF\u95EE\u66F4\u65B0\u540E\u7684 DOM",paraId:96,tocIndex:30},{value:"post",paraId:96,tocIndex:30},{value:"\u7EC4\u4EF6 \u66F4\u65B0\u540E \u6267\u884C",paraId:96,tocIndex:30},{value:"DOM \u64CD\u4F5C/\u5E03\u5C40\u8BA1\u7B97",paraId:96,tocIndex:30},{value:"\u4F7F\u7528 watchPostEffect \u7B80\u5316",paraId:96,tocIndex:30},{value:"sync",paraId:96,tocIndex:30},{value:"\u540C\u6B65 \u54CD\u5E94\u53D8\u5316",paraId:96,tocIndex:30},{value:"\u9700\u8981\u5373\u65F6\u53CD\u9988\u7684\u7B80\u5355\u903B\u8F91",paraId:96,tocIndex:30},{value:"\u907F\u514D\u5728\u9891\u7E41\u53D8\u5316\u7684\u6570\u636E\u6E90\u4F7F\u7528",paraId:96,tocIndex:30},{value:"vue3.5+\u65B0\u589E\uFF0C\u6CE8\u518C\u4E00\u4E2A\u6E05\u7406\u51FD\u6570\uFF0C\u5728\u5F53\u524D\u4FA6\u542C\u5668\u5373\u5C06\u91CD\u65B0\u8FD0\u884C\u65F6\u6267\u884C\u3002\u53EA\u80FD\u5728 watchEffect \u4F5C\u7528\u51FD\u6570\u6216 watch \u56DE\u8C03\u51FD\u6570\u7684\u540C\u6B65\u6267\u884C\u671F\u95F4\u8C03\u7528 (\u5373\u4E0D\u80FD\u5728\u5F02\u6B65\u51FD\u6570\u7684 await \u8BED\u53E5\u4E4B\u540E\u8C03\u7528)\u3002",paraId:97,tocIndex:31},{value:`import { watch, onWatcherCleanup } from 'vue'
+
+watch(id, (newId) => {
+  const { response, cancel } = doAsyncWork(newId)
+  // \u5982\u679C \`id\` \u53D8\u5316\uFF0C\u5219\u8C03\u7528 \`cancel\`\uFF0C
+  // \u5982\u679C\u4E4B\u524D\u7684\u8BF7\u6C42\u672A\u5B8C\u6210\uFF0C\u5219\u53D6\u6D88\u8BE5\u8BF7\u6C42
+  onWatcherCleanup(cancel)
+})
+`,paraId:98,tocIndex:31}]},35150:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(98874);const a=[{value:"Vue2 \u94A9\u5B50",paraId:0},{value:"Vue3 \u5BF9\u5E94\u94A9\u5B50",paraId:0},{value:"\u4F7F\u7528\u573A\u666F",paraId:0},{value:"\u6CE8\u610F\u4E8B\u9879",paraId:0},{value:"beforeCreate",paraId:0},{value:"setup()",paraId:0},{value:"\u7EC4\u4EF6\u521D\u59CB\u5316\u524D\uFF0C\u65E0\u6CD5\u8BBF\u95EE data \u548C methods\u3002\u521D\u59CB\u5316\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u8BA1\u7B97\u5C5E\u6027\u7B49",paraId:0},{value:"Vue3 \u4E2D\u6B64\u9636\u6BB5\u88AB setup() \u66FF\u4EE3\uFF0C\u76F4\u63A5\u4F7F\u7528 setup()\uFF0C\u4E14\u65E0\u6CD5\u4F7F\u7528 this\u3002",paraId:0},{value:"created",paraId:0},{value:"setup()",paraId:0},{value:"\u7EC4\u4EF6\u5B9E\u4F8B\u521B\u5EFA\u540E\uFF0C\u53EF\u8BBF\u95EE data \u548C methods\uFF0C\u4F46\u672A\u6302\u8F7D DOM\u3002\u521D\u59CB\u5316\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u8BA1\u7B97\u5C5E\u6027\u7B49",paraId:0},{value:"Vue3 \u4E2D\u5C06\u521D\u59CB\u5316\u903B\u8F91\u653E\u5728 setup() \u4E2D\uFF0C\u5F02\u6B65\u8BF7\u6C42\u53EF\u5728\u6B64\u9636\u6BB5\u53D1\u8D77\u3002",paraId:0},{value:"beforeMount",paraId:0},{value:"onBeforeMount",paraId:0},{value:"\u7EC4\u4EF6\u6302\u8F7D\u5230 DOM \u524D\uFF0C\u6700\u540E\u4E00\u6B21\u64CD\u4F5C\u6570\u636E\u7684\u673A\u4F1A\u3002",paraId:0},{value:"Vue3 \u9700\u663E\u5F0F\u5BFC\u5165 onBeforeMount \u5E76\u5728 setup() \u4E2D\u4F7F\u7528\u3002",paraId:0},{value:"mounted",paraId:0},{value:"onMounted",paraId:0},{value:"\u7EC4\u4EF6\u6302\u8F7D\u540E\uFF0C\u53EF\u64CD\u4F5C DOM \u6216\u53D1\u8D77\u4F9D\u8D56 DOM \u7684\u8BF7\u6C42\uFF08\u5982\u56FE\u8868\u521D\u59CB\u5316\uFF09\u3002",paraId:0},{value:"\u907F\u514D\u5728\u6B64\u9636\u6BB5\u4FEE\u6539\u54CD\u5E94\u5F0F\u6570\u636E\uFF0C\u53EF\u80FD\u5BFC\u81F4\u65E0\u9650\u5FAA\u73AF\u3002",paraId:0},{value:"beforeUpdate",paraId:0},{value:"onBeforeUpdate",paraId:0},{value:"\u6570\u636E\u53D8\u5316\u540E\u3001DOM \u66F4\u65B0\u524D\uFF0C\u7528\u4E8E\u83B7\u53D6\u66F4\u65B0\u524D\u7684\u72B6\u6001\u3002",paraId:0},{value:"\u907F\u514D\u5728\u6B64\u9636\u6BB5\u4FEE\u6539\u6570\u636E\uFF0C\u53EF\u80FD\u5F15\u53D1\u989D\u5916\u6E32\u67D3\u3002",paraId:0},{value:"updated",paraId:0},{value:"onUpdated",paraId:0},{value:"\u6570\u636E\u53D8\u5316\u5BFC\u81F4 DOM \u66F4\u65B0\u540E\uFF0C\u53EF\u6267\u884C\u4F9D\u8D56\u65B0 DOM \u7684\u64CD\u4F5C\u3002",paraId:0},{value:"\u8C28\u614E\u4F7F\u7528\uFF0C\u9891\u7E41\u6570\u636E\u53D8\u5316\u53EF\u80FD\u5BFC\u81F4\u6027\u80FD\u95EE\u9898\u3002",paraId:0},{value:"beforeDestroy",paraId:0},{value:"onBeforeUnmount",paraId:0},{value:"\u7EC4\u4EF6\u9500\u6BC1\u524D\uFF0C\u7528\u4E8E\u6E05\u7406\u5B9A\u65F6\u5668\u3001\u53D6\u6D88\u4E8B\u4EF6\u76D1\u542C\u7B49\u8D44\u6E90\u91CA\u653E\u64CD\u4F5C\u3002",paraId:0},{value:"Vue3 \u4E2D\u540D\u79F0\u6539\u4E3A onBeforeUnmount\uFF0C\u9700\u6CE8\u610F\u547D\u540D\u53D8\u5316\u3002",paraId:0},{value:"destroyed",paraId:0},{value:"onUnmounted",paraId:0},{value:"\u7EC4\u4EF6\u9500\u6BC1\u540E\uFF0C\u7528\u4E8E\u6700\u7EC8\u6E05\u7406\u5DE5\u4F5C\u3002",paraId:0},{value:"Vue3 \u4E2D\u540D\u79F0\u6539\u4E3A onUnmounted\uFF0C\u4E0E\u5378\u8F7D\u76F8\u5173\u7684\u903B\u8F91\u5E94\u5728\u6B64\u5B8C\u6210\u3002",paraId:0},{value:"activated",paraId:0},{value:"onActivated",paraId:0},{value:"\u88AB ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u7F13\u5B58\u7684\u7EC4\u4EF6\u6FC0\u6D3B\u65F6\u8C03\u7528, \u66FF\u4EE3 ",paraId:0},{value:"onMounted",paraId:0},{value:"\u9700\u914D\u5408 ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u4F7F\u7528\uFF0C\u7528\u4E8E\u6062\u590D\u7EC4\u4EF6\u72B6\u6001\u3002",paraId:0},{value:"deactivated",paraId:0},{value:"onDeactivated",paraId:0},{value:"\u88AB ",paraId:0},{value:"<keep-alive>",paraId:0},{value:" \u7F13\u5B58\u7684\u7EC4\u4EF6\u5931\u6D3B\u65F6\u8C03\u7528, \u66FF\u4EE3 ",paraId:0},{value:"onUnmounted",paraId:0},{value:"\u7528\u4E8E\u4FDD\u5B58\u7EC4\u4EF6\u72B6\u6001\u6216\u6682\u505C\u540E\u53F0\u4EFB\u52A1\u3002",paraId:0},{value:"errorCaptured",paraId:0},{value:"onErrorCaptured",paraId:0},{value:"\u6355\u83B7\u5B50\u7EC4\u4EF6\u4F20\u9012\u7684\u9519\u8BEF\u65F6\u8C03\u7528\uFF0C\u53EF\u7528\u4E8E\u9519\u8BEF\u4E0A\u62A5\u3002",paraId:0},{value:"Vue3 \u4E2D\u9700\u663E\u5F0F\u5BFC\u5165\uFF0C\u53EF\u8FD4\u56DE false \u963B\u6B62\u9519\u8BEF\u7EE7\u7EED\u4F20\u64AD\u3002",paraId:0},{value:"-",paraId:0},{value:"onRenderTracked",paraId:0},{value:"Vue3 \u65B0\u589E\uFF1A\u8C03\u8BD5\u6E32\u67D3\u4F9D\u8D56\u7684\u54CD\u5E94\u5F0F\u6570\u636E\u53D8\u5316\u3002",paraId:0},{value:"\u4EC5\u5728\u5F00\u53D1\u6A21\u5F0F\u4E0B\u6709\u6548\uFF0C\u7528\u4E8E\u8FFD\u8E2A\u6E32\u67D3\u8FC7\u7A0B\u4E2D\u7684\u4F9D\u8D56\u6536\u96C6\u3002",paraId:0},{value:"-",paraId:0},{value:"onRenderTriggered",paraId:0},{value:"Vue3 \u65B0\u589E\uFF1A\u8C03\u8BD5\u54CD\u5E94\u5F0F\u6570\u636E\u89E6\u53D1\u7EC4\u4EF6\u91CD\u65B0\u6E32\u67D3\u65F6\u7684\u5177\u4F53\u53D8\u5316\u3002",paraId:0},{value:"\u5F00\u53D1\u5DE5\u5177\uFF0C\u7528\u4E8E\u5B9A\u4F4D\u6027\u80FD\u95EE\u9898\u6216\u610F\u5916\u6E32\u67D3\u3002",paraId:0}]},91995:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(13643);const a=[{value:"\u5728 vue3 \u4E2D\u9690\u5F0F\u7EA6\u5B9A\uFF1A",paraId:0,tocIndex:2},{value:"modelValue",paraId:1,tocIndex:2},{value:" \u548C ",paraId:1,tocIndex:2},{value:"update:modelValue",paraId:1,tocIndex:2},{value:" \u662F Vue 3 \u4E3A v-model \u8BBE\u8BA1\u7684\u4FDD\u7559\u540D\u79F0",paraId:1,tocIndex:2},{value:"\u53EA\u8981\u7236\u7EC4\u4EF6\u4F7F\u7528 v-model\uFF0CVue \u4F1A\u81EA\u52A8\u5904\u7406\u8FD9\u4E24\u4E2A\u540D\u79F0\u7684\u5173\u8054",paraId:1,tocIndex:2},{value:"\u8FD9\u79CD\u673A\u5236\u8BA9 v-model \u7684\u4F7F\u7528\u66F4\u7B80\u6D01\uFF0C\u5F00\u53D1\u8005\u53EA\u9700\u9075\u5B88\u547D\u540D\u7EA6\u5B9A\uFF0C\u65E0\u9700\u624B\u52A8\u5B9A\u4E49\u7236-\u5B50\u4E4B\u95F4\u7684\u534F\u8BAE",paraId:1,tocIndex:2},{value:`<!--\u7236\u7EC4\u4EF6 (Parent.vue)-->
 <script setup>
   import { ref } from 'vue';
   import Child from './Child.vue';
@@ -14818,20 +14804,71 @@ const focusCurrent = () => {
   targetEl?.focus();
 };
 <\/script>
-`,paraId:67,tocIndex:18},{value:"\u7279\u6027",paraId:68,tocIndex:19},{value:"\u4F20\u7EDF ref",paraId:68,tocIndex:19},{value:"useTemplateRef()",paraId:68,tocIndex:19},{value:"\u7ED1\u5B9A\u65B9\u5F0F",paraId:68,tocIndex:19},{value:"\u9690\u5F0F\u901A\u8FC7\u53D8\u91CF\u540D\u5339\u914D\u5B57\u7B26\u4E32 ref",paraId:68,tocIndex:19},{value:"\u663E\u5F0F\u901A\u8FC7\u5B57\u7B26\u4E32\u952E\u5339\u914D",paraId:68,tocIndex:19},{value:"Hooks \u5C01\u88C5",paraId:68,tocIndex:19},{value:"\u9700\u5BFC\u51FA ref \u53D8\u91CF",paraId:68,tocIndex:19},{value:"\u53EF\u9690\u85CF ref\uFF0C\u4EC5\u66B4\u9732\u903B\u8F91\u65B9\u6CD5",paraId:68,tocIndex:19},{value:"\u52A8\u6001\u5207\u6362",paraId:68,tocIndex:19},{value:"\u9700\u624B\u52A8\u7BA1\u7406\u591A\u4E2A ref",paraId:68,tocIndex:19},{value:"\u901A\u8FC7\u52A8\u6001\u952E\u540D\u7B80\u5316\u5207\u6362\u903B\u8F91",paraId:68,tocIndex:19},{value:"\u4EE3\u7801\u53EF\u8BFB\u6027",paraId:68,tocIndex:19},{value:"\u53D8\u91CF\u540D\u4E0E\u6A21\u677F\u5B57\u7B26\u4E32\u6613\u6DF7\u6DC6",paraId:68,tocIndex:19},{value:"\u952E\u540D\u4E00\u81F4\uFF0C\u610F\u56FE\u66F4\u6E05\u6670",paraId:68,tocIndex:19}]},3091:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(69240);const a=[{value:"\u5728 Vue 3 \u4E2D\uFF0CRender \u51FD\u6570\u662F\u4E00\u79CD\u63D0\u4F9B\u4E86\u66F4\u5927\u7075\u6D3B\u6027\u7684\u9AD8\u7EA7\u529F\u80FD\u3002\u867D\u7136 Vue \u7684\u6A21\u677F\u7CFB\u7EDF\u5DF2\u7ECF\u8DB3\u591F\u5F3A\u5927\uFF0C\u4F46\u5728\u67D0\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u76F4\u63A5\u4F7F\u7528 JavaScript \u7F16\u5199\u6E32\u67D3\u903B\u8F91\u4F1A\u66F4\u52A0\u65B9\u4FBF\u3002",paraId:0,tocIndex:1},{value:"Render \u51FD\u6570\u7684\u5DE5\u4F5C\u539F\u7406\u662F\u901A\u8FC7\u8FD4\u56DE\u4E00\u4E2A\u865A\u62DF\u8282\u70B9\uFF08VNode\uFF09\u6765\u544A\u8BC9 Vue \u5982\u4F55\u6E32\u67D3\u754C\u9762\u3002Vue 3 \u63D0\u4F9B\u4E86 h \u51FD\u6570\u7528\u4E8E\u521B\u5EFA VNode\u3002",paraId:1,tocIndex:1},{value:"\u95EE\u9898\u7C7B\u578B",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u8BED\u6CD5\u5C40\u9650",paraId:2,tocIndex:2},{value:"Render \u51FD\u6570\u89E3\u51B3\u65B9\u6848",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u7ED3\u6784\u751F\u6210",paraId:2,tocIndex:2},{value:"v-if/v-for",paraId:2,tocIndex:2},{value:"\u7EC4\u5408\u590D\u6742\u5EA6\u6307\u6570\u7EA7\u589E\u957F \u76F4\u63A5\u4F7F\u7528 JavaScript \u903B\u8F91\u63A7\u5236\u7ED3\u6784",paraId:2,tocIndex:2},{value:"\u6027\u80FD\u654F\u611F\u573A\u666F",paraId:2,tocIndex:2},{value:"diff \u7B97\u6CD5\u65E0\u6CD5\u7CBE\u7EC6\u4F18\u5316",paraId:2,tocIndex:2},{value:"\u624B\u52A8\u63A7\u5236 VNode \u751F\u6210\u4E0E\u590D\u7528",paraId:2,tocIndex:2},{value:"\u590D\u6742\u7EC4\u4EF6\u6A21\u5F0F",paraId:2,tocIndex:2},{value:"\u9700\u8981\u591A\u5C42\u7EC4\u4EF6\u5D4C\u5957",paraId:2,tocIndex:2},{value:"\u9AD8\u9636\u51FD\u6570\u7EC4\u5408\u5F0F\u5F00\u53D1",paraId:2,tocIndex:2},{value:"\u975E DOM \u73AF\u5883\u6E32\u67D3",paraId:2,tocIndex:2},{value:"\u5B8C\u5168\u65E0\u6CD5\u5B9E\u73B0",paraId:2,tocIndex:2},{value:"\u5BF9\u63A5\u4EFB\u610F\u6E32\u67D3\u76EE\u6807",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u6A21\u677F\u9700\u6C42",paraId:2,tocIndex:2},{value:"\u9700\u8981\u9884\u7F16\u8BD1",paraId:2,tocIndex:2},{value:"\u8FD0\u884C\u65F6\u52A8\u6001\u751F\u6210",paraId:2,tocIndex:2},{value:"\u8DE8\u6839\u8282\u70B9\u5E03\u5C40",paraId:2,tocIndex:2},{value:"\u9700\u8981\u989D\u5916\u5305\u88F9\u5143\u7D20",paraId:2,tocIndex:2},{value:"Fragment \u76F4\u63A5\u8FD4\u56DE\u6570\u7EC4",paraId:2,tocIndex:2},{value:"\u7C7B\u578B\u5B89\u5168\u8981\u6C42",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u7C7B\u578B\u63A8\u5BFC\u6709\u9650",paraId:2,tocIndex:2},{value:"\u5B8C\u7F8E\u914D\u5408 TypeScript \u7C7B\u578B\u7CFB\u7EDF",paraId:2,tocIndex:2},{value:`<script>
-import { h } from 'vue';
+`,paraId:67,tocIndex:18},{value:"\u7279\u6027",paraId:68,tocIndex:19},{value:"\u4F20\u7EDF ref",paraId:68,tocIndex:19},{value:"useTemplateRef()",paraId:68,tocIndex:19},{value:"\u7ED1\u5B9A\u65B9\u5F0F",paraId:68,tocIndex:19},{value:"\u9690\u5F0F\u901A\u8FC7\u53D8\u91CF\u540D\u5339\u914D\u5B57\u7B26\u4E32 ref",paraId:68,tocIndex:19},{value:"\u663E\u5F0F\u901A\u8FC7\u5B57\u7B26\u4E32\u952E\u5339\u914D",paraId:68,tocIndex:19},{value:"Hooks \u5C01\u88C5",paraId:68,tocIndex:19},{value:"\u9700\u5BFC\u51FA ref \u53D8\u91CF",paraId:68,tocIndex:19},{value:"\u53EF\u9690\u85CF ref\uFF0C\u4EC5\u66B4\u9732\u903B\u8F91\u65B9\u6CD5",paraId:68,tocIndex:19},{value:"\u52A8\u6001\u5207\u6362",paraId:68,tocIndex:19},{value:"\u9700\u624B\u52A8\u7BA1\u7406\u591A\u4E2A ref",paraId:68,tocIndex:19},{value:"\u901A\u8FC7\u52A8\u6001\u952E\u540D\u7B80\u5316\u5207\u6362\u903B\u8F91",paraId:68,tocIndex:19},{value:"\u4EE3\u7801\u53EF\u8BFB\u6027",paraId:68,tocIndex:19},{value:"\u53D8\u91CF\u540D\u4E0E\u6A21\u677F\u5B57\u7B26\u4E32\u6613\u6DF7\u6DC6",paraId:68,tocIndex:19},{value:"\u952E\u540D\u4E00\u81F4\uFF0C\u610F\u56FE\u66F4\u6E05\u6670",paraId:68,tocIndex:19}]},3091:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(69240);const a=[{value:"\u5728 Vue 3 \u4E2D\uFF0CRender \u51FD\u6570\u662F\u4E00\u79CD\u63D0\u4F9B\u4E86\u66F4\u5927\u7075\u6D3B\u6027\u7684\u9AD8\u7EA7\u529F\u80FD\u3002\u867D\u7136 Vue \u7684\u6A21\u677F\u7CFB\u7EDF\u5DF2\u7ECF\u8DB3\u591F\u5F3A\u5927\uFF0C\u4F46\u5728\u67D0\u4E9B\u60C5\u51B5\u4E0B\uFF0C\u76F4\u63A5\u4F7F\u7528 JavaScript \u7F16\u5199\u6E32\u67D3\u903B\u8F91\u4F1A\u66F4\u52A0\u65B9\u4FBF\u3002",paraId:0,tocIndex:1},{value:"Render \u51FD\u6570\u7684\u5DE5\u4F5C\u539F\u7406\u662F\u901A\u8FC7\u8FD4\u56DE\u4E00\u4E2A\u865A\u62DF\u8282\u70B9\uFF08VNode\uFF09\u6765\u544A\u8BC9 Vue \u5982\u4F55\u6E32\u67D3\u754C\u9762\u3002Vue 3 \u63D0\u4F9B\u4E86 h \u51FD\u6570\u7528\u4E8E\u521B\u5EFA VNode\u3002",paraId:1,tocIndex:1},{value:"\u95EE\u9898\u7C7B\u578B",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u8BED\u6CD5\u5C40\u9650",paraId:2,tocIndex:2},{value:"Render \u51FD\u6570\u89E3\u51B3\u65B9\u6848",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u7ED3\u6784\u751F\u6210",paraId:2,tocIndex:2},{value:"v-if/v-for",paraId:2,tocIndex:2},{value:"\u7EC4\u5408\u590D\u6742\u5EA6\u6307\u6570\u7EA7\u589E\u957F \u76F4\u63A5\u4F7F\u7528 JavaScript \u903B\u8F91\u63A7\u5236\u7ED3\u6784",paraId:2,tocIndex:2},{value:"\u6027\u80FD\u654F\u611F\u573A\u666F",paraId:2,tocIndex:2},{value:"diff \u7B97\u6CD5\u65E0\u6CD5\u7CBE\u7EC6\u4F18\u5316",paraId:2,tocIndex:2},{value:"\u624B\u52A8\u63A7\u5236 VNode \u751F\u6210\u4E0E\u590D\u7528",paraId:2,tocIndex:2},{value:"\u590D\u6742\u7EC4\u4EF6\u6A21\u5F0F",paraId:2,tocIndex:2},{value:"\u9700\u8981\u591A\u5C42\u7EC4\u4EF6\u5D4C\u5957",paraId:2,tocIndex:2},{value:"\u9AD8\u9636\u51FD\u6570\u7EC4\u5408\u5F0F\u5F00\u53D1",paraId:2,tocIndex:2},{value:"\u975E DOM \u73AF\u5883\u6E32\u67D3",paraId:2,tocIndex:2},{value:"\u5B8C\u5168\u65E0\u6CD5\u5B9E\u73B0",paraId:2,tocIndex:2},{value:"\u5BF9\u63A5\u4EFB\u610F\u6E32\u67D3\u76EE\u6807",paraId:2,tocIndex:2},{value:"\u52A8\u6001\u6A21\u677F\u9700\u6C42",paraId:2,tocIndex:2},{value:"\u9700\u8981\u9884\u7F16\u8BD1",paraId:2,tocIndex:2},{value:"\u8FD0\u884C\u65F6\u52A8\u6001\u751F\u6210",paraId:2,tocIndex:2},{value:"\u8DE8\u6839\u8282\u70B9\u5E03\u5C40",paraId:2,tocIndex:2},{value:"\u9700\u8981\u989D\u5916\u5305\u88F9\u5143\u7D20",paraId:2,tocIndex:2},{value:"Fragment \u76F4\u63A5\u8FD4\u56DE\u6570\u7EC4",paraId:2,tocIndex:2},{value:"\u7C7B\u578B\u5B89\u5168\u8981\u6C42",paraId:2,tocIndex:2},{value:"\u6A21\u677F\u7C7B\u578B\u63A8\u5BFC\u6709\u9650",paraId:2,tocIndex:2},{value:"\u5B8C\u7F8E\u914D\u5408 TypeScript \u7C7B\u578B\u7CFB\u7EDF",paraId:2,tocIndex:2},{value:`h(
+  type,      // \u5FC5\u9700\uFF0C\u5143\u7D20\u7C7B\u578B\u3001\u7EC4\u4EF6\u6216\u5F02\u6B65\u7EC4\u4EF6
+  props,     // \u53EF\u9009\uFF0C\u4F20\u9012\u7ED9\u7EC4\u4EF6/\u5143\u7D20\u7684\u5C5E\u6027
+  children   // \u53EF\u9009\uFF0C\u5B50\u8282\u70B9\u6216\u8005\u63D2\u69FD
+)
+`,paraId:3,tocIndex:3},{value:"type \u53C2\u6570\u53EF\u4EE5\u4E3A\uFF1A",paraId:4,tocIndex:3},{value:"HTML \u6807\u7B7E\u540D\uFF08\u5B57\u7B26\u4E32\uFF09\uFF1A\u5982 'div'\u3001'span'\u3001'button' \u7B49\u3002",paraId:5,tocIndex:3},{value:"\u7EC4\u4EF6\u5BF9\u8C61\uFF1A\u53EF\u4EE5\u662F\u5BFC\u5165\u7684\u7EC4\u4EF6\u6216\u5C40\u90E8\u6CE8\u518C\u7684\u7EC4\u4EF6\u3002",paraId:5,tocIndex:3},{value:`// \u521B\u5EFA\u4E00\u4E2Adiv\u5143\u7D20
+h('div');
 
-export default {
+// \u521B\u5EFA\u4E00\u4E2A\u81EA\u5B9A\u4E49\u7EC4\u4EF6
+import MyComponent from './MyComponent.vue';
+h(MyComponent);
+`,paraId:6,tocIndex:3},{value:"props \u53C2\u6570\u53EF\u4EE5\u4E3A\uFF1A",paraId:7,tocIndex:3},{value:"class\u3001style\uFF1A\u5143\u7D20\u7684\u7C7B\u540D\u548C\u6837\u5F0F\u3002",paraId:8,tocIndex:3},{value:"id\u3001name\uFF1A\u5143\u7D20\u7684 ID \u548C\u540D\u79F0\u3002",paraId:8,tocIndex:3},{value:"onXXX\uFF1A\u4E8B\u4EF6\u76D1\u542C\u5668\uFF08\u5982 onClick\u3001onChange\uFF09\u3002",paraId:8,tocIndex:3},{value:"\u7EC4\u4EF6\u7684 props\uFF08\u5982 msg\u3001count\uFF09\u3002",paraId:8,tocIndex:3},{value:`// \u4E3Adiv\u8BBE\u7F6E\u5C5E\u6027\u548C\u4E8B\u4EF6
+h('div', {
+  class: 'container',
+  style: { color: 'red' },
+  onClick: () => console.log('Clicked'),
+  id: 'main'
+});
+
+// \u4F20\u9012props\u7ED9\u7EC4\u4EF6
+h(MyComponent, {
+  msg: 'Hello',
+  count: 10
+});
+`,paraId:9,tocIndex:3},{value:"children \u53C2\u6570\u53EF\u4EE5\u4E3A\uFF1A",paraId:10,tocIndex:3},{value:"\u5B57\u7B26\u4E32\uFF1A\u6587\u672C\u5185\u5BB9\u3002",paraId:11,tocIndex:3},{value:"\u6570\u7EC4\uFF1A\u591A\u4E2A\u5B50\u8282\u70B9\uFF0C\u6BCF\u4E2A\u5B50\u8282\u70B9\u53EF\u4EE5\u662F h() \u8C03\u7528\u6216\u5176\u4ED6\u7C7B\u578B\u3002",paraId:11,tocIndex:3},{value:"\u51FD\u6570\uFF1A\u7528\u4E8E\u4F5C\u7528\u57DF\u63D2\u69FD\uFF08Scoped Slots\uFF09\u3002",paraId:11,tocIndex:3},{value:`// \u6587\u672C\u5B50\u8282\u70B9
+h('div', {}, 'Hello World');
+
+// \u591A\u4E2A\u5B50\u8282\u70B9
+h('div', {}, [
+  h('h1', 'Title'),
+  h('p', 'Content'),
+  'Additional text'
+]);
+
+// \u5D4C\u5957\u7ED3\u6784
+h('div', {}, [
+  h('ul', {}, [
+    h('li', 'Item 1'),
+    h('li', 'Item 2')
+  ])
+]);
+
+// \u7EC4\u4EF6\u5B50\u8282\u70B9
+h(ParentComponent, {}, [
+  h(ChildComponent)
+]);
+`,paraId:12,tocIndex:3},{value:"\u5982\u679C\u4E0D\u9700\u8981\u4F20\u9012 props\uFF0C\u53EF\u4EE5\u76F4\u63A5\u7701\u7565\u7B2C\u4E8C\u4E2A\u53C2\u6570",paraId:13,tocIndex:3},{value:`// \u7701\u7565props\uFF0C\u76F4\u63A5\u4F20\u9012children
+h('div', 'Hello');
+h('div', [h('span', 'Child')]);
+`,paraId:14,tocIndex:3},{value:"\u4E0E JSX \u7684\u5173\u7CFB",paraId:15,tocIndex:3},{value:"Vue 3 \u652F\u6301 JSX \u8BED\u6CD5\uFF0C\u5B83\u662F h() \u51FD\u6570\u7684\u8BED\u6CD5\u7CD6\uFF0C\u4F7F\u4EE3\u7801\u66F4\u63A5\u8FD1 HTML\uFF1A",paraId:16,tocIndex:3},{value:`// JSX\u5199\u6CD5
+const App = {
   setup() {
-    return () =>
-      h('div', { class: 'demo', onClick: () => console.log('clicked') }, [
-        h('h1', '\u6807\u9898'),
-        h('button', { type: 'button' }, '\u70B9\u51FB\u6211'),
-      ]);
-  },
+    return () => (
+      <MyComponent title="Welcome">
+        <p>Content</p>
+      </MyComponent>
+    );
+  }
 };
-<\/script>
-`,paraId:3,tocIndex:3},{value:"\u52A8\u6001\u7EC4\u4EF6\u5DE5\u5382\uFF1A\u9700\u8981\u6839\u636E\u6570\u636E\u751F\u6210\u4E0D\u786E\u5B9A\u7684\u7EC4\u4EF6\u7ED3\u6784",paraId:4,tocIndex:4},{value:`// \u7EC4\u4EF6\u52A8\u6001\u751F\u6210\u5668
+
+// \u7B49\u4EF7\u4E8Eh()\u5199\u6CD5
+h(MyComponent, { title: 'Welcome' }, [
+  h('p', 'Content')
+]);
+`,paraId:17,tocIndex:3},{value:"\u52A8\u6001\u7EC4\u4EF6\u5DE5\u5382\uFF1A\u9700\u8981\u6839\u636E\u6570\u636E\u751F\u6210\u4E0D\u786E\u5B9A\u7684\u7EC4\u4EF6\u7ED3\u6784",paraId:18,tocIndex:4},{value:`// \u7EC4\u4EF6\u52A8\u6001\u751F\u6210\u5668
 export default {
   setup() {
     const componentConfigs = ref([
@@ -14860,7 +14897,7 @@ export default {
       );
   },
 };
-`,paraId:5,tocIndex:4},{value:"\u590D\u6742\u903B\u8F91\u7684\u76F4\u89C2\u8868\u8FBE\uFF1A\u5904\u7406\u5D4C\u5957\u6570\u636E\u7ED3\u6784\u65F6\u66F4\u6E05\u6670",paraId:6,tocIndex:4},{value:`// \u9012\u5F52\u6E32\u67D3\u6811\u5F62\u7EC4\u4EF6
+`,paraId:19,tocIndex:4},{value:"\u590D\u6742\u903B\u8F91\u7684\u76F4\u89C2\u8868\u8FBE\uFF1A\u5904\u7406\u5D4C\u5957\u6570\u636E\u7ED3\u6784\u65F6\u66F4\u6E05\u6670",paraId:20,tocIndex:4},{value:`// \u9012\u5F52\u6E32\u67D3\u6811\u5F62\u7EC4\u4EF6
 const TreeItem = {
   props: ['node'],
   setup(props) {
@@ -14875,7 +14912,7 @@ const TreeItem = {
       ]);
   },
 };
-`,paraId:7,tocIndex:4},{value:"\u6846\u67B6\u5F00\u53D1\uFF1A\u521B\u5EFA\u9AD8\u9636\u7EC4\u4EF6\u3001\u62BD\u8C61\u516C\u7528\u903B\u8F91",paraId:8,tocIndex:4},{value:`// \u7EC4\u4EF6\u589E\u5F3A\u5668 \u521B\u5EFA\u53EF\u590D\u7528\u903B\u8F91\u5305\u88C5\u5668\u5E26
+`,paraId:21,tocIndex:4},{value:"\u6846\u67B6\u5F00\u53D1\uFF1A\u521B\u5EFA\u9AD8\u9636\u7EC4\u4EF6\u3001\u62BD\u8C61\u516C\u7528\u903B\u8F91",paraId:22,tocIndex:4},{value:`// \u7EC4\u4EF6\u589E\u5F3A\u5668 \u521B\u5EFA\u53EF\u590D\u7528\u903B\u8F91\u5305\u88C5\u5668\u5E26
 // \u6743\u9650\u68C0\u67E5\u7684\u9AD8\u9636\u7EC4\u4EF6
 const withAuth = (WrappedComponent) => ({
   props: WrappedComponent.props,
@@ -14896,70 +14933,28 @@ const AdminButton = withAuth({
     return () => h('button', '\u7BA1\u7406\u5458\u64CD\u4F5C');
   },
 });
-`,paraId:9,tocIndex:4},{value:"\u6027\u80FD\u5173\u952E\u8DEF\u5F84\uFF1A\u5927\u6570\u636E\u91CF\u5217\u8868\u3001\u865A\u62DF\u6EDA\u52A8",paraId:10,tocIndex:4},{value:`// \u9AD8\u6548\u865A\u62DF\u6EDA\u52A8\u5217\u8868
-export default {
-  setup() {
-    const items = ref(/* 10000\u6761\u6570\u636E */);
-    const visibleRange = ref([0, 50]);
-
-    return () =>
-      h(
-        'div',
-        { class: 'virtual-scroll' },
-        items.value.slice(...visibleRange.value).map((item) =>
-          h(
-            'div',
-            {
-              key: item.id,
-              class: 'row',
-              style: { height: \`\${item.height}px\` },
-            },
-            item.content,
-          ),
-        ),
-      );
-  },
-};
-`,paraId:11,tocIndex:4},{value:"\u4E0E JavaScript \u751F\u6001\u6DF1\u5EA6\u96C6\u6210\uFF1A \u96C6\u6210\u7B2C\u4E09\u65B9\u6E32\u67D3\u5668\uFF08\u5982 Canvas\uFF09",paraId:12,tocIndex:4},{value:`// \u5BF9\u63A5 Canvas \u6E32\u67D3
-export default {
-  setup() {
-    const canvasRef = ref(null);
-
-    onMounted(() => {
-      const ctx = canvasRef.value.getContext('2d');
-      // \u7ED8\u5236\u903B\u8F91...
-    });
-
-    return () =>
-      h('canvas', {
-        ref: canvasRef,
-        width: 800,
-        height: 600,
-      });
-  },
-};
-`,paraId:13,tocIndex:4},{value:"\u4F18\u5148\u4F7F\u7528\u6A21\u677F\uFF1A95%\u573A\u666F\u63A8\u8350\u4F7F\u7528\u6A21\u677F\u8BED\u6CD5",paraId:14,tocIndex:5},{value:"\u7C7B\u578B\u5B89\u5168\uFF1A\u914D\u5408 TypeScript \u4F7F\u7528\u7C7B\u578B\u65AD\u8A00",paraId:15,tocIndex:5},{value:`h(resolveComponent('MyButton') as ComponentPublicInstance);
-`,paraId:16,tocIndex:5},{value:"\u6027\u80FD\u4F18\u5316\uFF1A\u5BF9\u9759\u6001\u5185\u5BB9\u4F7F\u7528\u7F13\u5B58",paraId:17,tocIndex:5},{value:`const staticContent = h('div', '\u9759\u6001\u5185\u5BB9');
+`,paraId:23,tocIndex:4},{value:"\u4F18\u5148\u4F7F\u7528\u6A21\u677F\uFF1A95%\u573A\u666F\u63A8\u8350\u4F7F\u7528\u6A21\u677F\u8BED\u6CD5",paraId:24,tocIndex:5},{value:"\u7C7B\u578B\u5B89\u5168\uFF1A\u914D\u5408 TypeScript \u4F7F\u7528\u7C7B\u578B\u65AD\u8A00",paraId:25,tocIndex:5},{value:`h(resolveComponent('MyButton') as ComponentPublicInstance);
+`,paraId:26,tocIndex:5},{value:"\u6027\u80FD\u4F18\u5316\uFF1A\u5BF9\u9759\u6001\u5185\u5BB9\u4F7F\u7528\u7F13\u5B58",paraId:27,tocIndex:5},{value:`const staticContent = h('div', '\u9759\u6001\u5185\u5BB9');
 return () => [staticContent, dynamicContent];
-`,paraId:18,tocIndex:5},{value:"\u7EC4\u4EF6\u89E3\u6790\u95EE\u9898",paraId:19,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
+`,paraId:28,tocIndex:5},{value:"\u7EC4\u4EF6\u89E3\u6790\u95EE\u9898",paraId:29,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
 h('ButtonPrimary'); // \u65E0\u6CD5\u76F4\u63A5\u4F7F\u7528\u7EC4\u4EF6\u540D
 
 // \u2705 \u6B63\u786E\u65B9\u5F0F
 import { resolveComponent } from 'vue';
 h(resolveComponent('ButtonPrimary'));
-`,paraId:20,tocIndex:6},{value:"\u4E8B\u4EF6\u76D1\u542C\u5668\u547D\u540D",paraId:21,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
+`,paraId:30,tocIndex:6},{value:"\u4E8B\u4EF6\u76D1\u542C\u5668\u547D\u540D",paraId:31,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
 h('button', { on-click: handleClick }) // Vue3\u4E0D\u518D\u652F\u6301\u77ED\u6A2A\u7EBF\u683C\u5F0F
 
 // \u2705 \u6B63\u786E\u65B9\u5F0F
 h('button', { onClick: handleClick })
-`,paraId:22,tocIndex:6},{value:"\u63D2\u69FD\u4F7F\u7528\u53D8\u5316",paraId:23,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
+`,paraId:32,tocIndex:6},{value:"\u63D2\u69FD\u4F7F\u7528\u53D8\u5316",paraId:33,tocIndex:6},{value:`// \u274C \u9519\u8BEF\u793A\u4F8B
 h('div', [this.$slots.default]) // Vue2\u65B9\u5F0F
 
 // \u2705 \u6B63\u786E\u65B9\u5F0F
 setup(props, { slots }) {
   return () => h('div', slots.default())
 }
-`,paraId:24,tocIndex:6},{value:"Props \u5904\u7406",paraId:25,tocIndex:6},{value:`// \u52A8\u6001\u5C5E\u6027\u7ED1\u5B9A
+`,paraId:34,tocIndex:6},{value:"Props \u5904\u7406",paraId:35,tocIndex:6},{value:`// \u52A8\u6001\u5C5E\u6027\u7ED1\u5B9A
 h('input', {
   value: modelValue,
   onInput: (e) => context.emit('update:modelValue', e.target.value),
@@ -14970,7 +14965,82 @@ h(ChildComponent, {
   title: props.title,
   'onUpdate:title': (val) => emit('update:title', val),
 });
-`,paraId:26,tocIndex:6}]},47607:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(70242);const a=[{value:"\u89E3\u51B3 Options API \u7684\u5C40\u9650\u6027",paraId:0,tocIndex:2},{value:"\u5728 Vue2 \u7684 Options API\uFF08data, methods, computed \u7B49\u9009\u9879\uFF09\u4E2D\uFF0C\u5F53\u7EC4\u4EF6\u903B\u8F91\u590D\u6742\u65F6\uFF0C\u76F8\u5173\u4EE3\u7801\u4F1A\u88AB\u62C6\u5206\u5230\u4E0D\u540C\u9009\u9879\u4E2D\uFF0C\u5BFC\u81F4\u903B\u8F91\u788E\u7247\u5316\u3002\u4F8B\u5982\uFF0C\u4E00\u4E2A\u529F\u80FD\u76F8\u5173\u7684 data\u3001method \u548C\u751F\u547D\u5468\u671F\u94A9\u5B50\u53EF\u80FD\u5206\u6563\u5728\u4E0D\u540C\u4F4D\u7F6E\u3002",paraId:1,tocIndex:2},{value:"\u76EE\u6807\uFF1Asetup \u5141\u8BB8\u5C06\u540C\u4E00\u529F\u80FD\u7684\u903B\u8F91\u96C6\u4E2D\u5728\u4E00\u8D77\uFF0C\u63D0\u5347\u4EE3\u7801\u53EF\u8BFB\u6027\u548C\u53EF\u7EF4\u62A4\u6027\u3002",paraId:2,tocIndex:2},{value:"\u66F4\u597D\u7684\u903B\u8F91\u590D\u7528",paraId:3,tocIndex:2},{value:"Vue2 \u7684 Mixins \u5BB9\u6613\u5BFC\u81F4\u547D\u540D\u51B2\u7A81\u548C\u6765\u6E90\u4E0D\u6E05\u6670\u3002",paraId:4,tocIndex:2},{value:"\u89E3\u51B3\u65B9\u6848\uFF1A\u901A\u8FC7 setup + \u81EA\u5B9A\u4E49\u7EC4\u5408\u51FD\u6570\uFF08\u5982 useCounter()\uFF09\uFF0C\u53EF\u4EE5\u66F4\u5B89\u5168\u3001\u7075\u6D3B\u5730\u590D\u7528\u903B\u8F91\u3002",paraId:5,tocIndex:2},{value:"\u66F4\u597D\u7684 TypeScript \u652F\u6301",paraId:6,tocIndex:2},{value:"Composition API \u5929\u7136\u9002\u5408\u7C7B\u578B\u63A8\u5BFC\uFF0Csetup \u4E2D\u5B9A\u4E49\u7684\u53D8\u91CF\u548C\u51FD\u6570\u53EF\u4EE5\u8F7B\u677E\u83B7\u5F97\u7C7B\u578B\u63D0\u793A\u3002",paraId:7,tocIndex:2},{value:"setup \u662F\u4E00\u4E2A\u51FD\u6570\uFF0C\u5728\u7EC4\u4EF6\u5B9E\u4F8B\u521B\u5EFA\u4E4B\u524D\u6267\u884C\uFF0C\u7528\u4E8E\u5B9A\u4E49\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u751F\u547D\u5468\u671F\u94A9\u5B50\u7B49",paraId:8,tocIndex:3},{value:`export default {
+`,paraId:36,tocIndex:6},{value:"\u5728 Vue 3 \u4E2D\uFF0CresolveComponent \u662F\u4E00\u4E2A\u7528\u4E8E\u52A8\u6001\u89E3\u6790\u7EC4\u4EF6\u5F15\u7528\u7684 API\uFF0C\u4E3B\u8981\u5728\u7F16\u5199\u6E32\u67D3\u51FD\u6570\uFF08\u800C\u975E\u6A21\u677F\uFF09\u65F6\u4F7F\u7528\u3002\u5B83\u7684\u6838\u5FC3\u4F5C\u7528\u662F\u5C06\u7EC4\u4EF6\u540D\u79F0\u89E3\u6790\u4E3A\u5B9E\u9645\u7684\u7EC4\u4EF6\u5BF9\u8C61\uFF0C\u4EE5\u4FBF\u5728 h() \u51FD\u6570\u4E2D\u4F7F\u7528\u3002",paraId:37,tocIndex:7},{value:"\u5728\u6E32\u67D3\u51FD\u6570\u4E2D\u52A8\u6001\u4F7F\u7528\u7EC4\u4EF6",paraId:38,tocIndex:8},{value:"\u5F53\u4F60\u4F7F\u7528\u6E32\u67D3\u51FD\u6570\u800C\u975E\u6A21\u677F\u65F6\uFF0C\u65E0\u6CD5\u76F4\u63A5\u901A\u8FC7\u540D\u79F0\u5F15\u7528\u7EC4\u4EF6\uFF0C\u9700\u8981\u5148\u89E3\u6790\u7EC4\u4EF6\u3002",paraId:39,tocIndex:8},{value:`import { h, resolveComponent } from 'vue';
+
+export default {
+  setup() {
+    // \u89E3\u6790\u7EC4\u4EF6
+    const MyButton = resolveComponent('MyButton');
+    
+    return () => h(MyButton, { type: 'primary' });
+  }
+};
+`,paraId:40,tocIndex:8},{value:"\u6761\u4EF6\u6E32\u67D3\u4E0D\u540C\u7EC4\u4EF6",paraId:41,tocIndex:8},{value:"\u6839\u636E\u6761\u4EF6\u52A8\u6001\u9009\u62E9\u6E32\u67D3\u4E0D\u540C\u7684\u7EC4\u4EF6\u3002",paraId:42,tocIndex:8},{value:`import { h, resolveComponent, ref } from 'vue';
+
+export default {
+  setup() {
+    const useFancyButton = ref(true);
+    
+    return () => {
+      // \u6839\u636E\u6761\u4EF6\u89E3\u6790\u4E0D\u540C\u7EC4\u4EF6
+      const Button = resolveComponent(
+        useFancyButton.value ? 'FancyButton' : 'PlainButton'
+      );
+      
+      return h(Button, { label: 'Click me' });
+    };
+  }
+};
+`,paraId:43,tocIndex:8},{value:"\u5B9E\u73B0\u9AD8\u9636\u7EC4\u4EF6 (HOC)",paraId:44,tocIndex:8},{value:"\u5728\u9AD8\u9636\u7EC4\u4EF6\u4E2D\u52A8\u6001\u5305\u88C5\u5176\u4ED6\u7EC4\u4EF6\u3002",paraId:45,tocIndex:8},{value:`import { h, resolveComponent } from 'vue';
+
+export function withLogging(WrappedComponentName) {
+  return {
+    setup(props, { attrs, slots, emit }) {
+      // \u89E3\u6790\u88AB\u5305\u88C5\u7684\u7EC4\u4EF6
+      const WrappedComponent = resolveComponent(WrappedComponentName);
+      
+      // \u6DFB\u52A0\u65E5\u5FD7\u529F\u80FD
+      const enhancedEmit = (event, ...args) => {
+        console.log(\`Emitted event: \${event}\`, args);
+        emit(event, ...args);
+      };
+      
+      return () => h(
+        WrappedComponent, 
+        { ...props, ...attrs, on: enhancedEmit }, 
+        slots
+      );
+    }
+  };
+}
+
+// \u4F7F\u7528\u9AD8\u9636\u7EC4\u4EF6
+const LoggedButton = withLogging('MyButton');
+`,paraId:46,tocIndex:8},{value:"\u52A8\u6001\u7EC4\u4EF6\u7CFB\u7EDF",paraId:47,tocIndex:8},{value:"\u6784\u5EFA\u4E00\u4E2A\u6839\u636E\u914D\u7F6E\u52A8\u6001\u6E32\u67D3\u4E0D\u540C\u7EC4\u4EF6\u7684\u7CFB\u7EDF\u3002",paraId:48,tocIndex:8},{value:`import { h, resolveComponent, defineComponent } from 'vue';
+
+export const ComponentRenderer = defineComponent({
+  props: {
+    componentName: String,
+    propsData: Object
+  },
+  setup(props) {
+    return () => {
+      if (!props.componentName) return null;
+      
+      // \u89E3\u6790\u7EC4\u4EF6
+      const Component = resolveComponent(props.componentName);
+      
+      return h(Component, props.propsData);
+    };
+  }
+});
+
+// \u4F7F\u7528\u65B9\u5F0F
+<ComponentRenderer 
+  :component-name="currentComponent" 
+  :props-data="componentProps" 
+/>
+`,paraId:49,tocIndex:8}]},47607:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(70242);const a=[{value:"\u89E3\u51B3 Options API \u7684\u5C40\u9650\u6027",paraId:0,tocIndex:2},{value:"\u5728 Vue2 \u7684 Options API\uFF08data, methods, computed \u7B49\u9009\u9879\uFF09\u4E2D\uFF0C\u5F53\u7EC4\u4EF6\u903B\u8F91\u590D\u6742\u65F6\uFF0C\u76F8\u5173\u4EE3\u7801\u4F1A\u88AB\u62C6\u5206\u5230\u4E0D\u540C\u9009\u9879\u4E2D\uFF0C\u5BFC\u81F4\u903B\u8F91\u788E\u7247\u5316\u3002\u4F8B\u5982\uFF0C\u4E00\u4E2A\u529F\u80FD\u76F8\u5173\u7684 data\u3001method \u548C\u751F\u547D\u5468\u671F\u94A9\u5B50\u53EF\u80FD\u5206\u6563\u5728\u4E0D\u540C\u4F4D\u7F6E\u3002",paraId:1,tocIndex:2},{value:"\u76EE\u6807\uFF1Asetup \u5141\u8BB8\u5C06\u540C\u4E00\u529F\u80FD\u7684\u903B\u8F91\u96C6\u4E2D\u5728\u4E00\u8D77\uFF0C\u63D0\u5347\u4EE3\u7801\u53EF\u8BFB\u6027\u548C\u53EF\u7EF4\u62A4\u6027\u3002",paraId:2,tocIndex:2},{value:"\u66F4\u597D\u7684\u903B\u8F91\u590D\u7528",paraId:3,tocIndex:2},{value:"Vue2 \u7684 Mixins \u5BB9\u6613\u5BFC\u81F4\u547D\u540D\u51B2\u7A81\u548C\u6765\u6E90\u4E0D\u6E05\u6670\u3002",paraId:4,tocIndex:2},{value:"\u89E3\u51B3\u65B9\u6848\uFF1A\u901A\u8FC7 setup + \u81EA\u5B9A\u4E49\u7EC4\u5408\u51FD\u6570\uFF08\u5982 useCounter()\uFF09\uFF0C\u53EF\u4EE5\u66F4\u5B89\u5168\u3001\u7075\u6D3B\u5730\u590D\u7528\u903B\u8F91\u3002",paraId:5,tocIndex:2},{value:"\u66F4\u597D\u7684 TypeScript \u652F\u6301",paraId:6,tocIndex:2},{value:"Composition API \u5929\u7136\u9002\u5408\u7C7B\u578B\u63A8\u5BFC\uFF0Csetup \u4E2D\u5B9A\u4E49\u7684\u53D8\u91CF\u548C\u51FD\u6570\u53EF\u4EE5\u8F7B\u677E\u83B7\u5F97\u7C7B\u578B\u63D0\u793A\u3002",paraId:7,tocIndex:2},{value:"setup \u662F\u4E00\u4E2A\u51FD\u6570\uFF0C\u5728\u7EC4\u4EF6\u5B9E\u4F8B\u521B\u5EFA\u4E4B\u524D\u6267\u884C\uFF0C\u7528\u4E8E\u5B9A\u4E49\u54CD\u5E94\u5F0F\u6570\u636E\u3001\u65B9\u6CD5\u3001\u751F\u547D\u5468\u671F\u94A9\u5B50\u7B49",paraId:8,tocIndex:3},{value:`export default {
   props: ['title'],
   setup(props, context) {
     // 1. \u54CD\u5E94\u5F0F\u6570\u636E
