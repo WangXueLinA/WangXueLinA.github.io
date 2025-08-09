@@ -68,7 +68,7 @@ export default {
 </script>
 ```
 
-## 注意事项
+### 注意事项
 
 1. 嵌套对象的响应式：shallowReactive 和 shallowRef 不会递归地将嵌套对象转换为响应式，因此如果你需要嵌套对象的响应式，应该使用 reactive 或 ref。
 2. 性能优化：在大型对象或嵌套层级较深的情况下，使用 shallowReactive 或 shallowRef 可以减少响应式系统的开销，因为它们不会递归地处理嵌套对象。

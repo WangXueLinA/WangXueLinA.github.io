@@ -20,8 +20,8 @@ order: -94
 | updated       | onUpdated         | 数据变化导致 DOM 更新后，可执行依赖新 DOM 的操作。                                       | 谨慎使用，频繁数据变化可能导致性能问题。                          |
 | beforeDestroy | onBeforeUnmount   | 组件销毁前，用于清理定时器、取消事件监听等资源释放操作。                                 | Vue3 中名称改为 onBeforeUnmount，需注意命名变化。                 |
 | destroyed     | onUnmounted       | 组件销毁后，用于最终清理工作。                                                           | Vue3 中名称改为 onUnmounted，与卸载相关的逻辑应在此完成。         |
-| activated     | onActivated       | 被 `<keep-alive>` 缓存的组件激活时调用。                                                 | 需配合 `<keep-alive>` 使用，用于恢复组件状态。                    |
-| deactivated   | onDeactivated     | 被 `<keep-alive>` 缓存的组件失活时调用。                                                 | 用于保存组件状态或暂停后台任务。                                  |
+| activated     | onActivated       | 被 `<keep-alive>` 缓存的组件激活时调用, 替代 `onMounted`                                 | 需配合 `<keep-alive>` 使用，用于恢复组件状态。                    |
+| deactivated   | onDeactivated     | 被 `<keep-alive>` 缓存的组件失活时调用, 替代 `onUnmounted`                               | 用于保存组件状态或暂停后台任务。                                  |
 | errorCaptured | onErrorCaptured   | 捕获子组件传递的错误时调用，可用于错误上报。                                             | Vue3 中需显式导入，可返回 false 阻止错误继续传播。                |
 | -             | onRenderTracked   | Vue3 新增：调试渲染依赖的响应式数据变化。                                                | 仅在开发模式下有效，用于追踪渲染过程中的依赖收集。                |
 | -             | onRenderTriggered | Vue3 新增：调试响应式数据触发组件重新渲染时的具体变化。                                  | 开发工具，用于定位性能问题或意外渲染。                            |
