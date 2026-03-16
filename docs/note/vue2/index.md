@@ -324,6 +324,50 @@ new Vue({
 });
 ```
 
+## 组件中的 data
+
+组件中的 data 为啥不是对象而必须是函数（返回对象）？
+
+核心原因是：防止多个组件实例共用同一个数据对象，导致数据污染。
+
+```js
+// 定义一个组件（错误示范）
+const MyComponent = {
+  // data 是对象，所有实例共享
+  data: {
+    count: 0,
+  },
+  template: `<button @click="count++">{{ count }}</button>`,
+};
+
+// 创建两个组件实例
+new Vue({ el: '#app1', components: { MyComponent } });
+new Vue({ el: '#app2', components: { MyComponent } });
+```
+
+效果：点击 #app1 里的按钮，#app2 里的 count 也会同步增加 —— 因为两个实例共用同一个 data 对象，数据完全耦合。
+
+改写：
+
+```js
+// 定义一个组件（正确示范）
+const MyComponent = {
+  // data 是函数，每次实例化返回新对象
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  template: `<button @click="count++">{{ count }}</button>`,
+};
+
+// 创建两个组件实例
+new Vue({ el: '#app1', components: { MyComponent } });
+new Vue({ el: '#app2', components: { MyComponent } });
+```
+
+效果：点击 #app1 的按钮，只有 #app1 的 count 增加，#app2 不受影响 —— 每个实例的 data 都是独立的。
+
 ## 模板语法
 
 Vue.js 使用了基于 HTML 的模板语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。所有 Vue.js 的模板都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。
