@@ -10297,8 +10297,34 @@ function List({ items, isHorizontal }) {
     };
   },
 });
-`,paraId:67,tocIndex:19},{value:"Vue.js \u4F7F\u7528\u4E86\u57FA\u4E8E HTML \u7684\u6A21\u677F\u8BED\u6CD5\uFF0C\u5141\u8BB8\u5F00\u53D1\u8005\u58F0\u660E\u5F0F\u5730\u5C06 DOM \u7ED1\u5B9A\u81F3\u5E95\u5C42 Vue \u5B9E\u4F8B\u7684\u6570\u636E\u3002\u6240\u6709 Vue.js \u7684\u6A21\u677F\u90FD\u662F\u5408\u6CD5\u7684 HTML\uFF0C\u6240\u4EE5\u80FD\u88AB\u9075\u5FAA\u89C4\u8303\u7684\u6D4F\u89C8\u5668\u548C HTML \u89E3\u6790\u5668\u89E3\u6790\u3002",paraId:68,tocIndex:20},{value:"\u6700\u5E38\u89C1\u7684\u5F62\u5F0F\u5C31\u662F\u4F7F\u7528\u201C\u53CC\u5927\u62EC\u53F7\u7684\u6587\u672C\u63D2\u503C",paraId:69,tocIndex:22},{value:`<span>Message: {{ msg }}</span>
-`,paraId:70,tocIndex:22},{value:"msg \u662F js \u8868\u8FBE\u5F0F\uFF0C\u4E14\u53EF\u4EE5\u76F4\u63A5\u8BFB\u53D6\u5230 data \u4E2D\u7684\u6240\u6709\u5C5E\u6027",paraId:71,tocIndex:22},{value:"\u529F\u80FD\uFF1A\u7528\u4E8E\u89E3\u6790\u6807\u7B7E\uFF08\u5305\u62EC\uFF1A\u6807\u7B7E\u5C5E\u6027\u3001\u6807\u7B7E\u4F53\u5185\u5BB9\u3001\u7ED1\u5B9A\u4E8B\u4EF6\u2026\uFF09",paraId:72,tocIndex:23},{value:"\u5199\u6CD5\uFF1A",paraId:73,tocIndex:23},{value:"v-bind:href=\u201Cxxx\u201D",paraId:73,tocIndex:23},{value:" \u6216 \u7B80\u5199\u4E3A ",paraId:73,tocIndex:23},{value:":href=\u201Cxxx\u201D",paraId:73,tocIndex:23},{value:"\u5982\uFF1A",paraId:74,tocIndex:23},{value:"<a :href=\u201Cxxx\u201D>\u94FE\u63A5</a>",paraId:74,tocIndex:23},{value:"xxx \u540C\u6837\u8981\u5199 js \u8868\u8FBE\u5F0F\uFF0C\u4E14\u53EF\u4EE5\u76F4\u63A5\u8BFB\u53D6\u5230 data \u4E2D\u7684\u6240\u6709\u5C5E\u6027",paraId:75,tocIndex:23},{value:`<a :href="school.url.toUpperCase()">\u70B9\u6211\u53BB{{school.name}}\u5B66\u4E601</a>
+`,paraId:67,tocIndex:19},{value:"\u7EC4\u4EF6\u4E2D\u7684 data \u4E3A\u5565\u4E0D\u662F\u5BF9\u8C61\u800C\u5FC5\u987B\u662F\u51FD\u6570\uFF08\u8FD4\u56DE\u5BF9\u8C61\uFF09\uFF1F",paraId:68,tocIndex:20},{value:"\u6838\u5FC3\u539F\u56E0\u662F\uFF1A\u9632\u6B62\u591A\u4E2A\u7EC4\u4EF6\u5B9E\u4F8B\u5171\u7528\u540C\u4E00\u4E2A\u6570\u636E\u5BF9\u8C61\uFF0C\u5BFC\u81F4\u6570\u636E\u6C61\u67D3\u3002",paraId:69,tocIndex:20},{value:`// \u5B9A\u4E49\u4E00\u4E2A\u7EC4\u4EF6\uFF08\u9519\u8BEF\u793A\u8303\uFF09
+const MyComponent = {
+  // data \u662F\u5BF9\u8C61\uFF0C\u6240\u6709\u5B9E\u4F8B\u5171\u4EAB
+  data: {
+    count: 0,
+  },
+  template: \`<button @click="count++">{{ count }}</button>\`,
+};
+
+// \u521B\u5EFA\u4E24\u4E2A\u7EC4\u4EF6\u5B9E\u4F8B
+new Vue({ el: '#app1', components: { MyComponent } });
+new Vue({ el: '#app2', components: { MyComponent } });
+`,paraId:70,tocIndex:20},{value:"\u6548\u679C\uFF1A\u70B9\u51FB #app1 \u91CC\u7684\u6309\u94AE\uFF0C#app2 \u91CC\u7684 count \u4E5F\u4F1A\u540C\u6B65\u589E\u52A0 \u2014\u2014 \u56E0\u4E3A\u4E24\u4E2A\u5B9E\u4F8B\u5171\u7528\u540C\u4E00\u4E2A data \u5BF9\u8C61\uFF0C\u6570\u636E\u5B8C\u5168\u8026\u5408\u3002",paraId:71,tocIndex:20},{value:"\u6539\u5199\uFF1A",paraId:72,tocIndex:20},{value:`// \u5B9A\u4E49\u4E00\u4E2A\u7EC4\u4EF6\uFF08\u6B63\u786E\u793A\u8303\uFF09
+const MyComponent = {
+  // data \u662F\u51FD\u6570\uFF0C\u6BCF\u6B21\u5B9E\u4F8B\u5316\u8FD4\u56DE\u65B0\u5BF9\u8C61
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  template: \`<button @click="count++">{{ count }}</button>\`,
+};
+
+// \u521B\u5EFA\u4E24\u4E2A\u7EC4\u4EF6\u5B9E\u4F8B
+new Vue({ el: '#app1', components: { MyComponent } });
+new Vue({ el: '#app2', components: { MyComponent } });
+`,paraId:73,tocIndex:20},{value:"\u6548\u679C\uFF1A\u70B9\u51FB #app1 \u7684\u6309\u94AE\uFF0C\u53EA\u6709 #app1 \u7684 count \u589E\u52A0\uFF0C#app2 \u4E0D\u53D7\u5F71\u54CD \u2014\u2014 \u6BCF\u4E2A\u5B9E\u4F8B\u7684 data \u90FD\u662F\u72EC\u7ACB\u7684\u3002",paraId:74,tocIndex:20},{value:"Vue.js \u4F7F\u7528\u4E86\u57FA\u4E8E HTML \u7684\u6A21\u677F\u8BED\u6CD5\uFF0C\u5141\u8BB8\u5F00\u53D1\u8005\u58F0\u660E\u5F0F\u5730\u5C06 DOM \u7ED1\u5B9A\u81F3\u5E95\u5C42 Vue \u5B9E\u4F8B\u7684\u6570\u636E\u3002\u6240\u6709 Vue.js \u7684\u6A21\u677F\u90FD\u662F\u5408\u6CD5\u7684 HTML\uFF0C\u6240\u4EE5\u80FD\u88AB\u9075\u5FAA\u89C4\u8303\u7684\u6D4F\u89C8\u5668\u548C HTML \u89E3\u6790\u5668\u89E3\u6790\u3002",paraId:75,tocIndex:21},{value:"\u6700\u5E38\u89C1\u7684\u5F62\u5F0F\u5C31\u662F\u4F7F\u7528\u201C\u53CC\u5927\u62EC\u53F7\u7684\u6587\u672C\u63D2\u503C",paraId:76,tocIndex:23},{value:`<span>Message: {{ msg }}</span>
+`,paraId:77,tocIndex:23},{value:"msg \u662F js \u8868\u8FBE\u5F0F\uFF0C\u4E14\u53EF\u4EE5\u76F4\u63A5\u8BFB\u53D6\u5230 data \u4E2D\u7684\u6240\u6709\u5C5E\u6027",paraId:78,tocIndex:23},{value:"\u529F\u80FD\uFF1A\u7528\u4E8E\u89E3\u6790\u6807\u7B7E\uFF08\u5305\u62EC\uFF1A\u6807\u7B7E\u5C5E\u6027\u3001\u6807\u7B7E\u4F53\u5185\u5BB9\u3001\u7ED1\u5B9A\u4E8B\u4EF6\u2026\uFF09",paraId:79,tocIndex:24},{value:"\u5199\u6CD5\uFF1A",paraId:80,tocIndex:24},{value:"v-bind:href=\u201Cxxx\u201D",paraId:80,tocIndex:24},{value:" \u6216 \u7B80\u5199\u4E3A ",paraId:80,tocIndex:24},{value:":href=\u201Cxxx\u201D",paraId:80,tocIndex:24},{value:"\u5982\uFF1A",paraId:81,tocIndex:24},{value:"<a :href=\u201Cxxx\u201D>\u94FE\u63A5</a>",paraId:81,tocIndex:24},{value:"xxx \u540C\u6837\u8981\u5199 js \u8868\u8FBE\u5F0F\uFF0C\u4E14\u53EF\u4EE5\u76F4\u63A5\u8BFB\u53D6\u5230 data \u4E2D\u7684\u6240\u6709\u5C5E\u6027",paraId:82,tocIndex:24},{value:`<a :href="school.url.toUpperCase()">\u70B9\u6211\u53BB{{school.name}}\u5B66\u4E601</a>
 
 <a :href="school.url">\u70B9\u6211\u53BB{{school.name}}\u5B66\u4E602</a>
 
@@ -10313,7 +10339,7 @@ function List({ items, isHorizontal }) {
     },
   });
 <\/script>
-`,paraId:76,tocIndex:23},{value:"\u5BF9\u4E8E\u6240\u6709\u7684\u6570\u636E\u7ED1\u5B9A\uFF0CVue.js \u90FD\u63D0\u4F9B\u4E86\u5B8C\u5168\u7684 JavaScript \u8868\u8FBE\u5F0F\u652F\u6301",paraId:77,tocIndex:24},{value:`{
+`,paraId:83,tocIndex:24},{value:"\u5BF9\u4E8E\u6240\u6709\u7684\u6570\u636E\u7ED1\u5B9A\uFF0CVue.js \u90FD\u63D0\u4F9B\u4E86\u5B8C\u5168\u7684 JavaScript \u8868\u8FBE\u5F0F\u652F\u6301",paraId:84,tocIndex:25},{value:`{
   {
     number + 1;
   }
@@ -10330,7 +10356,7 @@ function List({ items, isHorizontal }) {
 }
 
 <div v-bind:id="'list-' + id"></div>;
-`,paraId:78,tocIndex:24}]},7963:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(20308);const a=[{value:"<keep-alive>",paraId:0,tocIndex:1},{value:" \u662F\u4E00\u4E2A\u62BD\u8C61\u7EC4\u4EF6\uFF0C\u7528\u4E8E\u7F13\u5B58\u4E0D\u6D3B\u8DC3\u7684\u7EC4\u4EF6\u5B9E\u4F8B\uFF0C\u907F\u514D\u91CD\u590D\u6E32\u67D3\u548C\u4FDD\u6301\u7EC4\u4EF6\u72B6\u6001",paraId:0,tocIndex:1},{value:"\u6838\u5FC3\u529F\u80FD\uFF1A\u6309\u94AE\u5207\u6362",paraId:1,tocIndex:3},{value:'\u70B9\u51FB "\u663E\u793A A" \u2192 \u663E\u793A ComponentA',paraId:2,tocIndex:3},{value:'\u70B9\u51FB "\u663E\u793A B" \u2192 \u663E\u793A ComponentB',paraId:3,tocIndex:3},{value:"\u52A8\u6001\u7EC4\u4EF6\uFF1A",paraId:4,tocIndex:3},{value:'<component :is="currentComponent">',paraId:5,tocIndex:3},{value:" \u4F1A\u6839\u636E currentComponent \u7684\u503C\u52A8\u6001\u6E32\u67D3\u5BF9\u5E94\u7EC4\u4EF6\u3002",paraId:5,tocIndex:3},{value:"\u72B6\u6001\u7F13\u5B58\uFF1A",paraId:6,tocIndex:3},{value:"<keep-alive>",paraId:7,tocIndex:3},{value:" \u5305\u88F9\u52A8\u6001\u7EC4\u4EF6\uFF0C\u4F7F\u5F97\u5207\u6362\u65F6 \u4FDD\u7559\u7EC4\u4EF6\u72B6\u6001\uFF08\u5982\u8868\u5355\u8F93\u5165\u5185\u5BB9\u3001\u6570\u636E\u7B49\uFF09\u3002",paraId:7,tocIndex:3},{value:`<template>
+`,paraId:85,tocIndex:25}]},7963:function(t,n,e){e.r(n),e.d(n,{texts:function(){return a}});var o=e(20308);const a=[{value:"<keep-alive>",paraId:0,tocIndex:1},{value:" \u662F\u4E00\u4E2A\u62BD\u8C61\u7EC4\u4EF6\uFF0C\u7528\u4E8E\u7F13\u5B58\u4E0D\u6D3B\u8DC3\u7684\u7EC4\u4EF6\u5B9E\u4F8B\uFF0C\u907F\u514D\u91CD\u590D\u6E32\u67D3\u548C\u4FDD\u6301\u7EC4\u4EF6\u72B6\u6001",paraId:0,tocIndex:1},{value:"\u6838\u5FC3\u529F\u80FD\uFF1A\u6309\u94AE\u5207\u6362",paraId:1,tocIndex:3},{value:'\u70B9\u51FB "\u663E\u793A A" \u2192 \u663E\u793A ComponentA',paraId:2,tocIndex:3},{value:'\u70B9\u51FB "\u663E\u793A B" \u2192 \u663E\u793A ComponentB',paraId:3,tocIndex:3},{value:"\u52A8\u6001\u7EC4\u4EF6\uFF1A",paraId:4,tocIndex:3},{value:'<component :is="currentComponent">',paraId:5,tocIndex:3},{value:" \u4F1A\u6839\u636E currentComponent \u7684\u503C\u52A8\u6001\u6E32\u67D3\u5BF9\u5E94\u7EC4\u4EF6\u3002",paraId:5,tocIndex:3},{value:"\u72B6\u6001\u7F13\u5B58\uFF1A",paraId:6,tocIndex:3},{value:"<keep-alive>",paraId:7,tocIndex:3},{value:" \u5305\u88F9\u52A8\u6001\u7EC4\u4EF6\uFF0C\u4F7F\u5F97\u5207\u6362\u65F6 \u4FDD\u7559\u7EC4\u4EF6\u72B6\u6001\uFF08\u5982\u8868\u5355\u8F93\u5165\u5185\u5BB9\u3001\u6570\u636E\u7B49\uFF09\u3002",paraId:7,tocIndex:3},{value:`<template>
   <div>
     <button @click="currentComponent = 'ComponentA'">\u663E\u793AA</button>
     <button @click="currentComponent = 'ComponentB'">\u663E\u793AB</button>
