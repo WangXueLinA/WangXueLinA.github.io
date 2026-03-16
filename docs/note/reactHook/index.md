@@ -1368,4 +1368,3 @@ const ListItems = () => (
 1. **避免不必要的 DOM 层级**： 当一个组件需要返回多个相邻的 DOM 元素而不希望增加额外的 DOM 层级时，可以使用 Fragment 替代常规的 HTML 元素（如 `<div>`）来包裹这些子元素。例如，在构建列表或者表格的时候，不希望因为每一组子元素都添加一层无意义的 `<div>`
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

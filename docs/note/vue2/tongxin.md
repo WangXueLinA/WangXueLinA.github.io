@@ -628,4 +628,3 @@ export default {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

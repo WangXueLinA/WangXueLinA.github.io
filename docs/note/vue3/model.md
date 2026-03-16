@@ -415,4 +415,3 @@ const modelValue = useModel(props, 'modelValue', {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -140,4 +140,3 @@ history.go(-1); //向后跳转一个记录
 - history.length：获取历史记录数
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

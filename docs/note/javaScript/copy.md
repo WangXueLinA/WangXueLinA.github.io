@@ -94,4 +94,3 @@ const deep = _.cloneDeep(obj);
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -220,4 +220,3 @@ console.log(numbers); // 输出: [1, 2, 3, 4, 5] （原数组未改变）
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

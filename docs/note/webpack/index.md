@@ -1984,4 +1984,3 @@ webpack 的运行流程是一个串行的过程，从启动到结束会依次执
 - 输出：将编译后的 Module 组合成 Chunk，将 Chunk 转换成文件，输出到文件系统中
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -282,4 +282,3 @@ console.log(c); // Uncaught TypeError: Assignment to constant variable
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

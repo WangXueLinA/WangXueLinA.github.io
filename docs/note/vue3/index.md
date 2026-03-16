@@ -483,4 +483,3 @@ Promise.resolve().then(() => {
 | 微任务中的更新   | 仍异步批量处理          | 可能同步更新         |
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

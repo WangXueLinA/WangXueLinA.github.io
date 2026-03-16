@@ -45,4 +45,3 @@ console.log(person.name); // 输出 "Alice"
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

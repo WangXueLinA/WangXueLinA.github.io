@@ -306,4 +306,3 @@ obj.find(); // "hello"
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -523,4 +523,3 @@ module.exports = smp.wrap({
 <ImagePreview src="/images/js/image19.jpg"></ImagePreview>
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

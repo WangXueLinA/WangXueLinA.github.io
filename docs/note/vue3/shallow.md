@@ -243,4 +243,3 @@ state.value.count++;
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

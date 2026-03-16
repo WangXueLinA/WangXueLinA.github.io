@@ -5,7 +5,7 @@ title: h函数
 
 # Vue3
 
-## h函数
+## h 函数
 
 在 Vue 3 中，Render 函数是一种提供了更大灵活性的高级功能。虽然 Vue 的模板系统已经足够强大，但在某些情况下，直接使用 JavaScript 编写渲染逻辑会更加方便。
 
@@ -29,11 +29,12 @@ Render 函数的工作原理是通过返回一个虚拟节点（VNode）来告�
 
 ```js
 h(
-  type,      // 必需，元素类型、组件或异步组件
-  props,     // 可选，传递给组件/元素的属性
-  children   // 可选，子节点或者插槽
-)
+  type, // 必需，元素类型、组件或异步组件
+  props, // 可选，传递给组件/元素的属性
+  children, // 可选，子节点或者插槽
+);
 ```
+
 type 参数可以为：
 
 1. HTML 标签名（字符串）：如 'div'、'span'、'button' 等。
@@ -61,13 +62,13 @@ h('div', {
   class: 'container',
   style: { color: 'red' },
   onClick: () => console.log('Clicked'),
-  id: 'main'
+  id: 'main',
 });
 
 // 传递props给组件
 h(MyComponent, {
   msg: 'Hello',
-  count: 10
+  count: 10,
 });
 ```
 
@@ -82,24 +83,13 @@ children 参数可以为：
 h('div', {}, 'Hello World');
 
 // 多个子节点
-h('div', {}, [
-  h('h1', 'Title'),
-  h('p', 'Content'),
-  'Additional text'
-]);
+h('div', {}, [h('h1', 'Title'), h('p', 'Content'), 'Additional text']);
 
 // 嵌套结构
-h('div', {}, [
-  h('ul', {}, [
-    h('li', 'Item 1'),
-    h('li', 'Item 2')
-  ])
-]);
+h('div', {}, [h('ul', {}, [h('li', 'Item 1'), h('li', 'Item 2')])]);
 
 // 组件子节点
-h(ParentComponent, {}, [
-  h(ChildComponent)
-]);
+h(ParentComponent, {}, [h(ChildComponent)]);
 ```
 
 如果不需要传递 props，可以直接省略第二个参数
@@ -123,13 +113,11 @@ const App = {
         <p>Content</p>
       </MyComponent>
     );
-  }
+  },
 };
 
 // 等价于h()写法
-h(MyComponent, { title: 'Welcome' }, [
-  h('p', 'Content')
-]);
+h(MyComponent, { title: 'Welcome' }, [h('p', 'Content')]);
 ```
 
 ### 使用场景
@@ -299,9 +287,9 @@ export default {
   setup() {
     // 解析组件
     const MyButton = resolveComponent('MyButton');
-    
+
     return () => h(MyButton, { type: 'primary' });
-  }
+  },
 };
 ```
 
@@ -315,16 +303,16 @@ import { h, resolveComponent, ref } from 'vue';
 export default {
   setup() {
     const useFancyButton = ref(true);
-    
+
     return () => {
       // 根据条件解析不同组件
       const Button = resolveComponent(
-        useFancyButton.value ? 'FancyButton' : 'PlainButton'
+        useFancyButton.value ? 'FancyButton' : 'PlainButton',
       );
-      
+
       return h(Button, { label: 'Click me' });
     };
-  }
+  },
 };
 ```
 
@@ -340,19 +328,16 @@ export function withLogging(WrappedComponentName) {
     setup(props, { attrs, slots, emit }) {
       // 解析被包装的组件
       const WrappedComponent = resolveComponent(WrappedComponentName);
-      
+
       // 添加日志功能
       const enhancedEmit = (event, ...args) => {
         console.log(`Emitted event: ${event}`, args);
         emit(event, ...args);
       };
-      
-      return () => h(
-        WrappedComponent, 
-        { ...props, ...attrs, on: enhancedEmit }, 
-        slots
-      );
-    }
+
+      return () =>
+        h(WrappedComponent, { ...props, ...attrs, on: enhancedEmit }, slots);
+    },
   };
 }
 
@@ -375,21 +360,20 @@ export const ComponentRenderer = defineComponent({
   setup(props) {
     return () => {
       if (!props.componentName) return null;
-      
+
       // 解析组件
       const Component = resolveComponent(props.componentName);
-      
+
       return h(Component, props.propsData);
     };
   }
 });
 
 // 使用方式
-<ComponentRenderer 
-  :component-name="currentComponent" 
-  :props-data="componentProps" 
+<ComponentRenderer
+  :component-name="currentComponent"
+  :props-data="componentProps"
 />
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -232,4 +232,3 @@ demo: https://stackblitz.com/edit/stackblitz-starters-yhbsxu?file=index.html
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

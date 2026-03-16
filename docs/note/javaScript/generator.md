@@ -147,4 +147,3 @@ for (let [key, value] of objectEntries(jane)) {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

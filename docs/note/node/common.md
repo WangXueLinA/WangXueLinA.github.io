@@ -82,4 +82,3 @@ const module3 = require('Demo/src/main.js');
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

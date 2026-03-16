@@ -339,19 +339,19 @@ obj.a.b = 6;
 console.log(innerRef.value, 'innerRef'); // 6 相当于修改innerRef.value
 ```
 
-5. 在内部不仅可以自动解包ref，还可以解包computed
+5. 在内部不仅可以自动解包 ref，还可以解包 computed
 
-computed返回的也是一个ref，因此在reactive对象内部同样会自动解包
+computed 返回的也是一个 ref，因此在 reactive 对象内部同样会自动解包
 
 ```js
-import { reactive, computed } from 'vue'
+import { reactive, computed } from 'vue';
 
 const state = reactive({
   count: 10,
-  doubled: computed(() => state.count * 2) // 自动解包为计算结果
-})
+  doubled: computed(() => state.count * 2), // 自动解包为计算结果
+});
 
-console.log(state.doubled) // 直接访问20（而非Ref对象）
+console.log(state.doubled); // 直接访问20（而非Ref对象）
 ```
 
 ## ref 对比 reactive
@@ -406,55 +406,57 @@ const myCustomRef = customRef((track, trigger) => {
 ```vue
 <template>
   <div>
-    <input v-model="searchQuery" placeholder="搜索...">
+    <input v-model="searchQuery" placeholder="搜索..." />
     <div v-if="results.length">搜索结果: {{ results.length }} 条</div>
   </div>
 </template>
 
 <script setup>
-import { ref, customRef } from 'vue'
+import { ref, customRef } from 'vue';
 
 // 防抖处理函数
 function debouncedRef(initialValue, delay = 200) {
-  let timeout
+  let timeout;
   return customRef((track, trigger) => {
     return {
       get() {
-        track()
-        return initialValue
+        track();
+        return initialValue;
       },
       set(newValue) {
-        clearTimeout(timeout)
+        clearTimeout(timeout);
         timeout = setTimeout(() => {
-          initialValue = newValue
-          trigger()
-        }, delay)
-      }
-    }
-  })
+          initialValue = newValue;
+          trigger();
+        }, delay);
+      },
+    };
+  });
 }
 
 // 创建防抖ref
-const searchQuery = debouncedRef('')
-const results = ref([])
+const searchQuery = debouncedRef('');
+const results = ref([]);
 
 // 监听搜索词变化，触发搜索请求
 watch(searchQuery, async (newValue) => {
   if (newValue.trim()) {
     // 模拟API请求
-    results.value = await fetchSearchResults(newValue)
+    results.value = await fetchSearchResults(newValue);
   } else {
-    results.value = []
+    results.value = [];
   }
-})
+});
 
 // 模拟搜索API
 function fetchSearchResults(query) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([/* 搜索结果 */])
-    }, 300)
-  })
+      resolve([
+        /* 搜索结果 */
+      ]);
+    }, 300);
+  });
 }
 </script>
 ```
@@ -679,4 +681,3 @@ const focusCurrent = () => {
 | 代码可读性 | 变量名与模板字符串易混淆     | 键名一致，意图更清晰       |
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

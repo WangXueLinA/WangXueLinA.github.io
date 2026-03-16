@@ -177,4 +177,3 @@ for (let [key, value] of iterEntries(myObj)) {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

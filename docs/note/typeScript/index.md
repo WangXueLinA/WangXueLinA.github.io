@@ -2157,4 +2157,3 @@ let d: Record<string, string> = b; //报错： Type 'Obj2' is not assignable to 
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

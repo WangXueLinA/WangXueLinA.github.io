@@ -127,4 +127,3 @@ let arr = [...obj]; // TypeError: Cannot spread non-iterable object
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

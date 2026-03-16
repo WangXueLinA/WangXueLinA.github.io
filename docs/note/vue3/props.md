@@ -7,7 +7,9 @@ order: -98
 # Vue3
 
 ## props
+
 ### 基础概念
+
 在 Vue3 中，props 是组件之间传递数据的主要方式，遵循单向数据流原则。父组件可以通过 props 向子组件传递数据，子组件不能直接修改 props，只能通过 emit 触发事件通知父组件进行修改。
 
 ### 定义方式
@@ -55,24 +57,24 @@ const props = withDefaults(defineProps(), {
   size: 'medium',
   disabled: false
 });
-
 </script>
 ```
 
 ### 类型校验
 
 1. 基础类型校验
+
 ```ts
 interface Props {
   // 基础类型
-  name: String,           // 字符串
-  age: Number,            // 数字
-  isActive: Boolean,      // 布尔值
-  hobbies: Array,         // 数组
-  user: Object,           // 对象
-  callback: Function,     // 函数
-  date: Date,             // 日期
-  regex: RegExp           // 正则表达式
+  name: String; // 字符串
+  age: Number; // 数字
+  isActive: Boolean; // 布尔值
+  hobbies: Array; // 数组
+  user: Object; // 对象
+  callback: Function; // 函数
+  date: Date; // 日期
+  regex: RegExp; // 正则表达式
 }
 ```
 
@@ -81,20 +83,21 @@ interface Props {
 ```ts
 interface Props {
   // 多种可能的类型
-  id: [String, Number],
+  id: [String, Number];
   // 可为 null 或 undefined
-  optionalValue: [String, null, undefined]
+  optionalValue: [String, null, undefined];
 }
 ```
 
 3. 对象结构校验
+
 ```ts
 interface Props {
   user: {
-    type: Object,
-    required: true,
-    default: () => ({ name: 'Guest', age: 0 })
-  }
+    type: Object;
+    required: true;
+    default: () => { name: 'Guest'; age: 0 };
+  };
 }
 ```
 
@@ -122,17 +125,17 @@ interface Props {
 ```ts
 interface Props {
   size: {
-    type: String,
-    default: 'medium' // 默认值
-  },
+    type: String;
+    default: 'medium'; // 默认值
+  };
   count: {
-    type: Number,
-    default: 10
-  },
+    type: Number;
+    default: 10;
+  };
   isLoading: {
-    type: Boolean,
-    default: false // 注意：Boolean 类型默认值需显式设置
-  }
+    type: Boolean;
+    default: false; // 注意：Boolean 类型默认值需显式设置
+  };
 }
 ```
 
@@ -141,16 +144,16 @@ interface Props {
 ```ts
 interface Props {
   options: {
-    type: Object,
-    default: () => ({
-      theme: 'light',
-      animation: true
-    })
-  },
+    type: Object;
+    default: () => {
+      theme: 'light';
+      animation: true;
+    };
+  };
   list: {
-    type: Array,
-    default: () => []
-  }
+    type: Array;
+    default: () => [];
+  };
 }
 ```
 
@@ -159,14 +162,14 @@ interface Props {
 ```ts
 interface Props {
   userId: {
-    type: String,
-    required: true // 必传
-  },
+    type: String;
+    required: true; // 必传
+  };
   config: {
-    type: Object,
-    required: true,
-    default: () => ({}) // 必传但有默认值，适用于需要空对象的场景
-  }
+    type: Object;
+    required: true;
+    default: () => {}; // 必传但有默认值，适用于需要空对象的场景
+  };
 }
 ```
 
@@ -199,6 +202,7 @@ const props = defineProps(['size']);
 // 该 prop 变更时计算属性也会自动更新
 const normalizedSize = computed(() => props.size.trim().toLowerCase());
 ```
+
 ### withDefaults 提供类型安全默认值
 
 ```js
@@ -220,12 +224,14 @@ const props = withDefaults(defineProps<Props>(), {
 ```
 
 ### 在 TypeScript 中获取 Prop 类型
+
 1. ExtractPropTypes： 从运行时定义提取完整类型
 
 - 作用：从 defineProps 的运行时定义中提取完整的 TypeScript 类型，包括默认值和必填项信息。
 - 使用场景：
   - 需要复用 props 类型：当你想在组件内部或外部使用 props 的类型时。
   - 结合默认值：需要类型系统感知默认值的存在。
+
 ```js
 <script setup lang="ts">
 import { defineProps, ExtractPropTypes } from 'vue';
@@ -312,7 +318,6 @@ const props = defineProps({
 </script>
 ```
 
-
 ### Prop 与 v-model 结合
 
 在 Vue 3 中，v-model 是一个语法糖，本质上是 `:modelValue` 和 `@update:modelValue` 的组合：
@@ -322,9 +327,9 @@ const props = defineProps({
 <ChildComponent v-model="parentValue" />
 
 <!-- 等价于 -->
-<ChildComponent 
-  :modelValue="parentValue" 
-  @update:modelValue="parentValue = $event" 
+<ChildComponent
+  :modelValue="parentValue"
+  @update:modelValue="parentValue = $event"
 />
 ```
 
@@ -394,100 +399,100 @@ const increment = () => {
 </template>
 ```
 
-
 ### 解构
 
-Vue3 的响应式系统基于Proxy 代理实现。当通过props.xxx访问属性时，Proxy 会拦截访问并建立依赖关系。但直接解构 Props 会破坏这种代理关系，导致属性变为普通值，失去响应性。
+Vue3 的响应式系统基于 Proxy 代理实现。当通过 props.xxx 访问属性时，Proxy 会拦截访问并建立依赖关系。但直接解构 Props 会破坏这种代理关系，导致属性变为普通值，失去响应性。
 
 ```js
 export default {
   props: {
-    message: String
+    message: String,
   },
   setup(props) {
     // ❌ 直接解构，丢失响应性！
     const { message } = props;
-    
+
     // 此处message是初始值的拷贝，不会随props更新
     console.log(message); // 后续更新无法触发
-  }
-}
+  },
+};
 ```
 
 Vue3 提供了多种方式安全地解构 Props 并保持响应性：
 
-1. 使用 toRefs: 将 Props 转换为包含ref的对象，每个属性都是响应式的。
+1. 使用 toRefs: 将 Props 转换为包含 ref 的对象，每个属性都是响应式的。
 
 ```js
-import { toRefs } from 'vue'
+import { toRefs } from 'vue';
 
 export default {
   props: {
     message: String,
-    count: Number
+    count: Number,
   },
   setup(props) {
     // 将所有props转为ref
     const { message, count } = toRefs(props);
-    
+
     // 使用时需通过.value访问
     console.log(message.value); // 响应式
-    
+
     return {
       // 模板中可直接使用message（无需.value）
       message,
-      count
-    }
-  }
-}
+      count,
+    };
+  },
+};
 ```
 
-2.  使用 toRef（按需转换）:只对需要的 Prop 创建ref，更灵活。
+2.  使用 toRef（按需转换）:只对需要的 Prop 创建 ref，更灵活。
 
 ```js
-import { toRef } from 'vue'
+import { toRef } from 'vue';
 
 export default {
   props: {
-    message: String
+    message: String,
   },
   setup(props) {
     // 仅对message创建ref
     const message = toRef(props, 'message');
-    
+
     // 响应式访问
     console.log(message.value);
-    
+
     return {
-      message
-    }
-  }
-}
+      message,
+    };
+  },
+};
 ```
+
 3.  使用计算属性（Computed）:通过计算属性动态获取 Prop 值，保持响应性。
 
 ```js
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 export default {
   props: {
-    message: String
+    message: String,
   },
   setup(props) {
     // 创建计算属性
     const message = computed(() => props.message);
-    
+
     // 响应式访问
     console.log(message.value);
-    
+
     return {
-      message
-    }
-  }
-}
+      message,
+    };
+  },
+};
 ```
 
-在Vue3.5+版本中的响应系统基于属性访问跟踪状态的使用情况。例如，在计算属性或侦听器中访问 props.foo 时，foo 属性将被跟踪为依赖项。
+在 Vue3.5+版本中的响应系统基于属性访问跟踪状态的使用情况。例如，在计算属性或侦听器中访问 props.foo 时，foo 属性将被跟踪为依赖项。
 
 ```js
 const { foo } = defineProps(['foo']);
@@ -624,7 +629,7 @@ export default defineComponent({
 
 ## defineProps
 
-defineProps的主要功能是定义和校验父组件传递给子组件的属性
+defineProps 的主要功能是定义和校验父组件传递给子组件的属性
 
 1. 类型自动推导：在使用 TypeScript 时，无需额外配置，就能自动推导出属性类型。
 2. 运行时校验：和 Vue2 的 props 选项一样，它也能进行运行时校验。
@@ -643,7 +648,7 @@ const props = defineProps<Props>(['message']);
 
 ## defineEmits
 
-defineEmits用于定义子组件可以触发的事件，父组件可以监听这些事件。
+defineEmits 用于定义子组件可以触发的事件，父组件可以监听这些事件。
 
 1. 类型安全：能确保触发的事件名称和参数类型都是正确的。
 2. 运行时校验：可对触发事件的参数进行校验。
@@ -698,27 +703,26 @@ const props = withDefaults(defineProps<Props>(), {
 
 ### 作用
 
-mergeProps的核心作用是将多个 props 对象合并为一个新对象，主要用于组合式 API 和高阶组件（HOC）中。
-
+mergeProps 的核心作用是将多个 props 对象合并为一个新对象，主要用于组合式 API 和高阶组件（HOC）中。
 
 1. 保留所有属性：合并后的对象包含所有原始 props 中的属性。
-2. 事件处理器合并：同名事件处理器（如onClick）会被合并为一个数组，按顺序执行。
-3. 非事件属性覆盖：同名的非事件属性（如class、style）后出现的会覆盖先出现的。
+2. 事件处理器合并：同名事件处理器（如 onClick）会被合并为一个数组，按顺序执行。
+3. 非事件属性覆盖：同名的非事件属性（如 class、style）后出现的会覆盖先出现的。
 
 ```js
-import { mergeProps } from 'vue'
+import { mergeProps } from 'vue';
 
 const one = {
   class: 'foo',
-  onClick: handlerA
-}
+  onClick: handlerA,
+};
 
 const two = {
   class: { bar: true },
-  onClick: handlerB
-}
+  onClick: handlerB,
+};
 
-const merged = mergeProps(one, two)
+const merged = mergeProps(one, two);
 /**
  {
    class: 'foo bar',
@@ -741,8 +745,8 @@ const merged = mergeProps(one, two)
 2. 非事件属性覆盖：class、style 等属性也会被简单覆盖，而非合并。
 3. 类型安全缺失：TypeScript 无法正确推导合并后的类型。
 
-
 mergeProps 解决了上述问题
+
 ```js
 <template>
   <ChildComponent v-bind="mergedProps" />
@@ -758,11 +762,11 @@ const props = defineProps({
 
 const mergedProps = mergeProps(
   props,
-  { 
+  {
     // 内部默认 props
     size: 'medium',
     // 内部事件处理器
-    onClick: () => console.log('Clicked') 
+    onClick: () => console.log('Clicked')
   }
 );
 </script>
@@ -771,7 +775,6 @@ const mergedProps = mergeProps(
 1. 事件合并：同名事件处理器会被合并为数组，按顺序执行。
 2. 属性智能合并：class 和 style 会被正确合并（如果需要）。
 3. 类型安全：配合 TypeScript 提供完整的类型推导。
-
 
 ### 使用场景
 
@@ -833,4 +836,3 @@ const merged = mergeProps(formProps, buttonProps);
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

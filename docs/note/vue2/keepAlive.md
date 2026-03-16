@@ -170,4 +170,3 @@ delete cache['ComponentA'];
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -314,4 +314,3 @@ export default {
 https://router.vuejs.org/zh/guide/migration/
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

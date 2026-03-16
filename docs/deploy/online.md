@@ -58,4 +58,3 @@ npm run deploy
 
 <ImagePreview src="/images/other/image8.jpg"></ImagePreview>
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

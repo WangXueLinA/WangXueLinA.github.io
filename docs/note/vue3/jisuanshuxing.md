@@ -219,19 +219,20 @@ Vue3 通过返回值停止， 完全终止整个监听行为，常用于组件�
 const stop = watch(source, callback);
 stop(); // 调用停止监听
 ```
-在3.5+版本中增加了暂停/恢复侦听器
+
+在 3.5+版本中增加了暂停/恢复侦听器
 
 ```js
-const { stop, pause, resume } = watch(() => {})
+const { stop, pause, resume } = watch(() => {});
 
 // 暂停侦听器
-pause()
+pause();
 
 // 稍后恢复
-resume()
+resume();
 
 // 停止
-stop()
+stop();
 ```
 
 ### 副作用清除
@@ -252,16 +253,16 @@ watch(id, (newId, oldId, onCleanup) => {
 3.5+ 中的副作用清理
 
 ```js
-import { watch, onWatcherCleanup } from "vue";
+import { watch, onWatcherCleanup } from 'vue';
 
 watch(flag, () => {
   const timer = setInterval(() => {
     // 做一些事情
-    console.log("do something");
+    console.log('do something');
   }, 200);
 
   onWatcherCleanup(() => {
-    console.log("清理定时器");
+    console.log('清理定时器');
     clearInterval(timer);
   });
 });
@@ -336,7 +337,6 @@ watch(optimizedComputed, (newVal) => {
   console.log('优化后的计算结果:', newVal);
 });
 </script>
-
 ```
 
 ### 注意事项
@@ -379,7 +379,7 @@ watch(
   () => state.count,
   (newCount) => {
     state.count = newCount + 1; // 不要这样做
-  }
+  },
 );
 ```
 
@@ -438,16 +438,16 @@ onUnmounted(stop);
 3.5+新增的暂停/恢复侦听器：
 
 ```js
-const { stop, pause, resume } = watchEffect(() => {})
+const { stop, pause, resume } = watchEffect(() => {});
 
 // 暂停侦听器
-pause()
+pause();
 
 // 稍后恢复
-resume()
+resume();
 
 // 停止
-stop()
+stop();
 ```
 
 ### 副作用清除
@@ -469,15 +469,15 @@ watchEffect((onCleanup) => {
 3.5+ 中的副作用清理
 
 ```js
-import { onWatcherCleanup } from 'vue'
+import { onWatcherCleanup } from 'vue';
 
 watchEffect(async () => {
-  const { response, cancel } = doAsyncWork(newId)
+  const { response, cancel } = doAsyncWork(newId);
   // 如果 `id` 变化，则调用 `cancel`，
   // 如果之前的请求未完成，则取消该请求
-  onWatcherCleanup(cancel)
-  data.value = await response
-})
+  onWatcherCleanup(cancel);
+  data.value = await response;
+});
 ```
 
 ### 使用场景
@@ -833,20 +833,19 @@ data.value = 1;
 | post       | 组件 更新后 执行 | DOM 操作/布局计算      | 使用 watchPostEffect 简化  |
 | sync       | 同步 响应变化    | 需要即时反馈的简单逻辑 | 避免在频繁变化的数据源使用 |
 
-
 ## onWatcherCleanup
 
 vue3.5+新增，注册一个清理函数，在当前侦听器即将重新运行时执行。只能在 watchEffect 作用函数或 watch 回调函数的同步执行期间调用 (即不能在异步函数的 await 语句之后调用)。
 
 ```js
-import { watch, onWatcherCleanup } from 'vue'
+import { watch, onWatcherCleanup } from 'vue';
 
 watch(id, (newId) => {
-  const { response, cancel } = doAsyncWork(newId)
+  const { response, cancel } = doAsyncWork(newId);
   // 如果 `id` 变化，则调用 `cancel`，
   // 如果之前的请求未完成，则取消该请求
-  onWatcherCleanup(cancel)
-})
+  onWatcherCleanup(cancel);
+});
 ```
+
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

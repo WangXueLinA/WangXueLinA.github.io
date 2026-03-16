@@ -224,5 +224,3 @@ npm adduser
 <ImagePreview src="/images/component/image10.jpg"></ImagePreview>
 
 <BackTop></BackTop>
-
-<SplashCursor></SplashCursor>

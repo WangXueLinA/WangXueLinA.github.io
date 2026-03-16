@@ -395,22 +395,21 @@ export default {
 
   // 接收 props + context 参数
   setup(props, context) {
-
     // context 包含四个属性：attrs/slots/emit/expose‌
     const { attrs, slots, emit, expose } = context;
 
     const handleEmit = () => {
-     // 通过 context.emit 触发事件
+      // 通过 context.emit 触发事件
       emit('custom-event', '参数');
     };
 
     const logAttrs = () => {
       // 访问未声明的 props 属性
-      console.log('attrs:', attrs); 
+      console.log('attrs:', attrs);
     };
 
     // 必须手动返回模板所需方法
-    return { handleEmit, logAttrs }; 
+    return { handleEmit, logAttrs };
   },
 };
 </script>
@@ -449,4 +448,3 @@ const logAttrs = () => {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

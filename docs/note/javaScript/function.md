@@ -277,4 +277,3 @@ let getTempItem = (id) => ({ id: id, name: 'Temp' });
 </Alert>
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

@@ -74,4 +74,3 @@ flex-basis: https://stackblitz.com/edit/stackblitz-starters-d31xfm?file=index.ht
 `max-width/min-width > flex-basis > width > box`
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

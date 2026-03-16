@@ -145,4 +145,3 @@ Grid：二维布局系统，复杂页面结构更易实现
 </Alert>
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

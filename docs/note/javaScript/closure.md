@@ -139,4 +139,3 @@ function debounce(fn, timeout) {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

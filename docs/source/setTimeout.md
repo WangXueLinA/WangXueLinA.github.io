@@ -60,4 +60,3 @@ const stopExecution = setIntervalWithTimeout(() => console.log('Tick'), 1000);
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

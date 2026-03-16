@@ -678,4 +678,3 @@ axios.interceptors.response.use(
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

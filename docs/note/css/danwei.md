@@ -115,4 +115,3 @@ h1 {
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>

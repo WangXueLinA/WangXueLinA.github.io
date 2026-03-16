@@ -182,4 +182,3 @@ Vue.component('GlobalTransition', GlobalTransition);
 ```
 
 <BackTop></BackTop>
-<SplashCursor></SplashCursor>
